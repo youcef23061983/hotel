@@ -1,0 +1,470 @@
+{
+  "gallery": [
+    {
+      "type": "hotel",
+      "id": 1,
+      "images": [
+        "src/images/homepage/img1.jpg",
+        "src/images/homepage/img2.jpg",
+        "src/images/homepage/img3.jpg",
+        "src/images/homepage/img4.jpg",
+        "src/images/homepage/img5.jpg",
+        "src/images/homepage/img6.jpg",
+        "src/images/homepage/img7.jpg",
+        "src/images/homepage/img8.jpg",
+        "src/images/homepage/img9.jpg",
+        "src/images/homepage/img10.jpg",
+        "src/images/homepage/img11.jpg"
+      ]
+    },
+    {
+      "type": "Rooms & Suites",
+      "id": 2,
+      "images": [
+        "src/images/rooms/standard single room/img1.jpg",
+        "src/images/rooms/standard double room/img1.jpg",
+        "src/images/rooms/deluxe double room/img1.jpg",
+        "src/images/suites/junior suite/img1.jpg",
+        "src/images/suites/executive suite/img1.jpg",
+        "src/images/suites/terrace suite/img1.jpg",
+        "src/images/suites/garden loft/img1.jpg",
+        "src/images/suites/presidential suite/img1.jpg",
+        "src/images/suites/phenthouse suite/img1.jpg",
+        "src/images/suites/two bedroom family suite/img1.jpg"
+      ]
+    },
+    {
+      "type": "Wellnes",
+      "id": 3,
+      "images": [
+        "src/images/wellness/img1.jpg",
+        "src/images/wellness/img2.jpg",
+        "src/images/wellness/img3.jpg",
+        "src/images/wellness/img4.jpg",
+        "src/images/wellness/img5.jpg",
+        "src/images/wellness/img6.jpg",
+        "src/images/wellness/img7.jpg",
+        "src/images/wellness/img8.jpg",
+        "src/images/wellness/img9.jpg",
+        "src/images/wellness/img11.jpg",
+        "src/images/wellness/img12.jpg",
+        "src/images/wellness/img13.jpg",
+        "src/images/wellness/img14.jpg",
+        "src/images/wellness/img15.jpg",
+        "src/images/wellness/img16.jpg",
+        "src/images/wellness/img17.jpg",
+        "src/images/wellness/img18.jpg",
+        "src/images/wellness/img19.jpg",
+        "src/images/wellness/img20.jpg",
+        "src/images/wellness/img21.jpg"
+      ]
+    },
+    {
+      "type": "Restaurants",
+      "id": 4,
+      "images": [
+        "src/images/restaurants/img2.jpg",
+        "src/images/restaurants/img3.jpg",
+        "src/images/restaurants/img4.jpg",
+        "src/images/restaurants/img5.jpg",
+        "src/images/restaurants/img6.jpg",
+        "src/images/restaurants/img7.jpg",
+        "src/images/restaurants/img8.jpg",
+        "src/images/restaurants/img9.jpg",
+        "src/images/restaurants/img11.jpg",
+        "src/images/restaurants/img12.jpg",
+        "src/images/restaurants/img13.jpg",
+        "src/images/restaurants/img14.jpg",
+        "src/images/restaurants/img15.jpg"
+      ]
+    },
+    {
+      "type": "Experience",
+      "id": 5,
+      "images": [
+        "src/images/homepage/img1.jpg",
+        "src/images/homepage/img2.jpg",
+        "src/images/homepage/img3.jpg",
+        "src/images/homepage/img4.jpg",
+        "src/images/homepage/img5.jpg",
+        "src/images/homepage/img6.jpg",
+        "src/images/homepage/img7.jpg",
+        "src/images/homepage/img8.jpg",
+        "src/images/homepage/img9.jpg",
+        "src/images/homepage/img10.jpg"
+      ]
+    },
+    {
+      "type": "Events",
+      "id": 6,
+      "images": [
+        "src/images/homepage/img1.jpg",
+        "src/images/homepage/img2.jpg",
+        "src/images/homepage/img3.jpg",
+        "src/images/homepage/img4.jpg",
+        "src/images/homepage/img5.jpg",
+        "src/images/homepage/img6.jpg",
+        "src/images/homepage/img7.jpg",
+        "src/images/homepage/img8.jpg",
+        "src/images/homepage/img9.jpg",
+        "src/images/homepage/img10.jpg"
+      ]
+    },
+    {
+      "type": "header",
+      "id": 7,
+      "images": ["src/images/header/roomsheader.jpg"]
+    }
+  ],
+  "rooms": [
+    {
+      "name": "Standard Single Room",
+      "type": "room",
+      "id": 1,
+      "intoduction": "Indulge in the cozy embrace of our Standard Single Room, a retreat designed for solo travelers seeking tranquility. Enjoy the breathtaking City view from your balcony, and relish in amenities such as a TV, Wi-Fi, and 24-Hour Room Service. Immerse yourself in the comfort of a well-appointed space where every detail is crafted for your convenience.",
+      "bath_number": 1,
+      "room_square_footage": 200,
+      "capacity": 1,
+      "max_children": 0,
+      "max_pets": 0,
+      "pets_allowed": false,
+      "butler_service": false,
+      "view": "City",
+      "living_room": false,
+      "breakfast": true,
+
+      "amenities": [
+        { "name": "TV", "icon": "tv_icon.png" },
+        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
+        { "name": "Air Conditioning", "icon": "ac_icon.png" },
+        { "name": "Balcony", "icon": "balcony_icon.png" },
+        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
+        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+      ],
+      "price": 120,
+      "images": [
+        "src/images/rooms/standard single room/img1.jpg",
+        "src/images/rooms/standard single room/img2.jpg",
+        "src/images/rooms/standard single room/img3.jpg"
+      ],
+      "feedback": "A comfortable room with a fantastic city view. The 24-hour room service was a lifesaver!"
+    },
+    {
+      "name": "Standard Double Room",
+      "type": "room",
+
+      "id": 2,
+      "intoduction": "Elevate your stay in the city with our spacious Standard Double Room. Ideal for couples or small families, this room features a charming balcony, a sitting area, and the convenience of 24-Hour Room Service. Bask in the City view and experience the perfect blend of luxury and functionality.",
+
+      "bath_number": 1,
+      "room_square_footage": 250,
+      "capacity": 2,
+      "max_children": 1,
+      "max_pets": 1,
+      "pets_allowed": true,
+      "butler_service": false,
+      "view": "City",
+      "living_room": false,
+      "breakfast": true,
+
+      "amenities": [
+        { "name": "TV", "icon": "tv_icon.png" },
+        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
+        { "name": "Air Conditioning", "icon": "ac_icon.png" },
+        { "name": "Balcony", "icon": "balcony_icon.png" },
+        { "name": "Sitting Area", "icon": "sitting_icon.png" },
+        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
+        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+      ],
+      "price": 150,
+      "images": [
+        "src/images/rooms/standard double room/img1.jpg",
+        "src/images/rooms/standard double room/img2.jpg",
+        "src/images/rooms/standard double room/img3.jpg",
+        "src/images/rooms/standard double room/img4.jpg"
+      ],
+      "feedback": "Spacious room with a lovely balcony. Enjoyed the sitting area and breakfast service."
+    },
+    {
+      "name": "Deluxe Double Room",
+      "type": "room",
+
+      "id": 3,
+      "intoduction": "Step into the Deluxe Double Room, where elegance meets tranquility. With a garden view, this room offers a serene escape. Indulge in amenities like TV, Wi-Fi, Minibar, and a private balcony. Experience a charming stay surrounded by lush greenery and exceptional comfort.",
+
+      "bath_number": 2,
+      "room_square_footage": 350,
+      "capacity": 2,
+      "max_children": 2,
+      "max_pets": 2,
+      "pets_allowed": true,
+      "butler_service": false,
+      "view": "Garden",
+      "living_room": false,
+      "breakfast": true,
+
+      "amenities": [
+        { "name": "TV", "icon": "tv_icon.png" },
+        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
+        { "name": "Air Conditioning", "icon": "ac_icon.png" },
+        { "name": "Balcony", "icon": "balcony_icon.png" },
+        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
+        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+      ],
+      "price": 200,
+      "images": [
+        "src/images/rooms/deluxe double room/img1.jpg",
+        "src/images/rooms/deluxe double room/img2.jpg",
+        "src/images/rooms/deluxe double room/img3.jpg"
+      ],
+      "feedback": "Charming Deluxe Double Room with a tranquil garden view. The additional amenities like minibar and balcony added a touch of luxury to our stay."
+    },
+    {
+      "name": "Junior Suite",
+      "type": "suite",
+
+      "id": 4,
+      "intoduction": "Our Junior Suite is a sanctuary of sophistication with a mesmerizing Sea view. Enjoy the spacious living room, a private balcony, and the impeccable service of a personal butler. Revel in the harmonious blend of luxury and modernity that defines this unique suite.",
+
+      "bath_number": 2,
+      "room_square_footage": 400,
+      "capacity": 2,
+      "max_children": 1,
+      "max_pets": 1,
+      "pets_allowed": true,
+      "butler_service": true,
+      "view": "Sea",
+      "living_room": true,
+      "breakfast": true,
+
+      "amenities": [
+        { "name": "TV", "icon": "tv_icon.png" },
+        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
+        { "name": "Air Conditioning", "icon": "ac_icon.png" },
+        { "name": "Balcony", "icon": "balcony_icon.png" },
+        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
+        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+      ],
+      "price": 250,
+      "images": [
+        "src/images/suites/junior suite/img1.jpg",
+        "src/images/suites/junior suite/img2.jpg",
+        "src/images/suites/junior suite/img3.jpg",
+        "src/images/suites/junior suite/img4.jpg"
+      ],
+      "feedback": "Sophisticated Junior Suite with a mesmerizing sea view. The living room and butler service made our stay extra special. A perfect blend of elegance and comfort."
+    },
+    {
+      "name": "Executive Suite",
+      "type": "suite",
+
+      "id": 5,
+      "intoduction": "Unwind in the lap of luxury with our Executive Suite, overlooking the expansive Sea. This suite features a spacious living room, a private balcony, and top-notch amenities, including 24-Hour Room Service. Immerse yourself in a world of opulence and unparalleled comfort.",
+
+      "bath_number": 3,
+      "room_square_footage": 600,
+      "capacity": 4,
+      "max_children": 2,
+      "max_pets": 2,
+      "pets_allowed": false,
+      "butler_service": true,
+      "view": "Sea",
+      "living_room": true,
+      "breakfast": true,
+
+      "amenities": [
+        { "name": "TV", "icon": "tv_icon.png" },
+        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
+        { "name": "Air Conditioning", "icon": "ac_icon.png" },
+        { "name": "Balcony", "icon": "balcony_icon.png" },
+        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
+        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+      ],
+      "price": 350,
+      "images": [
+        "src/images/suites/executive suite/img1.jpg",
+        "src/images/suites/executive suite/img2.jpg",
+        "src/images/suites/executive suite/img3.jpg",
+        "src/images/suites/executive suite/img4.jpg"
+      ],
+      "feedback": "Exceptional Executive Suite overlooking the sea. The spacious living room and top-notch amenities, including the balcony and 24-hour room service, made our stay unforgettable."
+    },
+    {
+      "name": "Terrace Suite",
+      "type": "suite",
+
+      "id": 6,
+      "intoduction": "The Terrace Suite invites you to experience comfort with a touch of outdoor relaxation. Revel in the Sea view from your private terrace, and enjoy amenities like TV, Wi-Fi, and Air Conditioning. This suite offers a perfect blend of tranquility and luxury.",
+
+      "bath_number": 2,
+      "room_square_footage": 450,
+      "capacity": 3,
+      "max_children": 1,
+      "max_pets": 1,
+      "pets_allowed": true,
+      "butler_service": true,
+      "view": "Sea",
+      "living_room": true,
+      "breakfast": true,
+
+      "amenities": [
+        { "name": "TV", "icon": "tv_icon.png" },
+        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
+        { "name": "Air Conditioning", "icon": "ac_icon.png" },
+        { "name": "Balcony", "icon": "balcony_icon.png" },
+        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
+        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+      ],
+      "price": 300,
+      "images": [
+        "src/images/suites/terrace suite/img1.jpg",
+        "src/images/suites/terrace suite/img2.jpg",
+        "src/images/suites/terrace suite/img3.jpg",
+        "src/images/suites/terrace suite/img4.jpg"
+      ],
+      "feedback": "Inviting Terrace Suite with a stunning sea view. The private terrace was a delightful spot to unwind. A perfect choice for those seeking comfort with a touch of outdoor relaxation."
+    },
+    {
+      "name": "Garden Loft",
+      "type": "suite",
+
+      "id": 7,
+      "intoduction": "Discover the quaint charm of our Garden Loft, offering a delightful Garden view. Immerse yourself in a cozy atmosphere with essential amenities like TV, Wi-Fi, and a balcony. Experience a stay that combines simplicity with modern comfort.",
+
+      "bath_number": 2,
+      "room_square_footage": 500,
+      "capacity": 2,
+      "max_children": 1,
+      "max_pets": 1,
+      "pets_allowed": true,
+      "butler_service": false,
+      "view": "Garden",
+      "living_room": false,
+      "breakfast": true,
+
+      "amenities": [
+        { "name": "TV", "icon": "tv_icon.png" },
+        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
+        { "name": "Air Conditioning", "icon": "ac_icon.png" },
+        { "name": "Balcony", "icon": "balcony_icon.png" },
+        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
+        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+      ],
+      "price": 280,
+      "images": [
+        "src/images/suites/garden loft/img1.jpg",
+        "src/images/suites/garden loft/img2.jpg",
+        "src/images/suites/garden loft/img3.jpg",
+        "src/images/suites/garden loft/img4.jpg"
+      ],
+      "feedback": "Quaint Garden Loft with a lovely garden view. The cozy atmosphere and essential amenities like TV, Wi-Fi, and balcony made our stay delightful."
+    },
+    {
+      "name": "Presidential Suite",
+      "type": "suite",
+
+      "bath_number": 4,
+      "id": 8,
+      "intoduction": "Indulge in the epitome of luxury with our Presidential Suite, offering breathtaking Sea views. This suite features a spacious living room, a private balcony, and the exclusive service of a personal butler. Immerse yourself in a world of grandeur and unparalleled luxury.",
+
+      "room_square_footage": 800,
+      "capacity": 6,
+      "max_children": 3,
+      "max_pets": 2,
+      "pets_allowed": false,
+      "butler_service": true,
+      "view": "Sea",
+      "living_room": true,
+      "breakfast": true,
+
+      "amenities": [
+        { "name": "TV", "icon": "tv_icon.png" },
+        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
+        { "name": "Air Conditioning", "icon": "ac_icon.png" },
+        { "name": "Balcony", "icon": "balcony_icon.png" },
+        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
+        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+      ],
+      "price": 700,
+      "images": [
+        "src/images/suites/presidential suite/img1.jpg",
+        "src/images/suites/presidential suite/img2.jpg",
+        "src/images/suites/presidential suite/img3.jpg",
+        "src/images/suites/presidential suite/img4.jpg"
+      ],
+      "feedback": "Opulent Presidential Suite with breathtaking sea views. The spacious living room, private balcony, and 24-hour room service exceeded our expectations. A truly luxurious experience."
+    },
+    {
+      "name": "Penthouse Suite",
+      "type": "suite",
+
+      "id": 9,
+      "intoduction": "Experience the height of indulgence in our Penthouse Suite, boasting expansive Sea views. This suite features a private terrace, a living room, and top-tier amenities, including a private jacuzzi. Elevate your stay to new heights of luxury and sophistication.",
+
+      "bath_number": 5,
+      "room_square_footage": 1000,
+      "capacity": 8,
+      "max_children": 4,
+      "max_pets": 2,
+      "pets_allowed": true,
+      "butler_service": true,
+      "view": "Sea",
+      "living_room": true,
+      "breakfast": true,
+
+      "amenities": [
+        { "name": "TV", "icon": "tv_icon.png" },
+        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
+        { "name": "Air Conditioning", "icon": "ac_icon.png" },
+        { "name": "Balcony", "icon": "balcony_icon.png" },
+        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
+        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+      ],
+      "price": 900,
+      "images": [
+        "src/images/suites/phenthouse suite/img1.jpg",
+        "src/images/suites/phenthouse suite/img2.jpg",
+        "src/images/suites/phenthouse suite/img3.jpg",
+        "src/images/suites/phenthouse suite/img4.jpg",
+        "src/images/suites/phenthouse suite/img5.jpg",
+        "src/images/suites/phenthouse suite/img5.jpg"
+      ],
+      "feedback": "Sumptuous Penthouse Suite with expansive sea views. The private terrace and top-tier amenities, including a private jacuzzi, created an unforgettable and indulgent stay."
+    },
+    {
+      "name": "Two-Bedroom Family Room",
+      "type": "room",
+
+      "id": 10,
+      "intoduction": "Sumptuous Penthouse Suite with expansive sea views. The private terrace and top-tier amenities, including a private jacuzzi, created an unforgettable and indulgent stay.",
+      "room_square_footage": 550,
+      "capacity": 4,
+      "max_children": 2,
+      "max_pets": 2,
+      "pets_allowed": true,
+      "butler_service": false,
+      "view": "City",
+      "living_room": true,
+      "breakfast": true,
+
+      "amenities": [
+        { "name": "TV", "icon": "tv_icon.png" },
+        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
+        { "name": "Air Conditioning", "icon": "ac_icon.png" },
+        { "name": "Kitchenette", "icon": "kitchen_icon.png" },
+        { "name": "Family-friendly Amenities", "icon": "family_icon.png" },
+        { "name": "Family-friendly Amenities", "icon": "family_icon.png" }
+      ],
+      "price": 400,
+      "images": [
+        "src/images/suites/two bedroom family suite/img1.jpg",
+        "src/images/suites/two bedroom family suite/img2.jpg",
+        "src/images/suites/two bedroom family suite/img3.jpg",
+        "src/images/suites/two bedroom family suite/img4.jpg",
+        "src/images/suites/two bedroom family suite/img5.jpg",
+        "src/images/suites/two bedroom family suite/img6.jpg"
+      ],
+      "feedback": "Perfect for a family vacation. The kitchenette made it easy to prepare meals. Loved the sitting area and balcony."
+    }
+  ]
+}
