@@ -1,0 +1,114 @@
+/* slider.css */
+
+/* Styles for the Swiper container */
+.mySwiper {
+  width: 100%;
+  height: 100vh;
+}
+
+/* Styles for each slide */
+.mySwiper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Styles for the title, subtitle, and text within each slide */
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.text {
+  color: #fff;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Styles for the gallery container */
+.gallery {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Styles for each image in the gallery */
+.gallery img {
+  width: 100px;
+  height: 100px;
+  margin: 0 10px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Styles for the gallery image hover effect */
+.gallery img:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+/* slider.css */
+
+/* Styles for the Swiper container */
+.mySwiper {
+  width: 100%;
+  height: 100vh;
+}
+
+/* Styles for each slide */
+.mySwiper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Styles for the title, subtitle, and text within each slide */
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.text {
+  color: #fff;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Styles for the gallery container */
+.gallery {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Styles for each image in the gallery */
+.gallery img {
+  width: 100px;
+  height: 100px;
+  margin: 0 10px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Styles for the gallery image hover effect */
+.gallery img:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
