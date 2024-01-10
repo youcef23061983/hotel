@@ -122,9 +122,10 @@
       "type": "room",
       "id": 1,
       "intoduction": "Indulge in the cozy embrace of our Standard Single Room, a retreat designed for solo travelers seeking tranquility. Enjoy the breathtaking City view from your balcony, and relish in amenities such as a TV, Wi-Fi, and 24-Hour Room Service. Immerse yourself in the comfort of a well-appointed space where every detail is crafted for your convenience.",
-      "bath_number": 1,
-      "room_square_footage": 200,
-      "capacity": 1,
+      "room_square_footage": { "number": 200, "icon": "GrCube" },
+      "capacity": { "number": 1, "icon": "MdOutlinePeopleAlt" },
+      "bath_number": { "number": 1, "icon": "TbBath" },
+
       "max_children": 0,
       "max_pets": 0,
       "pets_allowed": false,
@@ -134,12 +135,12 @@
       "breakfast": true,
 
       "amenities": [
-        { "name": "TV", "icon": "tv_icon.png" },
-        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
-        { "name": "Air Conditioning", "icon": "ac_icon.png" },
-        { "name": "Balcony", "icon": "balcony_icon.png" },
-        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
-        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+        { "name": "TV", "icon": "PiTelevisionSimpleThin" },
+        { "name": "Wi-Fi", "icon": "FaWifi" },
+        { "name": "Air Conditioning", "icon": "Air Conditioning" },
+        { "name": "Balcony", "icon": "MdBalcony" },
+        { "name": "24-Hour Room Service", "icon": "Tb24Hours" },
+        { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 120,
       "images": [
@@ -156,9 +157,9 @@
       "id": 2,
       "intoduction": "Elevate your stay in the city with our spacious Standard Double Room. Ideal for couples or small families, this room features a charming balcony, a sitting area, and the convenience of 24-Hour Room Service. Bask in the City view and experience the perfect blend of luxury and functionality.",
 
-      "bath_number": 1,
-      "room_square_footage": 250,
-      "capacity": 2,
+      "room_square_footage": { "number": 250, "icon": "GrCube" },
+      "capacity": { "number": 2, "icon": "MdOutlinePeopleAlt" },
+      "bath_number": { "number": 1, "icon": "TbBath" },
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -168,20 +169,19 @@
       "breakfast": true,
 
       "amenities": [
-        { "name": "TV", "icon": "tv_icon.png" },
-        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
-        { "name": "Air Conditioning", "icon": "ac_icon.png" },
-        { "name": "Balcony", "icon": "balcony_icon.png" },
-        { "name": "Sitting Area", "icon": "sitting_icon.png" },
-        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
-        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+        { "name": "TV", "icon": "PiTelevisionSimpleThin" },
+        { "name": "Wi-Fi", "icon": "FaWifi" },
+        { "name": "Air Conditioning", "icon": "Air Conditioning" },
+        { "name": "Balcony", "icon": "MdBalcony" },
+        { "name": "24-Hour Room Service", "icon": "Tb24Hours" },
+        { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "Sitting Area", "icon": "TbSofa " }
       ],
       "price": 150,
       "images": [
         "src/images/rooms/standard double room/img1.jpg",
         "src/images/rooms/standard double room/img2.jpg",
-        "src/images/rooms/standard double room/img3.jpg",
-        "src/images/rooms/standard double room/img4.jpg"
+        "src/images/rooms/standard double room/img3.jpg"
       ],
       "feedback": "Spacious room with a lovely balcony. Enjoyed the sitting area and breakfast service."
     },
@@ -192,9 +192,9 @@
       "id": 3,
       "intoduction": "Step into the Deluxe Double Room, where elegance meets tranquility. With a garden view, this room offers a serene escape. Indulge in amenities like TV, Wi-Fi, Minibar, and a private balcony. Experience a charming stay surrounded by lush greenery and exceptional comfort.",
 
-      "bath_number": 2,
-      "room_square_footage": 350,
-      "capacity": 2,
+      "room_square_footage": { "number": 350, "icon": "GrCube" },
+      "capacity": { "number": 2, "icon": "MdOutlinePeopleAlt" },
+      "bath_number": { "number": 2, "icon": "TbBath" },
       "max_children": 2,
       "max_pets": 2,
       "pets_allowed": true,
@@ -204,12 +204,12 @@
       "breakfast": true,
 
       "amenities": [
-        { "name": "TV", "icon": "tv_icon.png" },
-        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
-        { "name": "Air Conditioning", "icon": "ac_icon.png" },
-        { "name": "Balcony", "icon": "balcony_icon.png" },
-        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
-        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+        { "name": "TV", "icon": "PiTelevisionSimpleThin" },
+        { "name": "Wi-Fi", "icon": "FaWifi" },
+        { "name": "Air Conditioning", "icon": "Air Conditioning" },
+        { "name": "Balcony", "icon": "MdBalcony" },
+        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 200,
       "images": [
@@ -226,9 +226,9 @@
       "id": 4,
       "intoduction": "Our Junior Suite is a sanctuary of sophistication with a mesmerizing Sea view. Enjoy the spacious living room, a private balcony, and the impeccable service of a personal butler. Revel in the harmonious blend of luxury and modernity that defines this unique suite.",
 
-      "bath_number": 2,
-      "room_square_footage": 400,
-      "capacity": 2,
+      "room_square_footage": { "number": 400, "icon": "GrCube" },
+      "capacity": { "number": 2, "icon": "MdOutlinePeopleAlt" },
+      "bath_number": { "number": 2, "icon": "TbBath" },
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -238,12 +238,12 @@
       "breakfast": true,
 
       "amenities": [
-        { "name": "TV", "icon": "tv_icon.png" },
-        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
-        { "name": "Air Conditioning", "icon": "ac_icon.png" },
-        { "name": "Balcony", "icon": "balcony_icon.png" },
-        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
-        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+        { "name": "TV", "icon": "PiTelevisionSimpleThin" },
+        { "name": "Wi-Fi", "icon": "FaWifi" },
+        { "name": "Air Conditioning", "icon": "Air Conditioning" },
+        { "name": "Balcony", "icon": "MdBalcony" },
+        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 250,
       "images": [
@@ -261,9 +261,9 @@
       "id": 5,
       "intoduction": "Unwind in the lap of luxury with our Executive Suite, overlooking the expansive Sea. This suite features a spacious living room, a private balcony, and top-notch amenities, including 24-Hour Room Service. Immerse yourself in a world of opulence and unparalleled comfort.",
 
-      "bath_number": 3,
-      "room_square_footage": 600,
-      "capacity": 4,
+      "room_square_footage": { "number": 600, "icon": "GrCube" },
+      "capacity": { "number": 4, "icon": "MdOutlinePeopleAlt" },
+      "bath_number": { "number": 3, "icon": "TbBath" },
       "max_children": 2,
       "max_pets": 2,
       "pets_allowed": false,
@@ -273,12 +273,12 @@
       "breakfast": true,
 
       "amenities": [
-        { "name": "TV", "icon": "tv_icon.png" },
-        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
-        { "name": "Air Conditioning", "icon": "ac_icon.png" },
-        { "name": "Balcony", "icon": "balcony_icon.png" },
-        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
-        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+        { "name": "TV", "icon": "PiTelevisionSimpleThin" },
+        { "name": "Wi-Fi", "icon": "FaWifi" },
+        { "name": "Air Conditioning", "icon": "Air Conditioning" },
+        { "name": "Balcony", "icon": "MdBalcony" },
+        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 350,
       "images": [
@@ -296,9 +296,9 @@
       "id": 6,
       "intoduction": "The Terrace Suite invites you to experience comfort with a touch of outdoor relaxation. Revel in the Sea view from your private terrace, and enjoy amenities like TV, Wi-Fi, and Air Conditioning. This suite offers a perfect blend of tranquility and luxury.",
 
-      "bath_number": 2,
-      "room_square_footage": 450,
-      "capacity": 3,
+      "room_square_footage": { "number": 450, "icon": "GrCube" },
+      "capacity": { "number": 3, "icon": "MdOutlinePeopleAlt" },
+      "bath_number": { "number": 2, "icon": "TbBath" },
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -308,12 +308,12 @@
       "breakfast": true,
 
       "amenities": [
-        { "name": "TV", "icon": "tv_icon.png" },
-        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
-        { "name": "Air Conditioning", "icon": "ac_icon.png" },
-        { "name": "Balcony", "icon": "balcony_icon.png" },
-        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
-        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+        { "name": "TV", "icon": "PiTelevisionSimpleThin" },
+        { "name": "Wi-Fi", "icon": "FaWifi" },
+        { "name": "Air Conditioning", "icon": "Air Conditioning" },
+        { "name": "Balcony", "icon": "MdBalcony" },
+        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 300,
       "images": [
@@ -331,9 +331,9 @@
       "id": 7,
       "intoduction": "Discover the quaint charm of our Garden Loft, offering a delightful Garden view. Immerse yourself in a cozy atmosphere with essential amenities like TV, Wi-Fi, and a balcony. Experience a stay that combines simplicity with modern comfort.",
 
-      "bath_number": 2,
-      "room_square_footage": 500,
-      "capacity": 2,
+      "room_square_footage": { "number": 500, "icon": "GrCube" },
+      "capacity": { "number": 2, "icon": "MdOutlinePeopleAlt" },
+      "bath_number": { "number": 2, "icon": "TbBath" },
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -343,12 +343,12 @@
       "breakfast": true,
 
       "amenities": [
-        { "name": "TV", "icon": "tv_icon.png" },
-        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
-        { "name": "Air Conditioning", "icon": "ac_icon.png" },
-        { "name": "Balcony", "icon": "balcony_icon.png" },
-        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
-        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+        { "name": "TV", "icon": "PiTelevisionSimpleThin" },
+        { "name": "Wi-Fi", "icon": "FaWifi" },
+        { "name": "Air Conditioning", "icon": "Air Conditioning" },
+        { "name": "Balcony", "icon": "MdBalcony" },
+        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 280,
       "images": [
@@ -363,12 +363,12 @@
       "name": "Presidential Suite",
       "type": "suite",
 
-      "bath_number": 4,
       "id": 8,
       "intoduction": "Indulge in the epitome of luxury with our Presidential Suite, offering breathtaking Sea views. This suite features a spacious living room, a private balcony, and the exclusive service of a personal butler. Immerse yourself in a world of grandeur and unparalleled luxury.",
 
-      "room_square_footage": 800,
-      "capacity": 6,
+      "room_square_footage": { "number": 800, "icon": "GrCube" },
+      "capacity": { "number": 6, "icon": "MdOutlinePeopleAlt" },
+      "bath_number": { "number": 4, "icon": "TbBath" },
       "max_children": 3,
       "max_pets": 2,
       "pets_allowed": false,
@@ -378,12 +378,12 @@
       "breakfast": true,
 
       "amenities": [
-        { "name": "TV", "icon": "tv_icon.png" },
-        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
-        { "name": "Air Conditioning", "icon": "ac_icon.png" },
-        { "name": "Balcony", "icon": "balcony_icon.png" },
-        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
-        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+        { "name": "TV", "icon": "PiTelevisionSimpleThin" },
+        { "name": "Wi-Fi", "icon": "FaWifi" },
+        { "name": "Air Conditioning", "icon": "Air Conditioning" },
+        { "name": "Balcony", "icon": "MdBalcony" },
+        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 700,
       "images": [
@@ -401,9 +401,9 @@
       "id": 9,
       "intoduction": "Experience the height of indulgence in our Penthouse Suite, boasting expansive Sea views. This suite features a private terrace, a living room, and top-tier amenities, including a private jacuzzi. Elevate your stay to new heights of luxury and sophistication.",
 
-      "bath_number": 5,
-      "room_square_footage": 1000,
-      "capacity": 8,
+      "room_square_footage": { "number": 1000, "icon": "GrCube" },
+      "capacity": { "number": 8, "icon": "MdOutlinePeopleAlt" },
+      "bath_number": { "number": 5, "icon": "TbBath" },
       "max_children": 4,
       "max_pets": 2,
       "pets_allowed": true,
@@ -413,12 +413,12 @@
       "breakfast": true,
 
       "amenities": [
-        { "name": "TV", "icon": "tv_icon.png" },
-        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
-        { "name": "Air Conditioning", "icon": "ac_icon.png" },
-        { "name": "Balcony", "icon": "balcony_icon.png" },
-        { "name": "24-Hour Room Service", "icon": "room_service_icon.png" },
-        { "name": "Breakfast", "icon": "breakfast_icon.png" }
+        { "name": "TV", "icon": "PiTelevisionSimpleThin" },
+        { "name": "Wi-Fi", "icon": "FaWifi" },
+        { "name": "Air Conditioning", "icon": "Air Conditioning" },
+        { "name": "Balcony", "icon": "MdBalcony" },
+        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 900,
       "images": [
@@ -437,8 +437,9 @@
 
       "id": 10,
       "intoduction": "Sumptuous Penthouse Suite with expansive sea views. The private terrace and top-tier amenities, including a private jacuzzi, created an unforgettable and indulgent stay.",
-      "room_square_footage": 550,
-      "capacity": 4,
+      "room_square_footage": { "number": 550, "icon": "GrCube" },
+      "capacity": { "number": 4, "icon": "MdOutlinePeopleAlt" },
+      "bath_number": { "number": 2, "icon": "TbBath" },
       "max_children": 2,
       "max_pets": 2,
       "pets_allowed": true,
@@ -448,12 +449,10 @@
       "breakfast": true,
 
       "amenities": [
-        { "name": "TV", "icon": "tv_icon.png" },
-        { "name": "Wi-Fi", "icon": "wifi_icon.png" },
-        { "name": "Air Conditioning", "icon": "ac_icon.png" },
-        { "name": "Kitchenette", "icon": "kitchen_icon.png" },
-        { "name": "Family-friendly Amenities", "icon": "family_icon.png" },
-        { "name": "Family-friendly Amenities", "icon": "family_icon.png" }
+        { "name": "TV", "icon": "PiTelevisionSimpleThin" },
+        { "name": "Wi-Fi", "icon": "FaWifi" },
+        { "name": "Air Conditioning", "icon": "Air Conditioning" },
+        { "name": "Kitchenette", "icon": "FaKitchenSet" }
       ],
       "price": 400,
       "images": [

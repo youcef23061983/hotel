@@ -94,7 +94,9 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link className="navlink">Dinning</Link>
+              <Link className="navlink" to="restaurant">
+                Dinning
+              </Link>
             </li>
             <li>
               <Link className="navlink">WellNess & SPA</Link>

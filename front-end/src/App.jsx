@@ -6,6 +6,7 @@ import Layout from "./pages/Layout";
 import About from "./components/About";
 import Rooms from "./components/Rooms";
 import Details from "./components/Details";
+import Restaurant from "./components/Restaurant";
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="rooms" element={<Rooms />} />
             <Route path="rooms/:id" element={<Details />} />
             <Route path="about" element={<About />} />
+            <Route path="restaurant" element={<Restaurant />} />
           </Route>
         </Routes>
       </BrowserRouter>

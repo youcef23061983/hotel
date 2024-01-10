@@ -49,10 +49,10 @@ const Rooms = () => {
     ? Math.min(...roomsData.map((room) => room.price))
     : 0;
   let minSize = roomsData
-    ? Math.min(...roomsData.map((room) => room.room_square_footage))
+    ? Math.min(...roomsData.map((room) => room.room_square_footage.number))
     : 0;
   let maxSize = roomsData
-    ? Math.max(...roomsData.map((room) => room.room_square_footage))
+    ? Math.max(...roomsData.map((room) => room.room_square_footage.number))
     : 0;
   let types = roomsData
     ? ["all", ...new Set(roomsData.map((room) => room.type))]
@@ -67,7 +67,7 @@ const Rooms = () => {
   });
 
   let people = roomsData
-    ? [...new Set(roomsData.map((room) => room.capacity))]
+    ? [...new Set(roomsData.map((room) => room.capacity.number))]
     : [];
   people = people.map((capacity, index) => {
     return (
@@ -79,11 +79,11 @@ const Rooms = () => {
   const filterRooms = roomsData?.filter((room) => {
     const typeFiler = user.type === "all" || room.type === user.type;
     const capacityFilter =
-      user.capacity === 1 || room.capacity === parseInt(user.capacity);
+      user.capacity === 1 || room.capacity.number === parseInt(user.capacity);
     const sizefilter =
       user.minSize === 0 ||
-      (room.room_square_footage >= parseInt(user.minSize) &&
-        room.room_square_footage <= parseInt(user.maxSize));
+      (room.room_square_footage.number >= parseInt(user.minSize) &&
+        room.room_square_footage.number <= parseInt(user.maxSize));
     const priceFilter = user.price === 0 || room.price >= user.price;
     const breakfastFilter = !user.breakfast || room.breakfast;
     const petFilter = !user.pets_allowed || room.pets_allowed;
@@ -236,7 +236,7 @@ const Rooms = () => {
                   <h4>{name}</h4>
                   <h4>{id}</h4>
 
-                  <Link to={`/rooms/${id}`} className="room-btn">
+                  <Link to={`${id}`} className="room-btn">
                     explore more
                   </Link>
                 </div>

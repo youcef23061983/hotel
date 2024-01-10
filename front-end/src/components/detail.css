@@ -112,3 +112,120 @@
   transform: scale(1.1);
   transition: transform 0.3s ease-in-out;
 }
+
+.detailImg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.roomImages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* margin: 5rem auto; */
+  border-radius: 3rem;
+}
+.sliderButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.sliderButton {
+  font-size: 3rem;
+  font-weight: lighter;
+  color: var(--clr-primary-header-button);
+  margin: 0 1rem;
+  background-color: transparent;
+  border-color: transparent;
+}
+.sliderButton:hover {
+  scale: 1.3;
+  color: var(--clr-primary-navbar);
+}
+.sliderButton:disabled {
+  color: rgb(82, 82, 239);
+}
+.iconsDetails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 0.2rem;
+}
+
+.iconDetail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* width: 100%; */
+}
+.iconDetail > p {
+  color: white;
+}
+.iconDetail > button {
+  background: transparent;
+  border-color: transparent;
+  color: white;
+}
+@media screen and (min-width: 336px) {
+  .roomImages {
+    margin: 1rem auto;
+    width: 33rem;
+    aspect-ratio: 1/1;
+  }
+  .iconDetail > button {
+    font-size: 1.8rem;
+  }
+}
+@media screen and (min-width: 786px) {
+  .roomImages {
+    margin: 1rem auto;
+    width: 50rem;
+    aspect-ratio: 1/1;
+  }
+  .iconDetail > button {
+    font-size: 2rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .iconDetail > button {
+    font-size: 2.2rem;
+  }
+}
+
+.mySwiper {
+  width: 100%;
+  height: auto;
+  padding: 2rem 0;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  max-width: 170rem;
+  min-height: 30rem;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+.otherRoom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.swiper-pagination {
+  display: none;
+}
+.otherRooms {
+  margin: 10rem 0;
+}
+.otherRooms > h2 {
+  text-align: center;
+}
+.otherRoom > h3 {
+  text-align: center;
+}

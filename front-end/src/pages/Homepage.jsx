@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "./homepage.css";
 import Banner from "./Banner";
+import video from "../assets/video.mp4";
 
 const Homepage = () => {
   const galleryFn = async () => {
@@ -43,7 +44,7 @@ const Homepage = () => {
   useEffect(() => {
     const slider = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % x);
-    }, 3000);
+    }, 1000);
 
     return () => clearInterval(slider);
   }, [x]);
@@ -51,10 +52,11 @@ const Homepage = () => {
     <div>
       <div
         className="headerimages"
-        style={{
-          background: `url(${data && data[0].images[index]}) center/cover `,
-        }}
+        // style={{
+        //   background: `url(${data && data[0].images[index]}) center/cover `,
+        // }}
       >
+        <video src={video} autoPlay loop muted className="video" />
         <Banner title="you find legend in legend hotel" />
       </div>
       <div className="section">
@@ -121,18 +123,14 @@ const Homepage = () => {
           >
             {roomsData &&
               roomsData.map((room) => {
-                const { type, images, id } = room;
+                const { name, images, id } = room;
                 return (
                   <SwiperSlide key={id}>
                     <Link to={`/rooms/${id}`}>
-                      <img
-                        src={images[0]}
-                        alt="slide_image"
-                        // className="img"
-                      />
+                      <img src={images[0]} alt="slide_image" />
                     </Link>
 
-                    <h3 style={{ textAlign: "center" }}>{type}</h3>
+                    <h3 style={{ textAlign: "center" }}>{name}</h3>
                   </SwiperSlide>
                 );
               })}
@@ -167,7 +165,9 @@ const Homepage = () => {
             impression. Welcome to Legend Hotel, where our many restaurants
             promise a journey through the world of exceptional dining.
           </p>
-          <Link className="link-btn">explore more</Link>
+          <Link className="link-btn" to="restaurant">
+            explore more
+          </Link>
         </div>
       </div>
       <div className="section">
