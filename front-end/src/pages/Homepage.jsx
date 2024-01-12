@@ -190,7 +190,9 @@ const Homepage = () => {
             Welcome to a haven where relaxation meets rejuvenation, and every
             moment is dedicated to your personal oasis of serenity.
           </p>
-          <Link className="link-btn">explore more</Link>
+          <Link className="link-btn" to="wellness">
+            explore more
+          </Link>
         </div>
       </div>
     </div>

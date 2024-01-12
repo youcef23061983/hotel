@@ -37,6 +37,7 @@
       "type": "Wellnes",
       "id": 3,
       "images": [
+        "src/images/wellness/wellness.jpg",
         "src/images/wellness/img1.jpg",
         "src/images/wellness/img2.jpg",
         "src/images/wellness/img3.jpg",
@@ -46,6 +47,7 @@
         "src/images/wellness/img7.jpg",
         "src/images/wellness/img8.jpg",
         "src/images/wellness/img9.jpg",
+        "src/images/wellness/img10.jpg",
         "src/images/wellness/img11.jpg",
         "src/images/wellness/img12.jpg",
         "src/images/wellness/img13.jpg",
@@ -55,14 +57,14 @@
         "src/images/wellness/img17.jpg",
         "src/images/wellness/img18.jpg",
         "src/images/wellness/img19.jpg",
-        "src/images/wellness/img20.jpg",
-        "src/images/wellness/img21.jpg"
+        "src/images/wellness/img20.jpg"
       ]
     },
     {
       "type": "Restaurants",
       "id": 4,
       "images": [
+        "src/images/restaurants/img1.jpg",
         "src/images/restaurants/img2.jpg",
         "src/images/restaurants/img3.jpg",
         "src/images/restaurants/img4.jpg",
@@ -71,6 +73,7 @@
         "src/images/restaurants/img7.jpg",
         "src/images/restaurants/img8.jpg",
         "src/images/restaurants/img9.jpg",
+        "src/images/restaurants/img10.jpg",
         "src/images/restaurants/img11.jpg",
         "src/images/restaurants/img12.jpg",
         "src/images/restaurants/img13.jpg",
@@ -82,16 +85,22 @@
       "type": "Experience",
       "id": 5,
       "images": [
-        "src/images/homepage/img1.jpg",
-        "src/images/homepage/img2.jpg",
-        "src/images/homepage/img3.jpg",
-        "src/images/homepage/img4.jpg",
-        "src/images/homepage/img5.jpg",
-        "src/images/homepage/img6.jpg",
-        "src/images/homepage/img7.jpg",
-        "src/images/homepage/img8.jpg",
-        "src/images/homepage/img9.jpg",
-        "src/images/homepage/img10.jpg"
+        "src/images/experience/Kayaking1.jpg",
+        "src/images/experience/Kayaking2.jpg",
+        "src/images/experience/Kayaking3.jpg",
+        "src/images/experience/Parasailing1.jpg",
+        "src/images/experience/Parasailing2.jpg",
+        "src/images/experience/Parasailing3.jpg",
+        "src/images/experience/Snorkeling1.jpg",
+        "src/images/experience/Snorkeling2.jpg",
+        "src/images/experience/Snorkeling3.jpg",
+        "src/images/experience/Stand-up Paddleboarding (SUP)1.jpg",
+        "src/images/experience/Stand-up Paddleboarding (SUP)2.jpg",
+        "src/images/experience/Stand-up Paddleboarding (SUP)3.jpg",
+        "src/images/experience/Windsurfing1.jpg",
+        "src/images/experience/Windsurfing2.jpg",
+        "src/images/experience/Windsurfing3.jpg",
+        "src/images/experience/experience.jpg"
       ]
     },
     {
@@ -175,7 +184,7 @@
         { "name": "Balcony", "icon": "MdBalcony" },
         { "name": "24-Hour Room Service", "icon": "Tb24Hours" },
         { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" },
-        { "name": "Sitting Area", "icon": "TbSofa " }
+        { "name": "Sitting Area", "icon": "TbSofa" }
       ],
       "price": 150,
       "images": [
@@ -208,7 +217,7 @@
         { "name": "Wi-Fi", "icon": "FaWifi" },
         { "name": "Air Conditioning", "icon": "Air Conditioning" },
         { "name": "Balcony", "icon": "MdBalcony" },
-        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "24-Hour Room Service", "icon": "Tb24Hours" },
         { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 200,
@@ -242,7 +251,7 @@
         { "name": "Wi-Fi", "icon": "FaWifi" },
         { "name": "Air Conditioning", "icon": "Air Conditioning" },
         { "name": "Balcony", "icon": "MdBalcony" },
-        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "24-Hour Room Service", "icon": "Tb24Hours" },
         { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 250,
@@ -277,7 +286,7 @@
         { "name": "Wi-Fi", "icon": "FaWifi" },
         { "name": "Air Conditioning", "icon": "Air Conditioning" },
         { "name": "Balcony", "icon": "MdBalcony" },
-        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "24-Hour Room Service", "icon": "Tb24Hours" },
         { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 350,
@@ -312,7 +321,7 @@
         { "name": "Wi-Fi", "icon": "FaWifi" },
         { "name": "Air Conditioning", "icon": "Air Conditioning" },
         { "name": "Balcony", "icon": "MdBalcony" },
-        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "24-Hour Room Service", "icon": "Tb24Hours" },
         { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 300,
@@ -347,7 +356,7 @@
         { "name": "Wi-Fi", "icon": "FaWifi" },
         { "name": "Air Conditioning", "icon": "Air Conditioning" },
         { "name": "Balcony", "icon": "MdBalcony" },
-        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "24-Hour Room Service", "icon": "Tb24Hours" },
         { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 280,
@@ -382,7 +391,7 @@
         { "name": "Wi-Fi", "icon": "FaWifi" },
         { "name": "Air Conditioning", "icon": "Air Conditioning" },
         { "name": "Balcony", "icon": "MdBalcony" },
-        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "24-Hour Room Service", "icon": "Tb24Hours" },
         { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 700,
@@ -417,7 +426,7 @@
         { "name": "Wi-Fi", "icon": "FaWifi" },
         { "name": "Air Conditioning", "icon": "Air Conditioning" },
         { "name": "Balcony", "icon": "MdBalcony" },
-        { "name": "24-Hour Room Service", "icon": "MdOutlineFreeBreakfast" },
+        { "name": "24-Hour Room Service", "icon": "Tb24Hours" },
         { "name": "Breakfast", "icon": "MdOutlineFreeBreakfast" }
       ],
       "price": 900,

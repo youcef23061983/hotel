@@ -99,10 +99,14 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link className="navlink">WellNess & SPA</Link>
+              <Link className="navlink" to="wellness">
+                WellNess & SPA
+              </Link>
             </li>
             <li>
-              <Link className="navlink">Experiences</Link>
+              <Link className="navlink" to="experiences">
+                Experiences
+              </Link>
             </li>
             <li>
               <Link className="navlink">Events</Link>

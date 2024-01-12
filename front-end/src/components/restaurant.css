@@ -1,0 +1,80 @@
+.restaurantHeader {
+  padding: 1rem;
+  margin: 5rem 1rem;
+}
+.restaurantHeader > h2 {
+  margin-bottom: 2rem;
+}
+
+/* -------css of other room */
+.mySwiper {
+  width: 100%;
+  height: auto;
+  padding: 2rem 0;
+  margin: 2rem 0;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  max-width: 170rem;
+  min-height: 30rem;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+.otherRoom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.swiper-pagination {
+  display: none;
+}
+.otherRooms {
+  margin: 10rem 0;
+}
+.otherRooms > h2 {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.otherRoom > h3 {
+  text-align: center;
+}
+.restaurant {
+  margin: 10rem 1rem;
+}
+/* -------icons */
+.restaurantIcons {
+  display: flex;
+  align-items: center;
+  margin: auto 0;
+}
+.restaurantIcon {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.5rem;
+}
+.iconTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.iconTitle > h4 {
+  margin-bottom: 0;
+  font-size: 1.5rem;
+}
+.iconTitle > p {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+.restaurantIcon > button {
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 4rem;
+}

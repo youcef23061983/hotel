@@ -7,6 +7,9 @@ import About from "./components/About";
 import Rooms from "./components/Rooms";
 import Details from "./components/Details";
 import Restaurant from "./components/Restaurant";
+import Wellness from "./components/Wellness";
+import Experiences from "./components/Experiences";
+
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -19,6 +22,8 @@ function App() {
             <Route path="rooms/:id" element={<Details />} />
             <Route path="about" element={<About />} />
             <Route path="restaurant" element={<Restaurant />} />
+            <Route path="wellness" element={<Wellness />} />
+            <Route path="experiences" element={<Experiences />} />
           </Route>
         </Routes>
       </BrowserRouter>
