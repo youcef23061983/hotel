@@ -599,6 +599,15 @@ a {
     width: 100%;
     margin: 1rem 1rem;
   }
+  .roomBooking {
+    /* margin: 1rem 2rem; */
+    max-width: (33rem, 80%);
+  }
+  .imgBooking {
+    /* max-width: (28rem, 80%); */
+
+    aspect-ratio: 1/1;
+  }
 }
 
 @media screen and (min-width: 786px) {

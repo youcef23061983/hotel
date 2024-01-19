@@ -111,7 +111,7 @@ const Booking = () => {
     // Add additional keys to remove if needed
   };
 
-  // clearLocalStorage();
+  clearLocalStorage();
   const img2 = roomData ? roomData.images[0] : 0;
 
   return (
@@ -149,12 +149,13 @@ const Booking = () => {
           <button type="submit" onClick={handle} className="link-btn">
             submit
           </button>
+          <h3>{allDates}</h3>
         </div>
       )}
-      {form && (
+      {form && allDates.length > 0 && (
         <div className="calendarContainer">
-          <div>
-            <div className="roomImages">
+          <div className="roomBooking">
+            <div className="imgBooking">
               <img src={`/${img2}`} alt="" className="img" />
             </div>
             <div></div>
