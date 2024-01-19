@@ -80,7 +80,9 @@ const Homepage = () => {
             just a visit but a cherished memory. Discover the epitome of
             hospitality at our Legend.
           </p>
-          <Link className="link-btn">explore more</Link>
+          <Link className="link-btn" to="about">
+            explore more
+          </Link>
         </div>
       </div>
       <div className="roomSlider">

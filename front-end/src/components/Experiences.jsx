@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
-import { MdOutlineSportsGymnastics } from "react-icons/md";
-import { TbPool, TbMassage } from "react-icons/tb";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -76,7 +73,9 @@ const Experiences = () => {
           unforgettable memories against the backdrop of Batu Ferringhi's
           coastal paradise.
         </p>
-        <Link className="link-btn">Book Now</Link>
+        <Link className="link-btn" to="/contact">
+          Contact Us
+        </Link>
 
         <Swiper
           effect={"coverflow"}
@@ -126,8 +125,9 @@ const Experiences = () => {
           lasting memories as you embrace the skies in this extraordinary
           parasailing escapade.
         </p>
-        <Link className="link-btn">Book Now</Link>
-
+        <Link className="link-btn" to="/contact">
+          Contact Us
+        </Link>
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
@@ -176,8 +176,9 @@ const Experiences = () => {
           magic of underwater exploration and create unforgettable moments
           amidst the wonders of Batu Ferringhi's coastal paradise.
         </p>
-        <Link className="link-btn">Book Now</Link>
-
+        <Link className="link-btn" to="/contact">
+          Contact Us
+        </Link>
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
@@ -205,6 +206,7 @@ const Experiences = () => {
           </SwiperSlide>
         </Swiper>
       </div>
+
       <div className="wellness">
         <h2>
           Graceful Glides: Stand-Up Paddleboarding (SUP) Serenity at Legend
@@ -228,60 +230,9 @@ const Experiences = () => {
           every glide brings you closer to the serene heart of Batu Ferringhi's
           waters.
         </p>
-        <Link className="link-btn">Book Now</Link>
-
-        <Swiper
-          effect={"coverflow"}
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={"auto"}
-          coverflowEffect={{
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          pagination={true}
-          modules={[EffectCoverflow, Pagination]}
-          className="mySwiper"
-        >
-          <SwiperSlide>
-            <img src={data && data[4].images[9]} alt="slide_image" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={data && data[4].images[10]} alt="slide_image" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={data && data[4].images[11]} alt="slide_image" />
-          </SwiperSlide>
-        </Swiper>
-      </div>
-      <div className="wellness">
-        <h2>
-          Graceful Glides: Stand-Up Paddleboarding (SUP) Serenity at Legend
-          Hotel
-        </h2>
-        <p>
-          Title: "Graceful Glides: Stand-Up Paddleboarding (SUP) Serenity at
-          Legend Hotel" Embark on a journey of tranquility and balance with our
-          Stand-Up Paddleboarding (SUP) activity at Legend Hotel in Batu
-          Ferringhi, Malaysia. This serene aquatic adventure invites guests to
-          gracefully navigate the calm waters of the Andaman Sea atop a
-          paddleboard, offering a unique perspective of the coastal beauty that
-          surrounds our esteemed hotel. Whether you are a novice seeking a
-          peaceful ride or an experienced paddleboarder craving the thrill of
-          the open sea, our well-maintained equipment and expert instructors
-          ensure an enjoyable and safe experience. Revel in the gentle rhythm of
-          paddling as you cruise along the shoreline, taking in breathtaking
-          views of the ocean and absorbing the soothing ambiance of our coastal
-          paradise. Legend Hotel invites you to discover the art of stand-up
-          paddleboarding, where every stroke becomes a moment of balance, and
-          every glide brings you closer to the serene heart of Batu Ferringhi's
-          waters.
-        </p>
-        <Link className="link-btn">Book Now</Link>
-
+        <Link className="link-btn" to="/contact">
+          Contact Us
+        </Link>
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
@@ -331,8 +282,9 @@ const Experiences = () => {
           of coastal living at Legend Hotel. Message ChatGPT… ChatGPT can make
           mistakes. Consider checking importa
         </p>
-        <Link className="link-btn">Book Now</Link>
-
+        <Link className="link-btn" to="/contact">
+          Contact Us
+        </Link>
         <Swiper
           effect={"coverflow"}
           grabCursor={true}

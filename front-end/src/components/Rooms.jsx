@@ -37,6 +37,7 @@ const Rooms = () => {
     size: 0,
     minSize: 0,
     maxSize: 0,
+    maxChildren: 0,
     breakfast: false,
     pets_allowed: false,
     living_room: false,
@@ -57,6 +58,10 @@ const Rooms = () => {
   let types = roomsData
     ? ["all", ...new Set(roomsData.map((room) => room.type))]
     : [];
+
+  let maxChildren = roomsData
+    ? Math.max(...roomsData.map((room) => room.max_children))
+    : 0;
 
   types = types.map((type, index) => {
     return (
@@ -89,6 +94,8 @@ const Rooms = () => {
     const petFilter = !user.pets_allowed || room.pets_allowed;
     const livingroomFilter = !user.living_room || room.living_room;
     const butlerserviceFilter = !user.butler_service || room.butler_service;
+    const childrenfilter =
+      user.maxChildren === 0 || room.max_children >= parseInt(user.maxChildren);
     return (
       typeFiler &&
       capacityFilter &&
@@ -97,7 +104,8 @@ const Rooms = () => {
       breakfastFilter &&
       petFilter &&
       livingroomFilter &&
-      butlerserviceFilter
+      butlerserviceFilter &&
+      childrenfilter
     );
   });
   const handleChange = (e) => {
@@ -223,6 +231,21 @@ const Rooms = () => {
               <label htmlFor="butler_service">butler_service</label>
             </div>
           </div>
+          <div className="searchElement">
+            <label htmlFor="children">max children</label>
+            <div className="inputSize">
+              <input
+                type="number"
+                name="maxChildren"
+                id="maxChildren"
+                value={user.maxChildren}
+                max={maxChildren}
+                min="0"
+                onChange={handleChange}
+                className="formSize"
+              />
+            </div>
+          </div>
         </form>
         <div className="roomslist">
           {roomsData &&
@@ -234,7 +257,6 @@ const Rooms = () => {
                     <img src={images[0]} className="img" />
                   </div>
                   <h4>{name}</h4>
-                  <h4>{id}</h4>
 
                   <Link to={`${id}`} className="room-btn">
                     explore more

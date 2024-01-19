@@ -18,9 +18,15 @@ const Footer = () => {
         </div>
         <div className="footerdiv">
           <h3>Explore</h3>
-          <Link className="footerlink">About Us</Link>
-          <Link className="footerlink">Gallery</Link>
-          <Link className="footerlink">Guest Review</Link>
+          <Link className="footerlink" to="about">
+            About Us
+          </Link>
+          <Link className="footerlink" to="gallery">
+            Gallery
+          </Link>
+          <Link className="footerlink" to="testimonial">
+            Guest Review
+          </Link>
         </div>
         <div className="footerdiv">
           <h3>Contact Us</h3>
@@ -30,7 +36,9 @@ const Footer = () => {
             <a href="">+00 00 00 00</a>
           </p>
 
-          <a href="">googleMaps</a>
+          <Link className="footerlink" to="google">
+            googleMaps
+          </Link>
         </div>
         <div className="footerdiv">
           <h3>Follow US</h3>
@@ -46,17 +54,19 @@ const Footer = () => {
         </div>
       </div>
       <ul className="copyrights">
-        <li className="footerlink">
-          <p>© 2023 Legend’s Hotel All Rights Reserved</p>
+        <li className="footerReserved">
+          <p className="footerReserved">
+            © 2023 Legend’s Hotel All Rights Reserved
+          </p>
         </li>
         <li className="footerlink">
-          <a href="">Privacy Policy |</a>
+          <a href="/privacy">Privacy Policy |</a>
         </li>
         <li className="footerlink">
-          <a href="">Terms &amp; Conditions |</a>
+          <a href="/terms">Terms &amp; Conditions |</a>
         </li>
         <li className="footerlink">
-          <a href="">Cookies Policy |</a>
+          <a href="/cookies">Cookies Policy |</a>
         </li>
       </ul>
     </>

@@ -54,14 +54,10 @@ const Details = () => {
   });
   const img1 = roomData ? roomData.images[0] : 0;
   const roomImages = roomData ? roomData.images : 0;
-  console.log(roomImages);
   const roomIcons = roomData ? roomData.amenities : 0;
-  console.log(roomIcons);
 
   const [index, setIndex] = useState(0);
-  console.log(roomImages[0]);
   const x = roomData && roomImages.length;
-  console.log(x);
 
   function renderIcon(iconName) {
     switch (iconName) {
@@ -95,7 +91,6 @@ const Details = () => {
   const square = roomData ? roomData.room_square_footage : [];
   const guest = roomData ? roomData.capacity : [];
   const bath = roomData ? roomData.bath_number : [];
-  console.log(square);
   const roomsFn = async () => {
     const res = await fetch("http://localhost:3000/rooms");
     if (!res.ok) {
@@ -112,11 +107,6 @@ const Details = () => {
         (room) => room.type === roomData.type && room.id !== roomData.id
       )
     : [];
-  console.log(otherRooms);
-  const [other, setOther] = useState(0);
-  console.log(otherRooms[0]);
-  const otherLength = otherRooms && otherRooms.length;
-  console.log(x);
 
   if (isPending) {
     return <h2>...is loading</h2>;
@@ -147,7 +137,9 @@ const Details = () => {
         <div className="p">
           <h2>about the room </h2>
           <p>{roomData.intoduction}</p>
-          <button className="nav-btn">book now </button>
+          <Link className="nav-btn" to={`/booking/${id}`}>
+            book now
+          </Link>
         </div>
         <div className="roomIcons">
           {roomIcons.map((icon, index) => {
@@ -160,6 +152,7 @@ const Details = () => {
           })}{" "}
         </div>
       </div>
+
       <div>
         <div className="roomImages">
           <img src={`/${roomImages && roomImages[index]}`} className="img" />
@@ -180,6 +173,11 @@ const Details = () => {
             <GrNext />
           </button>
         </div>
+      </div>
+
+      <div className="feedBack">
+        <h2>feed back</h2>
+        <p>{roomData && roomData.feedback}</p>
       </div>
       <div className="otherRooms">
         <h2>other rooms</h2>

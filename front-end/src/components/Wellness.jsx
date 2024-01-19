@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 import { MdOutlineSportsGymnastics } from "react-icons/md";
 import { TbPool, TbMassage } from "react-icons/tb";
+import { PiClockAfternoonThin } from "react-icons/pi";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -99,7 +100,17 @@ const Wellness = () => {
           dissolve, and the journey to rejuvenation begins with a refreshing
           plunge into tranquility.
         </p>
-        <Link className="link-btn">Book Now</Link>
+        <div className="restaurantIcons">
+          <div className="restaurantIcon">
+            <button>
+              <PiClockAfternoonThin />
+            </button>
+            <div className="iconTitle">
+              <h4>Opening hours </h4>
+              <p>08:00 pm – 08:00 pm</p>
+            </div>
+          </div>
+        </div>
 
         <Swiper
           effect={"coverflow"}
@@ -153,8 +164,17 @@ const Wellness = () => {
           wellness journey that leaves you refreshed, revitalized, and truly
           harmonized.
         </p>
-        <Link className="link-btn">Book Now</Link>
-
+        <div className="restaurantIcons">
+          <div className="restaurantIcon">
+            <button>
+              <PiClockAfternoonThin />
+            </button>
+            <div className="iconTitle">
+              <h4>Opening hours </h4>
+              <p>08:00 pm – 08:00 pm</p>
+            </div>
+          </div>
+        </div>
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
@@ -202,8 +222,17 @@ const Wellness = () => {
           day melt away in our spa sauna, a jewel in the crown of our holistic
           wellness offerings.
         </p>
-        <Link className="link-btn">Book Now</Link>
-
+        <div className="restaurantIcons">
+          <div className="restaurantIcon">
+            <button>
+              <PiClockAfternoonThin />
+            </button>
+            <div className="iconTitle">
+              <h4>Opening hours </h4>
+              <p>08:00 pm – 08:00 pm</p>
+            </div>
+          </div>
+        </div>
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
@@ -253,8 +282,17 @@ const Wellness = () => {
           the stresses of the outside world dissolve in the embrace of luxurious
           tranquility.
         </p>
-        <Link className="link-btn">Book Now</Link>
-
+        <div className="restaurantIcons">
+          <div className="restaurantIcon">
+            <button>
+              <PiClockAfternoonThin />
+            </button>
+            <div className="iconTitle">
+              <h4>Opening hours </h4>
+              <p>08:00 pm – 08:00 pm</p>
+            </div>
+          </div>
+        </div>
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
@@ -304,8 +342,17 @@ const Wellness = () => {
           the stresses of the outside world dissolve in the embrace of luxurious
           tranquility.
         </p>
-        <Link className="link-btn">Book Now</Link>
-
+        <div className="restaurantIcons">
+          <div className="restaurantIcon">
+            <button>
+              <PiClockAfternoonThin />
+            </button>
+            <div className="iconTitle">
+              <h4>Opening hours </h4>
+              <p>08:00 pm – 08:00 pm</p>
+            </div>
+          </div>
+        </div>
         <Swiper
           effect={"coverflow"}
           grabCursor={true}

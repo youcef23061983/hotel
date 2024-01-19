@@ -40,13 +40,6 @@ h4 {
   opacity: 0.7;
 }
 .banner {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  text-transform: capitalize;
-  font-weight: 600;
-  font-size: 5rem; */
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -86,6 +79,11 @@ p {
   font-weight: lighter;
   padding: 1rem;
   font-size: 1.5rem;
+}
+.navlink:hover {
+  text-decoration: underline;
+  transform: translateX(0.5rem);
+  transition: all 0.5s linear;
 }
 
 .nav-center {
@@ -127,11 +125,13 @@ hr {
   background-color: var(--clr-primary-navbar);
   color: white;
   border-radius: 0.5rem;
+  margin-right: auto;
 }
 .nav-btn:hover {
-  background-color: white;
-  color: var(--clr-primary-navbar);
   cursor: pointer;
+  scale: 1.1;
+  opacity: 0.7;
+  transition: all 0.6s linear;
 }
 .link-btn {
   font-size: var(--fontSize-button);
@@ -140,11 +140,14 @@ hr {
   background-color: var(--clr-primary-navbar);
   color: white;
   text-decoration: none;
+  border-radius: 0.8rem;
+  margin-right: auto;
 }
 .link-btn:hover {
-  background-color: white;
-  color: var(--clr-primary-navbar);
+  opacity: 0.7;
+  transform: translateX(0.5rem);
   cursor: pointer;
+  transition: all 0.5s linear;
 }
 
 .links {
@@ -163,11 +166,9 @@ hr {
 .img:hover {
   opacity: 0.7;
   scale: 1.1;
-  overflow: hidden;
+  transition: all 0.5s linear;
 }
-.link-btn {
-  margin-right: auto;
-}
+
 .nav-header {
   display: flex;
   align-items: center;
@@ -179,11 +180,8 @@ hr {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* height: 100vh; */
 }
 .footer {
-  /* margin-top: auto; */
-  /* bottom: 0; */
   text-align: center;
   box-shadow: 0.2rem 0.2rem 2rem rgb(14, 15, 56);
 }
@@ -195,9 +193,18 @@ hr {
   text-decoration: none;
   margin: 0.7rem 0;
 }
-.footerlink p {
+.footerReserved {
+  text-decoration: none;
+  margin: 0.7rem 0;
   margin-bottom: 0;
 }
+.footerlink:hover {
+  text-decoration: underline;
+  transform: translateX(0.4rem);
+  opacity: 0.7;
+  transition: all 0.5s linear;
+}
+
 a {
   text-decoration: none;
 }
@@ -285,9 +292,9 @@ a {
 }
 
 .room-btn:hover {
-  background-color: white;
-  color: var(--clr-primary-navbar);
   cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.5s linear;
 }
 .roomdiv {
   overflow: hidden;
@@ -317,6 +324,8 @@ a {
   font-size: 2rem;
 }
 .wellness {
+  display: flex;
+  flex-direction: column;
   margin: 15rem 1rem;
 }
 .iconsDetails {
@@ -330,7 +339,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* width: 100%; */
 }
 .iconDetail > p {
   color: white;
@@ -344,7 +352,73 @@ a {
   margin: 1rem;
   padding: 1rem;
 }
-
+.galleryList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin: 1rem;
+  padding: 1rem;
+}
+.galleryImage {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+.galleryButtons {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 5rem;
+}
+.galleryButton {
+  color: #22258a;
+  background: #d0d0ff;
+  border-color: transparent;
+  font-size: 2rem;
+  padding: 1rem 2.5rem;
+  border-radius: 1rem;
+}
+.galleryButton:hover {
+  opacity: 0.5;
+  scale: 1.1;
+  transition: all 0.7s linear;
+  cursor: pointer;
+}
+.map {
+  width: 90%;
+  border-radius: 3rem;
+}
+.testimonials {
+  margin: 6rem 1rem;
+}
+.testimonials > h2 {
+  text-align: center;
+}
+.testimonialDiv {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.testimonialImg {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+.testimonialName > p {
+  margin: 0;
+  font-size: 1rem;
+}
+.testimonials > p {
+  font-size: 2rem;
+}
+.privacy {
+  margin: 5rem 1rem;
+  padding: 1rem;
+}
+.privacy > h2 {
+  text-align: center;
+}
 /* -----home page */
 
 @media screen and (min-width: 336px) {
@@ -366,7 +440,6 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* margin: 0.8rem 0.8rem; */
   }
   .logo {
     height: auto;
@@ -400,6 +473,10 @@ a {
     font-size: 1.8rem;
     line-height: 2rem;
   }
+  .footerReserved {
+    font-size: 1.8rem;
+    line-height: 2rem;
+  }
   .section {
     display: flex;
     flex-direction: column;
@@ -407,6 +484,17 @@ a {
     padding: 2rem;
     margin-top: 2rem;
     min-height: 80rem;
+  }
+  .imgDiv {
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+    min-height: 30rem;
+    overflow: hidden;
+  }
+  .map {
+    min-height: 25rem;
   }
 
   .roomSlider {
@@ -432,18 +520,79 @@ a {
   .footericon {
     font-size: 2rem;
   }
+  .footericon:hover {
+    transform: translateX(0.5rem);
+    opacity: 0.7;
+    transition: all 0.5s linear;
+  }
 
-  .copyrights .footerlink > p,
-  a {
+  .copyrights .footerlink > a {
+    font-size: 1rem;
+  }
+  .footerReserved {
     font-size: 1rem;
   }
   .roomSection {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 2rem;
     padding: 2rem;
     margin-top: 2rem;
     height: auto;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    margin: 8rem 1rem;
+    padding: 1rem;
+  }
+  .touches {
+    margin-bottom: 3rem;
+  }
+  .touches > h2 {
+    margin-bottom: 2rem;
+  }
+  .touch > h4 {
+    margin-bottom: 0;
+  }
+  .touch > p {
+    font-size: 1.5rem;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  .info > input {
+    width: 30rem;
+  }
+  .info > textarea {
+    width: 30rem;
+    margin-bottom: 1rem;
+  }
+
+  .calendarContainer {
+    max-width: (35rem, 90%);
+    margin: 1rem 1rem;
+  }
+  .rdrCalendarWrapper {
+    width: 100%;
+  }
+  .calendarDate {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .calendarDate > a {
+    font-size: 1.5rem;
+  }
+
+  .calendarDate > svg {
+    font-size: 2rem;
+  }
+  .rdrMonth {
+    width: 100%;
+    margin: 1rem 1rem;
   }
 }
 
@@ -465,9 +614,6 @@ a {
     align-items: center;
     justify-content: space-between;
     height: auto;
-  }
-  .link-btn {
-    width: auto;
   }
 
   .book {
@@ -498,17 +644,28 @@ a {
     margin-top: 2rem;
     min-height: 55rem;
   }
+  .imgDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    overflow: hidden;
+  }
+  .map {
+    min-height: 70%;
+  }
   .p {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: 60%;
   }
-  .imgDiv {
-    width: 40%;
-    overflow: hidden;
-  }
+
   .footerlink {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .footerReserved {
     font-size: 1rem;
     line-height: 1.6;
   }
@@ -517,7 +674,6 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    /* gap: 2rem; */
     margin: 2rem 3rem;
   }
   .footerdiv {
@@ -547,6 +703,15 @@ a {
   .roomIcon {
     width: 40%;
   }
+  .form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .touches {
+    width: 50%;
+  }
 }
 @media screen and (min-width: 992px) {
   h2 {
@@ -565,9 +730,6 @@ a {
     font-size: 1.2rem;
   }
 
-  .link-btn {
-    flex: 0 0 auto;
-  }
   .section {
     display: flex;
     flex-direction: row-reverse;
@@ -578,9 +740,17 @@ a {
     min-height: 65rem;
   }
   .imgDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 40%;
+    overflow: hidden;
   }
   .footerlink {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  .footerReserved {
     font-size: 1.2rem;
     line-height: 1.6;
   }
@@ -614,6 +784,10 @@ a {
     font-size: 2rem;
   }
   .footerlink {
+    font-size: 1.5rem;
+    line-height: 1.6;
+  }
+  .footerReserved {
     font-size: 1.5rem;
     line-height: 1.6;
   }

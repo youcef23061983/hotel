@@ -38,6 +38,7 @@ const Navbar = () => {
       if (scrollHeight > navCenterHeight) {
         navCenter.current.style.position = "fixed";
         navCenter.current.style.background = "white";
+        navCenter.current.style.transition = "all 0.8s linear";
         span.style.color = "rgb(14, 15, 56)";
         links.forEach((link) => {
           link.style.color = "rgb(14, 15, 56)";
@@ -80,8 +81,12 @@ const Navbar = () => {
       </div>
       <div ref={linksContainerRef}>
         <div className="book">
-          <button className="nav-btn">book</button>
-          <Link className="navlink">contact</Link>
+          <Link className="navlink" to="about">
+            About US
+          </Link>
+          <Link className="navlink" to="contact">
+            contact
+          </Link>
         </div>
         <div>
           <ul
@@ -109,10 +114,14 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link className="navlink">Events</Link>
+              <Link className="navlink" to="events">
+                Events
+              </Link>
             </li>
             <li>
-              <Link className="navlink">Gallery</Link>
+              <Link className="navlink" to="gallery">
+                Gallery
+              </Link>
             </li>
           </ul>
         </div>
