@@ -122,9 +122,7 @@
     {
       "type": "header",
       "id": 7,
-      "images": [
-        "src/images/header/roomsheader.jpg"
-      ]
+      "images": ["src/images/header/roomsheader.jpg"]
     },
     {
       "type": "aboutUs",
@@ -161,9 +159,7 @@
         "number": 1,
         "icon": "TbBath"
       },
-      "unavailables": [
-        1705618800000
-      ],
+      "unavailables": [],
       "max_children": 0,
       "max_pets": 0,
       "pets_allowed": false,

@@ -573,8 +573,13 @@ a {
 
   .calendarContainer {
     max-width: (35rem, 90%);
-    margin: 1rem 1rem;
+    margin: 5rem 1rem;
   }
+  .calendarContainer > h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
   .rdrCalendarWrapper {
     width: 100%;
   }

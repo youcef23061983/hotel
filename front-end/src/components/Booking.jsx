@@ -112,6 +112,8 @@ const Booking = () => {
   };
 
   // clearLocalStorage();
+  const img2 = roomData ? roomData.images[0] : 0;
+
   return (
     <div>
       <div className="headerimages">
@@ -121,6 +123,7 @@ const Booking = () => {
       </div>
       {calender && (
         <div className="calendarContainer">
+          <h2>SELECT YOUR DATES</h2>
           <div className="calendarDate">
             <IoCalendarNumberOutline />
             <Link>{`${new Intl.DateTimeFormat("en-us", {
@@ -143,19 +146,20 @@ const Booking = () => {
             minDate={new Date()}
             disabledDates={dates}
           />
-          <button type="submit" onClick={handle}>
+          <button type="submit" onClick={handle} className="link-btn">
             submit
           </button>
         </div>
       )}
       {form && (
-        <div>
+        <div className="calendarContainer">
           <div>
-            <div>
-              <img src="" alt="" />
+            <div className="roomImages">
+              <img src={`/${img2}`} alt="" className="img" />
             </div>
-            <h2>LEGEND HOTEL</h2>
-            <div>
+            <div></div>
+            <h2>{roomData.name}</h2>
+            <div className="calendarDate">
               <p>Arrival:</p>
               <p>
                 {new Intl.DateTimeFormat("en-us", {
@@ -163,12 +167,12 @@ const Booking = () => {
                 }).format(date[0].startDate)}
               </p>
             </div>
-            <div>
+            <div className="calendarDate">
               <p>Departure:</p>
               <p>
                 {new Intl.DateTimeFormat("en-us", {
                   dateStyle: "full",
-                }).format(date[0].endDate + 1)}
+                }).format(date[0].endDate.getTime() + 24 * 60 * 60 * 1000)}
               </p>
             </div>
           </div>
