@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 
@@ -8,6 +9,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
+import { motion, useTransform, useScroll } from "framer-motion";
 const Events = () => {
   const galleryFn = async () => {
     const res = await fetch("http://localhost:3000/gallery");
@@ -20,6 +22,54 @@ const Events = () => {
     queryKey: ["gallery"],
     queryFn: galleryFn,
   });
+  const ref = useRef(null);
+  const ref2 = useRef(null);
+  const ref3 = useRef(null);
+  const ref4 = useRef(null);
+  const { scrollYProgress: scrollYProgress } = useScroll({
+    ref: ref,
+    offset: ["0 1", "0.28 1"],
+  });
+  const scrollOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.5, 0.7, 1],
+    [0, 0.1, 0.3, 1]
+  );
+  const scrollX = useTransform(scrollYProgress, [0, 1], [-900, 0]);
+  const scrollXP = useTransform(scrollYProgress, [0, 1], [-1800, 0]);
+  const { scrollYProgress: scrollYProgress2 } = useScroll({
+    ref: ref2,
+    offset: ["0 1", "0.35 1"],
+  });
+  const scrollOpacity2 = useTransform(
+    scrollYProgress2,
+    [0, 0.5, 0.7, 1],
+    [0, 0.1, 0.3, 1]
+  );
+  const scrollX2 = useTransform(scrollYProgress2, [0, 1], [-900, 0]);
+  const scrollXP2 = useTransform(scrollYProgress2, [0, 1], [-1800, 0]);
+  const { scrollYProgress: scrollYProgress3 } = useScroll({
+    ref: ref3,
+    offset: ["0 1", "0.6 1"],
+  });
+  const scrollOpacity3 = useTransform(
+    scrollYProgress3,
+    [0, 0.5, 0.7, 1],
+    [0, 0.1, 0.3, 1]
+  );
+  const scrollX3 = useTransform(scrollYProgress3, [0, 1], [-900, 0]);
+  const scrollXP3 = useTransform(scrollYProgress3, [0, 1], [-1800, 0]);
+  const { scrollYProgress: scrollYProgress4 } = useScroll({
+    ref: ref4,
+    offset: ["0 1", "0.8 1"],
+  });
+  const scrollOpacity4 = useTransform(
+    scrollYProgress4,
+    [0, 0.5, 0.7, 1],
+    [0, 0.1, 0.3, 1]
+  );
+  const scrollX4 = useTransform(scrollYProgress4, [0, 1], [-900, 0]);
+  const scrollXP4 = useTransform(scrollYProgress4, [0, 1], [-1800, 0]);
 
   return (
     <div>
@@ -31,11 +81,11 @@ const Events = () => {
       >
         <Banner title="EXPERIENCES"></Banner>
       </div>
-      <div className="wellness">
-        <h2>
+      <div className="wellness" ref={ref}>
+        <motion.h2 style={{ opacity: scrollOpacity, x: scrollX }}>
           Elegance in Every Occasion: Unforgettable Events at Legend Hotel
-        </h2>
-        <p>
+        </motion.h2>
+        <motion.p style={{ opacity: scrollOpacity, x: scrollXP }}>
           At Legend Hotel in Batu Ferringhi, Malaysia, we redefine the art of
           hosting exceptional events. Whether it's a grand celebration,
           corporate gathering, or intimate ceremony, our exquisite venues and
@@ -49,11 +99,13 @@ const Events = () => {
           Legend Hotel experience. Create lasting memories in an atmosphere
           where every event is a masterpiece, and every moment is an elegant
           celebration of life's special occasions.
-        </p>
+        </motion.p>
       </div>
-      <div className="wellness">
-        <h2>Whispers of Forever: Timeless Weddings at Legend Hotel</h2>
-        <p>
+      <div className="wellness" ref={ref2}>
+        <motion.h2 style={{ x: scrollX2, opacity: scrollOpacity2 }}>
+          Whispers of Forever: Timeless Weddings at Legend Hotel
+        </motion.h2>
+        <motion.p style={{ x: scrollXP2, opacity: scrollOpacity2 }}>
           Celebrate the union of love against the enchanting backdrop of Legend
           Hotel in Batu Ferringhi, Malaysia. Our exquisite venue, embraced by
           the coastal allure, sets the stage for a wedding day as timeless as
@@ -68,7 +120,7 @@ const Events = () => {
           story. Let the whispers of forever begin in a place where every nuance
           of romance is celebrated, and where your wedding becomes a legend in
           its own right.
-        </p>
+        </motion.p>
         <Link className="link-btn" to="/contact">
           Contact Us
         </Link>
@@ -102,9 +154,11 @@ const Events = () => {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="wellness">
-        <h2>Artistry Unveiled: Gallery Showcases at Legend Hotel</h2>
-        <p>
+      <div className="wellness" ref={ref3}>
+        <motion.h2 style={{ x: scrollX3, opacity: scrollOpacity3 }}>
+          Artistry Unveiled: Gallery Showcases at Legend Hotel
+        </motion.h2>
+        <motion.p style={{ x: scrollXP3, opacity: scrollOpacity3 }}>
           Discover a symphony of visual delights at Legend Hotel in Batu
           Ferringhi, Malaysia, where we proudly curate an ever-evolving gallery
           of artistic expressions. Our gallery events showcase a diverse range
@@ -120,7 +174,7 @@ const Events = () => {
           walls. Whether you are an art enthusiast or a curious soul, our
           gallery events promise an enriching experience that transcends the
           ordinary, leaving a lasting impression on the connoisseur in you.
-        </p>
+        </motion.p>
         <Link className="link-btn" to="/contact">
           Contact Us
         </Link>
@@ -151,9 +205,11 @@ const Events = () => {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="wellness">
-        <h2>Seamless Convergence: Successful Meetings at Legend Hotel</h2>
-        <p>
+      <div className="wellness" ref={ref4}>
+        <motion.h2 style={{ x: scrollX4, opacity: scrollOpacity4 }}>
+          Seamless Convergence: Successful Meetings at Legend Hotel
+        </motion.h2>
+        <motion.p style={{ x: scrollXP4, opacity: scrollOpacity4 }}>
           Elevate your corporate gatherings at Legend Hotel in Batu Ferringhi,
           Malaysia, where business meets sophistication in seamless harmony. Our
           versatile meeting spaces are designed to accommodate a spectrum of
@@ -168,7 +224,7 @@ const Events = () => {
           the backdrop for your successful business events, where every detail
           is meticulously attended to, allowing you to focus on what matters
           most – the success of your meeting.
-        </p>
+        </motion.p>
         <Link className="link-btn" to="/contact">
           Contact Us
         </Link>

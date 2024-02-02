@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { useScroll, motion, useTransform } from "framer-motion";
 
 const About = () => {
   const galleryFn = async () => {
@@ -14,6 +16,15 @@ const About = () => {
     queryKey: ["gallery"],
     queryFn: galleryFn,
   });
+  const ref = useRef(null);
+  const { scrollYProgress: scrollYProgress } = useScroll({
+    ref: ref,
+    offset: ["0 1", "0.6 1"],
+  });
+  const scrollOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.3, 1]);
+  const scrollX = useTransform(scrollYProgress, [0, 1], [-900, 0]);
+  const scrollImg = useTransform(scrollYProgress, [0, 1], [900, 0]);
+  const scrollXP = useTransform(scrollYProgress, [0, 1], [-1800, 0]);
   return (
     <div>
       <div
@@ -24,15 +35,32 @@ const About = () => {
       >
         <Banner title="ABOUT US" />
       </div>
-      <div className="section">
-        <div className="imgDiv">
+      <div className="section" ref={ref}>
+        <motion.div
+          className="imgDiv"
+          style={{
+            opacity: scrollOpacity,
+            x: scrollImg,
+            animationDuration: 2,
+          }}
+        >
           <img src={data && data[7].images[1]} alt="" className="img" />
-        </div>
+        </motion.div>
         <div className="p">
-          <h2>
+          <motion.h2
+            style={{
+              x: scrollX,
+              opacity: scrollOpacity,
+            }}
+          >
             Coastal Elegance: Legend Hotel's Enchanting Locale in Batu Ferringhi
-          </h2>
-          <p>
+          </motion.h2>
+          <motion.p
+            style={{
+              x: scrollXP,
+              opacity: scrollOpacity,
+            }}
+          >
             Nestled along the pristine shores of Batu Ferringhi in Malaysia,
             Legend Hotel unveils a haven of coastal elegance that captures the
             essence of paradise. Positioned against the backdrop of the Andaman
@@ -48,7 +76,7 @@ const About = () => {
             region. Whether you seek relaxation or adventure, our hotel's prime
             location ensures that every moment is immersed in the beauty and
             allure of Batu Ferringhi's coastal charm.
-          </p>
+          </motion.p>
           <Link className="link-btn" to="../google">
             location
           </Link>

@@ -1,7 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import { useQueries } from "@tanstack/react-query";
+import React, { useState, useRef, useEffect } from "react";
 import Banner from "../pages/Banner";
 import { Link } from "react-router-dom";
+import { motion, useTransform, useScroll } from "framer-motion";
+
 const Rooms = () => {
   const galleryFn = async () => {
     const res = await fetch("http://localhost:3000/gallery");
@@ -10,10 +12,6 @@ const Rooms = () => {
     }
     return res.json();
   };
-  const { data } = useQuery({
-    queryKey: ["gallery"],
-    queryFn: galleryFn,
-  });
   const roomsFn = async () => {
     const res = await fetch("http://localhost:3000/rooms");
     if (!res.ok) {
@@ -21,11 +19,18 @@ const Rooms = () => {
     }
     return res.json();
   };
-  const { data: roomsData } = useQuery({
-    queryKey: ["rooms"],
-    queryFn: roomsFn,
+  const [{ data: roomsData }, { data }] = useQueries({
+    queries: [
+      {
+        queryKey: ["rooms"],
+        queryFn: roomsFn,
+      },
+      {
+        queryKey: ["gallery"],
+        queryFn: galleryFn,
+      },
+    ],
   });
-
   const [user, setUser] = useState({
     name: "",
     type: "all",
@@ -115,7 +120,50 @@ const Rooms = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-  console.log(roomsData && roomsData[0].images[0]);
+
+  const ref = useRef(null);
+
+  const useMediaQuery = (query) => {
+    const [matches, setMatches] = useState(false);
+
+    useEffect(() => {
+      const media = window.matchMedia(query);
+      if (media.matches !== matches) {
+        setMatches(media.matches);
+      }
+
+      const listener = () => {
+        setMatches(media.matches);
+      };
+
+      if (typeof media.addEventListener === "function") {
+        media.addEventListener("change", listener);
+      } else {
+        media.addListener(listener);
+      }
+
+      return () => {
+        if (typeof media.removeEventListener === "function") {
+          media.removeEventListener("change", listener);
+        } else {
+          media.removeListener(listenerList);
+        }
+      };
+    }, [matches, query]);
+
+    return matches;
+  };
+  const isMediumScreen = useMediaQuery("(min-width: 768px)");
+
+  const { scrollYProgress } = useScroll({
+    ref: ref,
+    offset: ["0 1", isMediumScreen ? "0.6 1" : "0.33 1"],
+  });
+
+  const scrollOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [0, 0.2, 1]);
+  const scrollScale = useTransform(scrollYProgress, [0, 0.7, 1], [0, 0.5, 1]);
+  const scrollX = useTransform(scrollYProgress, [0, 1], ["100vw", "0vw"]);
+
   return (
     <div>
       <div
@@ -127,7 +175,14 @@ const Rooms = () => {
         <Banner title="choose your room" />
       </div>
       <div className="searchcontainer">
-        <form className="searchElements">
+        <motion.form
+          className="searchElements"
+          style={{
+            opacity: scrollOpacity,
+            scale: scrollScale,
+            x: scrollX,
+          }}
+        >
           <div className="searchElement">
             <label htmlFor="type">room &suite type</label>
             <select
@@ -154,7 +209,7 @@ const Rooms = () => {
           </div>
 
           <div className="searchElement">
-            <label htmlFor="price">price:${user.price}</label>
+            <label htmlFor="price">price:{user.price} $</label>
             <input
               type="range"
               name="price"
@@ -246,25 +301,32 @@ const Rooms = () => {
               />
             </div>
           </div>
-        </form>
-        <div className="roomslist">
+        </motion.form>
+        <motion.div layout className="roomslist">
           {roomsData &&
             filterRooms.map((room) => {
-              const { name, images, id } = room;
+              const { name, images, id, price } = room;
               return (
-                <div className="room" key={id}>
+                <motion.div
+                  layout
+                  transition={{ duration: 0.8 }}
+                  className="room"
+                  key={id}
+                >
                   <div className="roomdiv">
                     <img src={images[0]} className="img" />
                   </div>
                   <h4>{name}</h4>
-
-                  <Link to={`${id}`} className="room-btn">
-                    explore more
-                  </Link>
-                </div>
+                  <div className="priceDiv">
+                    <Link to={`${id}`} className="room-btn">
+                      explore more
+                    </Link>
+                    <Link className="room-btn">{price} $ per night </Link>
+                  </div>
+                </motion.div>
               );
             })}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

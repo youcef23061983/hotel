@@ -1,9 +1,4 @@
-import {
-  useQuery,
-  useQueryClient,
-  keepPreviousData,
-  QueryClient,
-} from "@tanstack/react-query";
+import { useQueries, useQueryClient } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 import { useParams, Link } from "react-router-dom";
 import "./detail.css";
@@ -23,18 +18,20 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
+import { useScroll, useTransform, motion } from "framer-motion";
 
 const Details = () => {
   const { id } = useParams();
-  // const queryClient = useQueryClient();
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: Infinity,
-      },
-    },
-  });
+  const queryClient = useQueryClient();
+  const [index, setIndex] = useState(0);
 
+  const roomsFn = async () => {
+    const res = await fetch("http://localhost:3000/rooms");
+    if (!res.ok) {
+      throw Error("ther is no data");
+    }
+    return res.json();
+  };
   const roomFn = async (id) => {
     const res = await fetch(`http://localhost:3000/rooms/${id}`);
     if (!res.ok) {
@@ -42,22 +39,29 @@ const Details = () => {
     }
     return res.json();
   };
-  const {
-    data: roomData,
-    isPending,
-    isPlaceholderData,
-  } = useQuery({
-    queryKey: ["room", id],
-    queryFn: () => roomFn(id),
-    initialData: () => queryClient.getQueryData("rooms"),
-    placeholderData: keepPreviousData,
+  const [{ data: roomsData }, { data: roomData, isPending }] = useQueries({
+    queries: [
+      {
+        queryKey: ["rooms"],
+        queryFn: roomsFn,
+      },
+      {
+        queryKey: ["room", id],
+        queryFn: () => roomFn(id),
+        initialData: () =>
+          queryClient
+            .getQueryData(["rooms"])
+            ?.find((d) => d.id === parseInt(id)),
+      },
+    ],
   });
   const img1 = roomData ? roomData.images[0] : 0;
   const roomImages = roomData ? roomData.images : 0;
   const roomIcons = roomData ? roomData.amenities : 0;
-
-  const [index, setIndex] = useState(0);
   const x = roomData && roomImages.length;
+  const square = roomData ? roomData.room_square_footage : [];
+  const guest = roomData ? roomData.capacity : [];
+  const bath = roomData ? roomData.bath_number : [];
 
   function renderIcon(iconName) {
     switch (iconName) {
@@ -88,25 +92,24 @@ const Details = () => {
         return null;
     }
   }
-  const square = roomData ? roomData.room_square_footage : [];
-  const guest = roomData ? roomData.capacity : [];
-  const bath = roomData ? roomData.bath_number : [];
-  const roomsFn = async () => {
-    const res = await fetch("http://localhost:3000/rooms");
-    if (!res.ok) {
-      throw Error("ther is no data");
-    }
-    return res.json();
-  };
-  const { data: roomsData } = useQuery({
-    queryKey: ["rooms"],
-    queryFn: roomsFn,
-  });
+
   const otherRooms = roomsData
     ? roomsData.filter(
         (room) => room.type === roomData.type && room.id !== roomData.id
       )
     : [];
+  const ref = useRef(null);
+  const { scrollYProgress: scrollYProgress } = useScroll({
+    ref: ref,
+    offset: ["0 1", "0.4 1"],
+  });
+  const scrollOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.5, 0.7, 1],
+    [0, 0.1, 0.3, 1]
+  );
+  const scrollIcon = useTransform(scrollYProgress, [0, 1], ["100vw", "0vw"]);
+  const scrollP = useTransform(scrollYProgress, [0, 1], ["-100vw", "0vw"]);
 
   if (isPending) {
     return <h2>...is loading</h2>;
@@ -133,15 +136,21 @@ const Details = () => {
           </div>
         </Banner>
       </div>
-      <div className="roomSection">
-        <div className="p">
+      <div className="roomSection" ref={ref}>
+        <motion.div
+          className="p"
+          style={{ opacity: scrollOpacity, x: scrollP }}
+        >
           <h2>about the room </h2>
-          <p>{roomData.intoduction}</p>
+          <p>{roomData && roomData.intoduction}</p>
           <Link className="nav-btn" to={`/booking/${id}`}>
             book now
           </Link>
-        </div>
-        <div className="roomIcons">
+        </motion.div>
+        <motion.div
+          className="roomIcons"
+          style={{ opacity: scrollOpacity, x: scrollIcon }}
+        >
           {roomIcons.map((icon, index) => {
             return (
               <div className="icon" key={index}>
@@ -150,7 +159,7 @@ const Details = () => {
               </div>
             );
           })}{" "}
-        </div>
+        </motion.div>
       </div>
 
       <div>

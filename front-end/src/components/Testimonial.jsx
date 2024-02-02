@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -7,6 +7,8 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
+import { useRef, useState, useEffect } from "react";
+import { motion, useTransform, useScroll } from "framer-motion";
 
 const Testimonial = () => {
   const galleryFn = async () => {
@@ -16,10 +18,6 @@ const Testimonial = () => {
     }
     return res.json();
   };
-  const { data } = useQuery({
-    queryKey: ["gallery"],
-    queryFn: galleryFn,
-  });
   const testimonilasFn = async () => {
     const res = await fetch("http://localhost:3000/testimonials");
     if (!res.ok) {
@@ -27,11 +25,64 @@ const Testimonial = () => {
     }
     return res.json();
   };
-  const { data: testimonials } = useQuery({
-    queryKey: ["testimonials"],
-    queryFn: testimonilasFn,
+  const [{ data }, { data: testimonials }] = useQueries({
+    queries: [
+      {
+        queryKey: ["gallery"],
+        queryFn: galleryFn,
+      },
+      {
+        queryKey: ["testimonials"],
+        queryFn: testimonilasFn,
+      },
+    ],
   });
-  console.log(testimonials);
+  const ref = useRef(null);
+
+  const useMediaQuery = (query) => {
+    const [matches, setMatches] = useState(false);
+
+    useEffect(() => {
+      const media = window.matchMedia(query);
+      if (media.matches !== matches) {
+        setMatches(media.matches);
+      }
+
+      const listener = () => {
+        setMatches(media.matches);
+      };
+
+      if (typeof media.addEventListener === "function") {
+        media.addEventListener("change", listener);
+      } else {
+        media.addListener(listener);
+      }
+
+      return () => {
+        if (typeof media.removeEventListener === "function") {
+          media.removeEventListener("change", listener);
+        } else {
+          media.removeListener(listenerList);
+        }
+      };
+    }, [matches, query]);
+
+    return matches;
+  };
+  const isMediumScreen = useMediaQuery("(min-width: 768px)");
+
+  const { scrollYProgress: scrollYProgress1 } = useScroll({
+    ref: ref,
+    offset: ["0 1", isMediumScreen ? "0.6 1" : "0.5 1"],
+  });
+  const scrollOpacity = useTransform(
+    scrollYProgress1,
+    [0, 0.5, 1],
+    [0, 0.3, 1]
+  );
+  const scrollX = useTransform(scrollYProgress1, [0, 1], [-900, 0]);
+  const scrollImg = useTransform(scrollYProgress1, [0, 1], [900, 0]);
+
   return (
     <div>
       <div
@@ -42,66 +93,74 @@ const Testimonial = () => {
       >
         <Banner title="TESTIMONIALS" />
       </div>
-      <div className="testimonials">
-        <h2>Echoes of Excellence: Guests Speak About Legend Hotel</h2>
-        <p>
-          At Legend Hotel in Batu Ferringhi, the stories of our guests paint a
-          vivid tapestry of unforgettable experiences. In their own words, they
-          share tales of unparalleled hospitality, exquisite accommodations, and
-          the seamless fusion of luxury and coastal charm. Many commend the
-          dedicated staff whose warmth and attentiveness left an indelible mark,
-          ensuring every need was met with a smile. Guests express admiration
-          for the stunning views that unfold from their rooms, capturing the
-          essence of Batu Ferringhi's coastal allure. Whether it's the culinary
-          delights, spa indulgences, or the myriad of activities, testimonials
-          echo the sentiment that Legend Hotel transcends expectations, creating
-          lasting memories for every visitor. The shared stories of joy and
-          satisfaction weave together to form a testament to our commitment to
-          excellence, making Legend Hotel not just a destination but a cherished
-          part of our guests' life stories.
-        </p>
-      </div>
-      <Swiper
-        effect={"coverflow"}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={"auto"}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
-        }}
-        pagination={true}
-        modules={[EffectCoverflow, Pagination]}
-        className="mySwiper"
-      >
-        {testimonials &&
-          testimonials.map((testimonial) => {
-            const { name, date, img, text } = testimonial;
+      <div ref={ref}>
+        <motion.div
+          style={{ x: scrollX, opacity: scrollOpacity }}
+          className="testimonials"
+        >
+          <h2>Echoes of Excellence: Guests Speak About Legend Hotel</h2>
+          <p>
+            At Legend Hotel in Batu Ferringhi, the stories of our guests paint a
+            vivid tapestry of unforgettable experiences. In their own words,
+            they share tales of unparalleled hospitality, exquisite
+            accommodations, and the seamless fusion of luxury and coastal charm.
+            Many commend the dedicated staff whose warmth and attentiveness left
+            an indelible mark, ensuring every need was met with a smile. Guests
+            express admiration for the stunning views that unfold from their
+            rooms, capturing the essence of Batu Ferringhi's coastal allure.
+            Whether it's the culinary delights, spa indulgences, or the myriad
+            of activities, testimonials echo the sentiment that Legend Hotel
+            transcends expectations, creating lasting memories for every
+            visitor. The shared stories of joy and satisfaction weave together
+            to form a testament to our commitment to excellence, making Legend
+            Hotel not just a destination but a cherished part of our guests'
+            life stories.
+          </p>
+        </motion.div>
+        <motion.div style={{ x: scrollImg, opacity: scrollOpacity }}>
+          <Swiper
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={"auto"}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 100,
+              modifier: 1,
+              slideShadows: true,
+            }}
+            pagination={true}
+            modules={[EffectCoverflow, Pagination]}
+            className="mySwiper"
+          >
+            {testimonials &&
+              testimonials.map((testimonial) => {
+                const { name, date, img, text } = testimonial;
 
-            return (
-              <SwiperSlide style={{ height: "auto" }}>
-                <div className="testimonials">
-                  <div className="testimonialDiv">
-                    <div className="testimonialImg">
-                      <img
-                        src={img}
-                        style={{ width: "3rem", height: "3rem" }}
-                      />
+                return (
+                  <SwiperSlide style={{ height: "auto" }}>
+                    <div className="testimonials">
+                      <div className="testimonialDiv">
+                        <div className="testimonialImg">
+                          <img
+                            src={img}
+                            style={{ maxWidth: "3rem", maxHeight: "3rem" }}
+                          />
+                        </div>
+                        <div className="testimonialName">
+                          <p>{name}</p>
+                          <p>{date}</p>
+                        </div>
+                      </div>
+                      <p>{text}</p>
                     </div>
-                    <div className="testimonialName">
-                      <p>{name}</p>
-                      <p>{date}</p>
-                    </div>
-                  </div>
-                  <p>{text}</p>
-                </div>
-              </SwiperSlide>
-            );
-          })}
-      </Swiper>
+                  </SwiperSlide>
+                );
+              })}
+          </Swiper>
+        </motion.div>
+      </div>
     </div>
   );
 };

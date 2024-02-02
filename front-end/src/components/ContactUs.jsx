@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 import { useRef } from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
 
 const ContactUs = () => {
   const galleryFn = async () => {
@@ -27,6 +28,19 @@ const ContactUs = () => {
 
     e.target.reset();
   };
+  const ref2 = useRef(null);
+  const { scrollYProgress: scrollYProgress } = useScroll({
+    ref: ref2,
+    offset: ["0 1", "0.6 1"],
+  });
+  const scrollOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.5, 0.7, 1],
+    [0, 0.1, 0.3, 1]
+  );
+  const scrollSend = useTransform(scrollYProgress, [0, 1], ["100vw", "0vw"]);
+  const scrollITouch = useTransform(scrollYProgress, [0, 1], ["-100vw", "0vw"]);
+
   return (
     <div>
       <div
@@ -37,8 +51,14 @@ const ContactUs = () => {
       >
         <Banner title="CONTACT US" />
       </div>
-      <div className="form">
-        <div className="touches">
+      <div className="form" ref={ref2}>
+        <motion.div
+          className="touches"
+          style={{
+            x: scrollITouch,
+            opacity: scrollOpacity,
+          }}
+        >
           <h2>GET IN TOUCH</h2>
           <div className="touch">
             <h4>Address:</h4>
@@ -56,8 +76,14 @@ const ContactUs = () => {
             <h4>Email:</h4>
             <p>----@---.com</p>
           </div>
-        </div>
-        <div className="send">
+        </motion.div>
+        <motion.div
+          className="send"
+          style={{
+            x: scrollSend,
+            opacity: scrollOpacity,
+          }}
+        >
           <form ref={form} onSubmit={submitHandlle}>
             <div className="info">
               <label htmlFor="firstName">First Name:</label>
@@ -83,7 +109,7 @@ const ContactUs = () => {
               Submit:
             </button>
           </form>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

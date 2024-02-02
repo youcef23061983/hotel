@@ -160,6 +160,7 @@
         "icon": "TbBath"
       },
       "unavailables": [],
+      "booking": [],
       "max_children": 0,
       "max_pets": 0,
       "pets_allowed": false,
@@ -199,7 +200,32 @@
         "src/images/rooms/standard single room/img2.jpg",
         "src/images/rooms/standard single room/img3.jpg"
       ],
-      "feedback": "A comfortable room with a fantastic city view. The 24-hour room service was a lifesaver!"
+      "feedback": "A comfortable room with a fantastic city view. The 24-hour room service was a lifesaver!",
+      "userData": {
+        "roomName": "",
+        "roomId": "",
+        "arrival": "05/01/2024",
+        "departure": "05/03/2024",
+        "title": "",
+        "firstName": "tt",
+        "lastName": "",
+        "countryCode": "",
+        "phoneNumber": "",
+        "email": "",
+        "country": "",
+        "city": "",
+        "nationality": "",
+        "creditCardNumber": "",
+        "expirationMonth": "",
+        "year": "",
+        "securityCode": "",
+        "nameHolder": "",
+        "termsCondition": false,
+        "emailMe": false,
+        "dates": [],
+        "price": 120,
+        "total": 360
+      }
     },
     {
       "name": "Standard Double Room",
@@ -219,6 +245,7 @@
         "icon": "TbBath"
       },
       "unavailables": [],
+      "booking": [],
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -281,6 +308,8 @@
         "number": 2,
         "icon": "TbBath"
       },
+      "unavailables": [],
+      "booking": [],
       "max_children": 2,
       "max_pets": 2,
       "pets_allowed": true,
@@ -339,6 +368,8 @@
         "number": 2,
         "icon": "TbBath"
       },
+      "unavailables": [],
+      "booking": [],
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -398,6 +429,8 @@
         "number": 3,
         "icon": "TbBath"
       },
+      "unavailables": [],
+      "booking": [],
       "max_children": 2,
       "max_pets": 2,
       "pets_allowed": false,
@@ -457,6 +490,8 @@
         "number": 2,
         "icon": "TbBath"
       },
+      "unavailables": [],
+      "booking": [],
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -516,6 +551,8 @@
         "number": 2,
         "icon": "TbBath"
       },
+      "unavailables": [],
+      "booking": [],
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -575,6 +612,8 @@
         "number": 4,
         "icon": "TbBath"
       },
+      "unavailables": [],
+      "booking": [],
       "max_children": 3,
       "max_pets": 2,
       "pets_allowed": false,
@@ -634,6 +673,8 @@
         "number": 5,
         "icon": "TbBath"
       },
+      "unavailables": [],
+      "booking": [],
       "max_children": 4,
       "max_pets": 2,
       "pets_allowed": true,
@@ -695,6 +736,8 @@
         "number": 2,
         "icon": "TbBath"
       },
+      "unavailables": [],
+      "booking": [],
       "max_children": 2,
       "max_pets": 2,
       "pets_allowed": true,
@@ -867,5 +910,6 @@
       "img": "src/images/gallery/testimonial8.jpg",
       "text": "In search of rejuvenation, I found my haven at Legend Hotel's spa and wellness center. The holistic approach to well-being, coupled with expert therapists, offered a sanctuary for relaxation. From soothing massages to invigorating wellness classes, each element contributed to a revitalizing experience. The spa's serene atmosphere, combined with the coastal setting, created the perfect backdrop for a wellness retreat. Legend Hotel exceeded my expectations, leaving me refreshed and renewed."
     }
-  ]
+  ],
+  "booking": []
 }

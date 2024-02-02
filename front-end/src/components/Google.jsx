@@ -1,5 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
+import { useRef, useState, useEffect } from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
+
 const Google = () => {
   const galleryFn = async () => {
     const res = await fetch("http://localhost:3000/gallery");
@@ -12,6 +15,52 @@ const Google = () => {
     queryKey: ["gallery"],
     queryFn: galleryFn,
   });
+  const ref = useRef(null);
+  const useMediaQuery = (query) => {
+    const [matches, setMatches] = useState(false);
+
+    useEffect(() => {
+      const media = window.matchMedia(query);
+      if (media.matches !== matches) {
+        setMatches(media.matches);
+      }
+
+      const listener = () => {
+        setMatches(media.matches);
+      };
+
+      if (typeof media.addEventListener === "function") {
+        media.addEventListener("change", listener);
+      } else {
+        media.addListener(listener);
+      }
+
+      return () => {
+        if (typeof media.removeEventListener === "function") {
+          media.removeEventListener("change", listener);
+        } else {
+          media.removeListener(listenerList);
+        }
+      };
+    }, [matches, query]);
+
+    return matches;
+  };
+  const isMediumScreen = useMediaQuery("(min-width: 768px)");
+
+  const { scrollYProgress: scrollYProgress1 } = useScroll({
+    ref: ref,
+    offset: ["0 1", isMediumScreen ? "0.65 1" : "0.58 1"],
+  });
+  const scrollOpacity = useTransform(
+    scrollYProgress1,
+    [0, 0.5, 1],
+    [0, 0.3, 1]
+  );
+  const scrollX = useTransform(scrollYProgress1, [0, 1], [-900, 0]);
+  const scrollImg = useTransform(scrollYProgress1, [0, 1], [900, 0]);
+  const scrollXP = useTransform(scrollYProgress1, [0, 1], [-1800, 0]);
+
   return (
     <div>
       <div
@@ -22,11 +71,13 @@ const Google = () => {
       >
         <Banner title="LOCATION" />
       </div>
-      <div className="section">
-        <div
+      <div className="section" ref={ref}>
+        <motion.div
           className="imgDiv"
           style={{
             background: `url(${data && data[7].images[4]}) center/cover `,
+            x: scrollImg,
+            opacity: scrollOpacity,
           }}
         >
           <iframe
@@ -36,10 +87,12 @@ const Google = () => {
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
-        </div>
+        </motion.div>
         <div className="p">
-          <h2>Seaside Splendor: Discovering the Allure of Batu Ferringhi</h2>
-          <p>
+          <motion.h2 style={{ x: scrollX, opacity: scrollOpacity }}>
+            Seaside Splendor: Discovering the Allure of Batu Ferringhi
+          </motion.h2>
+          <motion.p style={{ x: scrollXP, opacity: scrollOpacity }}>
             Nestled along the northwestern coast of Penang, Malaysia, Batu
             Ferringhi stands as a jewel in the crown of tropical destinations.
             Renowned for its pristine sandy beaches and crystal-clear waters,
@@ -54,7 +107,7 @@ const Google = () => {
             vibrant arts scene. Batu Ferringhi seamlessly combines relaxation
             and excitement, making it a sought-after destination where every
             corner reveals a new facet of its seaside splendor.
-          </p>
+          </motion.p>
         </div>
       </div>
     </div>

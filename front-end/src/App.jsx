@@ -1,6 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Layout from "./pages/Layout";
 import About from "./components/About";
@@ -18,35 +16,34 @@ import Privacy from "./components/Privacy";
 import Terms from "./components/Terms";
 import Cookies from "./components/Cookies";
 import Booking from "./components/Booking";
+import { AnimatePresence } from "framer-motion";
 
-const queryClient = new QueryClient();
 function App() {
+  const location = useLocation();
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Homepage />} />
-            <Route path="rooms" element={<Rooms />} />
-            <Route path="rooms/:id" element={<Details />} />
-            <Route path="about" element={<About />} />
-            <Route path="restaurant" element={<Restaurant />} />
-            <Route path="wellness" element={<Wellness />} />
-            <Route path="experiences" element={<Experiences />} />
-            <Route path="events" element={<Events />} />
-            <Route path="gallery" element={<Gallery />} />
-            <Route path="contact" element={<ContactUs />} />
-            <Route path="google" element={<Google />} />
-            <Route path="testimonial" element={<Testimonial />} />
-            <Route path="privacy" element={<Privacy />} />
-            <Route path="terms" element={<Terms />} />
-            <Route path="cookies" element={<Cookies />} />
-            <Route path="booking/:id" element={<Booking />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.key}>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Homepage />} />
+          <Route path="rooms" element={<Rooms />} />
+          <Route path="rooms/:id" element={<Details />} />
+          <Route path="about" element={<About />} />
+          <Route path="restaurant" element={<Restaurant />} />
+          <Route path="wellness" element={<Wellness />} />
+          <Route path="experiences" element={<Experiences />} />
+          <Route path="events" element={<Events />} />
+          <Route path="gallery" element={<Gallery />} />
+          <Route path="contact" element={<ContactUs />} />
+          <Route path="google" element={<Google />} />
+          <Route path="testimonial" element={<Testimonial />} />
+          <Route path="privacy" element={<Privacy />} />
+          <Route path="terms" element={<Terms />} />
+          <Route path="cookies" element={<Cookies />} />
+          <Route path="booking/:id" element={<Booking />} />
+        </Route>
+      </Routes>
+    </AnimatePresence>
   );
 }
 

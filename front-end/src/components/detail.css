@@ -178,7 +178,7 @@
 
 @media screen and (min-width: 336px) {
   .roomImages {
-    margin: 1rem 2rem;
+    margin: 1rem 6rem;
     max-width: (33rem, 80%);
     aspect-ratio: 1/1;
   }
@@ -188,8 +188,8 @@
 }
 @media screen and (min-width: 786px) {
   .roomImages {
-    margin: 1rem 15rem;
-    max-width: (50rem, 50%);
+    margin: 1rem 20rem;
+    max-width: (50rem, 30%);
     aspect-ratio: 1/1;
   }
   .iconDetail > button {
@@ -198,7 +198,19 @@
 }
 @media screen and (min-width: 992px) {
   .roomImages {
-    margin: 1rem 20rem;
+    max-width: (50rem, 30%);
+
+    margin: 1rem 30rem;
+  }
+  .iconDetail > button {
+    font-size: 2.2rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .roomImages {
+    max-width: (50rem, 30%);
+
+    margin: 1rem 40rem;
   }
   .iconDetail > button {
     font-size: 2.2rem;
@@ -241,4 +253,9 @@
 }
 .otherRoom > h3 {
   text-align: center;
+}
+@media screen and (min-width: 1200px) {
+  .roomImages {
+    margin: 1rem 50rem;
+  }
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
+import { useRef } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -8,6 +9,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
+import { motion, useTransform, useScroll } from "framer-motion";
 
 const Experiences = () => {
   const galleryFn = async () => {
@@ -21,6 +23,79 @@ const Experiences = () => {
     queryKey: ["gallery"],
     queryFn: galleryFn,
   });
+  const ref = useRef(null);
+  const ref2 = useRef(null);
+  const ref3 = useRef(null);
+  const ref4 = useRef(null);
+  const ref5 = useRef(null);
+  const ref6 = useRef(null);
+  const { scrollYProgress: scrollYProgress } = useScroll({
+    ref: ref,
+    offset: ["0 1", "0.15 1"],
+  });
+  const scrollOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.5, 0.7, 1],
+    [0, 0.1, 0.3, 1]
+  );
+  const scrollX = useTransform(scrollYProgress, [0, 1], [-900, 0]);
+  const scrollXP = useTransform(scrollYProgress, [0, 1], [-1800, 0]);
+  const { scrollYProgress: scrollYProgress2 } = useScroll({
+    ref: ref2,
+    offset: ["0 1", "0.23 1"],
+  });
+  const scrollOpacity2 = useTransform(
+    scrollYProgress2,
+    [0, 0.5, 0.7, 1],
+    [0, 0.1, 0.3, 1]
+  );
+  const scrollX2 = useTransform(scrollYProgress2, [0, 1], [-900, 0]);
+  const scrollXP2 = useTransform(scrollYProgress2, [0, 1], [-1800, 0]);
+  const { scrollYProgress: scrollYProgress3 } = useScroll({
+    ref: ref3,
+    offset: ["0 1", "0.37 1"],
+  });
+  const scrollOpacity3 = useTransform(
+    scrollYProgress3,
+    [0, 0.5, 0.7, 1],
+    [0, 0.1, 0.3, 1]
+  );
+  const scrollX3 = useTransform(scrollYProgress3, [0, 1], [-900, 0]);
+  const scrollXP3 = useTransform(scrollYProgress3, [0, 1], [-1800, 0]);
+  const { scrollYProgress: scrollYProgress4 } = useScroll({
+    ref: ref4,
+    offset: ["0 1", "0.53 1"],
+  });
+  const scrollOpacity4 = useTransform(
+    scrollYProgress4,
+    [0, 0.5, 0.7, 1],
+    [0, 0.1, 0.3, 1]
+  );
+  const scrollX4 = useTransform(scrollYProgress4, [0, 1], [-900, 0]);
+  const scrollXP4 = useTransform(scrollYProgress4, [0, 1], [-1800, 0]);
+
+  const { scrollYProgress: scrollYProgress5 } = useScroll({
+    ref: ref5,
+    offset: ["0 1", "0.67 1"],
+  });
+  const scrollOpacity5 = useTransform(
+    scrollYProgress5,
+    [0, 0.5, 0.7, 1],
+    [0, 0.1, 0.3, 1]
+  );
+  const scrollX5 = useTransform(scrollYProgress5, [0, 1], [-900, 0]);
+  const scrollXP5 = useTransform(scrollYProgress5, [0, 1], [-1800, 0]);
+  const { scrollYProgress: scrollYProgress6 } = useScroll({
+    ref: ref6,
+    offset: ["0 1", "0.82 1"],
+  });
+  const scrollOpacity6 = useTransform(
+    scrollYProgress6,
+    [0, 0.5, 0.7, 1],
+    [0, 0.1, 0.3, 1]
+  );
+  const scrollX6 = useTransform(scrollYProgress6, [0, 1], [-900, 0]);
+  const scrollXP6 = useTransform(scrollYProgress6, [0, 1], [-1800, 0]);
 
   return (
     <div>
@@ -32,11 +107,11 @@ const Experiences = () => {
       >
         <Banner title="EXPERIENCES"></Banner>
       </div>
-      <div className="spa">
-        <h2>
+      <div className="spa" ref={ref}>
+        <motion.h2 style={{ x: scrollX, opacity: scrollOpacity }}>
           Timeless Luxury Redefined: Unforgettable Experiences at Legend Hotel
-        </h2>
-        <p>
+        </motion.h2>
+        <motion.p style={{ x: scrollXP, opacity: scrollOpacity }}>
           Embark on a journey of unparalleled hospitality and sophistication at
           Legend Hotel, where each moment is crafted to leave an indelible mark
           on your memory. From the moment you step into our opulent lobby, you
@@ -50,14 +125,14 @@ const Experiences = () => {
           invites you to immerse yourself in a symphony of unparalleled
           experiences, where every detail is meticulously curated to create
           moments that linger long after you depart.
-        </p>
+        </motion.p>
       </div>
-      <div className="wellness">
-        <h2>
+      <div className="wellness" ref={ref2}>
+        <motion.h2 style={{ x: scrollX2, opacity: scrollOpacity2 }}>
           Navigating Serenity: Kayaking Adventures at Legend Hotel's Coastal
           Paradise
-        </h2>
-        <p>
+        </motion.h2>
+        <motion.p style={{ x: scrollXP2, opacity: scrollOpacity2 }}>
           Embark on an exhilarating aquatic escapade with our Kayaking activity
           at Legend Hotel in Batu Ferringhi, Malaysia. Immerse yourself in the
           natural beauty of our coastal surroundings as you paddle along the
@@ -72,7 +147,7 @@ const Experiences = () => {
           Hotel invites you to embrace the thrill of kayaking and create
           unforgettable memories against the backdrop of Batu Ferringhi's
           coastal paradise.
-        </p>
+        </motion.p>
         <Link className="link-btn" to="/contact">
           Contact Us
         </Link>
@@ -104,11 +179,11 @@ const Experiences = () => {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="wellness">
-        <h2>
+      <div className="wellness" ref={ref3}>
+        <motion.h2 style={{ x: scrollX3, opacity: scrollOpacity3 }}>
           Soaring Elegance: Parasailing Adventures with a View at Legend Hotel
-        </h2>
-        <p>
+        </motion.h2>
+        <motion.p style={{ x: scrollXP3, opacity: scrollOpacity3 }}>
           Title: "Soaring Elegance: Parasailing Adventures with a View at Legend
           Hotel" Embark on a breathtaking aerial journey with our Parasailing
           activity at Legend Hotel in Batu Ferringhi, Malaysia. Lift off into
@@ -124,7 +199,7 @@ const Experiences = () => {
           Hotel invites you to add a touch of adventure to your stay and create
           lasting memories as you embrace the skies in this extraordinary
           parasailing escapade.
-        </p>
+        </motion.p>
         <Link className="link-btn" to="/contact">
           Contact Us
         </Link>
@@ -155,12 +230,12 @@ const Experiences = () => {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="wellness">
-        <h2>
+      <div className="wellness" ref={ref4}>
+        <motion.h2 style={{ x: scrollX4, opacity: scrollOpacity4 }}>
           Aquatic Discovery: Snorkeling Adventures at Legend Hotel's Coastal
           Haven{" "}
-        </h2>
-        <p>
+        </motion.h2>
+        <motion.p style={{ x: scrollXP4, opacity: scrollOpacity4 }}>
           Dive into the vibrant underwater world with our Snorkeling activity at
           Legend Hotel in Batu Ferringhi, Malaysia. Set against the backdrop of
           the Andaman Sea, our coastal haven offers an unparalleled opportunity
@@ -175,7 +250,7 @@ const Experiences = () => {
           that flourishes just beyond the shores of Legend Hotel. Indulge in the
           magic of underwater exploration and create unforgettable moments
           amidst the wonders of Batu Ferringhi's coastal paradise.
-        </p>
+        </motion.p>
         <Link className="link-btn" to="/contact">
           Contact Us
         </Link>
@@ -207,12 +282,12 @@ const Experiences = () => {
         </Swiper>
       </div>
 
-      <div className="wellness">
-        <h2>
+      <div className="wellness" ref={ref5}>
+        <motion.h2 style={{ x: scrollX5, opacity: scrollOpacity5 }}>
           Graceful Glides: Stand-Up Paddleboarding (SUP) Serenity at Legend
           Hotel
-        </h2>
-        <p>
+        </motion.h2>
+        <motion.p style={{ x: scrollXP5, opacity: scrollOpacity5 }}>
           Title: "Graceful Glides: Stand-Up Paddleboarding (SUP) Serenity at
           Legend Hotel" Embark on a journey of tranquility and balance with our
           Stand-Up Paddleboarding (SUP) activity at Legend Hotel in Batu
@@ -229,7 +304,7 @@ const Experiences = () => {
           paddleboarding, where every stroke becomes a moment of balance, and
           every glide brings you closer to the serene heart of Batu Ferringhi's
           waters.
-        </p>
+        </motion.p>
         <Link className="link-btn" to="/contact">
           Contact Us
         </Link>
@@ -260,11 +335,11 @@ const Experiences = () => {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="wellness">
-        <h2>
+      <div className="wellness" ref={ref6}>
+        <motion.h2 style={{ x: scrollX6, opacity: scrollOpacity6 }}>
           Riding the Breeze: Windsurfing Thrills at Legend Hotel's Coastal Oasis
-        </h2>
-        <p>
+        </motion.h2>
+        <motion.p style={{ x: scrollXP6, opacity: scrollOpacity6 }}>
           Title: "Riding the Breeze: Windsurfing Thrills at Legend Hotel's
           Coastal Oasis" Embark on an exhilarating journey with our Windsurfing
           activity at Legend Hotel in Batu Ferringhi, Malaysia. Set against the
@@ -281,7 +356,7 @@ const Experiences = () => {
           windsurfing adventure, where the thrill of the sea meets the elegance
           of coastal living at Legend Hotel. Message ChatGPT… ChatGPT can make
           mistakes. Consider checking importa
-        </p>
+        </motion.p>
         <Link className="link-btn" to="/contact">
           Contact Us
         </Link>
