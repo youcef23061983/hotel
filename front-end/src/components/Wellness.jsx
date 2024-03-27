@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 import { MdOutlineSportsGymnastics } from "react-icons/md";
@@ -26,6 +25,9 @@ const Wellness = () => {
     queryKey: ["gallery"],
     queryFn: galleryFn,
   });
+  useEffect(() => {
+    document.title = "WellNess & SPA";
+  }, []);
   const ref = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Gallery = () => {
   const [gallery, setGallery] = useState({ type: "room" });
@@ -17,6 +17,9 @@ const Gallery = () => {
     queryKey: ["album"],
     queryFn: galleryFn,
   });
+  useEffect(() => {
+    document.title = "Gallery";
+  }, []);
 
   let types = data ? [...new Set(data.map((pictures) => pictures.type))] : [];
   const filterData = data?.filter((pictures) => {

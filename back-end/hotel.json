@@ -200,32 +200,7 @@
         "src/images/rooms/standard single room/img2.jpg",
         "src/images/rooms/standard single room/img3.jpg"
       ],
-      "feedback": "A comfortable room with a fantastic city view. The 24-hour room service was a lifesaver!",
-      "userData": {
-        "roomName": "",
-        "roomId": "",
-        "arrival": "05/01/2024",
-        "departure": "05/03/2024",
-        "title": "",
-        "firstName": "tt",
-        "lastName": "",
-        "countryCode": "",
-        "phoneNumber": "",
-        "email": "",
-        "country": "",
-        "city": "",
-        "nationality": "",
-        "creditCardNumber": "",
-        "expirationMonth": "",
-        "year": "",
-        "securityCode": "",
-        "nameHolder": "",
-        "termsCondition": false,
-        "emailMe": false,
-        "dates": [],
-        "price": 120,
-        "total": 360
-      }
+      "feedback": "A comfortable room with a fantastic city view. The 24-hour room service was a lifesaver!"
     },
     {
       "name": "Standard Double Room",

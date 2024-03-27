@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 
@@ -22,6 +22,9 @@ const Events = () => {
     queryKey: ["gallery"],
     queryFn: galleryFn,
   });
+  useEffect(() => {
+    document.title = "Events";
+  }, []);
   const ref = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-
+import { useEffect } from "react";
 const Terms = () => {
   const galleryFn = async () => {
     const res = await fetch("http://localhost:3000/gallery");
@@ -12,6 +12,9 @@ const Terms = () => {
     queryKey: ["gallery"],
     queryFn: galleryFn,
   });
+  useEffect(() => {
+    document.title = "Terms & Conditions";
+  }, []);
   return (
     <div>
       <div

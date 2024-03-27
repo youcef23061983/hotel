@@ -9,11 +9,9 @@ import { FaKitchenSet, FaWifi } from "react-icons/fa6";
 import { TbAirConditioning, Tb24Hours, TbSofa, TbBath } from "react-icons/tb";
 import { MdBalcony } from "react-icons/md";
 import { MdOutlineFreeBreakfast, MdOutlinePeopleAlt } from "react-icons/md";
-import React, { useRef, useState } from "react";
-// Import Swiper React components
+import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -55,6 +53,13 @@ const Details = () => {
       },
     ],
   });
+  useEffect(() => {
+    if (roomData) {
+      const name = roomData.name || "";
+      document.title = name;
+    }
+  }, [roomData]);
+
   const img1 = roomData ? roomData.images[0] : 0;
   const roomImages = roomData ? roomData.images : 0;
   const roomIcons = roomData ? roomData.amenities : 0;

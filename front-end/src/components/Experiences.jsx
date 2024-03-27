@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -23,6 +23,9 @@ const Experiences = () => {
     queryKey: ["gallery"],
     queryFn: galleryFn,
   });
+  useEffect(() => {
+    document.title = "Experience";
+  }, []);
   const ref = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);

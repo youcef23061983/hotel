@@ -8,7 +8,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useRef, useState, useEffect } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -25,6 +24,9 @@ const Restaurant = () => {
     queryKey: ["gallery"],
     queryFn: galleryFn,
   });
+  useEffect(() => {
+    document.title = "restaurant";
+  }, []);
   const ref = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);

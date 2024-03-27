@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-// import { useQuery, keepPreviousData } from "@tanstack/react-query";
-
 import { FaAlignJustify } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -9,25 +7,13 @@ const Navbar = () => {
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
   const navCenter = useRef(null);
-  // const queryFun = async () => {
-  //   const res = await fetch("  http://localhost:3000/hotel");
-  //   if (!res.ok) {
-  //     throw Error("ther is no data");
-  //   }
-  //   return res.json();
-  // };
-  // const { data, error, isPending, isPlaceholderData } = useQuery({
-  //   queryKey: ["hotel"],
-  //   queryFn: queryFun,
-  //   placeholderData: keepPreviousData,
-  // });
 
   useEffect(() => {
     let isMounted = true;
 
     const handScroll = () => {
       if (!isMounted) {
-        return; // Skip handling if the component is unmounted
+        return;
       }
 
       const scrollHeight = window.scrollY;
@@ -48,7 +34,7 @@ const Navbar = () => {
         span.style.color = "";
 
         links.forEach((link) => {
-          link.style.color = ""; // reset the color to the default
+          link.style.color = "";
         });
       }
     };
@@ -56,7 +42,7 @@ const Navbar = () => {
     window.addEventListener("scroll", handScroll);
 
     return () => {
-      isMounted = false; // Set the flag to false when the component is unmounted
+      isMounted = false;
       window.removeEventListener("scroll", handScroll);
     };
   }, []);

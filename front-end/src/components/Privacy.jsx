@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const Privacy = () => {
   const galleryFn = async () => {
@@ -12,6 +13,9 @@ const Privacy = () => {
     queryKey: ["gallery"],
     queryFn: galleryFn,
   });
+  useEffect(() => {
+    document.title = "Privacy Policy";
+  }, []);
   return (
     <div>
       <div

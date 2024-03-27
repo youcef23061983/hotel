@@ -16,34 +16,39 @@ import Privacy from "./components/Privacy";
 import Terms from "./components/Terms";
 import Cookies from "./components/Cookies";
 import Booking from "./components/Booking";
-import { AnimatePresence } from "framer-motion";
+import { BrowserRouter } from "react-router-dom";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+const queryClient = new QueryClient();
 
 function App() {
-  const location = useLocation();
-
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.key}>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Homepage />} />
-          <Route path="rooms" element={<Rooms />} />
-          <Route path="rooms/:id" element={<Details />} />
-          <Route path="about" element={<About />} />
-          <Route path="restaurant" element={<Restaurant />} />
-          <Route path="wellness" element={<Wellness />} />
-          <Route path="experiences" element={<Experiences />} />
-          <Route path="events" element={<Events />} />
-          <Route path="gallery" element={<Gallery />} />
-          <Route path="contact" element={<ContactUs />} />
-          <Route path="google" element={<Google />} />
-          <Route path="testimonial" element={<Testimonial />} />
-          <Route path="privacy" element={<Privacy />} />
-          <Route path="terms" element={<Terms />} />
-          <Route path="cookies" element={<Cookies />} />
-          <Route path="booking/:id" element={<Booking />} />
-        </Route>
-      </Routes>
-    </AnimatePresence>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Homepage />} />
+            <Route path="rooms" element={<Rooms />} />
+            <Route path="rooms/:id" element={<Details />} />
+            <Route path="about" element={<About />} />
+            <Route path="restaurant" element={<Restaurant />} />
+            <Route path="wellness" element={<Wellness />} />
+            <Route path="experiences" element={<Experiences />} />
+            <Route path="events" element={<Events />} />
+            <Route path="gallery" element={<Gallery />} />
+            <Route path="contact" element={<ContactUs />} />
+            <Route path="google" element={<Google />} />
+            <Route path="testimonial" element={<Testimonial />} />
+            <Route path="privacy" element={<Privacy />} />
+            <Route path="terms" element={<Terms />} />
+            <Route path="cookies" element={<Cookies />} />
+            <Route path="booking/:id" element={<Booking />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 

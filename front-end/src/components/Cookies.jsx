@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
+import { useEffect } from "react";
 
 const Cookies = () => {
   const galleryFn = async () => {
@@ -13,6 +14,9 @@ const Cookies = () => {
     queryKey: ["gallery"],
     queryFn: galleryFn,
   });
+  useEffect(() => {
+    document.title = "Cookies";
+  }, []);
   return (
     <div>
       <div

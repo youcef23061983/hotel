@@ -63,11 +63,11 @@ const Homepage = () => {
   });
   const { scrollYProgress: scrollYProgress3 } = useScroll({
     ref: ref3,
-    offset: ["0 1", "0.7 1"],
+    offset: ["0 1", "0.6 1"],
   });
   const { scrollYProgress: scrollYProgress4 } = useScroll({
     ref: ref4,
-    offset: ["0 1", "0.9 1"],
+    offset: ["0 1", "0.65"],
   });
   const scrollOpacity = useTransform(
     scrollYProgress1,

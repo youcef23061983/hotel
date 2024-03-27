@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useScroll, motion, useTransform } from "framer-motion";
 
 const About = () => {
@@ -16,6 +16,9 @@ const About = () => {
     queryKey: ["gallery"],
     queryFn: galleryFn,
   });
+  useEffect(() => {
+    document.title = "About Us";
+  }, []);
   const ref = useRef(null);
   const { scrollYProgress: scrollYProgress } = useScroll({
     ref: ref,

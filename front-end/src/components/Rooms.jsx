@@ -31,6 +31,9 @@ const Rooms = () => {
       },
     ],
   });
+  useEffect(() => {
+    document.title = "Rooms";
+  }, []);
   const [user, setUser] = useState({
     name: "",
     type: "all",

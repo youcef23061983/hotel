@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 
 const ContactUs = () => {
   const galleryFn = async () => {
@@ -16,17 +17,25 @@ const ContactUs = () => {
     queryFn: galleryFn,
   });
   const form = useRef();
+  useEffect(() => {
+    document.title = "Contact Us";
+  }, []);
 
-  const submitHandlle = (e) => {
-    e.preventDsefault();
-    emailjs.sendForm(
-      "service_x1kny1g",
-      "template_omz0d42",
-      form.current,
-      "G_hm2mMywVMLgQQnp"
-    );
+  const sendEmail = (e) => {
+    e.preventDefault();
 
-    e.target.reset();
+    emailjs
+      .sendForm("service_vgkozvc", "template_sv5btsr", form.current, {
+        publicKey: "_ISOAOSTfbmyXLWd5",
+      })
+      .then(
+        () => {
+          console.log("SUCCESS!");
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
   };
   const ref2 = useRef(null);
   const { scrollYProgress: scrollYProgress } = useScroll({
@@ -84,19 +93,11 @@ const ContactUs = () => {
             opacity: scrollOpacity,
           }}
         >
-          <form ref={form} onSubmit={submitHandlle}>
+          <form ref={form} onSubmit={sendEmail}>
             <div className="info">
-              <label htmlFor="firstName">First Name:</label>
-              <input type="text" name="firstName" />
+              <label htmlFor="name">First Name:</label>
+              <input type="text" name="name" />
             </div>
-            <div className="info">
-              <label htmlFor="lasttName">Last Name:</label>
-              <input type="text" name="lastName" />
-            </div>{" "}
-            <div className="info">
-              <label htmlFor="phone">Phone:</label>
-              <input type="number" name="phone" />
-            </div>{" "}
             <div className="info">
               <label htmlFor="email">Email:</label>
               <input type="email" name="email" />

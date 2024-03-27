@@ -1,8 +1,6 @@
-import { useQueries, useQuery } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -37,6 +35,9 @@ const Testimonial = () => {
       },
     ],
   });
+  useEffect(() => {
+    document.title = "Testimonials";
+  }, []);
   const ref = useRef(null);
 
   const useMediaQuery = (query) => {
