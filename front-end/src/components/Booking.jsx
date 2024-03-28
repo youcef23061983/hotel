@@ -9,7 +9,7 @@ import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
 import { format, differenceInDays } from "date-fns";
 import { FcCheckmark } from "react-icons/fc";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Booking = () => {
   const { id } = useParams();
@@ -30,6 +30,9 @@ const Booking = () => {
     initialData: () =>
       queryClient.getQueryData(["rooms"])?.find((d) => d.id === parseInt(id)),
   });
+  useEffect(() => {
+    document.title = "Booking";
+  }, []);
   const storedUnavailables = localStorage.getItem(`room_${id}_unavailables`);
   const initialDates = storedUnavailables ? JSON.parse(storedUnavailables) : [];
   const [dates, setDates] = useState(initialDates);
