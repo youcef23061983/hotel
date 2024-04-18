@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRef, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,17 +11,10 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { motion, useTransform, useScroll } from "framer-motion";
 const Events = () => {
-  const galleryFn = async () => {
-    const res = await fetch("http://localhost:3000/gallery");
-    if (!res.ok) {
-      throw Error("ther is no data");
-    }
-    return res.json();
-  };
-  const { data } = useQuery({
-    queryKey: ["gallery"],
-    queryFn: galleryFn,
-  });
+  const url = "http://localhost:3000/gallery";
+
+  const { data, isPending, error } = UseFetch(url);
+
   useEffect(() => {
     document.title = "Events";
   }, []);
@@ -73,6 +66,8 @@ const Events = () => {
   );
   const scrollX4 = useTransform(scrollYProgress4, [0, 1], [-900, 0]);
   const scrollXP4 = useTransform(scrollYProgress4, [0, 1], [-1800, 0]);
+  if (isPending) return <h2>...is loading</h2>;
+  if (error) return <h2>{error.message}</h2>;
 
   return (
     <div>

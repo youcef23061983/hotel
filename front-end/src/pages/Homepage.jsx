@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueries } from "@tanstack/react-query";
 import { useEffect, useState, useRef } from "react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -23,10 +23,7 @@ const Homepage = () => {
     }
     return res.json();
   };
-  const { data } = useQuery({
-    queryKey: ["gallery"],
-    queryFn: galleryFn,
-  });
+
   const roomsFn = async () => {
     const res = await fetch("http://localhost:3000/rooms");
     if (!res.ok) {
@@ -34,9 +31,18 @@ const Homepage = () => {
     }
     return res.json();
   };
-  const { data: roomsData } = useQuery({
-    queryKey: ["rooms"],
-    queryFn: roomsFn,
+
+  const [{ data }, { data: roomsData }] = useQueries({
+    queries: [
+      {
+        queryKey: ["gallery"],
+        queryFn: galleryFn,
+      },
+      {
+        queryKey: ["rooms"],
+        queryFn: roomsFn,
+      },
+    ],
   });
 
   const [index, setIndex] = useState(0);

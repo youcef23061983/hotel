@@ -3,19 +3,11 @@ import Banner from "../pages/Banner";
 import { useRef, useEffect } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-
+import UseFetch from "./UseFetch";
 const ContactUs = () => {
-  const galleryFn = async () => {
-    const res = await fetch("http://localhost:3000/gallery");
-    if (!res.ok) {
-      throw Error("ther is no data");
-    }
-    return res.json();
-  };
-  const { data } = useQuery({
-    queryKey: ["gallery"],
-    queryFn: galleryFn,
-  });
+  const url = "http://localhost:3000/gallery";
+
+  const { data, isPending, error } = UseFetch(url);
   const form = useRef();
   useEffect(() => {
     document.title = "Contact Us";
@@ -49,6 +41,8 @@ const ContactUs = () => {
   );
   const scrollSend = useTransform(scrollYProgress, [0, 1], ["100vw", "0vw"]);
   const scrollITouch = useTransform(scrollYProgress, [0, 1], ["-100vw", "0vw"]);
+  if (isPending) return <h2>...is loading</h2>;
+  if (error) return <h2>{error.message}</h2>;
 
   return (
     <div>

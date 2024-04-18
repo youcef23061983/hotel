@@ -1,22 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
 import { useState, useEffect } from "react";
 
 const Gallery = () => {
   const [gallery, setGallery] = useState({ type: "room" });
 
-  const galleryFn = async () => {
-    const res = await fetch("http://localhost:3000/album");
-    if (!res.ok) {
-      throw Error("There is no data");
-    }
-    return res.json();
-  };
+  const url = "http://localhost:3000/album";
+  const { data, isPending, error } = UseFetch(url);
 
-  const { data } = useQuery({
-    queryKey: ["album"],
-    queryFn: galleryFn,
-  });
   useEffect(() => {
     document.title = "Gallery";
   }, []);
@@ -27,6 +18,8 @@ const Gallery = () => {
       gallery.type === "room" || pictures.type === gallery.type;
     return typeFilter;
   });
+  if (isPending) return <h2>...is loading</h2>;
+  if (error) return <h2>{error.message}</h2>;
 
   return (
     <div>

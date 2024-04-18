@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
 import { MdOutlineSportsGymnastics } from "react-icons/md";
 import { TbPool, TbMassage } from "react-icons/tb";
@@ -14,17 +14,9 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 
 const Wellness = () => {
-  const galleryFn = async () => {
-    const res = await fetch("http://localhost:3000/gallery");
-    if (!res.ok) {
-      throw Error("ther is no data");
-    }
-    return res.json();
-  };
-  const { data } = useQuery({
-    queryKey: ["gallery"],
-    queryFn: galleryFn,
-  });
+  const url = "http://localhost:3000/gallery";
+  const { data, isPending, error } = UseFetch(url);
+
   useEffect(() => {
     document.title = "WellNess & SPA";
   }, []);
@@ -121,6 +113,8 @@ const Wellness = () => {
   );
   const scrollX5 = useTransform(scrollYProgress5, [0, 1], [-900, 0]);
   const scrollImg5 = useTransform(scrollYProgress5, [0, 1], [900, 0]);
+  if (isPending) return <h2>...is loading</h2>;
+  if (error) return <h2>{error.message}</h2>;
 
   return (
     <div>
