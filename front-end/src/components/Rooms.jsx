@@ -1,36 +1,15 @@
-import { useQueries } from "@tanstack/react-query";
 import React, { useState, useRef, useEffect } from "react";
 import Banner from "../pages/Banner";
 import { Link } from "react-router-dom";
 import { motion, useTransform, useScroll } from "framer-motion";
+import img1 from "../images/header/roomsheader.jpg";
+import UseFetch from "./UseFetch";
 
 const Rooms = () => {
-  const galleryFn = async () => {
-    const res = await fetch("http://localhost:3000/gallery");
-    if (!res.ok) {
-      throw Error("ther is no data");
-    }
-    return res.json();
-  };
-  const roomsFn = async () => {
-    const res = await fetch("http://localhost:3000/rooms");
-    if (!res.ok) {
-      throw Error("ther is no data");
-    }
-    return res.json();
-  };
-  const [{ data: roomsData }, { data }] = useQueries({
-    queries: [
-      {
-        queryKey: ["rooms"],
-        queryFn: roomsFn,
-      },
-      {
-        queryKey: ["gallery"],
-        queryFn: galleryFn,
-      },
-    ],
-  });
+  const url = "http://localhost:3000/rooms";
+  const key = "rooms";
+
+  const { data: roomsData, error, isPending } = UseFetch(url, key);
   useEffect(() => {
     document.title = "Rooms";
   }, []);
@@ -127,35 +106,35 @@ const Rooms = () => {
   const ref = useRef(null);
 
   const useMediaQuery = (query) => {
-    const [matches, setMatches] = useState(false);
+    const [matches, setMatches] = useState(
+      () => window.matchMedia(query).matches
+    );
 
     useEffect(() => {
       const media = window.matchMedia(query);
-      if (media.matches !== matches) {
-        setMatches(media.matches);
-      }
 
       const listener = () => {
         setMatches(media.matches);
       };
 
-      if (typeof media.addEventListener === "function") {
+      if (media.addEventListener) {
         media.addEventListener("change", listener);
       } else {
         media.addListener(listener);
       }
 
       return () => {
-        if (typeof media.removeEventListener === "function") {
+        if (media.removeEventListener) {
           media.removeEventListener("change", listener);
         } else {
-          media.removeListener(listenerList);
+          media.removeListener(listener);
         }
       };
-    }, [matches, query]);
+    }, [query]);
 
     return matches;
   };
+
   const isMediumScreen = useMediaQuery("(min-width: 768px)");
 
   const { scrollYProgress } = useScroll({
@@ -163,16 +142,19 @@ const Rooms = () => {
     offset: ["0 1", isMediumScreen ? "0.6 1" : "0.33 1"],
   });
 
-  const scrollOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [0, 0.2, 1]);
-  const scrollScale = useTransform(scrollYProgress, [0, 0.7, 1], [0, 0.5, 1]);
-  const scrollX = useTransform(scrollYProgress, [0, 1], ["100vw", "0vw"]);
+  const scrollOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const scrollScale = useTransform(scrollYProgress, [0, 0.02, 1], [0, 0.5, 1]);
+  const scrollX = useTransform(scrollYProgress, [0, 1], ["50vw", "0vw"]);
+  if (isPending) return <h2>...is loading</h2>;
+  if (error) return <h2>{error.message}</h2>;
 
   return (
     <div>
       <div
+        data-testid="rooms-div"
         className="headerimages"
         style={{
-          background: `url(${data && data[6].images[0]}) center/cover `,
+          background: `url(${img1}) center/cover `,
         }}
       >
         <Banner title="choose your room" />
@@ -224,9 +206,10 @@ const Rooms = () => {
               className="formSelect"
             />
           </div>
-          <div className="searchElement">
-            <label htmlFor="size">size</label>
-            <div className="inputSize">
+          <div>
+            <div className="searchElement">
+              <label htmlFor="minSize">min size</label>
+
               <input
                 type="number"
                 name="minSize"
@@ -236,6 +219,9 @@ const Rooms = () => {
                 onChange={handleChange}
                 className="formSize"
               />
+            </div>
+            <div className="searchElement">
+              <label htmlFor="maxSize">max size</label>
               <input
                 type="number"
                 name="maxSize"
@@ -290,7 +276,7 @@ const Rooms = () => {
             </div>
           </div>
           <div className="searchElement">
-            <label htmlFor="children">max children</label>
+            <label htmlFor="maxChildren">max children</label>
             <div className="inputSize">
               <input
                 type="number"

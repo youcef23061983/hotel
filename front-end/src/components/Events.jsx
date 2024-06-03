@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { useRef, useEffect } from "react";
 import UseFetch from "./UseFetch";
+import { PiOfficeChair } from "react-icons/pi";
+
+import { LuPartyPopper } from "react-icons/lu";
+import { TfiGallery } from "react-icons/tfi";
+
 import Banner from "../pages/Banner";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,8 +17,9 @@ import { EffectCoverflow, Pagination } from "swiper/modules";
 import { motion, useTransform, useScroll } from "framer-motion";
 const Events = () => {
   const url = "http://localhost:3000/gallery";
+  const key = "gallery";
 
-  const { data, isPending, error } = UseFetch(url);
+  const { data, isPending, error } = UseFetch(url, key);
 
   useEffect(() => {
     document.title = "Events";
@@ -77,10 +83,29 @@ const Events = () => {
           background: `url(${data && data[5].images[0]}) center/cover `,
         }}
       >
-        <Banner title="EXPERIENCES"></Banner>
+        <Banner title="Events">
+          <div className="iconsDetails">
+            <div className="iconDetail">
+              <LuPartyPopper className="icon" />
+              <p>Wedding</p>
+            </div>
+
+            <div className="iconDetail">
+              <TfiGallery className="icon" />
+              <p>Gallery </p>
+            </div>
+            <div className="iconDetail">
+              <PiOfficeChair className="icon" />
+              <p style={{ marginLeft: "1rem" }}>Meetings </p>
+            </div>
+          </div>
+        </Banner>
       </div>
       <div className="wellness" ref={ref}>
-        <motion.h2 style={{ opacity: scrollOpacity, x: scrollX }}>
+        <motion.h2
+          style={{ opacity: scrollOpacity, x: scrollX }}
+          data-testid="EventsH2"
+        >
           Elegance in Every Occasion: Unforgettable Events at Legend Hotel
         </motion.h2>
         <motion.p style={{ opacity: scrollOpacity, x: scrollXP }}>

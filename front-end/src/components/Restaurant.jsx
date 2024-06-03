@@ -2,6 +2,9 @@ import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
 import "./restaurant.css";
 import { PiClockAfternoonThin, PiDressThin } from "react-icons/pi";
+import { MdRamenDining } from "react-icons/md";
+import { IoRestaurantSharp } from "react-icons/io5";
+import { MdFoodBank } from "react-icons/md";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRef, useState, useEffect } from "react";
@@ -13,8 +16,9 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 const Restaurant = () => {
   const url = "http://localhost:3000/gallery";
+  const key = "gallery";
 
-  const { data, isPending, error } = UseFetch(url);
+  const { data, isPending, error } = UseFetch(url, key);
   useEffect(() => {
     document.title = "restaurant";
   }, []);
@@ -98,14 +102,26 @@ const Restaurant = () => {
           background: `url(${data && data[3].images[0]}) center/cover `,
         }}
       >
-        <Banner title="dinning & restaurant" />
+        <Banner title="dining & restaurant">
+          <div className="iconsDetails">
+            <div className="iconDetail">
+              <MdRamenDining className="icon" />
+              <p>Restaurant</p>
+            </div>
+
+            <div className="iconDetail">
+              <MdFoodBank className="icon" />
+              <p>In Dining</p>
+            </div>
+          </div>
+        </Banner>
       </div>
       <div className="restaurantHeader">
         <h2>
           "Dining in Opulence: A Culinary Oasis at Legend Hotel's Exquisite
           Restaurant in Batu Ferringhi, Malaysia"
         </h2>
-        <p>
+        <p data-testid="restaurant-paragraph">
           Nestled in the heart of the picturesque Batu Ferringhi in Malaysia,
           Legend Hotel stands as an epitome of elegance and charm. The hotel's
           distinguished restaurant offers a gastronomic journey into the rich

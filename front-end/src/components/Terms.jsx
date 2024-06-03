@@ -2,8 +2,9 @@ import UseFetch from "./UseFetch";
 import { useEffect } from "react";
 const Terms = () => {
   const url = "http://localhost:3000/gallery";
+  const key = "gallery";
 
-  const { data, isPending, error } = UseFetch(url);
+  const { data, isPending, error } = UseFetch(url, key);
 
   useEffect(() => {
     document.title = "Terms & Conditions";
@@ -15,6 +16,7 @@ const Terms = () => {
     <div>
       <div
         className="headerimages"
+        data-testid="div-Terms"
         style={{
           background: `url(${data && data[7].images[7]}) center/cover `,
         }}

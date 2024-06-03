@@ -1,11 +1,13 @@
 import Banner from "../pages/Banner";
 import { useEffect } from "react";
+
 import UseFetch from "./UseFetch";
 
 const Cookies = () => {
   const url = "http://localhost:3000/gallery";
+  const key = "gallery";
 
-  const { data, isPending, error } = UseFetch(url);
+  const { data, isPending, error } = UseFetch(url, key);
   useEffect(() => {
     document.title = "Cookies";
   }, []);
@@ -23,7 +25,7 @@ const Cookies = () => {
         <Banner title="COOKIES POLICY" />
       </div>
       <div className="privacy">
-        <h2>COOKIES POLICY</h2>
+        <h2 data-testid="cookies-h2">COOKIES POLICY</h2>
         <p>
           Welcome to Legend Hotel. This Cookies Policy explains how we use
           cookies and similar technologies on our website. By using our website,

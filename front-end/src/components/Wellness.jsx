@@ -15,7 +15,8 @@ import { EffectCoverflow, Pagination } from "swiper/modules";
 
 const Wellness = () => {
   const url = "http://localhost:3000/gallery";
-  const { data, isPending, error } = UseFetch(url);
+  const key = "gallery";
+  const { data, isPending, error } = UseFetch(url, key);
 
   useEffect(() => {
     document.title = "WellNess & SPA";
@@ -127,21 +128,15 @@ const Wellness = () => {
         <Banner title="WELLNESS & SPA">
           <div className="iconsDetails">
             <div className="iconDetail">
-              <button>
-                <TbPool />
-              </button>
+              <TbPool className="icon" />
               <p>pool</p>
             </div>
             <div className="iconDetail">
-              <button>
-                <TbMassage />
-              </button>
+              <TbMassage className="icon" />
               <p>treatment</p>
             </div>
             <div className="iconDetail">
-              <button>
-                <MdOutlineSportsGymnastics />
-              </button>
+              <MdOutlineSportsGymnastics className="icon" />
               <p>gym</p>
             </div>
           </div>

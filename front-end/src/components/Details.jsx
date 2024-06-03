@@ -1,4 +1,3 @@
-import { useQueries, useQueryClient } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 import { useParams, Link } from "react-router-dom";
 import "./detail.css";
@@ -11,59 +10,72 @@ import { MdBalcony } from "react-icons/md";
 import { MdOutlineFreeBreakfast, MdOutlinePeopleAlt } from "react-icons/md";
 import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useQuery, useQueries, useQueryClient } from "@tanstack/react-query";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { useScroll, useTransform, motion } from "framer-motion";
+import UseFetchQueries from "./UseFetchQueries";
 
 const Details = () => {
   const { id } = useParams();
-  const queryClient = useQueryClient();
   const [index, setIndex] = useState(0);
+  const url = "http://localhost:3000/rooms";
+  const key1 = "rooms";
 
-  const roomsFn = async () => {
-    const res = await fetch("http://localhost:3000/rooms");
+  const Fn1 = async () => {
+    const res = await fetch(url);
     if (!res.ok) {
-      throw Error("ther is no data");
+      throw Error("there is no first data");
     }
     return res.json();
   };
-  const roomFn = async (id) => {
-    const res = await fetch(`http://localhost:3000/rooms/${id}`);
+
+  const Fn2 = async () => {
+    const res = await fetch(`${url}/${id}`);
     if (!res.ok) {
-      throw Error("ther is no data");
+      throw Error("there is no second data");
     }
     return res.json();
   };
-  const [{ data: roomsData }, { data: roomData, isPending }] = useQueries({
+
+  const queryClient = useQueryClient();
+
+  const [
+    { data: roomsData, isPending: isPending1, error: error1 },
+    { data: roomData, isPending: isPending2, error: error2 },
+  ] = useQueries({
     queries: [
       {
-        queryKey: ["rooms"],
-        queryFn: roomsFn,
+        queryKey: [key1],
+        queryFn: Fn1,
       },
       {
-        queryKey: ["room", id],
-        queryFn: () => roomFn(id),
-        initialData: () =>
-          queryClient
-            .getQueryData(["rooms"])
-            ?.find((d) => d.id === parseInt(id)),
+        queryKey: [key1, id],
+        queryFn: Fn2,
+        initialData: () => {
+          const data = queryClient.getQueryData([key1]);
+
+          return data ? data.find((d) => d.id === parseInt(id)) : undefined;
+        },
+        enabled: !!id,
       },
     ],
   });
+
   useEffect(() => {
     if (roomData) {
       const name = roomData.name || "";
       document.title = name;
     }
   }, [roomData]);
+  const img1 = roomData ? roomData.images[0] : null;
 
-  const img1 = roomData ? roomData.images[0] : 0;
-  const roomImages = roomData ? roomData.images : 0;
+  const roomImages = roomData ? roomData.images : null;
   const roomIcons = roomData ? roomData.amenities : 0;
-  const x = roomData && roomImages.length;
+  const x = roomData ? roomImages.length : 0;
   const square = roomData ? roomData.room_square_footage : [];
   const guest = roomData ? roomData.capacity : [];
   const bath = roomData ? roomData.bath_number : [];
@@ -71,27 +83,27 @@ const Details = () => {
   function renderIcon(iconName) {
     switch (iconName) {
       case "PiTelevisionSimpleThin":
-        return <PiTelevisionSimpleThin />;
+        return <PiTelevisionSimpleThin className="icon" />;
       case "FaWifi":
-        return <FaWifi />;
+        return <FaWifi className="icon" />;
       case "Air Conditioning":
-        return <TbAirConditioning />;
+        return <TbAirConditioning className="icon" />;
       case "TbSofa":
-        return <TbSofa />;
+        return <TbSofa className="icon" />;
       case "Tb24Hours":
         return <Tb24Hours />;
       case "MdOutlineFreeBreakfast":
-        return <MdOutlineFreeBreakfast />;
+        return <MdOutlineFreeBreakfast className="icon" />;
       case "FaKitchenSet":
-        return <FaKitchenSet />;
+        return <FaKitchenSet className="icon" />;
       case "MdBalcony":
-        return <MdBalcony />;
+        return <MdBalcony className="icon" />;
       case "GrCube":
-        return <GrCube />;
+        return <GrCube className="icon" />;
       case "MdOutlinePeopleAlt":
-        return <MdOutlinePeopleAlt />;
+        return <MdOutlinePeopleAlt className="icon" />;
       case "TbBath":
-        return <TbBath />;
+        return <TbBath className="icon" />;
 
       default:
         return null;
@@ -103,6 +115,7 @@ const Details = () => {
         (room) => room.type === roomData.type && room.id !== roomData.id
       )
     : [];
+
   const ref = useRef(null);
   const { scrollYProgress: scrollYProgress } = useScroll({
     ref: ref,
@@ -116,26 +129,26 @@ const Details = () => {
   const scrollIcon = useTransform(scrollYProgress, [0, 1], ["100vw", "0vw"]);
   const scrollP = useTransform(scrollYProgress, [0, 1], ["-100vw", "0vw"]);
 
-  if (isPending) {
-    return <h2>...is loading</h2>;
-  }
+  if (isPending1 || isPending2) return <h2>...is loading</h2>;
+  if (error1) return <h2>{error1.message}</h2>;
+  if (error2) return <h2>{error2.message}</h2>;
   return (
     <div>
       <div className="headerimages">
-        <img src={`/${img1}`} alt="" className="detailImg" />
+        <img src={`/${img1}`} alt="no image" className="detailImg" />
 
         <Banner title={roomData.name}>
           <div className="iconsDetails">
             <div className="iconDetail">
-              <button>{renderIcon(square.icon)}</button>
+              {renderIcon(square.icon)}
               <p>{square.number} square foot</p>
             </div>
             <div className="iconDetail">
-              <button>{renderIcon(guest.icon)}</button>
+              {renderIcon(guest.icon)}
               <p>{guest.number} guest</p>
             </div>
             <div className="iconDetail">
-              <button>{renderIcon(bath.icon)}</button>
+              {renderIcon(bath.icon)}
               <p>{bath.number} bathroom</p>
             </div>
           </div>
@@ -146,8 +159,8 @@ const Details = () => {
           className="p"
           style={{ opacity: scrollOpacity, x: scrollP }}
         >
-          <h2>about the room </h2>
-          <p>{roomData && roomData.intoduction}</p>
+          <h2 data-testid="h2">about the room </h2>
+          <p>{roomData ? roomData.intoduction : ""}</p>
           <Link className="nav-btn" to={`/booking/${id}`}>
             book now
           </Link>
@@ -191,7 +204,7 @@ const Details = () => {
 
       <div className="feedBack">
         <h2>feed back</h2>
-        <p>{roomData && roomData.feedback}</p>
+        <p>{roomData ? roomData.feedback : ""}</p>
       </div>
       <div className="otherRooms">
         <h2>other rooms</h2>

@@ -2,11 +2,13 @@ import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
 import { useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
+import { IoLocationSharp } from "react-icons/io5";
 
 const Google = () => {
   const url = "http://localhost:3000/gallery";
+  const key = "gallery";
 
-  const { data, isPending, error } = UseFetch(url);
+  const { data, isPending, error } = UseFetch(url, key);
   const ref = useRef(null);
   const useMediaQuery = (query) => {
     const [matches, setMatches] = useState(false);
@@ -31,7 +33,7 @@ const Google = () => {
         if (typeof media.removeEventListener === "function") {
           media.removeEventListener("change", listener);
         } else {
-          media.removeListener(listenerList);
+          media.removeListener(listener);
         }
       };
     }, [matches, query]);
@@ -63,7 +65,11 @@ const Google = () => {
           background: `url(${data && data[7].images[3]}) center/cover `,
         }}
       >
-        <Banner title="LOCATION" />
+        <Banner title="LOCATION">
+          <div className="iconDetail">
+            <IoLocationSharp className="icon" />
+          </div>
+        </Banner>
       </div>
       <div className="section" ref={ref}>
         <motion.div
@@ -83,10 +89,16 @@ const Google = () => {
           ></iframe>
         </motion.div>
         <div className="p">
-          <motion.h2 style={{ x: scrollX, opacity: scrollOpacity }}>
+          <motion.h2
+            style={{ x: scrollX, opacity: scrollOpacity }}
+            data-testid="google-h2"
+          >
             Seaside Splendor: Discovering the Allure of Batu Ferringhi
           </motion.h2>
-          <motion.p style={{ x: scrollXP, opacity: scrollOpacity }}>
+          <motion.p
+            style={{ x: scrollXP, opacity: scrollOpacity }}
+            data-testid="google-p"
+          >
             Nestled along the northwestern coast of Penang, Malaysia, Batu
             Ferringhi stands as a jewel in the crown of tropical destinations.
             Renowned for its pristine sandy beaches and crystal-clear waters,

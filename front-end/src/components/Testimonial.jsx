@@ -7,34 +7,22 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { useRef, useState, useEffect } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
+import UseFetchQueries from "./UseFetchQueries";
+import Rating from "./Rating";
 
 const Testimonial = () => {
-  const galleryFn = async () => {
-    const res = await fetch("http://localhost:3000/gallery");
-    if (!res.ok) {
-      throw Error("ther is no data");
-    }
-    return res.json();
-  };
-  const testimonilasFn = async () => {
-    const res = await fetch("http://localhost:3000/testimonials");
-    if (!res.ok) {
-      throw Error("ther is no data");
-    }
-    return res.json();
-  };
-  const [{ data }, { data: testimonials }] = useQueries({
-    queries: [
-      {
-        queryKey: ["gallery"],
-        queryFn: galleryFn,
-      },
-      {
-        queryKey: ["testimonials"],
-        queryFn: testimonilasFn,
-      },
-    ],
-  });
+  const url1 = "http://localhost:3000/gallery";
+  const key1 = "gallery";
+  const url2 = "http://localhost:3000/testimonials";
+  const key2 = "testimonials";
+  const {
+    data1: data,
+    data2: testimonials,
+    isPending1,
+    isPending2,
+    error1,
+    error2,
+  } = UseFetchQueries(url1, key1, url2, key2);
   useEffect(() => {
     document.title = "Testimonials";
   }, []);
@@ -83,11 +71,15 @@ const Testimonial = () => {
   );
   const scrollX = useTransform(scrollYProgress1, [0, 1], [-900, 0]);
   const scrollImg = useTransform(scrollYProgress1, [0, 1], [900, 0]);
+  if (isPending1 || isPending2) return <h2>...is loading</h2>;
+  if (error1) return <h2>{error1.message}</h2>;
+  if (error2) return <h2>{error2.message}</h2>;
 
   return (
     <div>
       <div
         className="headerimages"
+        data-testid="div-testimonial"
         style={{
           background: `url(${data && data[7].images[5]}) center/cover `,
         }}
@@ -137,7 +129,7 @@ const Testimonial = () => {
           >
             {testimonials &&
               testimonials.map((testimonial) => {
-                const { name, date, img, text } = testimonial;
+                const { name, date, img, text, rating } = testimonial;
 
                 return (
                   <SwiperSlide style={{ height: "auto" }}>
@@ -151,7 +143,16 @@ const Testimonial = () => {
                         </div>
                         <div className="testimonialName">
                           <p>{name}</p>
-                          <p>{date}</p>
+
+                          <div className="rating">
+                            <p>{date}</p>
+                            <div className="rating">
+                              <div>
+                                <Rating rating={rating} />
+                              </div>
+                              <p>{rating} </p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <p>{text}</p>

@@ -10,7 +10,7 @@ const UseFetch = (url, key) => {
   };
   const { data, error, isPending } = useQuery({
     queryKey: [key],
-    queryFn: () => productFun(),
+    queryFn: productFun,
   });
   return { data, error, isPending };
 };

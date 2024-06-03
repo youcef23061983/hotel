@@ -5,7 +5,9 @@ import { useScroll, motion, useTransform } from "framer-motion";
 import UseFetch from "./UseFetch";
 const About = () => {
   const url = "http://localhost:3000/gallery";
-  const { data, isPending, error } = UseFetch(url);
+  const key = "gallery";
+
+  const { data, isPending, error } = UseFetch(url, key);
 
   useEffect(() => {
     document.title = "About Us";
@@ -27,6 +29,7 @@ const About = () => {
     <div>
       <div
         className="headerimages"
+        data-testid="about-element"
         style={{
           background: `url(${data && data[7].images[0]}) center/cover `,
         }}
@@ -54,6 +57,7 @@ const About = () => {
             Coastal Elegance: Legend Hotel's Enchanting Locale in Batu Ferringhi
           </motion.h2>
           <motion.p
+            data-testid="about-paragraph"
             style={{
               x: scrollXP,
               opacity: scrollOpacity,

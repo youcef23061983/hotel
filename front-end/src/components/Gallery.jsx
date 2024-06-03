@@ -1,12 +1,15 @@
 import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
 import { useState, useEffect } from "react";
+import { MdMonochromePhotos } from "react-icons/md";
 
 const Gallery = () => {
   const [gallery, setGallery] = useState({ type: "room" });
 
   const url = "http://localhost:3000/album";
-  const { data, isPending, error } = UseFetch(url);
+  const key = "album";
+
+  const { data, isPending, error } = UseFetch(url, key);
 
   useEffect(() => {
     document.title = "Gallery";
@@ -18,18 +21,25 @@ const Gallery = () => {
       gallery.type === "room" || pictures.type === gallery.type;
     return typeFilter;
   });
+  console.log(filterData);
   if (isPending) return <h2>...is loading</h2>;
   if (error) return <h2>{error.message}</h2>;
 
   return (
     <div>
       <div
+        data-testid="div-gallery"
         className="headerimages"
         style={{
           background: `url(${data && data[0].images[0]}) center/cover `,
         }}
       >
-        <Banner title="GALLERY" />
+        <Banner title="GALLERY">
+          <div className="iconDetail">
+            <MdMonochromePhotos className="icon" />
+            <p>Gallery</p>
+          </div>
+        </Banner>
       </div>
 
       <div className="galleryButtons">
@@ -47,14 +57,15 @@ const Gallery = () => {
         ))}
       </div>
       <div className="galleryList">
-        {filterData &&
-          filterData[0].images.map((image, index) => {
-            return (
-              <div className="galleryImage">
-                <img key={index} src={image} className="img" />
-              </div>
-            );
-          })}
+        {filterData
+          ? filterData[0].images.map((image, index) => {
+              return (
+                <div className="galleryImage">
+                  <img key={index} src={image} className="img" />
+                </div>
+              );
+            })
+          : []}
       </div>
     </div>
   );

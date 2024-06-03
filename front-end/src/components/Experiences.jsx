@@ -2,7 +2,10 @@ import { Link } from "react-router-dom";
 import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
 import { useRef, useEffect } from "react";
+import { MdOutlineScubaDiving } from "react-icons/md";
+import { GiSurfBoard } from "react-icons/gi";
 
+import { MdKayaking } from "react-icons/md";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -13,8 +16,9 @@ import { motion, useTransform, useScroll } from "framer-motion";
 
 const Experiences = () => {
   const url = "http://localhost:3000/gallery";
+  const key = "gallery";
 
-  const { data, isPending, error } = UseFetch(url);
+  const { data, isPending, error } = UseFetch(url, key);
 
   useEffect(() => {
     document.title = "Experience";
@@ -103,7 +107,23 @@ const Experiences = () => {
           background: `url(${data && data[4].images[15]}) center/cover `,
         }}
       >
-        <Banner title="EXPERIENCES"></Banner>
+        <Banner title="EXPERIENCES">
+          <div className="iconsDetails">
+            <div className="iconDetail">
+              <MdKayaking className="icon" />
+              <p data-testid="Experiences-paragraph">Kayaking</p>
+            </div>
+
+            <div className="iconDetail">
+              <MdOutlineScubaDiving className="icon" />
+              <p>Diving </p>
+            </div>
+            <div className="iconDetail">
+              <GiSurfBoard className="icon" />
+              <p>Windsurfing </p>
+            </div>
+          </div>
+        </Banner>
       </div>
       <div className="spa" ref={ref}>
         <motion.h2 style={{ x: scrollX, opacity: scrollOpacity }}>
@@ -126,11 +146,17 @@ const Experiences = () => {
         </motion.p>
       </div>
       <div className="wellness" ref={ref2}>
-        <motion.h2 style={{ x: scrollX2, opacity: scrollOpacity2 }}>
+        <motion.h2
+          style={{ x: scrollX2, opacity: scrollOpacity2 }}
+          data-testid="Experiences-Kayaking"
+        >
           Navigating Serenity: Kayaking Adventures at Legend Hotel's Coastal
           Paradise
         </motion.h2>
-        <motion.p style={{ x: scrollXP2, opacity: scrollOpacity2 }}>
+        <motion.p
+          style={{ x: scrollXP2, opacity: scrollOpacity2 }}
+          data-testid="Experiences-Kayaking-Paragraph"
+        >
           Embark on an exhilarating aquatic escapade with our Kayaking activity
           at Legend Hotel in Batu Ferringhi, Malaysia. Immerse yourself in the
           natural beauty of our coastal surroundings as you paddle along the

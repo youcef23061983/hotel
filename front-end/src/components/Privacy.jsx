@@ -3,8 +3,9 @@ import { useEffect } from "react";
 
 const Privacy = () => {
   const url = "http://localhost:3000/gallery";
+  const key = "gallery";
 
-  const { data, isPending, error } = UseFetch(url);
+  const { data, isPending, error } = UseFetch(url, key);
   useEffect(() => {
     document.title = "Privacy Policy";
   }, []);
@@ -14,6 +15,7 @@ const Privacy = () => {
   return (
     <div>
       <div
+        data-testid="privecy-background"
         className="headerimages"
         style={{
           background: `url(${data && data[7].images[6]}) center/cover `,
@@ -21,7 +23,7 @@ const Privacy = () => {
       />
       <div className="privacy">
         <h2>PRIVACY POLICY</h2>
-        <p>
+        <p data-testid="privecy-paragraph">
           At Legend Hotel, we prioritize the privacy and security of our guests,
           recognizing the importance of safeguarding personal information in the
           modern digital age. This Privacy Policy outlines our commitment to

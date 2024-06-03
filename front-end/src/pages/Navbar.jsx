@@ -1,14 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { FaAlignJustify } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [showLinks, setShowLinks] = useState(false);
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
   const navCenter = useRef(null);
+  const location = useLocation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    setShowLinks(false);
     let isMounted = true;
 
     const handScroll = () => {
@@ -45,7 +47,7 @@ const Navbar = () => {
       isMounted = false;
       window.removeEventListener("scroll", handScroll);
     };
-  }, []);
+  }, [location]);
 
   return (
     <nav className="nav-center" ref={navCenter}>

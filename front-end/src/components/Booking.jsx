@@ -1,35 +1,36 @@
 import { useEffect, useState } from "react";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import img1 from "../images/gallery/booking.jpg";
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 import { useParams, Link } from "react-router-dom";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
-import { format, differenceInDays } from "date-fns";
+import { format, differenceInDays, addDays } from "date-fns";
 import { FcCheckmark } from "react-icons/fc";
 import { motion } from "framer-motion";
+import UseFetchQueries from "./UseFetchQueries";
 
 const Booking = () => {
   const { id } = useParams();
-  const queryClient = useQueryClient();
   const [info, setInfo] = useState(false);
   const [congra, setCongra] = useState(false);
   const [calendar, setCalendar] = useState(true);
-  const roomFn = async (id) => {
-    const res = await fetch(`http://localhost:3000/rooms/${id}`);
-    if (!res.ok) {
-      throw Error("ther is no data");
-    }
-    return res.json();
-  };
-  const { data: roomData } = useQuery({
-    queryKey: ["room", id],
-    queryFn: () => roomFn(id),
-    initialData: () =>
-      queryClient.getQueryData(["rooms"])?.find((d) => d.id === parseInt(id)),
-  });
+  const url1 = "http://localhost:3000/rooms";
+  const key1 = "rooms";
+  const url2 = "http://localhost:3000/rooms";
+  const key2 = "room";
+  const funId = id;
+
+  const {
+    isPending1,
+    error1,
+    data2: roomData,
+    isPending2,
+    error2,
+  } = UseFetchQueries(url1, key1, url2, funId, key2);
+
   useEffect(() => {
     document.title = "Booking";
   }, []);
@@ -61,9 +62,9 @@ const Booking = () => {
 
   const arrival = format(date[0].startDate, "MM/dd/yyy");
 
-  const departure = format(date[0].endDate, "MM/dd/yyy");
+  const departure = format(addDays(date[0].endDate, 1), "MM/dd/yyy");
 
-  const estimatedTotal = roomData && roomData.price * allDates.length;
+  const estimatedTotal = roomData ? roomData.price * allDates.length : 0;
 
   const [user, setUser] = useState({
     arrival: "",
@@ -140,7 +141,7 @@ const Booking = () => {
   };
   const handleDateChange = (item) => {
     const arrival = format(item.selection.startDate, "MM/dd/yyyy");
-    const departure = format(item.selection.endDate, "MM/dd/yyyy");
+    const departure = format(addDays(item.selection.endDate, 1), "MM/dd/yyy");
     const allDates = dateRange(
       item.selection.startDate,
       item.selection.endDate
@@ -148,14 +149,14 @@ const Booking = () => {
 
     const numberOfNights =
       differenceInDays(item.selection.endDate, item.selection.startDate) + 1;
-    const total = roomData && roomData.price * numberOfNights;
+    const price = roomData ? roomData.price : 0;
 
-    const price = roomData && roomData.price;
+    const total = roomData ? roomData.price * numberOfNights : 0;
 
     setUser((prevUser) => ({
       ...prevUser,
-      arrival,
-      departure,
+      arrival: arrival,
+      departure: departure,
       dates: allDates,
       price,
       total,
@@ -230,7 +231,7 @@ const Booking = () => {
   };
   // removeAll();
 
-  const img2 = roomData ? roomData.images[0] : 0;
+  const img2 = roomData ? roomData.images[0] : null;
 
   const calendarVariants = {
     hidden: { x: "100vw", opacity: 0 },
@@ -238,11 +239,10 @@ const Booking = () => {
       x: 0,
       opacity: 1,
       transition: {
-        delay: 1,
-        duration: 2,
+        duration: 1.5,
         type: "spring",
         when: "beforeChildren",
-        staggerChildren: 1,
+        staggerChildren: 0.5,
       },
     },
     exit: {
@@ -260,8 +260,7 @@ const Booking = () => {
       x: 0,
       opacity: 1,
       transition: {
-        delay: 0.5,
-        duration: 2,
+        duration: 1.5,
         type: "spring",
         when: "beforeChildren",
         staggerChildren: 0.5,
@@ -284,10 +283,12 @@ const Booking = () => {
       transition: { ease: "easeInOut", type: "spring", duration: 2 },
     },
   };
-
+  if (isPending1 || isPending2) return <h2>...is loading</h2>;
+  if (error1) return <h2>{error1.message}</h2>;
+  if (error2) return <h2>{error2.message}</h2>;
   return (
     <div>
-      <div className="headerimages">
+      <div className="headerimages" data-testid="booking-div">
         <img src={img1} alt="" className="detailImg" />
 
         <Banner title="BOOKING" />
@@ -348,19 +349,21 @@ const Booking = () => {
               <div className="roomInfo">
                 <h2>{roomData && roomData.name}</h2>
                 <div className="calendarDate">
-                  <p>Arrival:</p>
+                  <label htmlFor="arrival">Arrival:</label>
                   <input
                     type="text"
                     name="arrival"
+                    id="arrival"
                     value={user.arrival}
                     onChange={handleDateChange}
                   />{" "}
                 </div>
                 <div className="calendarDate">
-                  <p>Departure:</p>
+                  <label htmlFor="departure">Departure:</label>
                   <input
                     type="text"
                     name="departure"
+                    id="departure"
                     value={user.departure}
                     onChange={handleDateChange}
                   />
@@ -377,6 +380,7 @@ const Booking = () => {
                   <p>Stay per night:</p>
                   <p>{roomData && roomData.price} $</p>
                 </div>
+
                 <div className="calendarDate">
                   <p>Estimated Total (FEES AND TAXES INCLU):</p>
                   <p>{estimatedTotal} $</p>
