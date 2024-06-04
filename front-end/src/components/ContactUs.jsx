@@ -1,10 +1,9 @@
 import Banner from "../pages/Banner";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { MdAttachEmail } from "react-icons/md";
 import emailjs from "@emailjs/browser";
 import UseFetch from "./UseFetch";
-import { useState } from "react";
 
 const ContactUs = () => {
   const [user, setUser] = useState({ name: "", email: "", comment: "" });
@@ -38,11 +37,42 @@ const ContactUs = () => {
         }
       );
   };
+  const useMediaQuery = (query) => {
+    const [matches, setMatches] = useState(false);
+
+    useEffect(() => {
+      const media = window.matchMedia(query);
+      if (media.matches !== matches) {
+        setMatches(media.matches);
+      }
+
+      const listener = () => {
+        setMatches(media.matches);
+      };
+
+      if (typeof media.addEventListener === "function") {
+        media.addEventListener("change", listener);
+      } else {
+        media.addListener(listener);
+      }
+
+      return () => {
+        if (typeof media.removeEventListener === "function") {
+          media.removeEventListener("change", listener);
+        } else {
+          media.removeListener(listener);
+        }
+      };
+    }, [matches, query]);
+
+    return matches;
+  };
+  const isMediumScreen = useMediaQuery("(min-width: 768px)");
 
   const ref2 = useRef(null);
   const { scrollYProgress } = useScroll({
     ref: ref2,
-    offset: ["0 1", "0.6 1"],
+    offset: ["0 1", isMediumScreen ? "0.6 1" : "0.4 1"],
   });
   const scrollOpacity = useTransform(
     scrollYProgress,

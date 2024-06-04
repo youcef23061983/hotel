@@ -15,7 +15,7 @@ const About = () => {
   const ref = useRef(null);
   const { scrollYProgress: scrollYProgress } = useScroll({
     ref: ref,
-    offset: ["0 1", "0.6 1"],
+    offset: ["0 1", "0.5 1"],
   });
   const scrollOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.3, 1]);
   const scrollX = useTransform(scrollYProgress, [0, 1], [-900, 0]);

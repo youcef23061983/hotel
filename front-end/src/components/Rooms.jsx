@@ -139,12 +139,12 @@ const Rooms = () => {
 
   const { scrollYProgress } = useScroll({
     ref: ref,
-    offset: ["0 1", isMediumScreen ? "0.6 1" : "0.33 1"],
+    offset: ["0 1", isMediumScreen ? "0.6 1" : "0.3 1"],
   });
 
   const scrollOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const scrollScale = useTransform(scrollYProgress, [0, 0.02, 1], [0, 0.5, 1]);
-  const scrollX = useTransform(scrollYProgress, [0, 1], ["50vw", "0vw"]);
+  const scrollX = useTransform(scrollYProgress, [0, 1], ["30vw", "0vw"]);
   if (isPending) return <h2>...is loading</h2>;
   if (error) return <h2>{error.message}</h2>;
 

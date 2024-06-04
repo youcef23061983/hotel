@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import UseFetch from "./UseFetch";
 import { PiOfficeChair } from "react-icons/pi";
 
@@ -24,13 +24,45 @@ const Events = () => {
   useEffect(() => {
     document.title = "Events";
   }, []);
+  const useMediaQuery = (query) => {
+    const [matches, setMatches] = useState(false);
+
+    useEffect(() => {
+      const media = window.matchMedia(query);
+      if (media.matches !== matches) {
+        setMatches(media.matches);
+      }
+
+      const listener = () => {
+        setMatches(media.matches);
+      };
+
+      if (typeof media.addEventListener === "function") {
+        media.addEventListener("change", listener);
+      } else {
+        media.addListener(listener);
+      }
+
+      return () => {
+        if (typeof media.removeEventListener === "function") {
+          media.removeEventListener("change", listener);
+        } else {
+          media.removeListener(listener);
+        }
+      };
+    }, [matches, query]);
+
+    return matches;
+  };
+  const isMediumScreen = useMediaQuery("(min-width: 768px)");
+
   const ref = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
   const ref4 = useRef(null);
   const { scrollYProgress: scrollYProgress } = useScroll({
     ref: ref,
-    offset: ["0 1", "0.28 1"],
+    offset: ["0 1", "0.2 1"],
   });
   const scrollOpacity = useTransform(
     scrollYProgress,
@@ -41,7 +73,7 @@ const Events = () => {
   const scrollXP = useTransform(scrollYProgress, [0, 1], [-1800, 0]);
   const { scrollYProgress: scrollYProgress2 } = useScroll({
     ref: ref2,
-    offset: ["0 1", "0.35 1"],
+    offset: ["0 1", "0.2 1"],
   });
   const scrollOpacity2 = useTransform(
     scrollYProgress2,
@@ -52,7 +84,7 @@ const Events = () => {
   const scrollXP2 = useTransform(scrollYProgress2, [0, 1], [-1800, 0]);
   const { scrollYProgress: scrollYProgress3 } = useScroll({
     ref: ref3,
-    offset: ["0 1", "0.6 1"],
+    offset: ["0 1", "0.5 1"],
   });
   const scrollOpacity3 = useTransform(
     scrollYProgress3,
@@ -63,7 +95,7 @@ const Events = () => {
   const scrollXP3 = useTransform(scrollYProgress3, [0, 1], [-1800, 0]);
   const { scrollYProgress: scrollYProgress4 } = useScroll({
     ref: ref4,
-    offset: ["0 1", "0.8 1"],
+    offset: ["0 1", isMediumScreen ? "0.8 1" : "0.6 1"],
   });
   const scrollOpacity4 = useTransform(
     scrollYProgress4,

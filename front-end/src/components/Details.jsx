@@ -10,14 +10,13 @@ import { MdBalcony } from "react-icons/md";
 import { MdOutlineFreeBreakfast, MdOutlinePeopleAlt } from "react-icons/md";
 import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useQuery, useQueries, useQueryClient } from "@tanstack/react-query";
+import { useQueries, useQueryClient } from "@tanstack/react-query";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { useScroll, useTransform, motion } from "framer-motion";
-import UseFetchQueries from "./UseFetchQueries";
 
 const Details = () => {
   const { id } = useParams();
@@ -115,19 +114,50 @@ const Details = () => {
         (room) => room.type === roomData.type && room.id !== roomData.id
       )
     : [];
+  const useMediaQuery = (query) => {
+    const [matches, setMatches] = useState(false);
+
+    useEffect(() => {
+      const media = window.matchMedia(query);
+      if (media.matches !== matches) {
+        setMatches(media.matches);
+      }
+
+      const listener = () => {
+        setMatches(media.matches);
+      };
+
+      if (typeof media.addEventListener === "function") {
+        media.addEventListener("change", listener);
+      } else {
+        media.addListener(listener);
+      }
+
+      return () => {
+        if (typeof media.removeEventListener === "function") {
+          media.removeEventListener("change", listener);
+        } else {
+          media.removeListener(listenerList);
+        }
+      };
+    }, [matches, query]);
+
+    return matches;
+  };
+  const isMediumScreen = useMediaQuery("(min-width: 768px)");
 
   const ref = useRef(null);
   const { scrollYProgress: scrollYProgress } = useScroll({
     ref: ref,
-    offset: ["0 1", "0.4 1"],
+    offset: ["0 1", isMediumScreen ? "0.3 1" : "0.2 1"],
   });
   const scrollOpacity = useTransform(
     scrollYProgress,
     [0, 0.5, 0.7, 1],
     [0, 0.1, 0.3, 1]
   );
-  const scrollIcon = useTransform(scrollYProgress, [0, 1], ["100vw", "0vw"]);
-  const scrollP = useTransform(scrollYProgress, [0, 1], ["-100vw", "0vw"]);
+  const scrollIcon = useTransform(scrollYProgress, [0, 1], ["70vw", "0vw"]);
+  const scrollP = useTransform(scrollYProgress, [0, 1], ["-70vw", "0vw"]);
 
   if (isPending1 || isPending2) return <h2>...is loading</h2>;
   if (error1) return <h2>{error1.message}</h2>;

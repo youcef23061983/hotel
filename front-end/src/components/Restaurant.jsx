@@ -59,7 +59,7 @@ const Restaurant = () => {
 
   const { scrollYProgress: scrollYProgress1 } = useScroll({
     ref: ref,
-    offset: ["0 1", isMediumScreen ? "0.415 1" : "0.4 1"],
+    offset: ["0 1", isMediumScreen ? "0.3 1" : "0.3 1"],
   });
   const scrollOpacity = useTransform(
     scrollYProgress1,
@@ -71,7 +71,7 @@ const Restaurant = () => {
 
   const { scrollYProgress: scrollYProgress2 } = useScroll({
     ref: ref2,
-    offset: ["0 1", isMediumScreen ? "0.625 1" : "0.58 1"],
+    offset: ["0 1", isMediumScreen ? "0.55 1" : "0.5 1"],
   });
   const scrollOpacity2 = useTransform(
     scrollYProgress2,
@@ -82,7 +82,7 @@ const Restaurant = () => {
   const scrollImg2 = useTransform(scrollYProgress2, [0, 1], [900, 0]);
   const { scrollYProgress: scrollYProgress3 } = useScroll({
     ref: ref3,
-    offset: ["0 1", isMediumScreen ? "0.83 1" : "0.78 1"],
+    offset: ["0 1", isMediumScreen ? "0.8 1" : "0.7 1"],
   });
   const scrollOpacity3 = useTransform(
     scrollYProgress3,

@@ -62,7 +62,7 @@ const Testimonial = () => {
 
   const { scrollYProgress: scrollYProgress1 } = useScroll({
     ref: ref,
-    offset: ["0 1", isMediumScreen ? "0.6 1" : "0.5 1"],
+    offset: ["0 1", isMediumScreen ? "0.42 1" : "0.4 1"],
   });
   const scrollOpacity = useTransform(
     scrollYProgress1,

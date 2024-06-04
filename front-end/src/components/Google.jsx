@@ -44,7 +44,7 @@ const Google = () => {
 
   const { scrollYProgress: scrollYProgress1 } = useScroll({
     ref: ref,
-    offset: ["0 1", isMediumScreen ? "0.65 1" : "0.58 1"],
+    offset: ["0 1", isMediumScreen ? "0.6 1" : "0.45 1"],
   });
   const scrollOpacity = useTransform(
     scrollYProgress1,

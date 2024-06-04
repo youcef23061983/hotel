@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { MdOutlineScubaDiving } from "react-icons/md";
 import { GiSurfBoard } from "react-icons/gi";
 
@@ -29,39 +29,71 @@ const Experiences = () => {
   const ref4 = useRef(null);
   const ref5 = useRef(null);
   const ref6 = useRef(null);
+  const useMediaQuery = (query) => {
+    const [matches, setMatches] = useState(false);
+
+    useEffect(() => {
+      const media = window.matchMedia(query);
+      if (media.matches !== matches) {
+        setMatches(media.matches);
+      }
+
+      const listener = () => {
+        setMatches(media.matches);
+      };
+
+      if (typeof media.addEventListener === "function") {
+        media.addEventListener("change", listener);
+      } else {
+        media.addListener(listener);
+      }
+
+      return () => {
+        if (typeof media.removeEventListener === "function") {
+          media.removeEventListener("change", listener);
+        } else {
+          media.removeListener(listener);
+        }
+      };
+    }, [matches, query]);
+
+    return matches;
+  };
+  const isMediumScreen = useMediaQuery("(min-width: 768px)");
+
   const { scrollYProgress: scrollYProgress } = useScroll({
     ref: ref,
-    offset: ["0 1", "0.15 1"],
+    offset: ["0 1", "0.1 1"],
   });
   const scrollOpacity = useTransform(
     scrollYProgress,
     [0, 0.5, 0.7, 1],
     [0, 0.1, 0.3, 1]
   );
-  const scrollX = useTransform(scrollYProgress, [0, 1], [-900, 0]);
-  const scrollXP = useTransform(scrollYProgress, [0, 1], [-1800, 0]);
+  const scrollX = useTransform(scrollYProgress, [0, 1], [-200, 0]);
+  const scrollXP = useTransform(scrollYProgress, [0, 1], [-200, 0]);
   const { scrollYProgress: scrollYProgress2 } = useScroll({
     ref: ref2,
-    offset: ["0 1", "0.23 1"],
+    offset: ["0 1", "0.2 1"],
   });
   const scrollOpacity2 = useTransform(
     scrollYProgress2,
     [0, 0.5, 0.7, 1],
     [0, 0.1, 0.3, 1]
   );
-  const scrollX2 = useTransform(scrollYProgress2, [0, 1], [-900, 0]);
-  const scrollXP2 = useTransform(scrollYProgress2, [0, 1], [-1800, 0]);
+  const scrollX2 = useTransform(scrollYProgress2, [0, 1], [-200, 0]);
+  const scrollXP2 = useTransform(scrollYProgress2, [0, 1], [-200, 0]);
   const { scrollYProgress: scrollYProgress3 } = useScroll({
     ref: ref3,
-    offset: ["0 1", "0.37 1"],
+    offset: ["0 1", isMediumScreen ? "0.37 1" : "0.2 1"],
   });
   const scrollOpacity3 = useTransform(
     scrollYProgress3,
     [0, 0.5, 0.7, 1],
     [0, 0.1, 0.3, 1]
   );
-  const scrollX3 = useTransform(scrollYProgress3, [0, 1], [-900, 0]);
-  const scrollXP3 = useTransform(scrollYProgress3, [0, 1], [-1800, 0]);
+  const scrollX3 = useTransform(scrollYProgress3, [0, 1], [-200, 0]);
+  const scrollXP3 = useTransform(scrollYProgress3, [0, 1], [-200, 0]);
   const { scrollYProgress: scrollYProgress4 } = useScroll({
     ref: ref4,
     offset: ["0 1", "0.53 1"],
@@ -71,8 +103,8 @@ const Experiences = () => {
     [0, 0.5, 0.7, 1],
     [0, 0.1, 0.3, 1]
   );
-  const scrollX4 = useTransform(scrollYProgress4, [0, 1], [-900, 0]);
-  const scrollXP4 = useTransform(scrollYProgress4, [0, 1], [-1800, 0]);
+  const scrollX4 = useTransform(scrollYProgress4, [0, 1], [-200, 0]);
+  const scrollXP4 = useTransform(scrollYProgress4, [0, 1], [-200, 0]);
 
   const { scrollYProgress: scrollYProgress5 } = useScroll({
     ref: ref5,
@@ -83,8 +115,8 @@ const Experiences = () => {
     [0, 0.5, 0.7, 1],
     [0, 0.1, 0.3, 1]
   );
-  const scrollX5 = useTransform(scrollYProgress5, [0, 1], [-900, 0]);
-  const scrollXP5 = useTransform(scrollYProgress5, [0, 1], [-1800, 0]);
+  const scrollX5 = useTransform(scrollYProgress5, [0, 1], [-200, 0]);
+  const scrollXP5 = useTransform(scrollYProgress5, [0, 1], [-200, 0]);
   const { scrollYProgress: scrollYProgress6 } = useScroll({
     ref: ref6,
     offset: ["0 1", "0.82 1"],
@@ -94,8 +126,8 @@ const Experiences = () => {
     [0, 0.5, 0.7, 1],
     [0, 0.1, 0.3, 1]
   );
-  const scrollX6 = useTransform(scrollYProgress6, [0, 1], [-900, 0]);
-  const scrollXP6 = useTransform(scrollYProgress6, [0, 1], [-1800, 0]);
+  const scrollX6 = useTransform(scrollYProgress6, [0, 1], [-200, 0]);
+  const scrollXP6 = useTransform(scrollYProgress6, [0, 1], [-200, 0]);
   if (isPending) return <h2>...is loading</h2>;
   if (error) return <h2>{error.message}</h2>;
 

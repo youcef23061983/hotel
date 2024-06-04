@@ -11,26 +11,37 @@ import { format, differenceInDays, addDays } from "date-fns";
 import { FcCheckmark } from "react-icons/fc";
 import { motion } from "framer-motion";
 import UseFetchQueries from "./UseFetchQueries";
+import { useQuery, QueryClient } from "@tanstack/react-query";
 
 const Booking = () => {
   const { id } = useParams();
   const [info, setInfo] = useState(false);
   const [congra, setCongra] = useState(false);
   const [calendar, setCalendar] = useState(true);
-  const url1 = "http://localhost:3000/rooms";
-  const key1 = "rooms";
-  const url2 = "http://localhost:3000/rooms";
-  const key2 = "room";
-  const funId = id;
+  const url = "http://localhost:3000/rooms";
 
+  const queryClient = new QueryClient();
+
+  const productFun = async () => {
+    const res = await fetch(`${url}/${id}`);
+    if (!res.ok) {
+      throw Error("There is no product data");
+    }
+    return res.json();
+  };
   const {
-    isPending1,
-    error1,
-    data2: roomData,
-    isPending2,
-    error2,
-  } = UseFetchQueries(url1, key1, url2, funId, key2);
-
+    data: roomData,
+    error,
+    isPending,
+  } = useQuery({
+    queryKey: ["product", id],
+    queryFn: productFun,
+    initialData: () => {
+      return queryClient
+        .getQueryData(["products"])
+        ?.find((x) => x.id === parseInt(id));
+    },
+  });
   useEffect(() => {
     document.title = "Booking";
   }, []);
@@ -283,9 +294,8 @@ const Booking = () => {
       transition: { ease: "easeInOut", type: "spring", duration: 2 },
     },
   };
-  if (isPending1 || isPending2) return <h2>...is loading</h2>;
-  if (error1) return <h2>{error1.message}</h2>;
-  if (error2) return <h2>{error2.message}</h2>;
+  if (isPending) return <h2>...is loading</h2>;
+  if (error) return <h2>{error.message}</h2>;
   return (
     <div>
       <div className="headerimages" data-testid="booking-div">
