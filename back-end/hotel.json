@@ -848,7 +848,6 @@
       "name": "David L., Business Traveler",
       "date": "11/02/2023",
       "rating": 4.6,
-
       "img": "src/images/gallery/testimonial2.jpg",
       "text": "As a frequent business traveler, Legend Hotel has set a new standard for excellence. The state-of-the-art meeting facilities, coupled with impeccable service, made my work trip exceptionally productive and enjoyable. The coastal locale provided a refreshing change of scenery, and the attention to detail from the staff ensured a seamless experience. I highly recommend Legend Hotel for both business and leisure stays."
     },
@@ -856,7 +855,6 @@
       "name": "Emily and James P., Honeymooners",
       "date": "11/10/2023",
       "rating": 4.7,
-
       "img": "src/images/gallery/testimonial3.jpg",
       "text": "Our honeymoon at Legend Hotel was a dream come true. The romantic ambiance, coupled with the stunning coastal backdrop, created the perfect setting for our celebration of love. The spa treatments were heavenly, and the private beach access made our stay truly magical. Legend Hotel exceeded our expectations, and we're already planning our anniversary trip back!"
     },
@@ -864,7 +862,6 @@
       "name": "Alex M., Adventure Seeker",
       "date": "11/20/2023",
       "rating": 4.8,
-
       "img": "src/images/gallery/testimonial4.jpg",
       "text": "Legend Hotel is not just a luxurious stay; it's an adventure lover's paradise. From windsurfing against the ocean breeze to exploring the vibrant streets of Batu Ferringhi, every moment was filled with excitement. The concierge team's recommendations for local activities added an authentic touch to my stay. I left Legend Hotel with a suitcase full of memories and a longing to return."
     },
@@ -872,7 +869,6 @@
       "name": "Linda K., Family Vacationer",
       "date": "11/30/2023",
       "rating": 4.5,
-
       "img": "src/images/gallery/testimonial5.jpg",
       "text": "Our family getaway at Legend Hotel was nothing short of extraordinary. The spacious accommodations comfortably accommodated our family, and the kids couldn't get enough of the engaging activities organized by the hotel. From beach picnics to poolside fun, every day brought new adventures. The staff's friendliness and genuine care for families truly made our stay remarkable. Legend Hotel has become our go-to destination for creating cherished family memories."
     },
@@ -880,7 +876,6 @@
       "name": "Robert H., Golf Enthusiast",
       "date": "11/30/2023",
       "rating": 4.6,
-
       "img": "src/images/gallery/testimonial6.jpg",
       "text": "As an avid golfer, Legend Hotel's proximity to world-class golf courses made it an ideal choice for my golf retreat. The concierge effortlessly arranged tee times, and returning to the hotel after a day on the green felt like coming home. The elegant surroundings, coupled with the serene coastal atmosphere, provided the perfect balance of relaxation and golfing excitement. Legend Hotel seamlessly caters to both my passion for golf and my desire for a luxurious escape."
     },
@@ -888,7 +883,6 @@
       "name": "Nadia S., Culinary Connoisseur",
       "date": "12/05/2023",
       "rating": 4.7,
-
       "img": "src/images/gallery/testimonial7.jpg",
       "text": "For a culinary journey like no other, Legend Hotel is a gastronomic haven. Each meal was a masterpiece, a symphony of flavors meticulously crafted by the talented chefs. The diverse culinary offerings, from local delicacies to international fare, showcased the richness of the dining experience. The restaurant's ambiance, coupled with the impeccable service, made every dining moment an unforgettable affair. Legend Hotel has truly elevated the art of dining."
     },
@@ -896,7 +890,6 @@
       "name": "Samuel D., Wellness Seeker",
       "date": "12/11/2023",
       "rating": 4.8,
-
       "img": "src/images/gallery/testimonial8.jpg",
       "text": "In search of rejuvenation, I found my haven at Legend Hotel's spa and wellness center. The holistic approach to well-being, coupled with expert therapists, offered a sanctuary for relaxation. From soothing massages to invigorating wellness classes, each element contributed to a revitalizing experience. The spa's serene atmosphere, combined with the coastal setting, created the perfect backdrop for a wellness retreat. Legend Hotel exceeded my expectations, leaving me refreshed and renewed."
     }

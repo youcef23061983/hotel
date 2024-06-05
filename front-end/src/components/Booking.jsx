@@ -10,7 +10,6 @@ import { DateRange } from "react-date-range";
 import { format, differenceInDays, addDays } from "date-fns";
 import { FcCheckmark } from "react-icons/fc";
 import { motion } from "framer-motion";
-import UseFetchQueries from "./UseFetchQueries";
 import { useQuery, QueryClient } from "@tanstack/react-query";
 
 const Booking = () => {
