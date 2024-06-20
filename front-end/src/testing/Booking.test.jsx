@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { beforeEach, expect, it, vi } from "vitest";
-import { mockData2 } from "./SetupTest";
+import { mockData, mockData2 } from "./SetupTest";
 import Booking from "../components/Booking";
 import { userEvent } from "@testing-library/user-event";
 
@@ -10,6 +10,7 @@ describe("group of testing Booking component", () => {
   vi.mock("../components/UseFetchQueries", () => ({
     __esModule: true,
     default: vi.fn(() => ({
+      data1: mockData,
       data2: mockData2,
       isPending1: false,
       error1: null,
