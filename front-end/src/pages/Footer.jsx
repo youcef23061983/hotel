@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   FaSquareInstagram,
   FaSquareFacebook,
@@ -18,15 +18,33 @@ const Footer = () => {
         </div>
         <div className="footerdiv">
           <h3>Explore</h3>
-          <Link className="footerlink" to="about">
+          <NavLink
+            style={({ isActive }) => {
+              return { color: isActive ? "#2138EF" : "grey" };
+            }}
+            className="footerlink"
+            to="about"
+          >
             About Us
-          </Link>
-          <Link className="footerlink" to="gallery">
+          </NavLink>
+          <NavLink
+            style={({ isActive }) => {
+              return { color: isActive ? "#2138EF" : "grey" };
+            }}
+            className="footerlink"
+            to="gallery"
+          >
             Gallery
-          </Link>
-          <Link className="footerlink" to="testimonial">
+          </NavLink>
+          <NavLink
+            style={({ isActive }) => {
+              return { color: isActive ? "#2138EF" : "grey" };
+            }}
+            className="footerlink"
+            to="testimonial"
+          >
             Guest Review
-          </Link>
+          </NavLink>
         </div>
         <div className="footerdiv">
           <h3>Contact Us</h3>
@@ -36,9 +54,15 @@ const Footer = () => {
             <a href="">+00 00 00 00</a>
           </p>
 
-          <Link className="footerlink" to="google">
+          <NavLink
+            style={({ isActive }) => {
+              return { color: isActive ? "#2138EF" : "grey" };
+            }}
+            className="footerlink"
+            to="google"
+          >
             googleMaps
-          </Link>
+          </NavLink>
         </div>
         <div className="footerdiv">
           <h3>Follow US</h3>
@@ -60,13 +84,37 @@ const Footer = () => {
           </p>
         </li>
         <li className="footerlink">
-          <a href="/privacy">Privacy Policy |</a>
+          <NavLink
+            style={({ isActive }) => {
+              return { color: isActive ? "#2138EF" : "grey" };
+            }}
+            className="footerlink"
+            to="privacy"
+          >
+            Privacy Policy |
+          </NavLink>
         </li>
         <li className="footerlink">
-          <a href="/terms">Terms &amp; Conditions |</a>
+          <NavLink
+            style={({ isActive }) => {
+              return { color: isActive ? "#2138EF" : "grey" };
+            }}
+            className="footerlink"
+            to="terms"
+          >
+            Terms &amp; Conditions |{" "}
+          </NavLink>
         </li>
         <li className="footerlink">
-          <a href="/cookies">Cookies Policy |</a>
+          <NavLink
+            style={({ isActive }) => {
+              return { color: isActive ? "#2138EF" : "grey" };
+            }}
+            className="footerlink"
+            to="cookies"
+          >
+            Cookies Policy |{" "}
+          </NavLink>
         </li>
       </ul>
     </>
