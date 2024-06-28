@@ -1,5 +1,5 @@
 import Banner from "../pages/Banner";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import "./detail.css";
 import { GrNext, GrPrevious, GrCube } from "react-icons/gr";
 import { PiTelevisionSimpleThin } from "react-icons/pi";
@@ -41,6 +41,7 @@ const Details = () => {
   };
 
   const queryClient = useQueryClient();
+  const location = useLocation();
 
   const [
     { data: roomsData, isPending: isPending1, error: error1 },
@@ -158,7 +159,15 @@ const Details = () => {
   );
   const scrollIcon = useTransform(scrollYProgress, [0, 1], ["70vw", "0vw"]);
   const scrollP = useTransform(scrollYProgress, [0, 1], ["-70vw", "0vw"]);
-
+  const goBack = (search) => {
+    if (search && search.includes("room")) {
+      return "go back to rooms";
+    } else if (search && search.includes("suite")) {
+      return "go back to suites";
+    } else {
+      return "go back to all rooms & suites";
+    }
+  };
   if (isPending1 || isPending2) return <h2>...is loading</h2>;
   if (error1) return <h2>{error1.message}</h2>;
   if (error2) return <h2>{error2.message}</h2>;
@@ -189,6 +198,14 @@ const Details = () => {
           className="p"
           style={{ opacity: scrollOpacity, x: scrollP }}
         >
+          <Link
+            className="nav-btn"
+            to={`..${location.state?.search || ""}`}
+            relative="path"
+          >
+            &larr;
+            <span>{goBack(location.state?.search)}</span>
+          </Link>
           <h2 data-testid="h2">about the room </h2>
           <p>{roomData ? roomData.intoduction : ""}</p>
           <Link className="nav-btn" to={`/booking/${id}`}>

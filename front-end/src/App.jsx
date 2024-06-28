@@ -19,6 +19,7 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Testimonial from "./components/Testimonial";
+import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="" element={<Layout />}>
             <Route index element={<Homepage />} />
             <Route path="rooms" element={<Rooms />} />
             <Route path="rooms/:id" element={<Details />} />
@@ -39,11 +40,11 @@ function App() {
             <Route path="gallery" element={<Gallery />} />
             <Route path="contact" element={<ContactUs />} />
             <Route path="google" element={<Google />} />
-
             <Route path="privacy" element={<Privacy />} />
             <Route path="terms" element={<Terms />} />
             <Route path="cookies" element={<Cookies />} />
             <Route path="booking/:id" element={<Booking />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

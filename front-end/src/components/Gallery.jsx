@@ -1,10 +1,11 @@
 import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { MdMonochromePhotos } from "react-icons/md";
+import { useSearchParams } from "react-router-dom";
 
 const Gallery = () => {
-  const [gallery, setGallery] = useState({ type: "room" });
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const url = "http://localhost:3000/album";
   const key = "album";
@@ -16,12 +17,11 @@ const Gallery = () => {
   }, []);
 
   let types = data ? [...new Set(data.map((pictures) => pictures.type))] : [];
-  const filterData = data?.filter((pictures) => {
-    const typeFilter =
-      gallery.type === "room" || pictures.type === gallery.type;
-    return typeFilter;
-  });
-  console.log(filterData);
+
+  const typeFilter = searchParams.get("type");
+  const filterData = typeFilter
+    ? data?.filter((picture) => picture.type === typeFilter)
+    : data;
   if (isPending) return <h2>...is loading</h2>;
   if (error) return <h2>{error.message}</h2>;
 
@@ -45,12 +45,14 @@ const Gallery = () => {
       <div className="galleryButtons">
         {types.map((type, id) => (
           <button
-            className="galleryButton"
+            className={`galleryButton ${
+              typeFilter === type ? "selected" : null
+            }`}
             key={id}
             name="type"
             id="type"
             value={type}
-            onClick={() => setGallery({ type })}
+            onClick={() => setSearchParams({ type })}
           >
             {type}
           </button>

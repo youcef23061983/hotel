@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Banner from "../pages/Banner";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion, useTransform, useScroll } from "framer-motion";
 import img1 from "../images/header/roomsheader.jpg";
 import UseFetch from "./UseFetch";
@@ -10,14 +10,12 @@ const Rooms = () => {
   const key = "rooms";
 
   const { data: roomsData, error, isPending } = UseFetch(url, key);
-  useEffect(() => {
-    document.title = "Rooms";
-  }, []);
-  const [user, setUser] = useState({
-    name: "",
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const initialUserState = {
     type: "all",
     price: 0,
-    capacity: 1,
+    capacity: "all",
     minPrice: 0,
     maxPrice: 0,
     room_square_footage: 0,
@@ -29,80 +27,62 @@ const Rooms = () => {
     pets_allowed: false,
     living_room: false,
     butler_service: false,
-  });
-  let maxPrice = roomsData
-    ? Math.max(...roomsData.map((room) => room.price))
-    : 0;
-  let minPrice = roomsData
-    ? Math.min(...roomsData.map((room) => room.price))
-    : 0;
-  let minSize = roomsData
-    ? Math.min(...roomsData.map((room) => room.room_square_footage.number))
-    : 0;
-  let maxSize = roomsData
-    ? Math.max(...roomsData.map((room) => room.room_square_footage.number))
-    : 0;
-  let types = roomsData
-    ? ["all", ...new Set(roomsData.map((room) => room.type))]
-    : [];
-
-  let maxChildren = roomsData
-    ? Math.max(...roomsData.map((room) => room.max_children))
-    : 0;
-
-  types = types.map((type, index) => {
-    return (
-      <option value={type} key={index}>
-        {type}
-      </option>
-    );
-  });
-
-  let people = roomsData
-    ? [...new Set(roomsData.map((room) => room.capacity.number))]
-    : [];
-  people = people.map((capacity, index) => {
-    return (
-      <option value={capacity} key={index}>
-        {capacity}
-      </option>
-    );
-  });
-  const filterRooms = roomsData?.filter((room) => {
-    const typeFiler = user.type === "all" || room.type === user.type;
-    const capacityFilter =
-      user.capacity === 1 || room.capacity.number === parseInt(user.capacity);
-    const sizefilter =
-      user.minSize === 0 ||
-      (room.room_square_footage.number >= parseInt(user.minSize) &&
-        room.room_square_footage.number <= parseInt(user.maxSize));
-    const priceFilter = user.price === 0 || room.price >= user.price;
-    const breakfastFilter = !user.breakfast || room.breakfast;
-    const petFilter = !user.pets_allowed || room.pets_allowed;
-    const livingroomFilter = !user.living_room || room.living_room;
-    const butlerserviceFilter = !user.butler_service || room.butler_service;
-    const childrenfilter =
-      user.maxChildren === 0 || room.max_children >= parseInt(user.maxChildren);
-    return (
-      typeFiler &&
-      capacityFilter &&
-      sizefilter &&
-      priceFilter &&
-      breakfastFilter &&
-      petFilter &&
-      livingroomFilter &&
-      butlerserviceFilter &&
-      childrenfilter
-    );
-  });
-  const handleChange = (e) => {
-    const { name, value, checked, type } = e.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: type === "checkbox" ? checked : value,
-    }));
   };
 
+  const [user, setUser] = useState(initialUserState);
+
+  useEffect(() => {
+    document.title = "Rooms";
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value, checked, type } = e.target;
+    const newValue = type === "checkbox" ? checked : value;
+
+    setUser((prevUser) => {
+      const updatedUser = {
+        ...prevUser,
+        [name]: newValue,
+      };
+
+      setSearchParams((prevParams) => {
+        if (
+          newValue === "" ||
+          newValue === false ||
+          newValue === "0" ||
+          newValue === "120" ||
+          newValue === "all" ||
+          newValue === "1"
+        ) {
+          prevParams.delete(name);
+        } else {
+          prevParams.set(name, newValue);
+        }
+
+        return prevParams;
+      });
+
+      return updatedUser;
+    });
+  };
+  useEffect(() => {
+    const updatedUserState = {
+      ...initialUserState,
+      type: searchParams.get("type") || "all",
+      price: parseInt(searchParams.get("price")) || 0,
+      capacity: parseInt(searchParams.get("capacity")) || "all",
+      minSize: parseInt(searchParams.get("room_square_footage")) || 0,
+      minSize: parseInt(searchParams.get("minSize")) || 0,
+      maxSize: parseInt(searchParams.get("maxSize")) || 0,
+      maxChildren: parseInt(searchParams.get("maxChildren")) || 0,
+      breakfast: searchParams.get("breakfast") === "true",
+      pets_allowed: searchParams.get("pets_allowed") === "true",
+      living_room: searchParams.get("living_room") === "true",
+      butler_service: searchParams.get("butler_service") === "true",
+    };
+
+    setUser(updatedUserState);
+  }, [searchParams]);
   const ref = useRef(null);
 
   const useMediaQuery = (query) => {
@@ -145,6 +125,71 @@ const Rooms = () => {
   const scrollOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const scrollScale = useTransform(scrollYProgress, [0, 0.02, 1], [0, 0.5, 1]);
   const scrollX = useTransform(scrollYProgress, [0, 1], ["30vw", "0vw"]);
+
+  let maxPrice = roomsData
+    ? Math.max(...roomsData.map((room) => room.price))
+    : 0;
+  let minPrice = roomsData
+    ? Math.min(...roomsData.map((room) => room.price))
+    : 0;
+  let minSize = roomsData
+    ? Math.min(...roomsData.map((room) => room.room_square_footage.number))
+    : 0;
+  let maxSize = roomsData
+    ? Math.max(...roomsData.map((room) => room.room_square_footage.number))
+    : 0;
+  let types = roomsData
+    ? ["all", ...new Set(roomsData.map((room) => room.type))]
+    : [];
+  let maxChildren = roomsData
+    ? Math.max(...roomsData.map((room) => room.max_children))
+    : 0;
+
+  types = types.map((type, index) => (
+    <option value={type} key={index}>
+      {type}
+    </option>
+  ));
+
+  let people = roomsData
+    ? ["all", ...new Set(roomsData.map((room) => room.capacity.number))]
+    : [];
+  people = people.map((capacity, index) => (
+    <option value={capacity} key={index}>
+      {capacity}
+    </option>
+  ));
+
+  const filterRooms = roomsData?.filter((room) => {
+    const typeFilter = user.type === "all" || room.type === user.type;
+    const capacityFilter =
+      user.capacity === "all" ||
+      room.capacity.number === parseInt(user.capacity);
+    const sizeFilter =
+      user.minSize === 0 ||
+      (room.room_square_footage.number >= parseInt(user.minSize) &&
+        room.room_square_footage.number <= parseInt(user.maxSize));
+    const priceFilter = user.price === 0 || room.price >= user.price;
+    const breakfastFilter = !user.breakfast || room.breakfast;
+    const petFilter = !user.pets_allowed || room.pets_allowed;
+    const livingRoomFilter = !user.living_room || room.living_room;
+    const butlerServiceFilter = !user.butler_service || room.butler_service;
+    const childrenFilter =
+      user.maxChildren === 0 || room.max_children >= parseInt(user.maxChildren);
+
+    return (
+      typeFilter &&
+      capacityFilter &&
+      sizeFilter &&
+      priceFilter &&
+      breakfastFilter &&
+      petFilter &&
+      livingRoomFilter &&
+      butlerServiceFilter &&
+      childrenFilter
+    );
+  });
+
   if (isPending) return <h2>...is loading</h2>;
   if (error) return <h2>{error.message}</h2>;
 
@@ -307,7 +352,11 @@ const Rooms = () => {
                   </div>
                   <h4>{name}</h4>
                   <div className="priceDiv">
-                    <Link to={`${id}`} className="room-btn">
+                    <Link
+                      to={`${id}`}
+                      state={{ search: `?${searchParams.toString()}` }}
+                      className="room-btn"
+                    >
                       explore more
                     </Link>
                     <Link className="room-btn">{price} $ per night </Link>
