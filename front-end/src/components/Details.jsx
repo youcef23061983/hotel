@@ -8,7 +8,7 @@ import { FaKitchenSet, FaWifi } from "react-icons/fa6";
 import { TbAirConditioning, Tb24Hours, TbSofa, TbBath } from "react-icons/tb";
 import { MdBalcony } from "react-icons/md";
 import { MdOutlineFreeBreakfast, MdOutlinePeopleAlt } from "react-icons/md";
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useQueries, useQueryClient } from "@tanstack/react-query";
 
@@ -138,7 +138,7 @@ const Details = () => {
         if (typeof media.removeEventListener === "function") {
           media.removeEventListener("change", listener);
         } else {
-          media.removeListener(listenerList);
+          media.removeListener(listener);
         }
       };
     }, [matches, query]);

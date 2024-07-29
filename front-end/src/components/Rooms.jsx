@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Banner from "../pages/Banner";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion, useTransform, useScroll } from "framer-motion";
@@ -18,7 +18,6 @@ const Rooms = () => {
     capacity: "all",
     minPrice: 0,
     maxPrice: 0,
-    room_square_footage: 0,
     size: 0,
     minSize: 0,
     maxSize: 0,
@@ -51,8 +50,7 @@ const Rooms = () => {
           newValue === false ||
           newValue === "0" ||
           newValue === "120" ||
-          newValue === "all" ||
-          newValue === "1"
+          newValue === "all"
         ) {
           prevParams.delete(name);
         } else {
@@ -71,7 +69,8 @@ const Rooms = () => {
       type: searchParams.get("type") || "all",
       price: parseInt(searchParams.get("price")) || 0,
       capacity: parseInt(searchParams.get("capacity")) || "all",
-      minSize: parseInt(searchParams.get("room_square_footage")) || 0,
+
+      // minSize: parseInt(searchParams.get("room_square_footage")) || 0,
       minSize: parseInt(searchParams.get("minSize")) || 0,
       maxSize: parseInt(searchParams.get("maxSize")) || 0,
       maxChildren: parseInt(searchParams.get("maxChildren")) || 0,
@@ -83,6 +82,7 @@ const Rooms = () => {
 
     setUser(updatedUserState);
   }, [searchParams]);
+
   const ref = useRef(null);
 
   const useMediaQuery = (query) => {
@@ -152,7 +152,9 @@ const Rooms = () => {
   ));
 
   let people = roomsData
-    ? ["all", ...new Set(roomsData.map((room) => room.capacity.number))]
+    ? ["all", ...new Set(roomsData.map((room) => room.capacity.number))].sort(
+        (a, b) => a - b
+      )
     : [];
   people = people.map((capacity, index) => (
     <option value={capacity} key={index}>
@@ -165,6 +167,7 @@ const Rooms = () => {
     const capacityFilter =
       user.capacity === "all" ||
       room.capacity.number === parseInt(user.capacity);
+
     const sizeFilter =
       user.minSize === 0 ||
       (room.room_square_footage.number >= parseInt(user.minSize) &&
