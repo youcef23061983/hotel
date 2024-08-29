@@ -66,7 +66,7 @@ const Footer = () => {
         </div>
         <div className="footerdiv">
           <h3>Follow US</h3>
-          <Link className="footericon">
+          <Link className="hover:text-blue-600  .footericon">
             <FaSquareInstagram />
           </Link>
           <Link className="footericon">
