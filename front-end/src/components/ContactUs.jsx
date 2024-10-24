@@ -4,6 +4,7 @@ import { useScroll, useTransform, motion } from "framer-motion";
 import { MdAttachEmail } from "react-icons/md";
 import emailjs from "@emailjs/browser";
 import UseFetch from "./UseFetch";
+import { ReactLenis } from "lenis/react";
 
 const ContactUs = () => {
   const [user, setUser] = useState({ name: "", email: "", comment: "" });
@@ -69,9 +70,9 @@ const ContactUs = () => {
   };
   const isMediumScreen = useMediaQuery("(min-width: 768px)");
 
-  const ref2 = useRef(null);
+  const ref1 = useRef(null);
   const { scrollYProgress } = useScroll({
-    ref: ref2,
+    target: ref1,
     offset: ["0 1", isMediumScreen ? "0.6 1" : "0.4 1"],
   });
   const scrollOpacity = useTransform(
@@ -101,70 +102,77 @@ const ContactUs = () => {
           </div>
         </Banner>
       </div>
-      <div className="form" ref={ref2}>
-        <motion.div
-          className="touches"
-          style={{ x: scrollITouch, opacity: scrollOpacity }}
-        >
-          <h2>GET IN TOUCH</h2>
-          <div className="touch">
-            <h4>Address:</h4>
-            <p>-------</p>
-          </div>
-          <div className="touch">
-            <h4>Phone:</h4>
-            <p>+-- ------</p>
-          </div>
-          <div className="touch">
-            <h4>Fax:</h4>
-            <p>-------</p>
-          </div>
-          <div className="touch">
-            <h4>Email:</h4>
-            <p>----@---.com</p>
-          </div>
-        </motion.div>
-        <motion.div
-          className="send"
-          style={{ x: scrollSend, opacity: scrollOpacity }}
-        >
-          <form ref={form} onSubmit={sendEmail}>
-            <div className="info">
-              <label htmlFor="name">First Name:</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={user.name}
-                onChange={handleChange}
-              />
+      <ReactLenis
+        root
+        options={{
+          lerp: 0.05,
+        }}
+      >
+        <div className="form" ref={ref1}>
+          <motion.div
+            className="touches"
+            style={{ x: scrollITouch, opacity: scrollOpacity }}
+          >
+            <h2>GET IN TOUCH</h2>
+            <div className="touch">
+              <h4>Address:</h4>
+              <p>-------</p>
             </div>
-            <div className="info">
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={user.email}
-                onChange={handleChange}
-              />
+            <div className="touch">
+              <h4>Phone:</h4>
+              <p>+-- ------</p>
             </div>
-            <div className="info">
-              <label htmlFor="comment">Comment:</label>
-              <textarea
-                id="comment"
-                name="comment"
-                style={{ height: "20rem" }}
-                value={user.comment}
-                onChange={handleChange}
-              />
+            <div className="touch">
+              <h4>Fax:</h4>
+              <p>-------</p>
             </div>
-            <button type="submit" className="room-btn">
-              Submit
-            </button>
-          </form>
-        </motion.div>
-      </div>
+            <div className="touch">
+              <h4>Email:</h4>
+              <p>----@---.com</p>
+            </div>
+          </motion.div>
+          <motion.div
+            className="send"
+            style={{ x: scrollSend, opacity: scrollOpacity }}
+          >
+            <form ref={form} onSubmit={sendEmail}>
+              <div className="info">
+                <label htmlFor="name">First Name:</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={user.name}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="info">
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={user.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="info">
+                <label htmlFor="comment">Comment:</label>
+                <textarea
+                  id="comment"
+                  name="comment"
+                  style={{ height: "20rem" }}
+                  value={user.comment}
+                  onChange={handleChange}
+                />
+              </div>
+              <button type="submit" className="room-btn">
+                Submit
+              </button>
+            </form>
+          </motion.div>
+        </div>
+      </ReactLenis>
     </div>
   );
 };

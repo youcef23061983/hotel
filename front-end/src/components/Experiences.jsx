@@ -62,7 +62,7 @@ const Experiences = () => {
   const isMediumScreen = useMediaQuery("(min-width: 768px)");
 
   const { scrollYProgress: scrollYProgress } = useScroll({
-    ref: ref,
+    target: ref,
     offset: ["0 1", "0.1 1"],
   });
   const scrollOpacity = useTransform(
@@ -73,7 +73,7 @@ const Experiences = () => {
   const scrollX = useTransform(scrollYProgress, [0, 1], [-200, 0]);
   const scrollXP = useTransform(scrollYProgress, [0, 1], [-200, 0]);
   const { scrollYProgress: scrollYProgress2 } = useScroll({
-    ref: ref2,
+    target: ref2,
     offset: ["0 1", "0.2 1"],
   });
   const scrollOpacity2 = useTransform(
@@ -84,7 +84,7 @@ const Experiences = () => {
   const scrollX2 = useTransform(scrollYProgress2, [0, 1], [-200, 0]);
   const scrollXP2 = useTransform(scrollYProgress2, [0, 1], [-200, 0]);
   const { scrollYProgress: scrollYProgress3 } = useScroll({
-    ref: ref3,
+    target: ref3,
     offset: ["0 1", isMediumScreen ? "0.37 1" : "0.2 1"],
   });
   const scrollOpacity3 = useTransform(
@@ -95,7 +95,7 @@ const Experiences = () => {
   const scrollX3 = useTransform(scrollYProgress3, [0, 1], [-200, 0]);
   const scrollXP3 = useTransform(scrollYProgress3, [0, 1], [-200, 0]);
   const { scrollYProgress: scrollYProgress4 } = useScroll({
-    ref: ref4,
+    target: ref4,
     offset: ["0 1", "0.53 1"],
   });
   const scrollOpacity4 = useTransform(
@@ -107,7 +107,7 @@ const Experiences = () => {
   const scrollXP4 = useTransform(scrollYProgress4, [0, 1], [-200, 0]);
 
   const { scrollYProgress: scrollYProgress5 } = useScroll({
-    ref: ref5,
+    target: ref5,
     offset: ["0 1", "0.67 1"],
   });
   const scrollOpacity5 = useTransform(
@@ -118,7 +118,7 @@ const Experiences = () => {
   const scrollX5 = useTransform(scrollYProgress5, [0, 1], [-200, 0]);
   const scrollXP5 = useTransform(scrollYProgress5, [0, 1], [-200, 0]);
   const { scrollYProgress: scrollYProgress6 } = useScroll({
-    ref: ref6,
+    target: ref6,
     offset: ["0 1", "0.82 1"],
   });
   const scrollOpacity6 = useTransform(

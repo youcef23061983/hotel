@@ -72,7 +72,7 @@ const Events = () => {
   const scrollX = useTransform(scrollYProgress, [0, 1], [-900, 0]);
   const scrollXP = useTransform(scrollYProgress, [0, 1], [-1800, 0]);
   const { scrollYProgress: scrollYProgress2 } = useScroll({
-    ref: ref2,
+    target: ref2,
     offset: ["0 1", "0.2 1"],
   });
   const scrollOpacity2 = useTransform(
@@ -83,7 +83,7 @@ const Events = () => {
   const scrollX2 = useTransform(scrollYProgress2, [0, 1], [-900, 0]);
   const scrollXP2 = useTransform(scrollYProgress2, [0, 1], [-1800, 0]);
   const { scrollYProgress: scrollYProgress3 } = useScroll({
-    ref: ref3,
+    target: ref3,
     offset: ["0 1", "0.5 1"],
   });
   const scrollOpacity3 = useTransform(
@@ -94,7 +94,7 @@ const Events = () => {
   const scrollX3 = useTransform(scrollYProgress3, [0, 1], [-900, 0]);
   const scrollXP3 = useTransform(scrollYProgress3, [0, 1], [-1800, 0]);
   const { scrollYProgress: scrollYProgress4 } = useScroll({
-    ref: ref4,
+    target: ref4,
     offset: ["0 1", isMediumScreen ? "0.8 1" : "0.6 1"],
   });
   const scrollOpacity4 = useTransform(
