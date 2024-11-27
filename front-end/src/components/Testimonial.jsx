@@ -14,7 +14,7 @@ import { BASE_API_URL } from "../../utils/Url";
 const Testimonial = () => {
   const url1 = `${BASE_API_URL}/gallery`;
   const key1 = "gallery";
-  const url2 = "http://localhost:3000/testimonials";
+  const url2 = `${BASE_API_URL}/testimonials`;
   const key2 = "testimonials";
   const {
     data1: data,
