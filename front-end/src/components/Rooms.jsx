@@ -194,7 +194,9 @@ const Rooms = () => {
       childrenFilter
     );
   });
-
+  if (!BASE_API_URL) {
+    return null;
+  }
   if (isPending) return <h2>...is loading</h2>;
   if (error) return <h2>{error.message}</h2>;
 
