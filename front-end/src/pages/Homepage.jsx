@@ -15,8 +15,9 @@ import Banner from "./Banner";
 import video from "../assets/video.mp4";
 import { useScroll, useTransform, motion } from "framer-motion";
 import UseFetchQueries from "../components/UseFetchQueries";
+import { BASE_API_URL } from "../../utils/Url";
 const Homepage = () => {
-  const url1 = "http://localhost:3000/gallery";
+  const url1 = `${BASE_API_URL}/gallery`;
   const key1 = "gallery";
   const url2 = "http://localhost:3000/rooms";
   const key2 = "rooms";
