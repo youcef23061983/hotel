@@ -5,9 +5,10 @@ import { motion, useTransform, useScroll } from "framer-motion";
 import img1 from "../images/header/roomsheader.jpg";
 import { ReactLenis } from "lenis/react";
 import UseFetch from "./UseFetch";
+import { BASE_API_URL } from "../../utils/Url";
 
 const Rooms = () => {
-  const url = "http://localhost:3000/rooms";
+  const url = `${BASE_API_URL}/rooms`;
   const key = "rooms";
 
   const { data: roomsData, error, isPending } = UseFetch(url, key);
