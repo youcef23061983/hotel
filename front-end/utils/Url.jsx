@@ -1,1 +1,1 @@
-export const BASE_API_URL = import.meta.env.NEXT_PUBLIC_API_URL;
+export const BASE_API_URL = import.meta.env.VITE_PROD_URL_URL;
