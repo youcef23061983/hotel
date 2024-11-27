@@ -4,9 +4,10 @@ import { useEffect, useRef } from "react";
 import { useScroll, motion, useTransform } from "framer-motion";
 import UseFetch from "./UseFetch";
 import { ReactLenis } from "lenis/react";
+import { BASE_API_URL } from "../../utils/Url";
 
 const About = () => {
-  const url = "http://localhost:3000/gallery";
+  const url = `${BASE_API_URL}/gallery`;
   const key = "gallery";
 
   const { data, isPending, error } = UseFetch(url, key);
