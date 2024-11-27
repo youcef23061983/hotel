@@ -82,7 +82,7 @@ const Testimonial = () => {
         className="headerimages"
         data-testid="div-testimonial"
         style={{
-          background: `url(${data && data[7].images[5]}) center/cover `,
+          background: `url(${data && data[7]?.images[5]}) center/cover `,
         }}
       >
         <Banner title="TESTIMONIALS" />
