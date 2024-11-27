@@ -7,6 +7,8 @@ import UseFetch from "./UseFetch";
 import { ReactLenis } from "lenis/react";
 
 const ContactUs = () => {
+  const [formStatus, setFormStatus] = useState(null);
+
   const [user, setUser] = useState({ name: "", email: "", comment: "" });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,16 +27,27 @@ const ContactUs = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
+
+    // Validation check
+    if (!user.name || !user.email || !user.comment) {
+      alert("Please enter your information");
+      return; // Return early to prevent further execution
+    }
+
     emailjs
       .sendForm("service_vgkozvc", "template_sv5btsr", form.current, {
-        publicKey: "_ISOAOSTfbmyXLWd5",
+        publicKey: import.meta.env.VITE_CONTACT_PUBLIC_KEY,
       })
       .then(
         () => {
-          console.log("SUCCESS!");
+          setFormStatus("Message sent successfully!");
+          setUser({ name: "", email: "", comment: "" });
+          setTimeout(() => {
+            setFormStatus(null);
+          }, 5000);
         },
         (error) => {
-          console.log("FAILED...", error.text);
+          setFormStatus(`Failed to send message: ${error.text}`);
         }
       );
   };
@@ -170,6 +183,11 @@ const ContactUs = () => {
                 Submit
               </button>
             </form>
+            {formStatus && (
+              <div className="formStatusMessage" style={{ marginTop: "1rem" }}>
+                {formStatus}
+              </div>
+            )}
           </motion.div>
         </div>
       </ReactLenis>
