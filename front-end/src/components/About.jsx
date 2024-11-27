@@ -7,7 +7,9 @@ import { ReactLenis } from "lenis/react";
 import { BASE_API_URL } from "../../utils/Url";
 
 const About = () => {
-  const url = `${BASE_API_URL}/gallery`;
+  // const url = `${BASE_API_URL}/gallery`;
+  const url = "https://hotel-o514.onrender.com/gallery";
+
   const key = "gallery";
 
   const { data, isPending, error } = UseFetch(url, key);

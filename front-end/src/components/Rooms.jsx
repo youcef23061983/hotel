@@ -8,7 +8,8 @@ import UseFetch from "./UseFetch";
 import { BASE_API_URL } from "../../utils/Url";
 
 const Rooms = () => {
-  const url = `${BASE_API_URL}/rooms`;
+  // const url = `${BASE_API_URL}/rooms`;
+  const url = "https://hotel-o514.onrender.com/rooms";
   const key = "rooms";
 
   const { data: roomsData, error, isPending } = UseFetch(url, key);
