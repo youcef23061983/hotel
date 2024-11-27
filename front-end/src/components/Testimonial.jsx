@@ -9,9 +9,10 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import UseFetchQueries from "./UseFetchQueries";
 import Rating from "./Rating";
+import { BASE_API_URL } from "../../utils/Url";
 
 const Testimonial = () => {
-  const url1 = "http://localhost:3000/gallery";
+  const url1 = `${BASE_API_URL}/gallery`;
   const key1 = "gallery";
   const url2 = "http://localhost:3000/testimonials";
   const key2 = "testimonials";
