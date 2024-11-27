@@ -12,9 +12,9 @@ import Rating from "./Rating";
 import { BASE_API_URL } from "../../utils/Url";
 
 const Testimonial = () => {
-  const url1 = `${BASE_API_URL}/gallery`;
+  const url1 = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
   const key1 = "gallery";
-  const url2 = `${BASE_API_URL}/testimonials`;
+  const url2 = `${import.meta.env.VITE_PROD_URL_URL}/testimonials`;
   const key2 = "testimonials";
   const {
     data1: data,
