@@ -12,6 +12,8 @@ const Rooms = () => {
   const key = "rooms";
 
   const { data: roomsData, error, isPending } = UseFetch(url, key);
+  console.log(roomsData);
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const initialUserState = {
