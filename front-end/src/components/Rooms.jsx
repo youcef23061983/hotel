@@ -164,36 +164,39 @@ const Rooms = () => {
     </option>
   ));
 
-  const filterRooms = roomsData?.filter((room) => {
-    const typeFilter = user.type === "all" || room.type === user.type;
-    const capacityFilter =
-      user.capacity === "all" ||
-      room.capacity.number === parseInt(user.capacity);
+  const filterRooms = roomsData
+    ? roomsData.filter((room) => {
+        const typeFilter = user.type === "all" || room.type === user.type;
+        const capacityFilter =
+          user.capacity === "all" ||
+          room.capacity.number === parseInt(user.capacity);
 
-    const sizeFilter =
-      user.minSize === 0 ||
-      (room.room_square_footage.number >= parseInt(user.minSize) &&
-        room.room_square_footage.number <= parseInt(user.maxSize));
-    const priceFilter = user.price === 0 || room.price >= user.price;
-    const breakfastFilter = !user.breakfast || room.breakfast;
-    const petFilter = !user.pets_allowed || room.pets_allowed;
-    const livingRoomFilter = !user.living_room || room.living_room;
-    const butlerServiceFilter = !user.butler_service || room.butler_service;
-    const childrenFilter =
-      user.maxChildren === 0 || room.max_children >= parseInt(user.maxChildren);
+        const sizeFilter =
+          user.minSize === 0 ||
+          (room.room_square_footage.number >= parseInt(user.minSize) &&
+            room.room_square_footage.number <= parseInt(user.maxSize));
+        const priceFilter = user.price === 0 || room.price >= user.price;
+        const breakfastFilter = !user.breakfast || room.breakfast;
+        const petFilter = !user.pets_allowed || room.pets_allowed;
+        const livingRoomFilter = !user.living_room || room.living_room;
+        const butlerServiceFilter = !user.butler_service || room.butler_service;
+        const childrenFilter =
+          user.maxChildren === 0 ||
+          room.max_children >= parseInt(user.maxChildren);
 
-    return (
-      typeFilter &&
-      capacityFilter &&
-      sizeFilter &&
-      priceFilter &&
-      breakfastFilter &&
-      petFilter &&
-      livingRoomFilter &&
-      butlerServiceFilter &&
-      childrenFilter
-    );
-  });
+        return (
+          typeFilter &&
+          capacityFilter &&
+          sizeFilter &&
+          priceFilter &&
+          breakfastFilter &&
+          petFilter &&
+          livingRoomFilter &&
+          butlerServiceFilter &&
+          childrenFilter
+        );
+      })
+    : [];
 
   if (isPending) return <h2>...is loading</h2>;
   if (error) return <h2>{error.message}</h2>;
@@ -348,37 +351,40 @@ const Rooms = () => {
             </div>
           </motion.form>
           <motion.div layout className="roomslist">
-            {roomsData &&
-              filterRooms.map((room) => {
-                const { name, images, id, price } = room;
-                return (
-                  <motion.div
-                    layout
-                    transition={{ duration: 0.8 }}
-                    className="room"
-                    key={id}
-                  >
-                    <div className="roomdiv">
-                      {/* <img src={images && images[0]} className="img" /> */}
-                      <img
-                        src={images && images[0] ? images[0] : "/fallback.jpg"}
-                        className="img"
-                      />
-                    </div>
-                    <h4>{name}</h4>
-                    <div className="priceDiv">
-                      <Link
-                        to={`${id}`}
-                        state={{ search: `?${searchParams.toString()}` }}
-                        className="room-btn"
-                      >
-                        explore more
-                      </Link>
-                      <Link className="room-btn">{price} $ per night </Link>
-                    </div>
-                  </motion.div>
-                );
-              })}
+            {filterRooms
+              ? filterRooms.map((room) => {
+                  const { name, images, id, price } = room;
+                  return (
+                    <motion.div
+                      layout
+                      transition={{ duration: 0.8 }}
+                      className="room"
+                      key={id}
+                    >
+                      <div className="roomdiv">
+                        {/* <img src={images && images[0]} className="img" /> */}
+                        <img
+                          src={
+                            images && images[0] ? images[0] : "/fallback.jpg"
+                          }
+                          className="img"
+                        />
+                      </div>
+                      <h4>{name}</h4>
+                      <div className="priceDiv">
+                        <Link
+                          to={`${id}`}
+                          state={{ search: `?${searchParams.toString()}` }}
+                          className="room-btn"
+                        >
+                          explore more
+                        </Link>
+                        <Link className="room-btn">{price} $ per night </Link>
+                      </div>
+                    </motion.div>
+                  );
+                })
+              : []}
           </motion.div>
         </div>
       </ReactLenis>
