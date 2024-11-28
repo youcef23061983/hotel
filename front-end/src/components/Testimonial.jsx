@@ -1,4 +1,3 @@
-import { useQueries } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -15,7 +14,6 @@ const Testimonial = () => {
 
   const key1 = "gallery";
   const url2 = `${import.meta.env.VITE_PROD_URL_URL}/testimonials`;
-
   const key2 = "testimonials";
   const {
     data1: data,
@@ -83,7 +81,7 @@ const Testimonial = () => {
         className="headerimages"
         data-testid="div-testimonial"
         style={{
-          background: `url(${data && data[7].images[5]}) center/cover `,
+          background: `url(${data && data[7]?.images[5]}) center/cover `,
         }}
       >
         <Banner title="TESTIMONIALS" />
