@@ -135,7 +135,7 @@ const Homepage = () => {
               x: scrollImg,
             }}
           >
-            <img src={data && data[0].images[5]} alt="" className="img" />
+            <img src={data && data[0]?.images[5]} alt="" className="img" />
           </motion.div>
           <motion.div
             className="p"
