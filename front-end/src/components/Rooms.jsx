@@ -355,7 +355,7 @@ const Rooms = () => {
           </motion.form>
           <motion.div layout className="roomslist">
             {roomsData &&
-              filterRooms.map((room) => {
+              filterRooms?.map((room) => {
                 const { name, images, id, price } = room;
                 return (
                   <motion.div
