@@ -4,140 +4,140 @@
       "type": "hotel",
       "id": 1,
       "images": [
-        "src/images/homepage/img1.jpg",
-        "src/images/homepage/img2.jpg",
-        "src/images/homepage/img3.jpg",
-        "src/images/homepage/img4.jpg",
-        "src/images/homepage/img5.jpg",
-        "src/images/homepage/img6.jpg",
-        "src/images/homepage/img7.jpg",
-        "src/images/homepage/img8.jpg",
-        "src/images/homepage/img9.jpg",
-        "src/images/homepage/img10.jpg",
-        "src/images/homepage/img11.jpg"
+        "/src/assets/images/homepage/img1.jpg",
+        "/src/assets/images/homepage/img2.jpg",
+        "/src/assets/images/homepage/img3.jpg",
+        "/src/assets/images/homepage/img4.jpg",
+        "/src/assets/images/homepage/img5.jpg",
+        "/src/assets/images/homepage/img6.jpg",
+        "/src/assets/images/homepage/img7.jpg",
+        "/src/assets/images/homepage/img8.jpg",
+        "/src/assets/images/homepage/img9.jpg",
+        "/src/assets/images/homepage/img10.jpg",
+        "/src/assets/images/homepage/img11.jpg"
       ]
     },
     {
       "type": "Rooms & Suites",
       "id": 2,
       "images": [
-        "src/images/rooms/standard single room/img1.jpg",
-        "src/images/rooms/standard double room/img1.jpg",
-        "src/images/rooms/deluxe double room/img1.jpg",
-        "src/images/suites/junior suite/img1.jpg",
-        "src/images/suites/executive suite/img1.jpg",
-        "src/images/suites/terrace suite/img1.jpg",
-        "src/images/suites/garden loft/img1.jpg",
-        "src/images/suites/presidential suite/img1.jpg",
-        "src/images/suites/phenthouse suite/img1.jpg",
-        "src/images/suites/two bedroom family suite/img1.jpg"
+        "src/assets/images/rooms/standard single room/img1.jpg",
+        "src/assets/images/rooms/standard double room/img1.jpg",
+        "src/assets/images/rooms/deluxe double room/img1.jpg",
+        "src/assets/images/suites/junior suite/img1.jpg",
+        "src/assets/images/suites/executive suite/img1.jpg",
+        "src/assets/images/suites/terrace suite/img1.jpg",
+        "src/assets/images/suites/garden loft/img1.jpg",
+        "src/assets/images/suites/presidential suite/img1.jpg",
+        "src/assets/images/suites/phenthouse suite/img1.jpg",
+        "src/assets/images/suites/two bedroom family suite/img1.jpg"
       ]
     },
     {
       "type": "Wellnes",
       "id": 3,
       "images": [
-        "src/images/wellness/wellness.jpg",
-        "src/images/wellness/img1.jpg",
-        "src/images/wellness/img2.jpg",
-        "src/images/wellness/img3.jpg",
-        "src/images/wellness/img4.jpg",
-        "src/images/wellness/img5.jpg",
-        "src/images/wellness/img6.jpg",
-        "src/images/wellness/img7.jpg",
-        "src/images/wellness/img8.jpg",
-        "src/images/wellness/img9.jpg",
-        "src/images/wellness/img10.jpg",
-        "src/images/wellness/img11.jpg",
-        "src/images/wellness/img12.jpg",
-        "src/images/wellness/img13.jpg",
-        "src/images/wellness/img14.jpg",
-        "src/images/wellness/img15.jpg",
-        "src/images/wellness/img16.jpg",
-        "src/images/wellness/img17.jpg",
-        "src/images/wellness/img18.jpg",
-        "src/images/wellness/img19.jpg",
-        "src/images/wellness/img20.jpg"
+        "src/assets/images/wellness/wellness.jpg",
+        "src/assets/images/wellness/img1.jpg",
+        "src/assets/images/wellness/img2.jpg",
+        "src/assets/images/wellness/img3.jpg",
+        "src/assets/images/wellness/img4.jpg",
+        "src/assets/images/wellness/img5.jpg",
+        "src/assets/images/wellness/img6.jpg",
+        "src/assets/images/wellness/img7.jpg",
+        "src/assets/images/wellness/img8.jpg",
+        "src/assets/images/wellness/img9.jpg",
+        "src/assets/images/wellness/img10.jpg",
+        "src/assets/images/wellness/img11.jpg",
+        "src/assets/images/wellness/img12.jpg",
+        "src/assets/images/wellness/img13.jpg",
+        "src/assets/images/wellness/img14.jpg",
+        "src/assets/images/wellness/img15.jpg",
+        "src/assets/images/wellness/img16.jpg",
+        "src/assets/images/wellness/img17.jpg",
+        "src/assets/images/wellness/img18.jpg",
+        "src/assets/images/wellness/img19.jpg",
+        "src/assets/images/wellness/img20.jpg"
       ]
     },
     {
       "type": "Restaurants",
       "id": 4,
       "images": [
-        "src/images/restaurants/img1.jpg",
-        "src/images/restaurants/img2.jpg",
-        "src/images/restaurants/img3.jpg",
-        "src/images/restaurants/img4.jpg",
-        "src/images/restaurants/img5.jpg",
-        "src/images/restaurants/img6.jpg",
-        "src/images/restaurants/img7.jpg",
-        "src/images/restaurants/img8.jpg",
-        "src/images/restaurants/img9.jpg",
-        "src/images/restaurants/img10.jpg",
-        "src/images/restaurants/img11.jpg",
-        "src/images/restaurants/img12.jpg",
-        "src/images/restaurants/img13.jpg",
-        "src/images/restaurants/img14.jpg",
-        "src/images/restaurants/img15.jpg"
+        "src/assets/images/restaurants/img1.jpg",
+        "src/assets/images/restaurants/img2.jpg",
+        "src/assets/images/restaurants/img3.jpg",
+        "src/assets/images/restaurants/img4.jpg",
+        "src/assets/images/restaurants/img5.jpg",
+        "src/assets/images/restaurants/img6.jpg",
+        "src/assets/images/restaurants/img7.jpg",
+        "src/assets/images/restaurants/img8.jpg",
+        "src/assets/images/restaurants/img9.jpg",
+        "src/assets/images/restaurants/img10.jpg",
+        "src/assets/images/restaurants/img11.jpg",
+        "src/assets/images/restaurants/img12.jpg",
+        "src/assets/images/restaurants/img13.jpg",
+        "src/assets/images/restaurants/img14.jpg",
+        "src/assets/images/restaurants/img15.jpg"
       ]
     },
     {
       "type": "Experience",
       "id": 5,
       "images": [
-        "src/images/experience/Kayaking1.jpg",
-        "src/images/experience/Kayaking2.jpg",
-        "src/images/experience/Kayaking3.jpg",
-        "src/images/experience/Parasailing1.jpg",
-        "src/images/experience/Parasailing2.jpg",
-        "src/images/experience/Parasailing3.jpg",
-        "src/images/experience/Snorkeling1.jpg",
-        "src/images/experience/Snorkeling2.jpg",
-        "src/images/experience/Snorkeling3.jpg",
-        "src/images/experience/Stand-up Paddleboarding (SUP)1.jpg",
-        "src/images/experience/Stand-up Paddleboarding (SUP)2.jpg",
-        "src/images/experience/Stand-up Paddleboarding (SUP)3.jpg",
-        "src/images/experience/Windsurfing1.jpg",
-        "src/images/experience/Windsurfing2.jpg",
-        "src/images/experience/Windsurfing3.jpg",
-        "src/images/experience/experience.jpg"
+        "src/assets/images/experience/Kayaking1.jpg",
+        "src/assets/images/experience/Kayaking2.jpg",
+        "src/assets/images/experience/Kayaking3.jpg",
+        "src/assets/images/experience/Parasailing1.jpg",
+        "src/assets/images/experience/Parasailing2.jpg",
+        "src/assets/images/experience/Parasailing3.jpg",
+        "src/assets/images/experience/Snorkeling1.jpg",
+        "src/assets/images/experience/Snorkeling2.jpg",
+        "src/assets/images/experience/Snorkeling3.jpg",
+        "src/assets/images/experience/Stand-up Paddleboarding (SUP)1.jpg",
+        "src/assets/images/experience/Stand-up Paddleboarding (SUP)2.jpg",
+        "src/assets/images/experience/Stand-up Paddleboarding (SUP)3.jpg",
+        "src/assets/images/experience/Windsurfing1.jpg",
+        "src/assets/images/experience/Windsurfing2.jpg",
+        "src/assets/images/experience/Windsurfing3.jpg",
+        "src/assets/images/experience/experience.jpg"
       ]
     },
     {
       "type": "Events",
       "id": 6,
       "images": [
-        "src/images/events/img1.jpg",
-        "src/images/events/img2.jpg",
-        "src/images/events/img3.jpg",
-        "src/images/events/img4.jpg",
-        "src/images/events/img5.jpg",
-        "src/images/events/img6.jpg",
-        "src/images/events/img7.jpg",
-        "src/images/events/img8.jpg",
-        "src/images/events/img9.jpg",
-        "src/images/events/img10.jpg"
+        "src/assets/images/events/img1.jpg",
+        "src/assets/images/events/img2.jpg",
+        "src/assets/images/events/img3.jpg",
+        "src/assets/images/events/img4.jpg",
+        "src/assets/images/events/img5.jpg",
+        "src/assets/images/events/img6.jpg",
+        "src/assets/images/events/img7.jpg",
+        "src/assets/images/events/img8.jpg",
+        "src/assets/images/events/img9.jpg",
+        "src/assets/images/events/img10.jpg"
       ]
     },
     {
       "type": "header",
       "id": 7,
-      "images": ["src/images/header/roomsheader.jpg"]
+      "images": ["src/assets/images/header/roomsheader.jpg"]
     },
     {
       "type": "aboutUs",
       "id": 8,
       "images": [
-        "src/images/gallery/about1.jpg",
-        "src/images/gallery/about2.jpg",
-        "src/images/gallery/about3.jpg",
-        "src/images/gallery/google.jpg",
-        "src/images/gallery/map.jpg",
-        "src/images/gallery/testimonial.jpg",
-        "src/images/gallery/privacyPolicy.jpg",
-        "src/images/gallery/terms.jpg",
-        "src/images/gallery/cookies.jpg",
-        "src/images/gallery/booking.jpg"
+        "src/assets/images/gallery/about1.jpg",
+        "src/assets/images/gallery/about2.jpg",
+        "src/assets/images/gallery/about3.jpg",
+        "src/assets/images/gallery/google.jpg",
+        "src/assets/images/gallery/map.jpg",
+        "src/assets/images/gallery/testimonial.jpg",
+        "src/assets/images/gallery/privacyPolicy.jpg",
+        "src/assets/images/gallery/terms.jpg",
+        "src/assets/images/gallery/cookies.jpg",
+        "src/assets/images/gallery/booking.jpg"
       ]
     }
   ],
@@ -196,9 +196,9 @@
       ],
       "price": 120,
       "images": [
-        "src/images/rooms/standard single room/img1.jpg",
-        "src/images/rooms/standard single room/img2.jpg",
-        "src/images/rooms/standard single room/img3.jpg"
+        "src/assets/images/rooms/standard single room/img1.jpg",
+        "src/assets/images/rooms/standard single room/img2.jpg",
+        "src/assets/images/rooms/standard single room/img3.jpg"
       ],
       "feedback": "A comfortable room with a fantastic city view. The 24-hour room service was a lifesaver!"
     },
@@ -260,9 +260,9 @@
       ],
       "price": 150,
       "images": [
-        "src/images/rooms/standard double room/img1.jpg",
-        "src/images/rooms/standard double room/img2.jpg",
-        "src/images/rooms/standard double room/img3.jpg"
+        "src/assets/images/rooms/standard double room/img1.jpg",
+        "src/assets/images/rooms/standard double room/img2.jpg",
+        "src/assets/images/rooms/standard double room/img3.jpg"
       ],
       "feedback": "Spacious room with a lovely balcony. Enjoyed the sitting area and breakfast service."
     },
@@ -320,9 +320,9 @@
       ],
       "price": 200,
       "images": [
-        "src/images/rooms/deluxe double room/img1.jpg",
-        "src/images/rooms/deluxe double room/img2.jpg",
-        "src/images/rooms/deluxe double room/img3.jpg"
+        "src/assets/images/rooms/deluxe double room/img1.jpg",
+        "src/assets/images/rooms/deluxe double room/img2.jpg",
+        "src/assets/images/rooms/deluxe double room/img3.jpg"
       ],
       "feedback": "Charming Deluxe Double Room with a tranquil garden view. The additional amenities like minibar and balcony added a touch of luxury to our stay."
     },
@@ -380,10 +380,10 @@
       ],
       "price": 250,
       "images": [
-        "src/images/suites/junior suite/img1.jpg",
-        "src/images/suites/junior suite/img2.jpg",
-        "src/images/suites/junior suite/img3.jpg",
-        "src/images/suites/junior suite/img4.jpg"
+        "src/assets/images/suites/junior suite/img1.jpg",
+        "src/assets/images/suites/junior suite/img2.jpg",
+        "src/assets/images/suites/junior suite/img3.jpg",
+        "src/assets/images/suites/junior suite/img4.jpg"
       ],
       "feedback": "Sophisticated Junior Suite with a mesmerizing sea view. The living room and butler service made our stay extra special. A perfect blend of elegance and comfort."
     },
@@ -441,10 +441,10 @@
       ],
       "price": 350,
       "images": [
-        "src/images/suites/executive suite/img1.jpg",
-        "src/images/suites/executive suite/img2.jpg",
-        "src/images/suites/executive suite/img3.jpg",
-        "src/images/suites/executive suite/img4.jpg"
+        "src/assets/images/suites/executive suite/img1.jpg",
+        "src/assets/images/suites/executive suite/img2.jpg",
+        "src/assets/images/suites/executive suite/img3.jpg",
+        "src/assets/images/suites/executive suite/img4.jpg"
       ],
       "feedback": "Exceptional Executive Suite overlooking the sea. The spacious living room and top-notch amenities, including the balcony and 24-hour room service, made our stay unforgettable."
     },
@@ -502,10 +502,10 @@
       ],
       "price": 300,
       "images": [
-        "src/images/suites/terrace suite/img1.jpg",
-        "src/images/suites/terrace suite/img2.jpg",
-        "src/images/suites/terrace suite/img3.jpg",
-        "src/images/suites/terrace suite/img4.jpg"
+        "src/assets/images/suites/terrace suite/img1.jpg",
+        "src/assets/images/suites/terrace suite/img2.jpg",
+        "src/assets/images/suites/terrace suite/img3.jpg",
+        "src/assets/images/suites/terrace suite/img4.jpg"
       ],
       "feedback": "Inviting Terrace Suite with a stunning sea view. The private terrace was a delightful spot to unwind. A perfect choice for those seeking comfort with a touch of outdoor relaxation."
     },
@@ -563,10 +563,10 @@
       ],
       "price": 280,
       "images": [
-        "src/images/suites/garden loft/img1.jpg",
-        "src/images/suites/garden loft/img2.jpg",
-        "src/images/suites/garden loft/img3.jpg",
-        "src/images/suites/garden loft/img4.jpg"
+        "src/assets/images/suites/garden loft/img1.jpg",
+        "src/assets/images/suites/garden loft/img2.jpg",
+        "src/assets/images/suites/garden loft/img3.jpg",
+        "src/assets/images/suites/garden loft/img4.jpg"
       ],
       "feedback": "Quaint Garden Loft with a lovely garden view. The cozy atmosphere and essential amenities like TV, Wi-Fi, and balcony made our stay delightful."
     },
@@ -624,10 +624,10 @@
       ],
       "price": 700,
       "images": [
-        "src/images/suites/presidential suite/img1.jpg",
-        "src/images/suites/presidential suite/img2.jpg",
-        "src/images/suites/presidential suite/img3.jpg",
-        "src/images/suites/presidential suite/img4.jpg"
+        "src/assets/images/suites/presidential suite/img1.jpg",
+        "src/assets/images/suites/presidential suite/img2.jpg",
+        "src/assets/images/suites/presidential suite/img3.jpg",
+        "src/assets/images/suites/presidential suite/img4.jpg"
       ],
       "feedback": "Opulent Presidential Suite with breathtaking sea views. The spacious living room, private balcony, and 24-hour room service exceeded our expectations. A truly luxurious experience."
     },
@@ -685,12 +685,12 @@
       ],
       "price": 900,
       "images": [
-        "src/images/suites/phenthouse suite/img1.jpg",
-        "src/images/suites/phenthouse suite/img2.jpg",
-        "src/images/suites/phenthouse suite/img3.jpg",
-        "src/images/suites/phenthouse suite/img4.jpg",
-        "src/images/suites/phenthouse suite/img5.jpg",
-        "src/images/suites/phenthouse suite/img5.jpg"
+        "src/assets/images/suites/phenthouse suite/img1.jpg",
+        "src/assets/images/suites/phenthouse suite/img2.jpg",
+        "src/assets/images/suites/phenthouse suite/img3.jpg",
+        "src/assets/images/suites/phenthouse suite/img4.jpg",
+        "src/assets/images/suites/phenthouse suite/img5.jpg",
+        "src/assets/images/suites/phenthouse suite/img5.jpg"
       ],
       "feedback": "Sumptuous Penthouse Suite with expansive sea views. The private terrace and top-tier amenities, including a private jacuzzi, created an unforgettable and indulgent stay."
     },
@@ -740,12 +740,12 @@
       ],
       "price": 400,
       "images": [
-        "src/images/suites/two bedroom family suite/img1.jpg",
-        "src/images/suites/two bedroom family suite/img2.jpg",
-        "src/images/suites/two bedroom family suite/img3.jpg",
-        "src/images/suites/two bedroom family suite/img4.jpg",
-        "src/images/suites/two bedroom family suite/img5.jpg",
-        "src/images/suites/two bedroom family suite/img6.jpg"
+        "src/assets/images/suites/two bedroom family suite/img1.jpg",
+        "src/assets/images/suites/two bedroom family suite/img2.jpg",
+        "src/assets/images/suites/two bedroom family suite/img3.jpg",
+        "src/assets/images/suites/two bedroom family suite/img4.jpg",
+        "src/assets/images/suites/two bedroom family suite/img5.jpg",
+        "src/assets/images/suites/two bedroom family suite/img6.jpg"
       ],
       "feedback": "Perfect for a family vacation. The kitchenette made it easy to prepare meals. Loved the sitting area and balcony."
     }
@@ -755,84 +755,84 @@
       "type": "room",
       "id": 1,
       "images": [
-        "src/images/gallery/room1.jpg",
-        "src/images/gallery/room2.jpg",
-        "src/images/gallery/room3.jpg",
-        "src/images/gallery/room4.jpg",
-        "src/images/gallery/room5.jpg"
+        "src/assets/images/gallery/room1.jpg",
+        "src/assets/images/gallery/room2.jpg",
+        "src/assets/images/gallery/room3.jpg",
+        "src/assets/images/gallery/room4.jpg",
+        "src/assets/images/gallery/room5.jpg"
       ]
     },
     {
       "type": "dinning",
       "id": 2,
       "images": [
-        "src/images/gallery/restaurant1.jpg",
-        "src/images/gallery/restaurant2.jpg",
-        "src/images/gallery/restaurant3.jpg",
-        "src/images/gallery/restaurant4.jpg",
-        "src/images/gallery/restaurant5.jpg"
+        "src/assets/images/gallery/restaurant1.jpg",
+        "src/assets/images/gallery/restaurant2.jpg",
+        "src/assets/images/gallery/restaurant3.jpg",
+        "src/assets/images/gallery/restaurant4.jpg",
+        "src/assets/images/gallery/restaurant5.jpg"
       ]
     },
     {
       "type": "Wellnes",
       "id": 3,
       "images": [
-        "src/images/gallery/wellness1.jpg",
-        "src/images/gallery/wellness2.jpg",
-        "src/images/gallery/wellness3.jpg",
-        "src/images/gallery/wellness4.jpg",
-        "src/images/gallery/wellness5.jpg",
-        "src/images/gallery/wellness6.jpg"
+        "src/assets/images/gallery/wellness1.jpg",
+        "src/assets/images/gallery/wellness2.jpg",
+        "src/assets/images/gallery/wellness3.jpg",
+        "src/assets/images/gallery/wellness4.jpg",
+        "sr/assets/images/gallery/wellness5.jpg",
+        "src/assets/images/gallery/wellness6.jpg"
       ]
     },
     {
       "type": "experiences",
       "id": 4,
       "images": [
-        "src/images/gallery/experience1.jpg",
-        "src/images/gallery/experience2.jpg",
-        "src/images/gallery/experience3.jpg",
-        "src/images/gallery/experience4.jpg",
-        "src/images/gallery/experience5.jpg",
-        "src/images/gallery/experience6.jpg",
-        "src/images/gallery/experience7.jpg",
-        "src/images/gallery/experience8.jpg",
-        "src/images/gallery/experience9.jpg",
-        "src/images/gallery/experience10.jpg",
-        "src/images/gallery/experience11.jpg",
-        "src/images/gallery/experience12.jpg",
-        "src/images/gallery/experience13.jpg",
-        "src/images/gallery/experience14.jpg",
-        "src/images/gallery/experience15.jpg"
+        "src/assets/images/gallery/experience1.jpg",
+        "src/assets/images/gallery/experience2.jpg",
+        "src/assets/images/gallery/experience3.jpg",
+        "src/assets/images/gallery/experience4.jpg",
+        "src/assets/images/gallery/experience5.jpg",
+        "src/assets/images/gallery/experience6.jpg",
+        "src/assets/images/gallery/experience7.jpg",
+        "src/assets/images/gallery/experience8.jpg",
+        "src/assets/images/gallery/experience9.jpg",
+        "src/assets/images/gallery/experience10.jpg",
+        "src/assets/images/gallery/experience11.jpg",
+        "src/assets/images/gallery/experience12.jpg",
+        "src/assets/images/gallery/experience13.jpg",
+        "src/assets/images/gallery/experience14.jpg",
+        "src/assets/images/gallery/experience15.jpg"
       ]
     },
     {
       "type": "events",
       "id": 5,
       "images": [
-        "src/images/gallery/event1.jpg",
-        "src/images/gallery/event2.jpg",
-        "src/images/gallery/event3.jpg",
-        "src/images/gallery/event4.jpg",
-        "src/images/gallery/event5.jpg",
-        "src/images/gallery/event6.jpg",
-        "src/images/gallery/event7.jpg",
-        "src/images/gallery/event8.jpg",
-        "src/images/gallery/event9.jpg"
+        "src/assets/images/gallery/event1.jpg",
+        "src/assets/images/gallery/event2.jpg",
+        "src/assets/images/gallery/event3.jpg",
+        "src/assets/images/gallery/event4.jpg",
+        "src/assets/images/gallery/event5.jpg",
+        "src/assets/images/gallery/event6.jpg",
+        "src/assets/images/gallery/event7.jpg",
+        "src/assets/images/gallery/event8.jpg",
+        "src/assets/images/gallery/event9.jpg"
       ]
     },
     {
       "type": "guests",
       "id": 6,
       "images": [
-        "src/images/gallery/guest1.jpg",
-        "src/images/gallery/guest2.jpg",
-        "src/images/gallery/guest3.jpg",
-        "src/images/gallery/guest4.jpg",
-        "src/images/gallery/guest5.jpg",
-        "src/images/gallery/guest6.jpg",
-        "src/images/gallery/guest7.jpg",
-        "src/images/gallery/guest8.jpg"
+        "src/assets/images/gallery/guest1.jpg",
+        "src/assets/images/gallery/guest2.jpg",
+        "src/assets/images/gallery/guest3.jpg",
+        "src/assets/images/gallery/guest4.jpg",
+        "src/assets/images/gallery/guest5.jpg",
+        "src/assets/images/gallery/guest6.jpg",
+        "src/assets/images/gallery/guest7.jpg",
+        "src/assets/images/gallery/guest8.jpg"
       ]
     }
   ],
@@ -841,56 +841,56 @@
       "name": "Sophie W., Travel Enthusiast",
       "date": "10/20/2023",
       "rating": 4.5,
-      "img": "src/images/gallery/testimonial1.jpg",
+      "img": "src/assets/images/gallery/testimonial1.jpg",
       "text": "Legend Hotel is an absolute gem! From the moment I stepped into the elegant lobby, I knew my stay would be special. The attention to detail and the warm welcome from the staff made me feel like royalty. The coastal views from my room were breathtaking, and the culinary experience surpassed all expectations. Legend Hotel is more than a stay; it's an immersive journey into luxury and comfort."
     },
     {
       "name": "David L., Business Traveler",
       "date": "11/02/2023",
       "rating": 4.6,
-      "img": "src/images/gallery/testimonial2.jpg",
+      "img": "src/assets/images/gallery/testimonial2.jpg",
       "text": "As a frequent business traveler, Legend Hotel has set a new standard for excellence. The state-of-the-art meeting facilities, coupled with impeccable service, made my work trip exceptionally productive and enjoyable. The coastal locale provided a refreshing change of scenery, and the attention to detail from the staff ensured a seamless experience. I highly recommend Legend Hotel for both business and leisure stays."
     },
     {
       "name": "Emily and James P., Honeymooners",
       "date": "11/10/2023",
       "rating": 4.7,
-      "img": "src/images/gallery/testimonial3.jpg",
+      "img": "src/assets/images/gallery/testimonial3.jpg",
       "text": "Our honeymoon at Legend Hotel was a dream come true. The romantic ambiance, coupled with the stunning coastal backdrop, created the perfect setting for our celebration of love. The spa treatments were heavenly, and the private beach access made our stay truly magical. Legend Hotel exceeded our expectations, and we're already planning our anniversary trip back!"
     },
     {
       "name": "Alex M., Adventure Seeker",
       "date": "11/20/2023",
       "rating": 4.8,
-      "img": "src/images/gallery/testimonial4.jpg",
+      "img": "src/assets/images/gallery/testimonial4.jpg",
       "text": "Legend Hotel is not just a luxurious stay; it's an adventure lover's paradise. From windsurfing against the ocean breeze to exploring the vibrant streets of Batu Ferringhi, every moment was filled with excitement. The concierge team's recommendations for local activities added an authentic touch to my stay. I left Legend Hotel with a suitcase full of memories and a longing to return."
     },
     {
       "name": "Linda K., Family Vacationer",
       "date": "11/30/2023",
       "rating": 4.5,
-      "img": "src/images/gallery/testimonial5.jpg",
+      "img": "src/assets/images/gallery/testimonial5.jpg",
       "text": "Our family getaway at Legend Hotel was nothing short of extraordinary. The spacious accommodations comfortably accommodated our family, and the kids couldn't get enough of the engaging activities organized by the hotel. From beach picnics to poolside fun, every day brought new adventures. The staff's friendliness and genuine care for families truly made our stay remarkable. Legend Hotel has become our go-to destination for creating cherished family memories."
     },
     {
       "name": "Robert H., Golf Enthusiast",
       "date": "11/30/2023",
       "rating": 4.6,
-      "img": "src/images/gallery/testimonial6.jpg",
+      "img": "src/assets/images/gallery/testimonial6.jpg",
       "text": "As an avid golfer, Legend Hotel's proximity to world-class golf courses made it an ideal choice for my golf retreat. The concierge effortlessly arranged tee times, and returning to the hotel after a day on the green felt like coming home. The elegant surroundings, coupled with the serene coastal atmosphere, provided the perfect balance of relaxation and golfing excitement. Legend Hotel seamlessly caters to both my passion for golf and my desire for a luxurious escape."
     },
     {
       "name": "Nadia S., Culinary Connoisseur",
       "date": "12/05/2023",
       "rating": 4.7,
-      "img": "src/images/gallery/testimonial7.jpg",
+      "img": "src/assets/images/gallery/testimonial7.jpg",
       "text": "For a culinary journey like no other, Legend Hotel is a gastronomic haven. Each meal was a masterpiece, a symphony of flavors meticulously crafted by the talented chefs. The diverse culinary offerings, from local delicacies to international fare, showcased the richness of the dining experience. The restaurant's ambiance, coupled with the impeccable service, made every dining moment an unforgettable affair. Legend Hotel has truly elevated the art of dining."
     },
     {
       "name": "Samuel D., Wellness Seeker",
       "date": "12/11/2023",
       "rating": 4.8,
-      "img": "src/images/gallery/testimonial8.jpg",
+      "img": "src/assets/images/gallery/testimonial8.jpg",
       "text": "In search of rejuvenation, I found my haven at Legend Hotel's spa and wellness center. The holistic approach to well-being, coupled with expert therapists, offered a sanctuary for relaxation. From soothing massages to invigorating wellness classes, each element contributed to a revitalizing experience. The spa's serene atmosphere, combined with the coastal setting, created the perfect backdrop for a wellness retreat. Legend Hotel exceeded my expectations, leaving me refreshed and renewed."
     }
   ],

@@ -15,7 +15,8 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 const Restaurant = () => {
-  const url = "http://localhost:3000/gallery";
+  const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
+
   const key = "gallery";
 
   const { data, isPending, error } = UseFetch(url, key);
@@ -82,7 +83,7 @@ const Restaurant = () => {
   const scrollImg2 = useTransform(scrollYProgress2, [0, 1], [900, 0]);
   const { scrollYProgress: scrollYProgress3 } = useScroll({
     target: ref3,
-    offset: ["0 1", isMediumScreen ? "0.8 1" : "0.7 1"],
+    offset: ["0 1", isMediumScreen ? "0.5 1" : "0.7 1"],
   });
   const scrollOpacity3 = useTransform(
     scrollYProgress3,

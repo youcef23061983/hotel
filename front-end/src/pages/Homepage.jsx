@@ -12,13 +12,15 @@ import { ReactLenis } from "lenis/react";
 
 import "./homepage.css";
 import Banner from "./Banner";
-import video from "../assets/video.mp4";
+import video from "/video.mp4";
 import { useScroll, useTransform, motion } from "framer-motion";
 import UseFetchQueries from "../components/UseFetchQueries";
 const Homepage = () => {
-  const url1 = "http://localhost:3000/gallery";
+  // const url1 = "http://localhost:3000/gallery";
+  const url1 = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
   const key1 = "gallery";
-  const url2 = "http://localhost:3000/rooms";
+  // const url2 = "http://localhost:3000/rooms";
+  const url2 = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
   const key2 = "rooms";
 
   const {

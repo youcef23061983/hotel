@@ -591,6 +591,17 @@ a {
     transition: all 0.5s linear;
   }
 
+  .footericon.instagram:hover {
+    color: #d946ef;
+  }
+  .footericon.facebook:hover {
+    color: #3b5998;
+  }
+
+  .footericon.youtube:hover {
+    color: #ff0000;
+  }
+
   .copyrights .footerlink > a {
     font-size: 1rem;
   }

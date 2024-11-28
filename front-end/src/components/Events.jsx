@@ -16,7 +16,7 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { motion, useTransform, useScroll } from "framer-motion";
 const Events = () => {
-  const url = "http://localhost:3000/gallery";
+  const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
   const key = "gallery";
 
   const { data, isPending, error } = UseFetch(url, key);
@@ -95,7 +95,7 @@ const Events = () => {
   const scrollXP3 = useTransform(scrollYProgress3, [0, 1], [-1800, 0]);
   const { scrollYProgress: scrollYProgress4 } = useScroll({
     target: ref4,
-    offset: ["0 1", isMediumScreen ? "0.8 1" : "0.6 1"],
+    offset: ["0 1", isMediumScreen ? "0.65 1" : "0.6 1"],
   });
   const scrollOpacity4 = useTransform(
     scrollYProgress4,

@@ -6,7 +6,7 @@ import { ReactLenis } from "lenis/react";
 import { IoLocationSharp } from "react-icons/io5";
 
 const Google = () => {
-  const url = "http://localhost:3000/gallery";
+  const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
   const key = "gallery";
 
   const { data, isPending, error } = UseFetch(url, key);

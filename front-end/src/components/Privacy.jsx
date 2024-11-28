@@ -2,7 +2,8 @@ import UseFetch from "./UseFetch";
 import { useEffect } from "react";
 
 const Privacy = () => {
-  const url = "http://localhost:3000/gallery";
+  const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
+
   const key = "gallery";
 
   const { data, isPending, error } = UseFetch(url, key);

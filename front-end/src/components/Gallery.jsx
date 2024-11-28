@@ -7,7 +7,8 @@ import { useSearchParams } from "react-router-dom";
 const Gallery = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const url = "http://localhost:3000/album";
+  const url = `${import.meta.env.VITE_PROD_URL_URL}/album`;
+
   const key = "album";
 
   const { data, isPending, error } = UseFetch(url, key);

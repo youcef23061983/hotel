@@ -66,13 +66,25 @@ const Footer = () => {
         </div>
         <div className="footerdiv">
           <h3>Follow US</h3>
-          <Link className="hover:text-blue-600  .footericon">
+          <Link
+            to="https://www.instagram.com"
+            target="_blank"
+            className="footericon instagram"
+          >
             <FaSquareInstagram />
           </Link>
-          <Link className="footericon">
+          <Link
+            to="https://www.facebook.com"
+            target="_blank"
+            className="footericon facebook"
+          >
             <FaSquareFacebook />
           </Link>
-          <Link className="footericon">
+          <Link
+            to="https://www.youtube.com"
+            target="_blank"
+            className="footericon youtube"
+          >
             <FaYoutube />
           </Link>
         </div>

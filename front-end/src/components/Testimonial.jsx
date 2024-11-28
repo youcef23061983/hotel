@@ -11,9 +11,11 @@ import UseFetchQueries from "./UseFetchQueries";
 import Rating from "./Rating";
 
 const Testimonial = () => {
-  const url1 = "http://localhost:3000/gallery";
+  const url1 = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
+
   const key1 = "gallery";
-  const url2 = "http://localhost:3000/testimonials";
+  const url2 = `${import.meta.env.VITE_PROD_URL_URL}/testimonials`;
+
   const key2 = "testimonials";
   const {
     data1: data,

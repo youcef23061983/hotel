@@ -2,12 +2,13 @@ import { useState, useRef, useEffect } from "react";
 import Banner from "../pages/Banner";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion, useTransform, useScroll } from "framer-motion";
-import img1 from "../images/header/roomsheader.jpg";
+import img1 from "/src/assets/images/header/roomsheader.jpg";
 import { ReactLenis } from "lenis/react";
 import UseFetch from "./UseFetch";
 
 const Rooms = () => {
-  const url = "http://localhost:3000/rooms";
+  const url = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
+
   const key = "rooms";
 
   const { data: roomsData, error, isPending } = UseFetch(url, key);

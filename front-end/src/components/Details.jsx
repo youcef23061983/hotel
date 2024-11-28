@@ -21,7 +21,7 @@ import { useScroll, useTransform, motion } from "framer-motion";
 const Details = () => {
   const { id } = useParams();
   const [index, setIndex] = useState(0);
-  const url = "http://localhost:3000/rooms";
+  const url = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
   const key1 = "rooms";
 
   const Fn1 = async () => {

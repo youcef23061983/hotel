@@ -6,7 +6,7 @@ import UseFetch from "./UseFetch";
 import { ReactLenis } from "lenis/react";
 
 const About = () => {
-  const url = "http://localhost:3000/gallery";
+  const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
   const key = "gallery";
 
   const { data, isPending, error } = UseFetch(url, key);

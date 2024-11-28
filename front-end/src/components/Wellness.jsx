@@ -14,7 +14,7 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 
 const Wellness = () => {
-  const url = "http://localhost:3000/gallery";
+  const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
   const key = "gallery";
   const { data, isPending, error } = UseFetch(url, key);
 
