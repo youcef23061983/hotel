@@ -365,7 +365,7 @@ const Rooms = () => {
                     key={id}
                   >
                     <div className="roomdiv">
-                      <img src={`/${images && images[0]}`} className="img" />
+                      <img src={`${images && images[0]}`} className="img" />
                     </div>
                     <h4>{name}</h4>
                     <div className="priceDiv">
