@@ -196,9 +196,9 @@
       ],
       "price": 120,
       "images": [
-        "src/assets/images/rooms/standard single room/img1.jpg",
-        "src/assets/images/rooms/standard single room/img2.jpg",
-        "src/assets/images/rooms/standard single room/img3.jpg"
+        "/images/rooms/standard single room/img1.jpg",
+        "/images/rooms/standard single room/img2.jpg",
+        "/images/rooms/standard single room/img3.jpg"
       ],
       "feedback": "A comfortable room with a fantastic city view. The 24-hour room service was a lifesaver!"
     },
