@@ -12,7 +12,7 @@ const Rooms = () => {
   const key = "rooms";
 
   const { data: roomsData, error, isPending } = UseFetch(url, key);
-  console.log(roomsData && roomsData?.images);
+  console.log(roomsData && roomsData[0]?.images[0]);
   console.log(roomsData);
 
   const [searchParams, setSearchParams] = useSearchParams();
