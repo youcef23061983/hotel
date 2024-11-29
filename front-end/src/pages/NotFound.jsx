@@ -1,5 +1,5 @@
 import React from "react";
-import error from "/src/assets/images/header/error.jpg";
+import error from "/images/header/error.jpg";
 import { Link } from "react-router-dom";
 
 const NotFound = () => {
