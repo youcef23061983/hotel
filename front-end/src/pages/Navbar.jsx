@@ -54,7 +54,7 @@ const Navbar = () => {
       <div className="nav-header">
         <div className="logo">
           <Link to="/">
-            <img src="/src/assets/images/logo.png" alt="" className="img" />
+            <img src="/images/logo.png" alt="" className="img" />
           </Link>
           <span className="logospan">LEGEND</span>
         </div>

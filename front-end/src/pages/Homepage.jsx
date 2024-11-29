@@ -114,9 +114,6 @@ const Homepage = () => {
   if (isPending1 || isPending2) return <h2>...is loading</h2>;
   if (error1) return <h2>{error1.message}</h2>;
   if (error2) return <h2>{error2.message}</h2>;
-  if (!import.meta.env.VITE_PROD_URL_URL) {
-    return null;
-  }
 
   return (
     <>
