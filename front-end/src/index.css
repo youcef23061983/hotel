@@ -377,10 +377,11 @@ a {
   border-radius: 1rem;
 }
 .galleryButtons {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  text-align: center;
+  gap: 1rem;
+  margin: 1rem;
   margin-top: 5rem;
 }
 .galleryButton {
