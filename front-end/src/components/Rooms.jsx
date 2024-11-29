@@ -124,7 +124,7 @@ const Rooms = () => {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["0 1", isMediumScreen ? "0.6 1" : "0.3 1"],
+    offset: ["0 1", isMediumScreen ? "0.6 1" : "0.2 1"],
   });
 
   const scrollOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
