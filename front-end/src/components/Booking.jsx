@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { IoCalendarNumberOutline } from "react-icons/io5";
-import img1 from "/src/assets/images/gallery/booking.jpg";
+import img1 from "/images/gallery/booking.jpg";
 import { useMutation } from "@tanstack/react-query";
 import Banner from "../pages/Banner";
 import { useParams, Link } from "react-router-dom";
