@@ -174,7 +174,8 @@ const Details = () => {
   return (
     <div>
       <div className="headerimages">
-        <img src={`/${img1}`} alt="no image" className="detailImg" />
+        {/* <img src={`/${img1}`} alt="no image" className="detailImg" /> */}
+        <img src={`${img1}`} alt="no image" className="detailImg" />
 
         <Banner title={roomData.name}>
           <div className="iconsDetails">
@@ -229,7 +230,8 @@ const Details = () => {
 
       <div>
         <div className="roomImages">
-          <img src={`/${roomImages && roomImages[index]}`} className="img" />
+          {/* <img src={`/${roomImages && roomImages[index]}`} className="img" /> */}
+          <img src={`${roomImages && roomImages[index]}`} className="img" />
         </div>
         <div className="sliderButtons">
           <button
@@ -278,7 +280,8 @@ const Details = () => {
                 <SwiperSlide key={id}>
                   <div className="otherRoom">
                     <Link to={`/rooms/${id}`}>
-                      <img src={`/${images[0]}`} alt="slide_image" />
+                      {/* <img src={`/${images[0]}`} alt="slide_image" /> */}
+                      <img src={`${images[0]}`} alt="slide_image" />
                     </Link>
 
                     <h3>{name}</h3>
