@@ -68,7 +68,7 @@ const Homepage = () => {
   const ref4 = useRef(null);
   const { scrollYProgress: scrollYProgress1 } = useScroll({
     target: ref,
-    offset: ["0 1", "0.1 0"],
+    offset: ["0 1", isMediumScreen ? "-0.2 0" : "-0.1 0"],
   });
   const { scrollYProgress: scrollYProgress2 } = useScroll({
     target: ref2,
@@ -76,11 +76,11 @@ const Homepage = () => {
   });
   const { scrollYProgress: scrollYProgress3 } = useScroll({
     target: ref3,
-    offset: ["0 1", isMediumScreen ? "0.7 1" : "0.6 1"],
+    offset: ["0 1", isMediumScreen ? "0.7 1" : "0.4 1"],
   });
   const { scrollYProgress: scrollYProgress4 } = useScroll({
     target: ref4,
-    offset: ["0 1", "0.85 1"],
+    offset: ["0 1", isMediumScreen ? "0.7 1" : "0.4 1"],
   });
   const scrollOpacity = useTransform(
     scrollYProgress1,
