@@ -240,21 +240,19 @@ const Wellness = () => {
             Wellness Sanctuary
           </h2>
           <p>
-            Title: "Harmony of Rejuvenation: Tailored Spa Treatments at Legend
-            Hotel's Wellness Sanctuary" Indulge in an exquisite journey of
-            self-care and renewal at Legend Hotel's distinguished spa and
-            wellness center in Batu Ferringhi, Malaysia. Our carefully curated
-            spa treatments are designed to transport you into a realm of
-            tranquility, where expert therapists blend ancient healing
-            traditions with modern techniques. From invigorating massages that
-            melt away tension to rejuvenating facials that enhance your natural
-            radiance, each treatment is a bespoke experience tailored to
-            harmonize mind, body, and spirit. Immerse yourself in the soothing
-            ambiance of our spa, adorned with calming aesthetics and infused
-            with the essence of relaxation. At Legend Hotel, our commitment to
-            well-being extends beyond accommodation, inviting you to embark on a
-            transformative wellness journey that leaves you refreshed,
-            revitalized, and truly harmonized.
+            Indulge in an exquisite journey of self-care and renewal at Legend
+            Hotel's distinguished spa and wellness center in Batu Ferringhi,
+            Malaysia. Our carefully curated spa treatments are designed to
+            transport you into a realm of tranquility, where expert therapists
+            blend ancient healing traditions with modern techniques. From
+            invigorating massages that melt away tension to rejuvenating facials
+            that enhance your natural radiance, each treatment is a bespoke
+            experience tailored to harmonize mind, body, and spirit. Immerse
+            yourself in the soothing ambiance of our spa, adorned with calming
+            aesthetics and infused with the essence of relaxation. At Legend
+            Hotel, our commitment to well-being extends beyond accommodation,
+            inviting you to embark on a transformative wellness journey that
+            leaves you refreshed, revitalized, and truly harmonized.
           </p>
           <div className="restaurantIcons">
             <div className="restaurantIcon">

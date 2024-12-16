@@ -122,7 +122,9 @@
     {
       "type": "header",
       "id": 7,
-      "images": ["/images/header/roomsheader.jpg"]
+      "images": [
+        "/images/header/roomsheader.jpg"
+      ]
     },
     {
       "type": "aboutUs",
@@ -343,8 +345,38 @@
         "number": 2,
         "icon": "TbBath"
       },
-      "unavailables": [],
-      "booking": [],
+      "unavailables": [
+        1734303600000,
+        1734390000000
+      ],
+      "booking": [
+        {
+          "arrival": "12/16/2024",
+          "departure": "12/18/2024",
+          "dates": [
+            1734303600000,
+            1734390000000
+          ],
+          "price": 250,
+          "total": 500,
+          "title": "",
+          "firstName": "",
+          "lastName": "",
+          "countryCode": "",
+          "phoneNumber": "",
+          "email": "",
+          "country": "",
+          "city": "",
+          "nationality": "",
+          "creditCardNumber": "",
+          "expirationMonth": "",
+          "year": "",
+          "securityCode": "",
+          "nameHolder": "",
+          "termsCondition": true,
+          "emailMe": true
+        }
+      ],
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -711,8 +743,38 @@
         "number": 2,
         "icon": "TbBath"
       },
-      "unavailables": [],
-      "booking": [],
+      "unavailables": [
+        1734303600000,
+        1734390000000
+      ],
+      "booking": [
+        {
+          "arrival": "12/16/2024",
+          "departure": "12/18/2024",
+          "dates": [
+            1734303600000,
+            1734390000000
+          ],
+          "price": 400,
+          "total": 800,
+          "title": "",
+          "firstName": "",
+          "lastName": "",
+          "countryCode": "",
+          "phoneNumber": "",
+          "email": "",
+          "country": "",
+          "city": "",
+          "nationality": "",
+          "creditCardNumber": "",
+          "expirationMonth": "",
+          "year": "",
+          "securityCode": "",
+          "nameHolder": "",
+          "termsCondition": false,
+          "emailMe": false
+        }
+      ],
       "max_children": 2,
       "max_pets": 2,
       "pets_allowed": true,

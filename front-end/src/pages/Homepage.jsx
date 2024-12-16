@@ -68,7 +68,7 @@ const Homepage = () => {
   const ref4 = useRef(null);
   const { scrollYProgress: scrollYProgress1 } = useScroll({
     target: ref,
-    offset: ["0 1", isMediumScreen ? "-0.2 0" : "-0.1 0"],
+    offset: ["0 1", "0.2 1"],
   });
   const { scrollYProgress: scrollYProgress2 } = useScroll({
     target: ref2,

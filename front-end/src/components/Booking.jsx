@@ -110,7 +110,7 @@ const Booking = () => {
     );
     setDates(updatedUnavailables);
 
-    const updateRes = await fetch(`http://localhost:3000/rooms/${id}`, {
+    const updateRes = await fetch(`${url}/${id}`, {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",
@@ -125,7 +125,7 @@ const Booking = () => {
   const updatedBooking = roomData ? [...roomData.booking, user] : [];
 
   const bookingFun = async () => {
-    const res = await fetch(`http://localhost:3000/rooms/${id}`, {
+    const res = await fetch(`${url}/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -177,53 +177,53 @@ const Booking = () => {
 
   const confirm = (e) => {
     e.preventDefault();
-    if (
-      !user.firstName ||
-      !user.lastName ||
-      !user.title ||
-      !user.phoneNumber ||
-      !user.countryCode ||
-      !user.country ||
-      !user.nationality ||
-      !user.creditCardNumber ||
-      !user.expirationMonth ||
-      !user.year ||
-      !user.securityCode ||
-      !user.nameHolder ||
-      !user.termsCondition ||
-      !user.emailMe ||
-      !user.email
-    ) {
-      alert("please enter your information");
-      return;
-    }
-    if (!user.arrival || !user.departure) {
-      alert("please go back and choose your booking days ");
-      return;
-    }
-    if (
-      user.firstName &&
-      user.lastName &&
-      user.title &&
-      user.phoneNumber &&
-      user.countryCode &&
-      user.country &&
-      user.nationality &&
-      user.creditCardNumber &&
-      user.expirationMonth &&
-      user.year &&
-      user.securityCode &&
-      user.nameHolder &&
-      user.termsCondition &&
-      user.emailMe &&
-      user.email &&
-      user.departure &&
-      user.arrival
-    ) {
-      unavailableData();
-      bookingMutate();
-      return;
-    }
+    // if (
+    //   !user.firstName ||
+    //   !user.lastName ||
+    //   !user.title ||
+    //   !user.phoneNumber ||
+    //   !user.countryCode ||
+    //   !user.country ||
+    //   !user.nationality ||
+    //   !user.creditCardNumber ||
+    //   !user.expirationMonth ||
+    //   !user.year ||
+    //   !user.securityCode ||
+    //   !user.nameHolder ||
+    //   !user.termsCondition ||
+    //   !user.emailMe ||
+    //   !user.email
+    // ) {
+    //   alert("please enter your information");
+    //   return;
+    // }
+    // if (!user.arrival || !user.departure) {
+    //   alert("please go back and choose your booking days ");
+    //   return;
+    // }
+    // if (
+    //   user.firstName &&
+    //   user.lastName &&
+    //   user.title &&
+    //   user.phoneNumber &&
+    //   user.countryCode &&
+    //   user.country &&
+    //   user.nationality &&
+    //   user.creditCardNumber &&
+    //   user.expirationMonth &&
+    //   user.year &&
+    //   user.securityCode &&
+    //   user.nameHolder &&
+    //   user.termsCondition &&
+    //   user.emailMe &&
+    //   user.email &&
+    //   user.departure &&
+    //   user.arrival
+    // ) {
+    unavailableData();
+    bookingMutate();
+    //   return;
+    // }
   };
   const clearLocalStorage = () => {
     localStorage.removeItem(`room_${id}_unavailables`);
@@ -353,7 +353,7 @@ const Booking = () => {
           <div className="infoContainer">
             <motion.div className="roomBooking" variants={bookingchildVariants}>
               <div className="imgBooking">
-                <img src={`/${img2}`} alt="" className="img" />
+                <img src={` ${img2}`} alt="" className="img" />
               </div>
               <div className="roomInfo">
                 <h2>{roomData && roomData.name}</h2>
