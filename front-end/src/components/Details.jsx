@@ -17,6 +17,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { useScroll, useTransform, motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 const Details = () => {
   const { id } = useParams();
@@ -68,7 +69,6 @@ const Details = () => {
   useEffect(() => {
     if (roomData) {
       const name = roomData.name || "";
-      document.title = name;
     }
   }, [roomData]);
   const img1 = roomData ? roomData.images[0] : null;
@@ -173,8 +173,46 @@ const Details = () => {
   if (error2) return <h2>{error2.message}</h2>;
   return (
     <div>
+      <Helmet>
+        <title>{roomData.name}</title>
+        <meta
+          name="description"
+          content={
+            roomData.name ||
+            "Discover the details of our luxurious rooms at LEGEND Hotel in Malaysia. Experience comfort and elegance."
+          }
+        />
+        <meta
+          property="og:title"
+          content={roomData.name || "Room Details - LEGEND Hotel"}
+        />
+        <meta
+          property="og:description"
+          content="Discover the details of our luxurious rooms at LEGEND Hotel in Malaysia. Experience comfort and elegance."
+        />
+        <meta property="og:image" content={img1} />
+        <meta property="og:url" content={window.location.href} />
+
+        {/* Twitter Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Room Details - LEGEND Hotel" />
+        <meta
+          name="twitter:description"
+          content="Discover the details of our luxurious rooms at LEGEND Hotel in Malaysia. Experience comfort and elegance."
+        />
+        <meta name="twitter:image" content={img1} />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="keywords"
+          content="room details, hotel, Malaysia, luxury, comfort, LEGEND Hotel"
+        />
+        <meta name="author" content="LEGEND Hotel" />
+        <meta
+          property="og:url"
+          content={`https://hotelmalaysia.vercel.app/rooms/${id}`}
+        />
+      </Helmet>
       <div className="headerimages">
-        {/* <img src={`/${img1}`} alt="no image" className="detailImg" /> */}
         <img src={`${img1}`} alt="no image" className="detailImg" />
 
         <Banner title={roomData.name}>

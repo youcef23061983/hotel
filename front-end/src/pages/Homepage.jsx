@@ -15,6 +15,7 @@ import Banner from "./Banner";
 import video from "/video.mp4";
 import { useScroll, useTransform, motion } from "framer-motion";
 import UseFetchQueries from "../components/UseFetchQueries";
+import { Helmet } from "react-helmet-async";
 const Homepage = () => {
   const url1 = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
   const key1 = "gallery";
@@ -117,6 +118,35 @@ const Homepage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>LEGEND Hotel - Malaysia</title>
+        <meta
+          name="description"
+          content="Welcome to LEGEND Hotel in Malaysia. Experience luxury and comfort in the heart of Malaysia."
+        />
+        <meta property="og:title" content="LEGEND Hotel - Malaysia" />
+        <meta
+          property="og:description"
+          content="Welcome to LEGEND Hotel in Malaysia. Experience luxury and comfort in the heart of Malaysia."
+        />
+        <meta property="og:image" content={"/images/homepage/img1"} />
+        <meta property="og:url" content={window.location.href} />
+
+        {/* Twitter Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="LEGEND Hotel - Malaysia" />
+        <meta
+          name="twitter:description"
+          content="Welcome to LEGEND Hotel in Malaysia. Experience luxury and comfort in the heart of Malaysia."
+        />
+        <meta name="twitter:image" content={"/images/homepage/img1"} />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="keywords"
+          content="hotel, Malaysia, luxury, comfort, LEGEND Hotel"
+        />
+        <meta name="author" content="LEGEND Hotel" />
+      </Helmet>
       <ReactLenis
         root
         options={{
@@ -135,7 +165,12 @@ const Homepage = () => {
               x: scrollImg,
             }}
           >
-            <img src={data && data[0]?.images[5]} alt="" className="img" />
+            <img
+              src={data && data[0]?.images[5]}
+              alt="homeImg"
+              loading="lazy"
+              className="img"
+            />
           </motion.div>
           <motion.div
             className="p"
@@ -219,7 +254,7 @@ const Homepage = () => {
                 return (
                   <SwiperSlide key={id}>
                     <Link to={`/rooms/${id}`}>
-                      <img src={images[0]} alt="slide_image" />
+                      <img src={images[0]} alt="slide_image" loading="lazy" />
                     </Link>
 
                     <h3 style={{ textAlign: "center" }}>{name}</h3>
@@ -245,7 +280,12 @@ const Homepage = () => {
               x: scrollImg3,
             }}
           >
-            <img src={data && data[3].images[0]} alt="" className="img" />
+            <img
+              src={data && data[3].images[0]}
+              alt="imgResaurant"
+              loading="lazy"
+              className="img"
+            />
           </motion.div>
           <motion.div
             className="p"
@@ -282,7 +322,12 @@ const Homepage = () => {
               x: scrollImg4,
             }}
           >
-            <img src={data && data[2].images[3]} alt="" className="img" />
+            <img
+              src={data && data[2].images[3]}
+              alt="spaImg"
+              loading="lazy"
+              className="img"
+            />
           </motion.div>
           <motion.div
             className="p"

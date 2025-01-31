@@ -5,6 +5,7 @@ import { motion, useTransform, useScroll } from "framer-motion";
 import img1 from "/images/header/roomsheader.jpg";
 import { ReactLenis } from "lenis/react";
 import UseFetch from "./UseFetch";
+import { Helmet } from "react-helmet-async";
 
 const Rooms = () => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
@@ -13,7 +14,6 @@ const Rooms = () => {
 
   const { data: roomsData, error, isPending } = UseFetch(url, key);
   console.log(roomsData && roomsData[0]?.images[0]);
-  console.log(roomsData);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -34,10 +34,6 @@ const Rooms = () => {
   };
 
   const [user, setUser] = useState(initialUserState);
-
-  useEffect(() => {
-    document.title = "Rooms";
-  }, []);
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -75,7 +71,6 @@ const Rooms = () => {
       price: parseInt(searchParams.get("price")) || 0,
       capacity: parseInt(searchParams.get("capacity")) || "all",
 
-      // minSize: parseInt(searchParams.get("room_square_footage")) || 0,
       minSize: parseInt(searchParams.get("minSize")) || 0,
       maxSize: parseInt(searchParams.get("maxSize")) || 0,
       maxChildren: parseInt(searchParams.get("maxChildren")) || 0,
@@ -206,6 +201,35 @@ const Rooms = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Rooms at LEGEND Hotel - Malaysia</title>
+        <meta
+          name="description"
+          content="Explore the luxurious rooms at LEGEND Hotel in Malaysia. Find the perfect room for your stay."
+        />
+        <meta property="og:title" content="Rooms at LEGEND Hotel - Malaysia" />
+        <meta
+          property="og:description"
+          content="Explore the luxurious rooms at LEGEND Hotel in Malaysia. Find the perfect room for your stay."
+        />
+        <meta property="og:image" content={img1} />
+        <meta property="og:url" content={window.location.href} />
+
+        {/* Twitter Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Rooms at LEGEND Hotel - Malaysia" />
+        <meta
+          name="twitter:description"
+          content="Explore the luxurious rooms at LEGEND Hotel in Malaysia. Find the perfect room for your stay."
+        />
+        <meta name="twitter:image" content={img1} />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="keywords"
+          content="hotel rooms, Malaysia, luxury, comfort, LEGEND Hotel"
+        />
+        <meta name="author" content="LEGEND Hotel" />
+      </Helmet>
       <div
         data-testid="rooms-div"
         className="headerimages"

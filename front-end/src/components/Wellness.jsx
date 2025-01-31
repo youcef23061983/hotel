@@ -12,15 +12,13 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
+import { Helmet } from "react-helmet-async";
 
 const Wellness = () => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
   const key = "gallery";
   const { data, isPending, error } = UseFetch(url, key);
 
-  useEffect(() => {
-    document.title = "WellNess & SPA";
-  }, []);
   const ref = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
@@ -119,6 +117,42 @@ const Wellness = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Wellness at LEGEND Hotel - Malaysia</title>
+        <meta
+          name="description"
+          content="Experience rejuvenation and relaxation at the wellness center of LEGEND Hotel in Malaysia. Enjoy tailored spa treatments."
+        />
+        <meta
+          property="og:title"
+          content="Wellness at LEGEND Hotel - Malaysia"
+        />
+        <meta
+          property="og:description"
+          content="Experience rejuvenation and relaxation at the wellness center of LEGEND Hotel in Malaysia. Enjoy tailored spa treatments."
+        />
+        <meta property="og:image" content={data && data[2].images[0]} />
+        <meta property="og:url" content={window.location.href} />
+
+        {/* Twitter Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Wellness at LEGEND Hotel - Malaysia"
+        />
+        <meta
+          name="twitter:description"
+          content="Experience rejuvenation and relaxation at the wellness center of LEGEND Hotel in Malaysia. Enjoy tailored spa treatments."
+        />
+        <meta name="twitter:image" content={data && data[2].images[0]} />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="keywords"
+          content="wellness, spa, hotel, Malaysia, relaxation, LEGEND Hotel"
+        />
+        <meta name="author" content="LEGEND Hotel" />
+      </Helmet>
+
       <div
         className="headerimages"
         style={{
