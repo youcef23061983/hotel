@@ -8,6 +8,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import UseFetchQueries from "./UseFetchQueries";
 import Rating from "./Rating";
+import { Helmet } from "react-helmet-async";
 
 const Testimonial = () => {
   const url1 = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
@@ -23,9 +24,7 @@ const Testimonial = () => {
     error1,
     error2,
   } = UseFetchQueries(url1, key1, url2, key2);
-  useEffect(() => {
-    document.title = "Testimonials";
-  }, []);
+
   const ref = useRef(null);
 
   const useMediaQuery = (query) => {
@@ -77,6 +76,35 @@ const Testimonial = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Testimonials - LEGEND Hotel</title>
+        <meta
+          name="description"
+          content="Read testimonials from our satisfied guests at LEGEND Hotel in Malaysia. Discover their experiences and stories."
+        />
+        <meta property="og:title" content="Testimonials - LEGEND Hotel" />
+        <meta
+          property="og:description"
+          content="Read testimonials from our satisfied guests at LEGEND Hotel in Malaysia. Discover their experiences and stories."
+        />
+        <meta property="og:image" content={data && data[0].images[0]} />
+        <meta property="og:url" content={window.location.href} />
+
+        {/* Twitter Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Testimonials - LEGEND Hotel" />
+        <meta
+          name="twitter:description"
+          content="Read testimonials from our satisfied guests at LEGEND Hotel in Malaysia. Discover their experiences and stories."
+        />
+        <meta name="twitter:image" content={data && data[0].images[0]} />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="keywords"
+          content="testimonials, hotel, Malaysia, LEGEND Hotel, guest experiences, reviews"
+        />
+        <meta name="author" content="LEGEND Hotel" />
+      </Helmet>
       <div
         className="headerimages"
         data-testid="div-testimonial"

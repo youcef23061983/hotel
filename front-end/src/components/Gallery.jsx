@@ -1,8 +1,8 @@
 import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
-import { useEffect } from "react";
 import { MdMonochromePhotos } from "react-icons/md";
 import { useSearchParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Gallery = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,10 +12,6 @@ const Gallery = () => {
   const key = "album";
 
   const { data, isPending, error } = UseFetch(url, key);
-
-  useEffect(() => {
-    document.title = "Gallery";
-  }, []);
 
   let types = data ? [...new Set(data.map((pictures) => pictures.type))] : [];
 
@@ -28,6 +24,42 @@ const Gallery = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Gallery at LEGEND Hotel - Malaysia</title>
+        <meta
+          name="description"
+          content="Explore the gallery of LEGEND Hotel in Malaysia. Discover the beauty and elegance of our hotel through stunning images."
+        />
+        <meta
+          property="og:title"
+          content="Gallery at LEGEND Hotel - Malaysia"
+        />
+        <meta
+          property="og:description"
+          content="Explore the gallery of LEGEND Hotel in Malaysia. Discover the beauty and elegance of our hotel through stunning images."
+        />
+        <meta property="og:image" content={data && data[0].images[0]} />
+        <meta property="og:url" content={window.location.href} />
+
+        {/* Twitter Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Gallery at LEGEND Hotel - Malaysia"
+        />
+        <meta
+          name="twitter:description"
+          content="Explore the gallery of LEGEND Hotel in Malaysia. Discover the beauty and elegance of our hotel through stunning images."
+        />
+        <meta name="twitter:image" content={data && data[0].images[0]} />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="keywords"
+          content="gallery, hotel, Malaysia, LEGEND Hotel, images, photos"
+        />
+        <meta name="author" content="LEGEND Hotel" />
+      </Helmet>
+
       <div
         data-testid="div-gallery"
         className="headerimages"

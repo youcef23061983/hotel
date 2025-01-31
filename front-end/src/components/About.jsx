@@ -1,9 +1,10 @@
 import Banner from "../pages/Banner";
 import { Link } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useScroll, motion, useTransform } from "framer-motion";
 import UseFetch from "./UseFetch";
 import { ReactLenis } from "lenis/react";
+import { Helmet } from "react-helmet-async";
 
 const About = () => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
@@ -12,9 +13,6 @@ const About = () => {
 
   const { data, isPending, error } = UseFetch(url, key);
 
-  useEffect(() => {
-    document.title = "About Us";
-  }, []);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -30,6 +28,36 @@ const About = () => {
 
   return (
     <>
+      <Helmet>
+        <title>About Us - LEGEND Hotel</title>
+        <meta
+          name="description"
+          content="Learn more about LEGEND Hotel in Malaysia. Discover our story, mission, and values."
+        />
+        <meta property="og:title" content="About Us - LEGEND Hotel" />
+        <meta
+          property="og:description"
+          content="Learn more about LEGEND Hotel in Malaysia. Discover our story, mission, and values."
+        />
+        <meta property="og:image" content={data && data[0].images[0]} />
+        <meta property="og:url" content={window.location.href} />
+
+        {/* Twitter Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Us - LEGEND Hotel" />
+        <meta
+          name="twitter:description"
+          content="Learn more about LEGEND Hotel in Malaysia. Discover our story, mission, and values."
+        />
+        <meta name="twitter:image" content={data && data[0].images[0]} />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="keywords"
+          content="about us, hotel, Malaysia, LEGEND Hotel, story, mission, values"
+        />
+        <meta name="author" content="LEGEND Hotel" />
+      </Helmet>
+
       <ReactLenis
         root
         options={{
