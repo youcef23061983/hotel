@@ -253,16 +253,32 @@ const Wellness = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <img src={data && data[2].images[1]} alt="slide_image" />
+              <img
+                src={data && data[2].images[1]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[2]} alt="slide_image" />
+              <img
+                src={data && data[2].images[2]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[3]} alt="slide_image" />
+              <img
+                src={data && data[2].images[3]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[4]} alt="slide_image" />
+              <img
+                src={data && data[2].images[4]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
           </Swiper>
         </motion.div>
@@ -318,16 +334,32 @@ const Wellness = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <img src={data && data[2].images[5]} alt="slide_image" />
+              <img
+                src={data && data[2].images[5]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[6]} alt="slide_image" />
+              <img
+                src={data && data[2].images[6]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[7]} alt="slide_image" />
+              <img
+                src={data && data[2].images[7]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[8]} alt="slide_image" />
+              <img
+                src={data && data[2].images[8]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
           </Swiper>
         </motion.div>
@@ -380,16 +412,32 @@ const Wellness = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <img src={data && data[2].images[9]} alt="slide_image" />
+              <img
+                src={data && data[2].images[9]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[10]} alt="slide_image" />
+              <img
+                src={data && data[2].images[10]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[11]} alt="slide_image" />
+              <img
+                src={data && data[2].images[11]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[12]} alt="slide_image" />
+              <img
+                src={data && data[2].images[12]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
           </Swiper>
         </motion.div>
@@ -444,16 +492,32 @@ const Wellness = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <img src={data && data[2].images[13]} alt="slide_image" />
+              <img
+                src={data && data[2].images[13]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[14]} alt="slide_image" />
+              <img
+                src={data && data[2].images[14]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[15]} alt="slide_image" />
+              <img
+                src={data && data[2].images[15]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[16]} alt="slide_image" />
+              <img
+                src={data && data[2].images[16]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
           </Swiper>
         </motion.div>
@@ -507,16 +571,32 @@ const Wellness = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <img src={data && data[2].images[17]} alt="slide_image" />
+              <img
+                src={data && data[2].images[17]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[18]} alt="slide_image" />
+              <img
+                src={data && data[2].images[18]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[19]} alt="slide_image" />
+              <img
+                src={data && data[2].images[19]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={data && data[2].images[20]} alt="slide_image" />
+              <img
+                src={data && data[2].images[20]}
+                alt="slide_image"
+                loading="lazy"
+              />
             </SwiperSlide>
           </Swiper>
         </motion.div>

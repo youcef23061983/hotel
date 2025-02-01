@@ -82,7 +82,12 @@ const About = () => {
               animationDuration: 2,
             }}
           >
-            <img src={data && data[7].images[1]} alt="" className="img" />
+            <img
+              src={data && data[7].images[1]}
+              alt="CoastalImg"
+              loading="lazy"
+              className="img"
+            />
           </motion.div>
           <div className="p">
             <motion.h2

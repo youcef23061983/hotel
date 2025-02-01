@@ -167,6 +167,8 @@ const Testimonial = () => {
                           <img
                             src={img}
                             style={{ maxWidth: "3rem", maxHeight: "3rem" }}
+                            alt="testimonialImg"
+                            loading="lazy"
                           />
                         </div>
                         <div className="testimonialName">

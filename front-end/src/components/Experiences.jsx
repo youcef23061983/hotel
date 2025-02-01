@@ -258,13 +258,25 @@ const Experiences = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src={data && data[4].images[0]} alt="slide_image" />
+            <img
+              src={data && data[4].images[0]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[4].images[1]} alt="slide_image" />
+            <img
+              src={data && data[4].images[1]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[4].images[2]} alt="slide_image" />
+            <img
+              src={data && data[4].images[2]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
         </Swiper>
       </div>
@@ -309,13 +321,25 @@ const Experiences = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src={data && data[4].images[3]} alt="slide_image" />
+            <img
+              src={data && data[4].images[3]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[4].images[4]} alt="slide_image" />
+            <img
+              src={data && data[4].images[4]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[4].images[5]} alt="slide_image" />
+            <img
+              src={data && data[4].images[5]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
         </Swiper>
       </div>
@@ -360,13 +384,25 @@ const Experiences = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src={data && data[4].images[6]} alt="slide_image" />
+            <img
+              src={data && data[4].images[6]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[4].images[7]} alt="slide_image" />
+            <img
+              src={data && data[4].images[7]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[4].images[8]} alt="slide_image" />
+            <img
+              src={data && data[4].images[8]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
         </Swiper>
       </div>
@@ -414,13 +450,25 @@ const Experiences = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src={data && data[4].images[9]} alt="slide_image" />
+            <img
+              src={data && data[4].images[9]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[4].images[10]} alt="slide_image" />
+            <img
+              src={data && data[4].images[10]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[4].images[11]} alt="slide_image" />
+            <img
+              src={data && data[4].images[11]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
         </Swiper>
       </div>
@@ -466,13 +514,25 @@ const Experiences = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src={data && data[4].images[12]} alt="slide_image" />
+            <img
+              src={data && data[4].images[12]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[4].images[13]} alt="slide_image" />
+            <img
+              src={data && data[4].images[13]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[4].images[14]} alt="slide_image" />
+            <img
+              src={data && data[4].images[14]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
         </Swiper>
       </div>

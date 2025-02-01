@@ -96,7 +96,7 @@ const Gallery = () => {
           ? filterData[0].images.map((image, index) => {
               return (
                 <div className="galleryImage">
-                  <img key={index} src={image} className="img" />
+                  <img key={index} src={image} className="img" loading="lazy" />
                 </div>
               );
             })

@@ -226,16 +226,32 @@ const Events = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src={data && data[5].images[0]} alt="slide_image" />
+            <img
+              src={data && data[5].images[0]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[5].images[1]} alt="slide_image" />
+            <img
+              src={data && data[5].images[1]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[5].images[2]} alt="slide_image" />
+            <img
+              src={data && data[5].images[2]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[5].images[3]} alt="slide_image" />
+            <img
+              src={data && data[5].images[3]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
         </Swiper>
       </div>
@@ -280,13 +296,25 @@ const Events = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src={data && data[5].images[4]} alt="slide_image" />
+            <img
+              src={data && data[5].images[4]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[5].images[5]} alt="slide_image" />
+            <img
+              src={data && data[5].images[5]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[5].images[6]} alt="slide_image" />
+            <img
+              src={data && data[5].images[6]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
         </Swiper>
       </div>
@@ -330,10 +358,18 @@ const Events = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src={data && data[5].images[7]} alt="slide_image" />
+            <img
+              src={data && data[5].images[7]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={data && data[5].images[8]} alt="slide_image" />
+            <img
+              src={data && data[5].images[8]}
+              alt="slide_image"
+              loading="lazy"
+            />
           </SwiperSlide>
         </Swiper>
       </div>

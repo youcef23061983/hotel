@@ -245,19 +245,39 @@ const Restaurant = () => {
                 className="mySwiper"
               >
                 <SwiperSlide>
-                  <img src={data && data[3].images[0]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[0]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={data && data[3].images[1]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[1]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={data && data[3].images[2]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[2]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={data && data[3].images[3]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[3]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>{" "}
                 <SwiperSlide>
-                  <img src={data && data[3].images[4]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[4]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>
               </Swiper>
             </motion.div>
@@ -322,19 +342,39 @@ const Restaurant = () => {
                 className="mySwiper"
               >
                 <SwiperSlide>
-                  <img src={data && data[3].images[5]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[5]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={data && data[3].images[6]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[6]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={data && data[3].images[7]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[7]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={data && data[3].images[8]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[8]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={data && data[3].images[9]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[9]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>
               </Swiper>
             </motion.div>
@@ -387,16 +427,32 @@ const Restaurant = () => {
                 className="mySwiper"
               >
                 <SwiperSlide>
-                  <img src={data && data[3].images[10]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[10]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={data && data[3].images[11]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[11]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={data && data[3].images[12]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[12]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>{" "}
                 <SwiperSlide>
-                  <img src={data && data[3].images[13]} alt="slide_image" />
+                  <img
+                    src={data && data[3].images[13]}
+                    alt="slide_image"
+                    loading="lazy"
+                  />
                 </SwiperSlide>
               </Swiper>
             </motion.div>

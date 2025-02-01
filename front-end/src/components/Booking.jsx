@@ -298,7 +298,12 @@ const Booking = () => {
   return (
     <div>
       <div className="headerimages" data-testid="booking-div">
-        <img src={img1} alt="" className="detailImg" />
+        <img
+          src={img1}
+          alt="calendarImg"
+          loading="lazy"
+          className="detailImg"
+        />
 
         <Banner title="BOOKING" />
       </div>
@@ -353,7 +358,12 @@ const Booking = () => {
           <div className="infoContainer">
             <motion.div className="roomBooking" variants={bookingchildVariants}>
               <div className="imgBooking">
-                <img src={` ${img2}`} alt="" className="img" />
+                <img
+                  src={` ${img2}`}
+                  alt="arrivalImg"
+                  loading="lazy"
+                  className="img"
+                />
               </div>
               <div className="roomInfo">
                 <h2>{roomData && roomData.name}</h2>
