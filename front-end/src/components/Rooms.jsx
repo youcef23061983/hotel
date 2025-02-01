@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
 import Banner from "../pages/Banner";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion, useTransform, useScroll } from "framer-motion";
@@ -377,39 +377,41 @@ const Rooms = () => {
               </div>
             </div>
           </motion.form>
-          <motion.div layout className="roomslist">
-            {filterRooms &&
-              filterRooms?.map((room) => {
-                const { name, images, id, price } = room;
-                return (
-                  <motion.div
-                    layout
-                    transition={{ duration: 0.8 }}
-                    className="room"
-                    key={id}
-                  >
-                    <div className="roomdiv">
-                      <img
-                        src={`${images && images[0]}`}
-                        className="img"
-                        loading="lazy"
-                      />
-                    </div>
-                    <h4>{name}</h4>
-                    <div className="priceDiv">
-                      <Link
-                        to={`${id}`}
-                        state={{ search: `?${searchParams.toString()}` }}
-                        className="room-btn"
-                      >
-                        explore more
-                      </Link>
-                      <Link className="room-btn">{price} $ per night </Link>
-                    </div>
-                  </motion.div>
-                );
-              })}
-          </motion.div>
+          <Suspense fallback={<h2>Loading rooms...</h2>}>
+            <motion.div layout className="roomslist">
+              {filterRooms &&
+                filterRooms?.map((room) => {
+                  const { name, images, id, price } = room;
+                  return (
+                    <motion.div
+                      layout
+                      transition={{ duration: 0.8 }}
+                      className="room"
+                      key={id}
+                    >
+                      <div className="roomdiv">
+                        <img
+                          src={`${images && images[0]}`}
+                          className="img"
+                          loading="lazy"
+                        />
+                      </div>
+                      <h4>{name}</h4>
+                      <div className="priceDiv">
+                        <Link
+                          to={`${id}`}
+                          state={{ search: `?${searchParams.toString()}` }}
+                          className="room-btn"
+                        >
+                          explore more
+                        </Link>
+                        <Link className="room-btn">{price} $ per night </Link>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+            </motion.div>
+          </Suspense>
         </div>
       </ReactLenis>
     </div>
