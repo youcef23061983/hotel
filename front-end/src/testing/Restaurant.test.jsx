@@ -3,14 +3,16 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, expect } from "vitest";
 import Restaurant from "../components/Restaurant";
 import { mockData } from "./SetupTest";
-import { wait } from "@testing-library/user-event/dist/cjs/utils/index.js";
+import { HelmetProvider } from "react-helmet-async";
 
 describe("group of testing Restaurant component", () => {
   const queryClient = new QueryClient();
   beforeEach(async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <Restaurant />
+        <HelmetProvider>
+          <Restaurant />
+        </HelmetProvider>
       </QueryClientProvider>
     );
     await waitFor(() => {

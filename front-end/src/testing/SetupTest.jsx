@@ -9,6 +9,11 @@ expect.extend(matchers);
 afterEach(() => {
   cleanup();
 });
+global.ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
 
 // Mock for matchMedia
 const mockMatchMedia = (matches) => ({
@@ -283,6 +288,66 @@ export const mockData = [
       "https://hotel.com/image7.jpg",
     ],
   },
+  {
+    id: 9,
+    name: "Executive",
+    type: "Suite",
+    room_square_footage: {
+      number: 500,
+      icon: "GrCube",
+    },
+    capacity: {
+      number: 2,
+      icon: "MdOutlinePeopleAlt",
+    },
+    max_children: 1,
+    max_pets: 0,
+    pets_allowed: false,
+    butler_service: true,
+    iving_room: false,
+    breakfast: true,
+    price: 180,
+
+    images: [
+      "https://hotel.com/image1.jpg",
+      "https://hotel.com/image2.jpg",
+      "https://hotel.com/image3.jpg",
+      "https://hotel.com/image4.jpg",
+      "https://hotel.com/image5.jpg",
+      "https://hotel.com/image6.jpg",
+      "https://hotel.com/image7.jpg",
+    ],
+  },
+  {
+    id: 10,
+    name: "Two-Bedroom",
+    type: "room",
+    room_square_footage: {
+      number: 500,
+      icon: "GrCube",
+    },
+    capacity: {
+      number: 4,
+      icon: "MdOutlinePeopleAlt",
+    },
+    max_children: 1,
+    max_pets: 0,
+    pets_allowed: false,
+    butler_service: true,
+    iving_room: false,
+    breakfast: true,
+    price: 120,
+
+    images: [
+      "https://hotel.com/image1.jpg",
+      "https://hotel.com/image2.jpg",
+      "https://hotel.com/image3.jpg",
+      "https://hotel.com/image4.jpg",
+      "https://hotel.com/image5.jpg",
+      "https://hotel.com/image6.jpg",
+      "https://hotel.com/image7.jpg",
+    ],
+  },
 ];
 export const mockData3 = [
   {
@@ -464,9 +529,9 @@ export const mockData2 = {
   ],
   price: 120,
   images: [
-    "src/images/rooms/standard single room/img1.jpg",
-    "src/images/rooms/standard single room/img2.jpg",
-    "src/images/rooms/standard single room/img3.jpg",
+    "/images/rooms/standard single room/img1.jpg",
+    "/images/rooms/standard single room/img2.jpg",
+    "/images/rooms/standard single room/img3.jpg",
   ],
   feedback:
     "A comfortable room with a fantastic city view. The 24-hour room service was a lifesaver!",
@@ -478,5 +543,25 @@ vi.mock("../components/UseFetch", () => ({
     data: mockData,
     isPending: false,
     error: null,
+  })),
+}));
+
+vi.mock("../components/BookingUseFetch", () => ({
+  __esModule: true,
+  default: vi.fn(() => ({
+    data: mockData2,
+    isPending: false,
+    error: null,
+  })),
+}));
+vi.mock("../components/DetailUseFetchQueries", () => ({
+  __esModule: true,
+  default: vi.fn(() => ({
+    data1: mockData,
+    data2: mockData2,
+    isPending1: false,
+    isPending2: false,
+    error1: null,
+    error2: null,
   })),
 }));

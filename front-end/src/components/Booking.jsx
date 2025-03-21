@@ -11,6 +11,7 @@ import { format, differenceInDays, addDays } from "date-fns";
 import { FcCheckmark } from "react-icons/fc";
 import { motion } from "framer-motion";
 import { useQuery, QueryClient } from "@tanstack/react-query";
+import BookingUseFetch from "./BookingUseFetch";
 
 const Booking = () => {
   const { id } = useParams();
@@ -19,28 +20,34 @@ const Booking = () => {
   const [calendar, setCalendar] = useState(true);
   const url = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
 
-  const queryClient = new QueryClient();
+  // const queryClient = new QueryClient();
 
-  const productFun = async () => {
-    const res = await fetch(`${url}/${id}`);
-    if (!res.ok) {
-      throw Error("There is no product data");
-    }
-    return res.json();
-  };
+  // const productFun = async () => {
+  //   const res = await fetch(`${url}/${id}`);
+  //   if (!res.ok) {
+  //     throw Error("There is no product data");
+  //   }
+  //   return res.json();
+  // };
+  // const {
+  //   data: roomData,
+  //   error,
+  //   isPending,
+  // } = useQuery({
+  //   queryKey: ["product", id],
+  //   queryFn: productFun,
+  //   initialData: () => {
+  //     return queryClient
+  //       .getQueryData(["products"])
+  //       ?.find((x) => x.id === parseInt(id));
+  //   },
+  // });
   const {
     data: roomData,
     error,
     isPending,
-  } = useQuery({
-    queryKey: ["product", id],
-    queryFn: productFun,
-    initialData: () => {
-      return queryClient
-        .getQueryData(["products"])
-        ?.find((x) => x.id === parseInt(id));
-    },
-  });
+  } = BookingUseFetch(url, "products", id);
+
   useEffect(() => {
     document.title = "Booking";
   }, []);

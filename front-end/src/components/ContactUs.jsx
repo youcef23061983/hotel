@@ -5,33 +5,29 @@ import { MdAttachEmail } from "react-icons/md";
 import emailjs from "@emailjs/browser";
 import UseFetch from "./UseFetch";
 import { ReactLenis } from "lenis/react";
-
-const ContactUs = () => {
+const ContactUs = ({ onSubmit }) => {
   const [formStatus, setFormStatus] = useState(null);
-
   const [user, setUser] = useState({ name: "", email: "", comment: "" });
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setUser((prev) => ({ ...prev, [name]: value }));
   };
-
   const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
   const key = "gallery";
   const { data, isPending, error } = UseFetch(url, key);
   const form = useRef();
-
   useEffect(() => {
     document.title = "Contact Us";
   }, []);
-
   const sendEmail = (e) => {
     e.preventDefault();
-
-    // Validation check
     if (!user.name || !user.email || !user.comment) {
       alert("Please enter your information");
       return; // Return early to prevent further execution
+    }
+    if (onSubmit) {
+      onSubmit(user);
+      return; // Skip the emailjs logic in tests
     }
 
     emailjs

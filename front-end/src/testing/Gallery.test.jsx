@@ -4,6 +4,8 @@ import Gallery from "../components/Gallery";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { mockData } from "./SetupTest";
+import { HelmetProvider } from "react-helmet-async";
+import { MemoryRouter } from "react-router-dom";
 
 describe("group ot Gallery testing elemnts", () => {
   const queryClient = new QueryClient();
@@ -11,7 +13,11 @@ describe("group ot Gallery testing elemnts", () => {
   beforeEach(async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <Gallery />
+        <HelmetProvider>
+          <MemoryRouter initialEntries={["/gallery"]}>
+            <Gallery />
+          </MemoryRouter>
+        </HelmetProvider>
       </QueryClientProvider>
     );
     await waitFor(() => {
@@ -28,7 +34,7 @@ describe("group ot Gallery testing elemnts", () => {
   });
   it("should render the right images when we click on one of the buttons ", async () => {
     const buttons = screen.getAllByRole("button");
-    expect(buttons).toHaveLength(4);
+    expect(buttons).toHaveLength(5);
 
     const diningButton = screen.getByRole("button", { name: /dining/i });
     const user = userEvent.setup();

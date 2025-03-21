@@ -5,6 +5,7 @@ import { beforeEach, expect } from "vitest";
 import Experiences from "../components/Experiences";
 import { mockData } from "./SetupTest";
 import userEvent from "@testing-library/user-event";
+import { HelmetProvider } from "react-helmet-async";
 
 describe("group of Experiences testing", () => {
   const ContactMock = () => {
@@ -15,14 +16,16 @@ describe("group of Experiences testing", () => {
     const queryClient = new QueryClient();
     render(
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Experiences />} />
-            {/* --------you have to put the original path in Experiences
+        <HelmetProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Experiences />} />
+              {/* --------you have to put the original path in Experiences
     //         component------------- */}
-            <Route path="/contact" element={<ContactMock />} />
-          </Routes>
-        </BrowserRouter>
+              <Route path="/contact" element={<ContactMock />} />
+            </Routes>
+          </BrowserRouter>
+        </HelmetProvider>
       </QueryClientProvider>
     );
     await waitFor(() => {

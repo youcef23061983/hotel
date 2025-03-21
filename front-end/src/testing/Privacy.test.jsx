@@ -3,13 +3,16 @@ import { beforeEach, expect } from "vitest";
 import Privacy from "../components/Privacy";
 import { render, screen, waitFor } from "@testing-library/react";
 import { mockData } from "./SetupTest";
+import { HelmetProvider } from "react-helmet-async";
 describe("group of testing Privacy component", () => {
   const queryClient = new QueryClient();
 
   beforeEach(async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <Privacy />
+        <HelmetProvider>
+          <Privacy />
+        </HelmetProvider>
       </QueryClientProvider>
     );
     await waitFor(() => {

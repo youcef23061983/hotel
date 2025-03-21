@@ -4,6 +4,7 @@ import { render, waitFor, screen } from "@testing-library/react";
 import { beforeEach, expect } from "vitest";
 import About from "../../src/components/About";
 import userEvent from "@testing-library/user-event";
+import { HelmetProvider } from "react-helmet-async";
 
 describe("group of testing About component", () => {
   const LocationDisplay = () => {
@@ -14,12 +15,14 @@ describe("group of testing About component", () => {
     const queryClient = new QueryClient();
     render(
       <QueryClientProvider client={queryClient}>
-        <MemoryRouter initialEntries={["/about"]}>
-          <Routes>
-            <Route path="/about" element={<About />} />
-            <Route path="/google" element={<LocationDisplay />} />
-          </Routes>
-        </MemoryRouter>
+        <HelmetProvider>
+          <MemoryRouter initialEntries={["/about"]}>
+            <Routes>
+              <Route path="/about" element={<About />} />
+              <Route path="/google" element={<LocationDisplay />} />
+            </Routes>
+          </MemoryRouter>
+        </HelmetProvider>
       </QueryClientProvider>
     );
 

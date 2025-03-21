@@ -18,59 +18,25 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import DetailUseFetchQueries from "./DetailUseFetchQueries";
 
 const Details = () => {
   const { id } = useParams();
   const [index, setIndex] = useState(0);
-  const url = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
+  const url1 = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
   const key1 = "rooms";
 
-  const Fn1 = async () => {
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw Error("there is no first data");
-    }
-    return res.json();
-  };
-
-  const Fn2 = async () => {
-    const res = await fetch(`${url}/${id}`);
-    if (!res.ok) {
-      throw Error("there is no second data");
-    }
-    return res.json();
-  };
-
-  const queryClient = useQueryClient();
   const location = useLocation();
 
-  const [
-    { data: roomsData, isPending: isPending1, error: error1 },
-    { data: roomData, isPending: isPending2, error: error2 },
-  ] = useQueries({
-    queries: [
-      {
-        queryKey: [key1],
-        queryFn: Fn1,
-      },
-      {
-        queryKey: [key1, id],
-        queryFn: Fn2,
-        initialData: () => {
-          const data = queryClient.getQueryData([key1]);
+  const {
+    data1: roomsData,
+    data2: roomData,
+    isPending1,
+    isPending2,
+    error1,
+    error2,
+  } = DetailUseFetchQueries(url1, key1, id);
 
-          return data ? data.find((d) => d.id === parseInt(id)) : undefined;
-        },
-        enabled: !!id,
-      },
-    ],
-  });
-
-  useEffect(() => {
-    if (roomData) {
-      const name = roomData.name || "";
-    }
-  }, [roomData]);
   const img1 = roomData ? roomData.images[0] : null;
 
   const roomImages = roomData ? roomData.images : null;

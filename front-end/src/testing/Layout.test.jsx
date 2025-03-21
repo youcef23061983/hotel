@@ -6,20 +6,23 @@ import Layout from "../pages/Layout";
 import Rooms from "../components/Rooms";
 import About from "../components/About";
 import userEvent from "@testing-library/user-event";
+import { HelmetProvider } from "react-helmet-async";
 
 describe("group of testing Layout component", () => {
   const queryClient = new QueryClient();
   beforeEach(async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <MemoryRouter initialEntries={["/"]}>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route path="rooms" element={<Rooms />} />
-              <Route path="about" element={<About />} />
-            </Route>
-          </Routes>
-        </MemoryRouter>
+        <HelmetProvider>
+          <MemoryRouter initialEntries={["/"]}>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route path="rooms" element={<Rooms />} />
+                <Route path="about" element={<About />} />
+              </Route>
+            </Routes>
+          </MemoryRouter>
+        </HelmetProvider>
       </QueryClientProvider>
     );
   });

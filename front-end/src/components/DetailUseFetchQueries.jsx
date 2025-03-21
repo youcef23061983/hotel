@@ -1,5 +1,8 @@
-import { useQueries } from "@tanstack/react-query";
-const UseFetchQueries = (url1, key1, url2, Key2) => {
+import { useQueries, useQueryClient } from "@tanstack/react-query";
+
+const DetailUseFetchQueries = (url1, key1, id) => {
+  const queryClient = useQueryClient();
+
   const Fn1 = async () => {
     const res = await fetch(url1);
     if (!res.ok) {
@@ -8,21 +11,30 @@ const UseFetchQueries = (url1, key1, url2, Key2) => {
     return res.json();
   };
   const Fn2 = async () => {
-    const res = await fetch(url2);
+    const res = await fetch(`${url1}/${id}`);
     if (!res.ok) {
       throw Error("there is no second data");
     }
     return res.json();
   };
+
   const results = useQueries({
     queries: [
       {
         queryKey: [key1],
         queryFn: Fn1,
       },
+
       {
-        queryKey: [Key2],
+        queryKey: [key1, id],
         queryFn: Fn2,
+        initialData: () => {
+          const data = queryClient.getQueryData([key1]);
+
+          return data ? data.find((d) => d.id === parseInt(id)) : undefined;
+        },
+        // The enabled: !!id ensures that the query only runs if id is defined. This is a good practice to avoid unnecessary fetches.
+        enabled: !!id,
       },
     ],
   });
@@ -36,4 +48,4 @@ const UseFetchQueries = (url1, key1, url2, Key2) => {
   };
 };
 
-export default UseFetchQueries;
+export default DetailUseFetchQueries;

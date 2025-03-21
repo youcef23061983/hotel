@@ -5,6 +5,7 @@ import { beforeEach, expect, it, vi } from "vitest";
 import { mockData, mockData2 } from "./SetupTest";
 import Booking from "../components/Booking";
 import { userEvent } from "@testing-library/user-event";
+import { HelmetProvider } from "react-helmet-async";
 
 describe("group of testing Booking component", () => {
   vi.mock("../components/UseFetchQueries", () => ({
@@ -24,11 +25,13 @@ describe("group of testing Booking component", () => {
   beforeEach(async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <MemoryRouter initialEntries={["/booking/1"]}>
-          <Routes>
-            <Route path="/booking/:id" element={<Booking />} />
-          </Routes>
-        </MemoryRouter>
+        <HelmetProvider>
+          <MemoryRouter initialEntries={["/booking/1"]}>
+            <Routes>
+              <Route path="/booking/:id" element={<Booking />} />
+            </Routes>
+          </MemoryRouter>
+        </HelmetProvider>
       </QueryClientProvider>
     );
     await waitFor(() => {

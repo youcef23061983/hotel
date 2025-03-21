@@ -3,13 +3,16 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, expect } from "vitest";
 import Terms from "../components/Terms";
 import { mockData1 } from "./SetupTest";
+import { HelmetProvider } from "react-helmet-async";
 
 describe("group of testing Terms component", () => {
   const queryClient = new QueryClient();
   beforeEach(async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <Terms />
+        <HelmetProvider>
+          <Terms />
+        </HelmetProvider>
       </QueryClientProvider>
     );
     await waitFor(() => {

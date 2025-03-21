@@ -4,6 +4,7 @@ import { beforeEach, it, vi } from "vitest";
 import Testimonial from "../components/Testimonial";
 import { expect } from "vitest";
 import { mockData, mockData3 } from "./SetupTest";
+import { HelmetProvider } from "react-helmet-async";
 
 describe("group of testing testimonial componnet", () => {
   vi.mock("../components/UseFetchQueries", () => ({
@@ -21,7 +22,9 @@ describe("group of testing testimonial componnet", () => {
   beforeEach(async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <Testimonial />
+        <HelmetProvider>
+          <Testimonial />
+        </HelmetProvider>
       </QueryClientProvider>
     );
     await waitFor(() => {

@@ -4,6 +4,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes, useLocation } from "react-router-dom";
 import { expect, it, vi } from "vitest";
 import { mockData, mockData3 } from "./SetupTest";
+import { HelmetProvider } from "react-helmet-async";
 
 describe("group of testing HomePage component", () => {
   vi.mock("../components/UseFetchQueries", () => ({
@@ -21,11 +22,13 @@ describe("group of testing HomePage component", () => {
   beforeEach(async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <MemoryRouter initialEntries={["/"]}>
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-          </Routes>
-        </MemoryRouter>
+        <HelmetProvider>
+          <MemoryRouter initialEntries={["/"]}>
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+            </Routes>
+          </MemoryRouter>
+        </HelmetProvider>
       </QueryClientProvider>
     );
 

@@ -5,6 +5,7 @@ import { beforeEach, expect, vi } from "vitest";
 import Details from "../components/Details";
 import { mockData2, mockData } from "./SetupTest";
 import userEvent from "@testing-library/user-event";
+import { HelmetProvider } from "react-helmet-async";
 
 describe("group of testing details component ", () => {
   vi.mock("../components/UseFetchQueries", () => ({
@@ -27,12 +28,14 @@ describe("group of testing details component ", () => {
   beforeEach(async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <MemoryRouter initialEntries={["/rooms/1"]}>
-          <Routes>
-            <Route path="rooms/:id" element={<Details />} />
-            <Route path="/booking/:id" element={<BookingMock />} />
-          </Routes>
-        </MemoryRouter>
+        <HelmetProvider>
+          <MemoryRouter initialEntries={["/rooms/1"]}>
+            <Routes>
+              <Route path="rooms/:id" element={<Details />} />
+              <Route path="/booking/:id" element={<BookingMock />} />
+            </Routes>
+          </MemoryRouter>
+        </HelmetProvider>
       </QueryClientProvider>
     );
     await waitFor(() => {
@@ -44,7 +47,8 @@ describe("group of testing details component ", () => {
     expect(h2).toBeInTheDocument();
     // screen.debug(h2);
     const img1 = screen.getAllByRole("img")[0];
-    expect(img1).toHaveAttribute("src", `/${mockData2.images[0]}`);
+    expect(img1).toHaveAttribute("src", `${mockData2.images[0]}`);
+
     expect(img1).toBeInTheDocument();
     const renderIcon = vi.fn().mockImplementation(() => {
       return;

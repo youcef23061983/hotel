@@ -5,6 +5,7 @@ import { beforeEach, expect, vi } from "vitest";
 import Rooms from "../components/Rooms";
 import userEvent from "@testing-library/user-event";
 import { fireEvent } from "@testing-library/react";
+import { HelmetProvider } from "react-helmet-async";
 
 describe("group of testing Rooms component", () => {
   const MockDetail = () => {
@@ -16,12 +17,14 @@ describe("group of testing Rooms component", () => {
   beforeEach(async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Rooms />} />
-            <Route path="/:id" element={<MockDetail />} />
-          </Routes>
-        </BrowserRouter>
+        <HelmetProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Rooms />} />
+              <Route path="/:id" element={<MockDetail />} />
+            </Routes>
+          </BrowserRouter>
+        </HelmetProvider>
       </QueryClientProvider>
     );
     await waitFor(() => {
@@ -47,7 +50,7 @@ describe("group of testing Rooms component", () => {
     const single = screen.getByRole("heading", { name: "single" });
     expect(single).toBeInTheDocument();
 
-    const singlePrice = screen.getByText("120 $ per night");
+    const singlePrice = screen.getByText("170 $ per night");
     expect(singlePrice).toBeInTheDocument();
     const imges = screen.getAllByRole("img")[0];
 
@@ -59,12 +62,13 @@ describe("group of testing Rooms component", () => {
     });
     expect(people).toBeInTheDocument();
     const user = userEvent.setup();
-    await user.selectOptions(people, "2");
-    expect(screen.getByRole("heading", { name: "double" })).toBeInTheDocument();
-    expect(
-      screen.getByRole("link", { name: "110 $ per night" })
-    ).toBeInTheDocument();
+    await userEvent.selectOptions(people, "3");
     // screen.debug();
+
+    expect(screen.getByRole("heading", { name: "terace" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "170 $ per night" })
+    ).toBeInTheDocument();
   });
   it("should render the right maxPrice", () => {
     const price = screen.getByRole("slider");
@@ -95,9 +99,11 @@ describe("group of testing Rooms component", () => {
     fireEvent.change(minSizeInput, { target: { value: "300" } });
     fireEvent.change(maxSizeInput, { target: { value: "500" } });
     // screen.debug();
-    expect(screen.getByRole("heading", { name: "deluxe" })).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: "80 $ per night" })
+      screen.getByRole("heading", { name: "penthouse" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "130 $ per night" })
     ).toBeInTheDocument();
   });
   it("should the right butler", async () => {
@@ -113,16 +119,17 @@ describe("group of testing Rooms component", () => {
     expect(
       screen.getByRole("link", { name: "130 $ per night" })
     ).toBeInTheDocument();
-    screen.debug();
+    // screen.debug();
   });
   it("should render max children", () => {
     const maxChildren = screen.getByRole("spinbutton", {
       name: "max children",
     });
     const maxNum = "3";
+    screen.debug();
     fireEvent.change(maxChildren, { target: { value: maxNum } });
     expect(
-      screen.getByRole("heading", { name: "presidential" })
+      screen.getByRole("heading", { name: "penthouse" })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("link", { name: "130 $ per night" })
@@ -133,6 +140,6 @@ describe("group of testing Rooms component", () => {
     await userEvent.setup().click(explore);
     const detail = await screen.findByTestId("detail-div");
     expect(detail).toBeInTheDocument();
-    expect(detail).toHaveTextContent("/1");
+    expect(detail).toHaveTextContent("/6");
   });
 });

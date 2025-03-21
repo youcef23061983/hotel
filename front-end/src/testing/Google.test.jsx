@@ -2,13 +2,16 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { beforeEach, expect } from "vitest";
 import Google from "../components/Google";
 import { render, screen, waitFor } from "@testing-library/react";
+import { HelmetProvider } from "react-helmet-async";
 
 describe("group of testing Google component", () => {
   const queryClient = new QueryClient();
   beforeEach(async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <Google />
+        <HelmetProvider>
+          <Google />
+        </HelmetProvider>
       </QueryClientProvider>
     );
     await waitFor(() => {

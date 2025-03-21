@@ -4,6 +4,7 @@ import { Route, Routes, useLocation, MemoryRouter } from "react-router-dom";
 import { beforeEach } from "vitest";
 import Events from "../components/Events";
 import userEvent from "@testing-library/user-event";
+import { HelmetProvider } from "react-helmet-async";
 
 describe("group of events testing", () => {
   const MockContact = () => {
@@ -16,12 +17,14 @@ describe("group of events testing", () => {
 
     render(
       <QueryClientProvider client={queryClient}>
-        <MemoryRouter initialEntries={["/events"]}>
-          <Routes>
-            <Route path="/events" element={<Events />} />
-            <Route path="/contact" element={<MockContact />} />
-          </Routes>
-        </MemoryRouter>
+        <HelmetProvider>
+          <MemoryRouter initialEntries={["/events"]}>
+            <Routes>
+              <Route path="/events" element={<Events />} />
+              <Route path="/contact" element={<MockContact />} />
+            </Routes>
+          </MemoryRouter>
+        </HelmetProvider>
       </QueryClientProvider>
     );
 
