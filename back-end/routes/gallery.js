@@ -1,15 +1,8 @@
 const express = require("express");
-const pool = require("../libs/db.js");
 
 const router = express.Router();
+const getGallery = require("../controllers/galleryController.js");
 
-router.get("/", async (req, res) => {
-  try {
-    const gallery = await pool.query("SELECT * FROM gallery");
-    res.json(gallery.rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+router.get("/", getGallery);
 
 module.exports = router;

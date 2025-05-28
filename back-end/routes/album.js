@@ -1,5 +1,5 @@
 require("dotenv").config();
-const getAlbum = require("../controllers/getAlbum.js");
+const getAlbum = require("../controllers/albumController.js");
 
 const express = require("express");
 
