@@ -180,7 +180,7 @@ const Testimonial = () => {
                               <div>
                                 <Rating rating={rating} />
                               </div>
-                              <p>{rating} </p>
+                              <p>{rating}</p>
                             </div>
                           </div>
                         </div>

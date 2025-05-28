@@ -160,7 +160,6 @@
         "icon": "TbBath"
       },
       "unavailables": [],
-      "booking": [],
       "max_children": 0,
       "max_pets": 0,
       "pets_allowed": false,
@@ -220,7 +219,6 @@
         "icon": "TbBath"
       },
       "unavailables": [],
-      "booking": [],
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -283,32 +281,7 @@
         "number": 2,
         "icon": "TbBath"
       },
-      "unavailables": [1734390000000, 1734476400000],
-      "booking": [
-        {
-          "arrival": "12/17/2024",
-          "departure": "12/19/2024",
-          "dates": [1734390000000, 1734476400000],
-          "price": 200,
-          "total": 400,
-          "title": "",
-          "firstName": "",
-          "lastName": "",
-          "countryCode": "",
-          "phoneNumber": "",
-          "email": "",
-          "country": "",
-          "city": "",
-          "nationality": "",
-          "creditCardNumber": "",
-          "expirationMonth": "",
-          "year": "",
-          "securityCode": "",
-          "nameHolder": "",
-          "termsCondition": false,
-          "emailMe": false
-        }
-      ],
+      "unavailables": [],
       "max_children": 2,
       "max_pets": 2,
       "pets_allowed": true,
@@ -367,57 +340,7 @@
         "number": 2,
         "icon": "TbBath"
       },
-      "unavailables": [
-        1734303600000, 1734390000000, 1734390000000, 1734476400000
-      ],
-      "booking": [
-        {
-          "arrival": "12/16/2024",
-          "departure": "12/18/2024",
-          "dates": [1734303600000, 1734390000000],
-          "price": 250,
-          "total": 500,
-          "title": "",
-          "firstName": "",
-          "lastName": "",
-          "countryCode": "",
-          "phoneNumber": "",
-          "email": "",
-          "country": "",
-          "city": "",
-          "nationality": "",
-          "creditCardNumber": "",
-          "expirationMonth": "",
-          "year": "",
-          "securityCode": "",
-          "nameHolder": "",
-          "termsCondition": true,
-          "emailMe": true
-        },
-        {
-          "arrival": "12/17/2024",
-          "departure": "12/19/2024",
-          "dates": [1734390000000, 1734476400000],
-          "price": 250,
-          "total": 500,
-          "title": "",
-          "firstName": "",
-          "lastName": "",
-          "countryCode": "",
-          "phoneNumber": "",
-          "email": "",
-          "country": "",
-          "city": "",
-          "nationality": "",
-          "creditCardNumber": "",
-          "expirationMonth": "",
-          "year": "",
-          "securityCode": "",
-          "nameHolder": "",
-          "termsCondition": false,
-          "emailMe": false
-        }
-      ],
+      "unavailables": [],
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -478,7 +401,6 @@
         "icon": "TbBath"
       },
       "unavailables": [],
-      "booking": [],
       "max_children": 2,
       "max_pets": 2,
       "pets_allowed": false,
@@ -539,7 +461,6 @@
         "icon": "TbBath"
       },
       "unavailables": [],
-      "booking": [],
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -600,7 +521,6 @@
         "icon": "TbBath"
       },
       "unavailables": [],
-      "booking": [],
       "max_children": 1,
       "max_pets": 1,
       "pets_allowed": true,
@@ -661,7 +581,6 @@
         "icon": "TbBath"
       },
       "unavailables": [],
-      "booking": [],
       "max_children": 3,
       "max_pets": 2,
       "pets_allowed": false,
@@ -722,7 +641,6 @@
         "icon": "TbBath"
       },
       "unavailables": [],
-      "booking": [],
       "max_children": 4,
       "max_pets": 2,
       "pets_allowed": true,
@@ -784,32 +702,8 @@
         "number": 2,
         "icon": "TbBath"
       },
-      "unavailables": [1734303600000, 1734390000000],
-      "booking": [
-        {
-          "arrival": "12/16/2024",
-          "departure": "12/18/2024",
-          "dates": [1734303600000, 1734390000000],
-          "price": 400,
-          "total": 800,
-          "title": "",
-          "firstName": "",
-          "lastName": "",
-          "countryCode": "",
-          "phoneNumber": "",
-          "email": "",
-          "country": "",
-          "city": "",
-          "nationality": "",
-          "creditCardNumber": "",
-          "expirationMonth": "",
-          "year": "",
-          "securityCode": "",
-          "nameHolder": "",
-          "termsCondition": false,
-          "emailMe": false
-        }
-      ],
+      "unavailables": [],
+
       "max_children": 2,
       "max_pets": 2,
       "pets_allowed": true,

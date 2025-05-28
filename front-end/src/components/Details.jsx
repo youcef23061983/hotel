@@ -78,7 +78,8 @@ const Details = () => {
 
   const otherRooms = roomsData
     ? roomsData.filter(
-        (room) => room.type === roomData.type && room.id !== roomData.id
+        // (room) => room.type === roomData.type && room.id !== roomData.id
+        (room) => room && room.type === roomData.type && room.id !== roomData.id
       )
     : [];
   const useMediaQuery = (query) => {

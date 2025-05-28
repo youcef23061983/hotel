@@ -10,7 +10,6 @@ import { DateRange } from "react-date-range";
 import { format, differenceInDays, addDays } from "date-fns";
 import { FcCheckmark } from "react-icons/fc";
 import { motion } from "framer-motion";
-import { useQuery, QueryClient } from "@tanstack/react-query";
 import BookingUseFetch from "./BookingUseFetch";
 
 const Booking = () => {
@@ -19,29 +18,6 @@ const Booking = () => {
   const [congra, setCongra] = useState(false);
   const [calendar, setCalendar] = useState(true);
   const url = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
-
-  // const queryClient = new QueryClient();
-
-  // const productFun = async () => {
-  //   const res = await fetch(`${url}/${id}`);
-  //   if (!res.ok) {
-  //     throw Error("There is no product data");
-  //   }
-  //   return res.json();
-  // };
-  // const {
-  //   data: roomData,
-  //   error,
-  //   isPending,
-  // } = useQuery({
-  //   queryKey: ["product", id],
-  //   queryFn: productFun,
-  //   initialData: () => {
-  //     return queryClient
-  //       .getQueryData(["products"])
-  //       ?.find((x) => x.id === parseInt(id));
-  //   },
-  // });
   const {
     data: roomData,
     error,
@@ -51,9 +27,7 @@ const Booking = () => {
   useEffect(() => {
     document.title = "Booking";
   }, []);
-  const storedUnavailables = localStorage.getItem(`room_${id}_unavailables`);
-  const initialDates = storedUnavailables ? JSON.parse(storedUnavailables) : [];
-  const [dates, setDates] = useState(initialDates);
+  const [dates, setDates] = useState([]);
 
   const [date, setDate] = useState([
     {
@@ -63,19 +37,18 @@ const Booking = () => {
     },
   ]);
   const dateRange = (startDate, endDate) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate.getTime());
-    const date = new Date(start.getTime());
     const dates = [];
-
-    while (date <= end) {
-      dates.push(new Date(date).getTime());
-      date.setDate(date.getDate() + 1);
+    let current = new Date(startDate);
+    while (current <= endDate) {
+      dates.push(current.getTime());
+      current = new Date(current.setDate(current.getDate() + 1));
     }
-
     return dates;
   };
-  const allDates = dateRange(date[0].startDate, date[0].endDate);
+
+  const allDates = dateRange(date[0].startDate, date[0].endDate).map((ms) =>
+    format(new Date(ms), "MM/dd/yyyy")
+  );
 
   const arrival = format(date[0].startDate, "MM/dd/yyy");
 
@@ -111,11 +84,6 @@ const Booking = () => {
     const updatedUnavailables = roomData
       ? [...roomData.unavailables, ...allDates]
       : [];
-    localStorage.setItem(
-      `room_${id}_unavailables`,
-      JSON.stringify(updatedUnavailables)
-    );
-    setDates(updatedUnavailables);
 
     const updateRes = await fetch(`${url}/${id}`, {
       method: "PATCH",
@@ -129,15 +97,21 @@ const Booking = () => {
   const { data: add, mutate: unavailableData } = useMutation({
     mutationFn: patchData,
   });
-  const updatedBooking = roomData ? [...roomData.booking, user] : [];
+  useEffect(() => {
+    if (roomData?.unavailables) {
+      const parsedDates = roomData.unavailables.map((date) => new Date(date));
+
+      setDates(parsedDates);
+    }
+  }, [roomData]);
 
   const bookingFun = async () => {
-    const res = await fetch(`${url}/${id}`, {
-      method: "PATCH",
+    const res = await fetch(`${import.meta.env.VITE_PROD_URL_URL}/bookings`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ booking: updatedBooking }),
+      body: JSON.stringify(user),
     });
 
     setInfo(!info);
@@ -162,14 +136,13 @@ const Booking = () => {
     const allDates = dateRange(
       item.selection.startDate,
       item.selection.endDate
-    );
+    ).map((ms) => format(new Date(ms), "MM/dd/yyyy"));
 
     const numberOfNights =
       differenceInDays(item.selection.endDate, item.selection.startDate) + 1;
     const price = roomData ? roomData.price : 0;
 
     const total = roomData ? roomData.price * numberOfNights : 0;
-
     setUser((prevUser) => ({
       ...prevUser,
       arrival: arrival,
@@ -177,6 +150,7 @@ const Booking = () => {
       dates: allDates,
       price,
       total,
+      room_id: id,
     }));
 
     setDate([item.selection]);
@@ -232,21 +206,6 @@ const Booking = () => {
     //   return;
     // }
   };
-  const clearLocalStorage = () => {
-    localStorage.removeItem(`room_${id}_unavailables`);
-  };
-
-  // clearLocalStorage();
-
-  const cleanupLocalStorage = () => {
-    localStorage.removeItem(`room_${id}_user`);
-  };
-  // cleanupLocalStorage();
-
-  const removeAll = () => {
-    localStorage.clear();
-  };
-  // removeAll();
 
   const img2 = roomData ? roomData.images[0] : null;
 
