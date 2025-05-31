@@ -19,12 +19,15 @@ import { EffectCoverflow, Pagination } from "swiper/modules";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import DetailUseFetchQueries from "./DetailUseFetchQueries";
+import { AppContext } from "../pages/AppProvider";
+import { useContext } from "react";
 
 const Details = () => {
   const { id } = useParams();
   const [index, setIndex] = useState(0);
   const url1 = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
   const key1 = "rooms";
+  const { addToCart, room } = useContext(AppContext);
 
   const location = useLocation();
 
@@ -219,7 +222,11 @@ const Details = () => {
           </Link>
           <h2 data-testid="h2">about the room </h2>
           <p>{roomData ? roomData.intoduction : ""}</p>
-          <Link className="nav-btn" to={`/booking/${id}`}>
+          <Link
+            className="nav-btn"
+            to={`/booking/${id}`}
+            onClick={() => addToCart(id)} // Changed to arrow function
+          >
             book now
           </Link>
         </motion.div>

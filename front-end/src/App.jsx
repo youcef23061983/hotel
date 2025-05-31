@@ -15,45 +15,32 @@ import Privacy from "./components/Privacy";
 import Terms from "./components/Terms";
 import Cookies from "./components/Cookies";
 import Booking from "./components/Booking";
-import { BrowserRouter } from "react-router-dom";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Testimonial from "./components/Testimonial";
 import NotFound from "./pages/NotFound";
-import { HelmetProvider } from "react-helmet-async";
-
-const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="" element={<Layout />}>
-              <Route index element={<Homepage />} />
-              <Route path="rooms" element={<Rooms />} />
-              <Route path="rooms/:id" element={<Details />} />
-              <Route path="about" element={<About />} />
-              <Route path="restaurant" element={<Restaurant />} />
-              <Route path="testimonial" element={<Testimonial />} />
-              <Route path="wellness" element={<Wellness />} />
-              <Route path="experiences" element={<Experiences />} />
-              <Route path="events" element={<Events />} />
-              <Route path="gallery" element={<Gallery />} />
-              <Route path="contact" element={<ContactUs />} />
-              <Route path="google" element={<Google />} />
-              <Route path="privacy" element={<Privacy />} />
-              <Route path="terms" element={<Terms />} />
-              <Route path="cookies" element={<Cookies />} />
-              <Route path="booking/:id" element={<Booking />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </HelmetProvider>
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+    <Routes>
+      <Route path="" element={<Layout />}>
+        <Route index element={<Homepage />} />
+        <Route path="rooms" element={<Rooms />} />
+        <Route path="rooms/:id" element={<Details />} />
+        <Route path="about" element={<About />} />
+        <Route path="restaurant" element={<Restaurant />} />
+        <Route path="testimonial" element={<Testimonial />} />
+        <Route path="wellness" element={<Wellness />} />
+        <Route path="experiences" element={<Experiences />} />
+        <Route path="events" element={<Events />} />
+        <Route path="gallery" element={<Gallery />} />
+        <Route path="contact" element={<ContactUs />} />
+        <Route path="google" element={<Google />} />
+        <Route path="privacy" element={<Privacy />} />
+        <Route path="terms" element={<Terms />} />
+        <Route path="cookies" element={<Cookies />} />
+        <Route path="booking/:id" element={<Booking />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 
