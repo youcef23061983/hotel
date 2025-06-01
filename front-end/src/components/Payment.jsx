@@ -11,10 +11,6 @@ import { AppContext } from "../pages/AppProvider";
 
 const Payment = ({ bookingMutate, unavailableData, open }) => {
   const { user, room, roomPayment, payment } = useContext(AppContext);
-  console.log("user in payment", user);
-  console.log("type of", typeof user?.total);
-
-  console.log("room in payment", room);
 
   const navigate = useNavigate();
   const [paymentSucceeded, setPaymentSucceeded] = useState(false);
@@ -22,7 +18,6 @@ const Payment = ({ bookingMutate, unavailableData, open }) => {
   const [clientSecret, setClientSecret] = useState(null);
 
   const total = user?.total || 0; // Ensure total is defined
-  console.log("Total in Payment in front:", total);
 
   useEffect(() => {
     fetch("http://localhost:3000/config") // Correct URL for the config

@@ -66,7 +66,6 @@ const CheckoutForm = ({ onSuccess }) => {
           const fullCustomerData = await response.json();
           setCustomerData(fullCustomerData);
           onSuccess(); // Pass to parent component
-          console.log(fullCustomerData);
         }
       } else {
         setMessage("Unexpected payment status");
@@ -77,7 +76,6 @@ const CheckoutForm = ({ onSuccess }) => {
 
     setIsProcessing(false);
   };
-  console.log("Customer Data:", customerData);
 
   //   {
   //     4000 0027 6000 3184 → Returns complete US address
