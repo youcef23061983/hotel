@@ -9,6 +9,8 @@ const galleryRoutes = require("./routes/gallery.js");
 const albumRoutes = require("./routes/album.js");
 const testimonialsRoutes = require("./routes/testimonials.js");
 const bookingsRoutes = require("./routes/bookings.js");
+const stripe = require("stripe")(process.env.VITE_STRIPE_SECRET_KEY);
+
 app.use(express.json());
 app.use(
   cors({
@@ -26,12 +28,12 @@ app.use("/testimonials", testimonialsRoutes);
 app.use("/bookings", bookingsRoutes);
 app.post("/create-payment-intent", async (req, res) => {
   const { total } = req.body;
-  console.log("total", total);
+  console.log("Total in Payment in back:", total);
 
   if (!total || total <= 0) {
     return res.status(400).json({ error: "Invalid amount" });
   }
-
+  // const amount = Math.round(total * 100); // Convert to cents
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: total * 100, // Convert to cents
@@ -45,6 +47,42 @@ app.post("/create-payment-intent", async (req, res) => {
   }
 });
 
+// app.post("/create-payment-intent", async (req, res) => {
+//   try {
+//     const { total } = req.body;
+
+//     console.log("Received payment request:", total);
+
+//     if (!total || isNaN(total) || total <= 0) {
+//       return res.status(400).json({
+//         error: "Invalid total amount",
+//         received: total,
+//       });
+//     }
+
+//     const amount = Math.round(total * 100); // Convert to cents
+
+//     const paymentIntent = await stripe.paymentIntents.create({
+//       amount,
+//       currency: "usd",
+
+//       automatic_payment_methods: {
+//         enabled: true,
+//       },
+//     });
+
+//     res.json({
+//       clientSecret: paymentIntent.client_secret,
+//       paymentIntentId: paymentIntent.id,
+//     });
+//   } catch (err) {
+//     console.error("Payment error:", err);
+//     res.status(500).json({
+//       error: "Payment processing failed",
+//       details: err.message,
+//     });
+//   }
+// });
 app.get("/config", (req, res) => {
   res.json({
     publishableKey: process.env.VITE_STRIPE_PUBLIC_KEY, // Send as JSON object

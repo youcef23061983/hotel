@@ -1607,10 +1607,6 @@ const Booking = () => {
       },
       body: JSON.stringify(user),
     });
-
-    setInfo(!info);
-    // setCongra(!congra);
-    setPayment(!payment);
   };
 
   const { data: addBooking, mutate: bookingMutate } = useMutation({
@@ -1648,58 +1644,18 @@ const Booking = () => {
 
     setDate([item.selection]);
   };
-
-  const confirm = (e) => {
-    e.preventDefault();
-    // if (
-    //   !user.firstName ||
-    //   !user.lastName ||
-    //   !user.title ||
-    //   !user.phoneNumber ||
-    //   !user.countryCode ||
-    //   !user.country ||
-    //   !user.nationality ||
-    //   !user.creditCardNumber ||
-    //   !user.expirationMonth ||
-    //   !user.year ||
-    //   !user.securityCode ||
-    //   !user.nameHolder ||
-    //   !user.termsCondition ||
-    //   !user.emailMe ||
-    //   !user.email
-    // ) {
-    //   alert("please enter your information");
-    //   return;
-    // }
-    // if (!user.arrival || !user.departure) {
-    //   alert("please go back and choose your booking days ");
-    //   return;
-    // }
-    // if (
-    //   user.firstName &&
-    //   user.lastName &&
-    //   user.title &&
-    //   user.phoneNumber &&
-    //   user.countryCode &&
-    //   user.country &&
-    //   user.nationality &&
-    //   user.creditCardNumber &&
-    //   user.expirationMonth &&
-    //   user.year &&
-    //   user.securityCode &&
-    //   user.nameHolder &&
-    //   user.termsCondition &&
-    //   user.emailMe &&
-    //   user.email &&
-    //   user.departure &&
-    //   user.arrival
-    // ) {
-    unavailableData();
-    bookingMutate();
-    //   return;
-    // }
+  const openPatmentcloseInfo = () => {
+    setInfo(!info);
+    setPayment(!payment);
   };
-
+  const openInfocloseCalendar = () => {
+    setInfo(!info);
+    setCalendar(!calendar);
+  };
+  const openCongreclosePayment = () => {
+    setPayment(!payment);
+    setCongra(!congra);
+  };
   if (isPending) return <h2>...is loading</h2>;
   if (error) return <h2>{error.message}</h2>;
   return (
@@ -1718,10 +1674,7 @@ const Booking = () => {
         <Calendar
           arrival={arrival}
           departure={departure}
-          info={info}
-          setInfo={setInfo}
-          calendar={calendar}
-          setCalendar={setCalendar}
+          open={openInfocloseCalendar}
           date={date}
           setDate={setDate}
           handleDateChange={handleDateChange}
@@ -1731,18 +1684,17 @@ const Booking = () => {
       )}
       {info && (
         <Information
-          roomData={roomData}
-          user={user}
           handleDateChange={handleDateChange}
           estimatedTotal={estimatedTotal}
           handleChange={handleChange}
-          confirm={confirm}
+          open={openPatmentcloseInfo}
         />
       )}
       {payment && (
         <Payment
           unavailableData={unavailableData}
           bookingMutate={bookingMutate}
+          open={openCongreclosePayment}
         />
       )}
 

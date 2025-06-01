@@ -3,15 +3,12 @@ import { AppContext } from "../pages/AppProvider";
 import { useContext } from "react";
 
 const Information = ({
-  user,
-  roomData,
   handleDateChange,
   estimatedTotal,
   handleChange,
-  confirm,
+  open,
 }) => {
-  const { room } = useContext(AppContext);
-  console.log(room, "this is room");
+  const { room: roomData, user } = useContext(AppContext);
 
   const img2 = roomData ? roomData.images[0] : null;
 
@@ -106,7 +103,10 @@ const Information = ({
         </motion.div>
 
         <motion.form
-          onSubmit={confirm}
+          onSubmit={(e) => {
+            e.preventDefault();
+            open();
+          }}
           className="allDetails"
           variants={detailschildVariants}
         >

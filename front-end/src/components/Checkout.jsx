@@ -1,10 +1,13 @@
 import { useState } from "react";
-// import React, { useContext } from "react";
-// import { AppContext } from "../data managment/AppProvider";
+import React, { useContext } from "react";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { AppContext } from "../pages/AppProvider";
 
 const Checkout = ({ onSuccess }) => {
-  //   const { total, cart, shipping } = useContext(AppContext);
+  const { user } = useContext(AppContext);
+
+  console.log("checkout total", user?.total);
+
   const [customerData, setCustomerData] = useState(null);
 
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
@@ -26,7 +29,7 @@ const Checkout = ({ onSuccess }) => {
       purchase_units: [
         {
           amount: {
-            value: total,
+            value: user?.total,
           },
         },
       ],

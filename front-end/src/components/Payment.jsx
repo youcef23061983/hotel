@@ -1,7 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import img from "/images/homepage/img1.jpg";
 import { useNavigate } from "react-router-dom";
-// import { AppContext } from "../data managment/AppProvider";
 import Checkout from "./Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -11,74 +9,75 @@ import CheckoutForm from "./CheckoutForm";
 import { useCallback } from "react";
 import { AppContext } from "../pages/AppProvider";
 
-const Payment = ({ bookingMutate, unavailableData }) => {
-  const { user, room } = useContext(AppContext);
+const Payment = ({ bookingMutate, unavailableData, open }) => {
+  const { user, room, roomPayment, payment } = useContext(AppContext);
   console.log("user in payment", user);
+  console.log("type of", typeof user?.total);
+
   console.log("room in payment", room);
 
-  const [payment, setPayment] = useState({});
   const navigate = useNavigate();
   const [paymentSucceeded, setPaymentSucceeded] = useState(false);
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState(null);
 
-  //   useEffect(() => {
-  //     fetch("http://localhost:3000/config") // Correct URL for the config
-  //       .then(async (r) => {
-  //         const { publishableKey } = await r.json();
-  //         setStripePromise(loadStripe(publishableKey)); // Use publishableKey
-  //         console.log("Publishable Key:", publishableKey);
-  //       })
-  //       .catch((error) => console.error("Error fetching config:", error));
-  //   }, []);
+  const total = user?.total || 0; // Ensure total is defined
+  console.log("Total in Payment in front:", total);
 
-  //   useEffect(() => {
-  //     fetch("http://localhost:3000/create-payment-intent", {
-  //       // Correct URL for create-payment-intent
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ total }),
-  //     })
-  //       .then(async (r) => {
-  //         if (!r.ok) {
-  //           throw new Error("Failed to fetch client secret");
-  //         }
-  //         const { clientSecret } = await r.json();
-  //         console.log("Client Secret:", clientSecret);
-  //         setClientSecret(clientSecret);
-  //       })
-  //       .catch((error) => console.error("Error fetching client secret:", error));
-  //   }, []);
-
-  const handleChange = useCallback((e) => {
-    const { name, value } = e.target;
-    setPayment((prevPayment) => ({
-      ...prevPayment,
-      [name]: value,
-    }));
+  useEffect(() => {
+    fetch("http://localhost:3000/config") // Correct URL for the config
+      .then(async (r) => {
+        const { publishableKey } = await r.json();
+        setStripePromise(loadStripe(publishableKey)); // Use publishableKey
+        console.log("Publishable Key:", publishableKey);
+      })
+      .catch((error) => console.error("Error fetching config:", error));
   }, []);
 
-  const paymentSubmit = useCallback(
+  useEffect(() => {
+    fetch("http://localhost:3000/create-payment-intent", {
+      // Correct URL for create-payment-intent
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ total }),
+    })
+      .then(async (r) => {
+        if (!r.ok) {
+          throw new Error("Failed to fetch client secret");
+        }
+        const { clientSecret } = await r.json();
+        console.log("Client Secret:", clientSecret);
+        setClientSecret(clientSecret);
+      })
+      .catch((error) => console.error("Error fetching client secret:", error));
+  }, []);
+
+  const handleChange = useCallback(
     (e) => {
-      e.preventDefault();
-      //   cartPayment(payment);
-      // if (paymentSucceeded) {
-      //   navigate("/order");
-      // }
-      navigate("/order");
+      const { name, value } = e.target;
+      roomPayment({
+        ...payment,
+        [name]: value,
+      });
     },
-    [payment, paymentSucceeded, , navigate]
+    [payment, roomPayment, paymentSucceeded]
   );
+
+  const paymentSubmit = useCallback((e) => {
+    e.preventDefault();
+    open();
+
+    // navigate("/bill");
+  }, []);
 
   const handleSuccess = useCallback(() => {
     setPaymentSucceeded(true);
-
-    // cartPayment(payment); // Move this here
     unavailableData();
     bookingMutate();
-  }, []);
+  }, [unavailableData, bookingMutate, open]);
+
   const paypalClienId = import.meta.env.VITE_PAYPAL_CLIENT_ID;
   const initialOptions = {
     "client-id": paypalClienId,
@@ -117,9 +116,6 @@ const Payment = ({ bookingMutate, unavailableData }) => {
       animate="visible"
       exit="exit"
     >
-      <motion.div className="headerimages" variants={childVariants}>
-        <img src={img} alt="payment" loading="lazy" className="detailImg" />
-      </motion.div>
       <motion.div className="loginContainer" variants={containerVariants}>
         <h3>Payment Method</h3>
         <form onSubmit={paymentSubmit} className="login-form">
@@ -154,7 +150,10 @@ const Payment = ({ bookingMutate, unavailableData }) => {
           {/* )} */}
         </form>
         {payment.payment === "paypal" && (
-          <PayPalScriptProvider options={initialOptions}>
+          <PayPalScriptProvider
+            options={initialOptions}
+            variants={childVariants}
+          >
             <Checkout onSuccess={handleSuccess} />
           </PayPalScriptProvider>
         )}

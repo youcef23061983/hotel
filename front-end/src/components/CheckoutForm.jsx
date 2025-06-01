@@ -4,11 +4,11 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-// import { AppContext } from "../data managment/AppProvider";
-// import { useContext } from "react";
+import { useContext } from "react";
+import { AppContext } from "../pages/AppProvider";
 
 const CheckoutForm = ({ onSuccess }) => {
-  //   const { cart, shipping, formUser, firebaseUser } = useContext(AppContext);
+  const { user, room } = useContext(AppContext);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -55,10 +55,10 @@ const CheckoutForm = ({ onSuccess }) => {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 paymentIntentId: paymentIntent.id,
-                cart,
-                shipping,
-                formUser,
-                firebaseUser,
+                user,
+                room,
+                // formUser,
+                // firebaseUser,
               }),
             }
           );
