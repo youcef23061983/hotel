@@ -24,7 +24,6 @@ const Payment = ({ bookingMutate, unavailableData, open }) => {
       .then(async (r) => {
         const { publishableKey } = await r.json();
         setStripePromise(loadStripe(publishableKey)); // Use publishableKey
-        console.log("Publishable Key:", publishableKey);
       })
       .catch((error) => console.error("Error fetching config:", error));
   }, []);
@@ -43,7 +42,7 @@ const Payment = ({ bookingMutate, unavailableData, open }) => {
           throw new Error("Failed to fetch client secret");
         }
         const { clientSecret } = await r.json();
-        console.log("Client Secret:", clientSecret);
+
         setClientSecret(clientSecret);
       })
       .catch((error) => console.error("Error fetching client secret:", error));

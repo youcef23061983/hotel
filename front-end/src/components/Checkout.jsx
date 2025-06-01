@@ -6,8 +6,6 @@ import { AppContext } from "../pages/AppProvider";
 const Checkout = ({ onSuccess }) => {
   const { user } = useContext(AppContext);
 
-  console.log("checkout total", user?.total);
-
   const [customerData, setCustomerData] = useState(null);
 
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
