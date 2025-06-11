@@ -1,3 +1,0 @@
-sk_test_.*==>REDACTED
-AIza[A-Za-z0-9_-]*==>REDACTED
-service_account==>REDACTED
