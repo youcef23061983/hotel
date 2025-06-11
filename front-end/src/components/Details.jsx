@@ -18,9 +18,9 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import DetailUseFetchQueries from "./DetailUseFetchQueries";
-import { AppContext } from "../pages/AppProvider";
 import { useContext } from "react";
+import DetailUseFetchQueries from "../data managment/DetailUseFetchQueries";
+import { AppContext } from "../data managment/AppProvider";
 
 const Details = () => {
   const { id } = useParams();

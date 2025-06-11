@@ -1,13 +1,28 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { FaAlignJustify } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { LuUserCircle2 } from "react-icons/lu";
+
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import { auth } from "../info & contact/Firebase";
+import { signOut } from "firebase/auth";
+import { AppContext } from "../data managment/AppProvider";
+import { useContext } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [showLinks, setShowLinks] = useState(false);
+
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
   const navCenter = useRef(null);
-  const location = useLocation();
+  const { logout, formUser, setFirebaseUser, setFormUser } =
+    useContext(AppContext);
+  const [firebaseUser, loading] = useAuthState(auth);
+  console.log("firebaseUser", firebaseUser);
 
   useLayoutEffect(() => {
     setShowLinks(false);
@@ -77,9 +92,71 @@ const Navbar = () => {
           <Link className="navlink" to="about">
             About US
           </Link>
-          <Link className="navlink" to="contact">
-            contact
-          </Link>
+          <div className="user">
+            <div>
+              {firebaseUser ? (
+                <div className="cart">
+                  <p className="displayName">
+                    Welcome, {firebaseUser?.displayName}
+                  </p>
+
+                  <Link
+                    to="/login"
+                    className="linkIcon"
+                    aria-label="User profile"
+                  >
+                    {firebaseUser?.photoURL ? (
+                      <img
+                        src={firebaseUser.photoURL}
+                        className="img"
+                        style={{ borderRadius: "50%" }}
+                        alt="Profile"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <LuUserCircle2 />
+                    )}
+                  </Link>
+                  <Link
+                    className="navlink"
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      try {
+                        await signOut(auth);
+                        setFirebaseUser(null);
+                        setFormUser(null);
+                        sessionStorage.removeItem("token");
+
+                        navigate("/", { replace: true });
+                      } catch (err) {
+                        console.error("Error signing out:", err.message);
+                      }
+                    }}
+                  >
+                    Logout
+                  </Link>
+                </div>
+              ) : formUser ? (
+                <div className="cart">
+                  <p className="navlink">Welcome, {formUser?.user?.username}</p>
+                  <Link className="linkIcon">
+                    <LuUserCircle2 className="w-10 h-10 rounded-full border border-gray-300 object-cover" />
+                  </Link>
+
+                  <Link className="navlink" onClick={logout}>
+                    Logout
+                  </Link>
+                </div>
+              ) : (
+                <Link className="navlink" to="/login">
+                  Login
+                </Link>
+              )}
+            </div>
+            <Link className="navlink" to="contact">
+              contact
+            </Link>
+          </div>
         </div>
         <div>
           <ul

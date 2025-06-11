@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 *,
 after,
 before {
@@ -5,6 +8,7 @@ before {
   padding: 0;
   box-sizing: border-box;
 }
+
 :root {
   --clr-primary-header-button: rgb(14, 15, 56);
   --clr-primary-navbar: #22258a;
@@ -26,6 +30,7 @@ body {
   font-size: 1.6rem;
   overflow-x: hidden;
 }
+
 ul {
   list-style-type: none;
 }
@@ -478,7 +483,25 @@ a {
   margin: 1rem;
   padding: 1rem;
 }
+.user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.displayName {
+  font-size: 1.9rem;
+  margin: auto 0;
+}
+.linkIcon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 5rem;
+  margin: auto;
 
+  font-weight: lighter;
+  opacity: 0.9;
+  color: var(--clr-primary-header-color);
+}
 /* -----home page */
 
 @media screen and (min-width: 336px) {
@@ -766,6 +789,13 @@ a {
   .policyCheck > input {
     margin-right: 0.5rem;
   }
+  .cart {
+    display: flex;
+    font-size: 2rem;
+    gap: 1rem;
+
+    margin: 0 1rem;
+  }
 }
 
 @media screen and (min-width: 786px) {
@@ -906,6 +936,9 @@ a {
   }
   .guestTitle > label {
     font-size: 1.5rem;
+  }
+  .cart {
+    font-size: 2.5rem;
   }
 }
 @media screen and (min-width: 992px) {

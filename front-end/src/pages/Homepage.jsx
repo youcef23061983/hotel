@@ -14,7 +14,7 @@ import "./homepage.css";
 import Banner from "./Banner";
 import video from "/video.mp4";
 import { useScroll, useTransform, motion } from "framer-motion";
-import UseFetchQueries from "../components/UseFetchQueries";
+import UseFetchQueries from "../data managment/UseFetchQueries";
 import { Helmet } from "react-helmet-async";
 const Homepage = () => {
   const url1 = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;

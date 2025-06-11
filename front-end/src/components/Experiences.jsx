@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
 import { useRef, useEffect, useState } from "react";
 import { MdOutlineScubaDiving } from "react-icons/md";
@@ -14,6 +13,7 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import UseFetch from "../data managment/UseFetch";
 
 const Experiences = () => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;

@@ -1,8 +1,8 @@
-import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
 import { MdMonochromePhotos } from "react-icons/md";
 import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import UseFetch from "../data managment/UseFetch";
 
 const Gallery = () => {
   const [searchParams, setSearchParams] = useSearchParams();

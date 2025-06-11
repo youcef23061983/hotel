@@ -1,4 +1,3 @@
-import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
 import "./restaurant.css";
 import { PiClockAfternoonThin, PiDressThin } from "react-icons/pi";
@@ -15,6 +14,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { Helmet } from "react-helmet-async";
+import UseFetch from "../data managment/UseFetch";
 const Restaurant = () => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
 

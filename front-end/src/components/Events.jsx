@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
-import UseFetch from "./UseFetch";
 import { PiOfficeChair } from "react-icons/pi";
 
 import { LuPartyPopper } from "react-icons/lu";
@@ -16,6 +15,7 @@ import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import UseFetch from "../data managment/UseFetch";
 const Events = () => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
   const key = "gallery";

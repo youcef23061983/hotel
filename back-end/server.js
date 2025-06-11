@@ -9,6 +9,8 @@ const galleryRoutes = require("./routes/gallery.js");
 const albumRoutes = require("./routes/album.js");
 const testimonialsRoutes = require("./routes/testimonials.js");
 const bookingsRoutes = require("./routes/bookings.js");
+const authRoutes = require("./routes/authUser.js");
+
 const stripe = require("stripe")(process.env.VITE_STRIPE_SECRET_KEY);
 
 app.use(express.json());
@@ -26,6 +28,8 @@ app.use("/gallery", galleryRoutes);
 app.use("/album", albumRoutes);
 app.use("/testimonials", testimonialsRoutes);
 app.use("/bookings", bookingsRoutes);
+app.use("/auth", authRoutes);
+
 app.post("/create-payment-intent", async (req, res) => {
   const { total } = req.body;
   console.log("Total in Payment in back:", total);
@@ -33,10 +37,9 @@ app.post("/create-payment-intent", async (req, res) => {
   if (!total || total <= 0) {
     return res.status(400).json({ error: "Invalid amount" });
   }
-  // const amount = Math.round(total * 100); // Convert to cents
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: total * 100, // Convert to cents
+      amount: Math.round(total * 100), // Properly round to nearest integer
       currency: "usd",
 
       automatic_payment_methods: { enabled: true },
@@ -47,42 +50,6 @@ app.post("/create-payment-intent", async (req, res) => {
   }
 });
 
-// app.post("/create-payment-intent", async (req, res) => {
-//   try {
-//     const { total } = req.body;
-
-//     console.log("Received payment request:", total);
-
-//     if (!total || isNaN(total) || total <= 0) {
-//       return res.status(400).json({
-//         error: "Invalid total amount",
-//         received: total,
-//       });
-//     }
-
-//     const amount = Math.round(total * 100); // Convert to cents
-
-//     const paymentIntent = await stripe.paymentIntents.create({
-//       amount,
-//       currency: "usd",
-
-//       automatic_payment_methods: {
-//         enabled: true,
-//       },
-//     });
-
-//     res.json({
-//       clientSecret: paymentIntent.client_secret,
-//       paymentIntentId: paymentIntent.id,
-//     });
-//   } catch (err) {
-//     console.error("Payment error:", err);
-//     res.status(500).json({
-//       error: "Payment processing failed",
-//       details: err.message,
-//     });
-//   }
-// });
 app.get("/config", (req, res) => {
   res.json({
     publishableKey: process.env.VITE_STRIPE_PUBLIC_KEY, // Send as JSON object
@@ -90,8 +57,7 @@ app.get("/config", (req, res) => {
 });
 app.post("/retrieve-customer-data", async (req, res) => {
   try {
-    const { paymentIntentId, total, cart, shipping, formUser, firebaseUser } =
-      req.body;
+    const { paymentIntentId, room, user, formUser, firebaseUser } = req.body;
 
     // const isTestMode = process.env.NODE_ENV === "development";
 
@@ -134,14 +100,15 @@ app.post("/retrieve-customer-data", async (req, res) => {
         .join("\n");
 
     const customerData = {
-      amout: total || (paymentIntent.amount / 100).toFixed(2) || "0.00",
-      fullName: shipping?.fullName || "Not provided",
-      street: shipping?.address || "",
+      amount: user?.total || (paymentIntent.amount / 100).toFixed(2) || "0.00",
+      dates: user?.dates?.length || "no nights",
+      fullName: user?.firstName + " " + user?.lastName || "Not provided",
+      street: user?.address || "123 Test Street",
       email: formUser.user.email || firebaseUser?.email || "Not provided",
-      country: shipping?.country || "N/A",
-      city: shipping?.city || "",
-      postalCode: shipping?.postalCode || "",
-      items: cart,
+      country: user?.country || "N/A",
+      city: user?.city || "",
+      postalCode: user?.postalCode || "12345",
+      items: room,
       // fullName:
       //   paymentIntent.payment_method?.billing_details?.name || "Not provided",
 
@@ -166,10 +133,12 @@ app.post("/retrieve-customer-data", async (req, res) => {
         paymentIntent.payment_method?.billing_details?.address?.postal_code ||
         "",
 
-      phone: paymentIntent.payment_method?.billing_details?.phone || "",
+      phone:
+        user?.countryCode + " " + user?.phoneNumber ||
+        paymentIntent.payment_method?.billing_details?.phone ||
+        " Not provided",
       paymentMethod: paymentIntent.payment_method?.card?.brand || "Unknown",
       last4: paymentIntent.payment_method?.card?.last4 || "****",
-      amount: (paymentIntent.amount / 100).toFixed(2) || "0.00",
       currency: paymentIntent.currency.toUpperCase() || "USD",
       created:
         new Date(paymentIntent.created * 1000).toISOString() ||

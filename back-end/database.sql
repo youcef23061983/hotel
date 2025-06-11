@@ -1086,5 +1086,23 @@ INSERT INTO testimonials (name, date, rating, img, text) VALUES
 
 
 
+-- ////////CREATE USER TABLE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\:
+CREATE TABLE tbluser (
+    id SERIAL NOT NULL PRIMARY KEY,
+    email VARCHAR(120) UNIQUE NOT NULL,
+    firebase_uid VARCHAR(100) ,
+    username VARCHAR(50) NOT NULL,
+    contact VARCHAR(15),
+    accounts TEXT[],
+    password TEXT,
+    provider VARCHAR(10) NULL,
+    country TEXT,
+    currency VARCHAR(5) NOT NULL DEFAULT 'USD',
+    user_role VARCHAR(10) NOT NULL DEFAULT 'customer' 
+        CHECK (user_role IN ('customer', 'admin')),
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 
 
