@@ -32,7 +32,6 @@ app.use("/auth", authRoutes);
 
 app.post("/create-payment-intent", async (req, res) => {
   const { total } = req.body;
-  console.log("Total in Payment in back:", total);
 
   if (!total || total <= 0) {
     return res.status(400).json({ error: "Invalid amount" });

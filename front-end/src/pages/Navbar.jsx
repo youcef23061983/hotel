@@ -22,7 +22,6 @@ const Navbar = () => {
   const { logout, formUser, setFirebaseUser, setFormUser } =
     useContext(AppContext);
   const [firebaseUser, loading] = useAuthState(auth);
-  console.log("firebaseUser", firebaseUser);
 
   useLayoutEffect(() => {
     setShowLinks(false);

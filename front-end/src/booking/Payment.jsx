@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Checkout from "./Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -21,10 +20,7 @@ import { useMutation } from "@tanstack/react-query";
 
 const Payment = ({ estimatedTotal, allDates, id }) => {
   const { user, room, roomPayment, payment } = useContext(AppContext);
-  console.log("roomPayment", room);
-  console.log("user", user);
 
-  const navigate = useNavigate();
   const [paymentSucceeded, setPaymentSucceeded] = useState(false);
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState(null);

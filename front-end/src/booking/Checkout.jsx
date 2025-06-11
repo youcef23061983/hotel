@@ -5,14 +5,12 @@ import { AppContext } from "../data managment/AppProvider";
 
 const Checkout = ({ onSuccess }) => {
   const { user, room } = useContext(AppContext);
-  console.log("paypal user", user);
 
   const [customerData, setCustomerData] = useState(null);
 
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
   const [currency, setCurrency] = useState(options.currency);
   const arrayRoom = [room];
-  console.log("paypal room", arrayRoom);
 
   const onCurrencyChange = ({ target: { value } }) => {
     setCurrency(value);
@@ -66,7 +64,6 @@ const Checkout = ({ onSuccess }) => {
       onSuccess();
     });
   };
-  console.log(room);
 
   return (
     <div className="checkout">

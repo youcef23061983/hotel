@@ -12,10 +12,8 @@ const authorization = async (req, res, next) => {
     }
 
     const token = authHeader?.split(" ")[1];
-    console.log("Received token:", token);
 
     if (!token) {
-      console.log("No token provided");
       return res
         .status(401)
         .json({ message: "Unauthorized - No token provided" });
@@ -23,11 +21,9 @@ const authorization = async (req, res, next) => {
 
     // Verify the token using the secret key
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Decoded token:", decoded);
 
     const userId = decoded?.userId;
     if (!userId) {
-      console.log("Invalid token: no user_id");
       return res.status(401).json({ message: "Unauthorized - Invalid token" });
     }
 
@@ -38,10 +34,8 @@ const authorization = async (req, res, next) => {
     );
 
     if (userResult.rows.length === 0) {
-      console.log("User not found");
       return res.status(401).json({ message: "Unauthorized - User not found" });
     }
-    console.log("this is your user", userResult.rows[0]);
 
     // Attach user information to the request object
     req.user = userResult.rows[0];

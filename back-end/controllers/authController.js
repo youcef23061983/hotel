@@ -16,7 +16,6 @@ const signupUser = async (req, res) => {
       return res.status(409).json({ message: "email already exists" });
     }
     const hashedPassword = await hashPassword(password);
-    console.log("Password received:", password);
 
     const user = await pool.query(
       `INSERT INTO tbluser (username, email, password) VALUES ($1, $2, $3) RETURNING *`,
@@ -39,7 +38,6 @@ const signupUser = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.log("Error in signup controller", error.message);
     res.status(500).json({
       message: "internal server error",
     });
@@ -49,8 +47,6 @@ const signupUser = async (req, res) => {
 const signinUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log("Email received:", email);
-    console.log("Password received:", password);
 
     if (!email || !password) {
       return res.status(401).json({
@@ -81,7 +77,6 @@ const signinUser = async (req, res) => {
     }
 
     const token = createJWT(user.id);
-    console.log("this is your token", token);
     res.cookie("token", token, {
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
       httpOnly: true,
@@ -98,8 +93,6 @@ const signinUser = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.error("Login error:", error.message);
-
     if (error.code === "ECONNREFUSED") {
       return res.status(503).json({
         error: "Service unavailable",
@@ -176,7 +169,6 @@ const firebaseSignup = async (req, res) => {
     );
 
     const newUser = result.rows[0];
-    console.log("this is firebase user", newUser);
 
     const token = createJWT(newUser.id);
 
