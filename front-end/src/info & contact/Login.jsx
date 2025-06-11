@@ -20,7 +20,7 @@ import {
 } from "firebase/auth";
 import { AppContext } from "../data managment/AppProvider";
 import { Helmet } from "react-helmet-async";
-import { auth } from "../info & contact/Firebase";
+import { auth } from "./Firebase";
 
 const Login = ({ onSubmit, setAuth }) => {
   const navigate = useNavigate();
@@ -67,8 +67,6 @@ const Login = ({ onSubmit, setAuth }) => {
       });
 
       const parseRes = await response.json();
-      console.log("Full response:", parseRes);
-      console.log("Token received:", parseRes.token);
 
       if (!response.ok) {
         setError(parseRes.message || "Login failed. Please try again.");
@@ -78,11 +76,6 @@ const Login = ({ onSubmit, setAuth }) => {
       if (!parseRes.token) {
         throw new Error("No token received from server");
       }
-
-      console.log(
-        "Token stored in sessionStorage:",
-        sessionStorage.getItem("token")
-      );
 
       if (parseRes.token) {
         sessionStorage.setItem("token", parseRes.token);
@@ -115,7 +108,6 @@ const Login = ({ onSubmit, setAuth }) => {
       setGooglestatus("submitting");
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      console.log("this is google user", result);
 
       const token = await user.getIdToken();
 
@@ -191,7 +183,6 @@ const Login = ({ onSubmit, setAuth }) => {
       // 2. Sign in with popup
       const userCredential = await signInWithPopup(auth, facebookProvider);
       const user = userCredential.user;
-      console.log("Facebook user:", user);
 
       // 3. Fallback for email if still null
       let userEmail = userCredential.user.email;
@@ -207,10 +198,7 @@ const Login = ({ onSubmit, setAuth }) => {
         userEmail = data.email;
       }
 
-      console.log("User email:", userEmail); // Should now have email
-
       const token = await user.getIdToken();
-      console.log("Firebase token:", token);
 
       const payload = {
         email: user.email || userEmail, // Use the fetched email if available
@@ -218,7 +206,6 @@ const Login = ({ onSubmit, setAuth }) => {
         username: user.displayName,
         provider: "facebook",
       };
-      console.log("Payload for server:", payload);
 
       const res = await fetch("http://localhost:3000/auth/firebaseSignup", {
         method: "POST",
@@ -255,12 +242,10 @@ const Login = ({ onSubmit, setAuth }) => {
 
       if (error.code === "auth/account-exists-with-different-credential") {
         const credential = OAuthProvider.credentialFromError(error);
-        console.log("Credential from error:", credential);
 
         // Handle account linking flow here
         const email = error.customData?.email;
         const methods = await fetchSignInMethodsForEmail(auth, email);
-        console.log("Available methods:", methods);
       } else {
         console.error("Facebook login error:", error);
         throw error;
@@ -373,48 +358,47 @@ const Login = ({ onSubmit, setAuth }) => {
               </div>
             </div>
 
-            {/* <div className="flex justify-between items-center">
-              <Link
-                to="/forgot-password"
-                className="text-[#22258a] hover:underline transition-colors"
+            <div className="flex justify-between items-center gap-3">
+              <button
+                type="submit"
+                disabled={status === "submitting"}
+                className="w-full bg-gradient-to-r from-[#22258a] to-[#0e0f38] hover:from-[#0e0f38] hover:to-[#22258a] text-white py-3 rounded-lg font-bold text-xxl transition-all duration-300 shadow-md hover:shadow-lg"
               >
-                Forgot password?
-              </Link>
-            </div> */}
-
-            <button
-              type="submit"
-              disabled={status === "submitting"}
-              className="w-full bg-gradient-to-r from-[#22258a] to-[#0e0f38] hover:from-[#0e0f38] hover:to-[#22258a] text-white py-3 rounded-lg font-bold text-xxl transition-all duration-300 shadow-md hover:shadow-lg"
-            >
-              {status === "submitting" ? (
-                <span className="flex items-center justify-center">
-                  <svg
-                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
-                  </svg>
-                  Signing in...
-                </span>
-              ) : (
-                "Sign In"
-              )}
-            </button>
+                {status === "submitting" ? (
+                  <span className="flex items-center justify-center">
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Signing in...
+                  </span>
+                ) : (
+                  "Sign In"
+                )}
+              </button>
+              <button
+                onClick={logout}
+                className="w-full py-2.5 bg-gray-200 text-gray-800 rounded-lg font-medium hover:bg-gray-300 transition-all"
+              >
+                logout{" "}
+              </button>
+            </div>
           </form>
 
           <div className="flex items-center my-8">
