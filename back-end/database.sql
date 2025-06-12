@@ -1087,6 +1087,8 @@ INSERT INTO testimonials (name, date, rating, img, text) VALUES
 
 
 -- ////////CREATE USER TABLE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\:
+-- to delete all data and set it to 0: TRUNCATE TABLE tbluser RESTART IDENTITY;
+
 CREATE TABLE tbluser (
     id SERIAL NOT NULL PRIMARY KEY,
     email VARCHAR(120) UNIQUE NOT NULL,
@@ -1095,7 +1097,7 @@ CREATE TABLE tbluser (
     contact VARCHAR(15),
     accounts TEXT[],
     password TEXT,
-    provider VARCHAR(10) NULL,
+    provider VARCHAR(10) NOT NULL DEFAULT 'local',
     country TEXT,
     currency VARCHAR(5) NOT NULL DEFAULT 'USD',
     user_role VARCHAR(10) NOT NULL DEFAULT 'customer' 
