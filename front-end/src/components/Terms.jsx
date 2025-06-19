@@ -1,11 +1,12 @@
 import UseFetch from "./UseFetch";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 const Terms = () => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
 
   const key = "gallery";
 
   const { data, isPending, error } = UseFetch(url, key);
+  console.log("terms image", data && data[7].images[7]);
 
   useEffect(() => {
     document.title = "Terms & Conditions";

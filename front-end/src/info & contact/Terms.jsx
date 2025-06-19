@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import UseFetch from "../data managment/UseFetch";
 
 const Terms = () => {
