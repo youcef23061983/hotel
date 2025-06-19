@@ -16,7 +16,7 @@ const stripe = require("stripe")(process.env.VITE_STRIPE_SECRET_KEY);
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173", // Your frontend origin
+    origin: ["http://localhost:5173", "https://hotelmalaysia.vercel.app"],
     credentials: true, // Allow credentials (cookies)
     optionsSuccessStatus: 200, // Some legacy browsers choke on 204
   })
@@ -155,6 +155,9 @@ app.post("/retrieve-customer-data", async (req, res) => {
       details: err.message,
     });
   }
+});
+app.get("/", (req, res) => {
+  res.send("API is running ✅");
 });
 app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
