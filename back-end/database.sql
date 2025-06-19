@@ -96,9 +96,10 @@ CREATE TABLE bookings (
 -- ////////////////////////INSERTING ROOMS & SUITES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
-BEGIN;
+-------------- insert id:1:
 
--- 1. Insert into rooms
+
+BEGIN;
 INSERT INTO rooms (
     name, type, introduction, max_children, max_pets, pets_allowed,
     butler_service, unavailables, view, living_room, breakfast,
@@ -125,22 +126,15 @@ INSERT INTO rooms (
 )
 RETURNING id;
 
--- Assume the returned ID is 1 for the example below.
--- If using a script, store this returned ID into a variable (e.g., in psql: `\gset`).
-
--- 2. Insert into room_square_footage
 INSERT INTO room_square_footage (room_id, number, icon)
 VALUES (1, 200, 'GrCube');
 
--- 3. Insert into capacity
 INSERT INTO capacity (room_id, number, icon)
 VALUES (1, 1, 'MdOutlinePeopleAlt');
 
--- 4. Insert into bath_number
 INSERT INTO bath_number (room_id, number, icon)
 VALUES (1, 1, 'TbBath');
 
--- 5. Insert amenities (with conflict protection)
 INSERT INTO amenities (name, icon)
 VALUES 
     ('TV', 'PiTelevisionSimpleThin'),
@@ -151,7 +145,6 @@ VALUES
     ('Breakfast', 'MdOutlineFreeBreakfast')
 ON CONFLICT (name) DO NOTHING;
 
--- 6. Insert into room_amenities
 INSERT INTO room_amenities (room_id, amenity_id)
 SELECT 1, id FROM amenities
 WHERE name IN (
@@ -165,10 +158,10 @@ WHERE name IN (
 
 COMMIT;
 
--- insert id:2
+----------------------- insert id:2:
+
 BEGIN;
 
--- 1. Insert into rooms (let id auto-generate)
 INSERT INTO rooms (
     name, type, introduction, max_children, max_pets, pets_allowed,
     butler_service, unavailables, view, living_room, breakfast,
@@ -195,27 +188,20 @@ INSERT INTO rooms (
 )
 RETURNING id;
 
--- Assume id is 2 in example below
--- Replace this hardcoded ID with variable if using a script
--- 2. Insert into room_square_footage
 INSERT INTO room_square_footage (room_id, number, icon)
 VALUES (2, 250, 'GrCube');
 
--- 3. Insert into capacity
 INSERT INTO capacity (room_id, number, icon)
 VALUES (2, 2, 'MdOutlinePeopleAlt');
 
--- 4. Insert into bath_number
 INSERT INTO bath_number (room_id, number, icon)
 VALUES (2, 1, 'TbBath');
 
--- 5. Insert any new amenities (conflict-safe)
 INSERT INTO amenities (name, icon)
 VALUES 
     ('Sitting Area', 'TbSofa')
 ON CONFLICT (name) DO NOTHING;
 
--- 6. Insert into room_amenities
 INSERT INTO room_amenities (room_id, amenity_id)
 SELECT 2, id FROM amenities
 WHERE name IN (
@@ -232,9 +218,10 @@ COMMIT;
 
 
 -- insert id:3 :
+
+
 BEGIN;
 
--- 1. Insert room (let id auto-generate)
 INSERT INTO rooms (
     name, type, introduction, max_children, max_pets, pets_allowed,
     butler_service, unavailables, view, living_room, breakfast,
@@ -261,27 +248,19 @@ INSERT INTO rooms (
 )
 RETURNING id;
 
--- ⚠️ In real SQL environment, capture the returned id.
--- For now, assume id = 3
-
--- 2. Insert into room_square_footage
 INSERT INTO room_square_footage (room_id, number, icon)
 VALUES (3, 350, 'GrCube');
 
--- 3. Insert into capacity
 INSERT INTO capacity (room_id, number, icon)
 VALUES (3, 2, 'MdOutlinePeopleAlt');
 
--- 4. Insert into bath_number
 INSERT INTO bath_number (room_id, number, icon)
 VALUES (3, 2, 'TbBath');
 
--- 5. Insert new amenities (safely handles duplicates)
 INSERT INTO amenities (name, icon) VALUES
-    ('Minibar', 'Minibar')  -- new amenity
+    ('Minibar', 'Minibar')  
 ON CONFLICT (name) DO NOTHING;
 
--- 6. Insert into room_amenities
 INSERT INTO room_amenities (room_id, amenity_id)
 SELECT 3, id FROM amenities
 WHERE name IN (
@@ -297,10 +276,10 @@ WHERE name IN (
 COMMIT;
 
 
--- insert id:4:
+----------------------- insert id:4:
+
 BEGIN;
 
--- 1. Insert the suite into rooms table
 INSERT INTO rooms (
     name, type, introduction, max_children, max_pets, pets_allowed,
     butler_service, unavailables, view, living_room, breakfast,
@@ -328,21 +307,16 @@ INSERT INTO rooms (
 )
 RETURNING id;
 
--- Assume returned id = 4 for the following inserts
 
--- 2. Insert room_square_footage
 INSERT INTO room_square_footage (room_id, number, icon)
 VALUES (4, 400, 'GrCube');
 
--- 3. Insert capacity
 INSERT INTO capacity (room_id, number, icon)
 VALUES (4, 2, 'MdOutlinePeopleAlt');
 
--- 4. Insert bath_number
 INSERT INTO bath_number (room_id, number, icon)
 VALUES (4, 2, 'TbBath');
 
--- 5. Insert amenities if new, or ignore duplicates
 INSERT INTO amenities (name, icon) VALUES
     ('TV', 'PiTelevisionSimpleThin'),
     ('Wi-Fi', 'FaWifi'),
@@ -352,7 +326,6 @@ INSERT INTO amenities (name, icon) VALUES
     ('Breakfast', 'MdOutlineFreeBreakfast')
 ON CONFLICT (name) DO NOTHING;
 
--- 6. Link room to amenities
 INSERT INTO room_amenities (room_id, amenity_id)
 SELECT 4, id FROM amenities
 WHERE name IN (
@@ -367,10 +340,10 @@ WHERE name IN (
 COMMIT;
 
 
--- insert id:5  :
+------------------ insert id:5  :
+
 BEGIN;
 
--- 1. Insert the suite into rooms table
 INSERT INTO rooms (
     name, type, introduction, max_children, max_pets, pets_allowed,
     butler_service, unavailables, view, living_room, breakfast,
@@ -398,21 +371,15 @@ INSERT INTO rooms (
 )
 RETURNING id;
 
--- Assume returned id = 5 for the following inserts
-
--- 2. Insert room_square_footage
 INSERT INTO room_square_footage (room_id, number, icon)
 VALUES (5, 600, 'GrCube');
 
--- 3. Insert capacity
 INSERT INTO capacity (room_id, number, icon)
 VALUES (5, 4, 'MdOutlinePeopleAlt');
 
--- 4. Insert bath_number
 INSERT INTO bath_number (room_id, number, icon)
 VALUES (5, 3, 'TbBath');
 
--- 5. Insert amenities if not already present
 INSERT INTO amenities (name, icon) VALUES
     ('TV', 'PiTelevisionSimpleThin'),
     ('Wi-Fi', 'FaWifi'),
@@ -422,7 +389,6 @@ INSERT INTO amenities (name, icon) VALUES
     ('Breakfast', 'MdOutlineFreeBreakfast')
 ON CONFLICT (name) DO NOTHING;
 
--- 6. Link room to amenities
 INSERT INTO room_amenities (room_id, amenity_id)
 SELECT 5, id FROM amenities
 WHERE name IN (
@@ -437,10 +403,10 @@ WHERE name IN (
 COMMIT;
 
 
--- insert id:6  :
+-------------------------- insert id:6  :
+
 BEGIN;
 
--- 1. Insert into rooms table
 INSERT INTO rooms (
     name, type, introduction, max_children, max_pets, pets_allowed,
     butler_service, unavailables, view, living_room, breakfast,
@@ -468,21 +434,16 @@ INSERT INTO rooms (
 )
 RETURNING id;
 
--- Assume returned id = 6
 
--- 2. Insert room_square_footage
 INSERT INTO room_square_footage (room_id, number, icon)
 VALUES (6, 450, 'GrCube');
 
--- 3. Insert capacity
 INSERT INTO capacity (room_id, number, icon)
 VALUES (6, 3, 'MdOutlinePeopleAlt');
 
--- 4. Insert bath_number
 INSERT INTO bath_number (room_id, number, icon)
 VALUES (6, 2, 'TbBath');
 
--- 5. Insert amenities if not already present
 INSERT INTO amenities (name, icon) VALUES
     ('TV', 'PiTelevisionSimpleThin'),
     ('Wi-Fi', 'FaWifi'),
@@ -492,7 +453,6 @@ INSERT INTO amenities (name, icon) VALUES
     ('Breakfast', 'MdOutlineFreeBreakfast')
 ON CONFLICT (name) DO NOTHING;
 
--- 6. Link room to amenities
 INSERT INTO room_amenities (room_id, amenity_id)
 SELECT 6, id FROM amenities
 WHERE name IN (
@@ -507,10 +467,10 @@ WHERE name IN (
 COMMIT;
 
 
--- insert id:7 ::----------------------
+----------------insert id:7 :
+
 BEGIN;
 
--- 1. Insert into rooms table
 INSERT INTO rooms (
     name, type, introduction, max_children, max_pets, pets_allowed,
     butler_service, unavailables, view, living_room, breakfast,
@@ -538,21 +498,16 @@ INSERT INTO rooms (
 )
 RETURNING id;
 
--- Assume returned id = 7
 
--- 2. Insert room_square_footage
 INSERT INTO room_square_footage (room_id, number, icon)
 VALUES (7, 500, 'GrCube');
 
--- 3. Insert capacity
 INSERT INTO capacity (room_id, number, icon)
 VALUES (7, 2, 'MdOutlinePeopleAlt');
 
--- 4. Insert bath_number
 INSERT INTO bath_number (room_id, number, icon)
 VALUES (7, 2, 'TbBath');
 
--- 5. Insert amenities if not already present
 INSERT INTO amenities (name, icon) VALUES
     ('TV', 'PiTelevisionSimpleThin'),
     ('Wi-Fi', 'FaWifi'),
@@ -562,7 +517,6 @@ INSERT INTO amenities (name, icon) VALUES
     ('Breakfast', 'MdOutlineFreeBreakfast')
 ON CONFLICT (name) DO NOTHING;
 
--- 6. Link room to amenities
 INSERT INTO room_amenities (room_id, amenity_id)
 SELECT 7, id FROM amenities
 WHERE name IN (
@@ -577,10 +531,9 @@ WHERE name IN (
 COMMIT;
 
 
--- insert id :8 :----------------
+------------- insert id :8 :
 BEGIN;
 
--- 1. Insert into rooms table
 INSERT INTO rooms (
     name, type, introduction, max_children, max_pets, pets_allowed,
     butler_service, unavailables, view, living_room, breakfast,
@@ -608,21 +561,16 @@ INSERT INTO rooms (
 )
 RETURNING id;
 
--- Assume returned id = 8
 
--- 2. Insert room_square_footage
 INSERT INTO room_square_footage (room_id, number, icon)
 VALUES (8, 800, 'GrCube');
 
--- 3. Insert capacity
 INSERT INTO capacity (room_id, number, icon)
 VALUES (8, 6, 'MdOutlinePeopleAlt');
 
--- 4. Insert bath_number
 INSERT INTO bath_number (room_id, number, icon)
 VALUES (8, 4, 'TbBath');
 
--- 5. Insert amenities if not already present
 INSERT INTO amenities (name, icon) VALUES
     ('TV', 'PiTelevisionSimpleThin'),
     ('Wi-Fi', 'FaWifi'),
@@ -632,7 +580,6 @@ INSERT INTO amenities (name, icon) VALUES
     ('Breakfast', 'MdOutlineFreeBreakfast')
 ON CONFLICT (name) DO NOTHING;
 
--- 6. Link room to amenities
 INSERT INTO room_amenities (room_id, amenity_id)
 SELECT 8, id FROM amenities
 WHERE name IN (
@@ -646,10 +593,10 @@ WHERE name IN (
 
 COMMIT;
 
--- insert id:9 : --------------------
+------------------------- insert id:9 : 
+
 BEGIN;
 
--- 1. Insert into rooms table
 INSERT INTO rooms (
     name, type, introduction, max_children, max_pets, pets_allowed,
     butler_service, unavailables, view, living_room, breakfast,
@@ -679,21 +626,16 @@ INSERT INTO rooms (
 )
 RETURNING id;
 
--- Assume returned id = 9
 
--- 2. Insert room_square_footage
 INSERT INTO room_square_footage (room_id, number, icon)
 VALUES (9, 1000, 'GrCube');
 
--- 3. Insert capacity
 INSERT INTO capacity (room_id, number, icon)
 VALUES (9, 8, 'MdOutlinePeopleAlt');
 
--- 4. Insert bath_number
 INSERT INTO bath_number (room_id, number, icon)
 VALUES (9, 5, 'TbBath');
 
--- 5. Insert amenities if not already present
 INSERT INTO amenities (name, icon) VALUES
     ('TV', 'PiTelevisionSimpleThin'),
     ('Wi-Fi', 'FaWifi'),
@@ -703,7 +645,6 @@ INSERT INTO amenities (name, icon) VALUES
     ('Breakfast', 'MdOutlineFreeBreakfast')
 ON CONFLICT (name) DO NOTHING;
 
--- 6. Link room to amenities
 INSERT INTO room_amenities (room_id, amenity_id)
 SELECT 9, id FROM amenities
 WHERE name IN (
@@ -718,10 +659,9 @@ WHERE name IN (
 COMMIT;
 
 
--- insert id:10 : --------------------
+---------------- insert id:10 : 
 BEGIN;
 
--- 1. Insert into rooms table
 INSERT INTO rooms (
     name, type, introduction, max_children, max_pets, pets_allowed,
     butler_service, unavailables, view, living_room, breakfast,
@@ -751,21 +691,16 @@ INSERT INTO rooms (
 )
 RETURNING id;
 
--- Assume returned id = 10
 
--- 2. Insert room_square_footage
 INSERT INTO room_square_footage (room_id, number, icon)
 VALUES (10, 550, 'GrCube');
 
--- 3. Insert capacity
 INSERT INTO capacity (room_id, number, icon)
 VALUES (10, 4, 'MdOutlinePeopleAlt');
 
--- 4. Insert bath_number
 INSERT INTO bath_number (room_id, number, icon)
 VALUES (10, 2, 'TbBath');
 
--- 5. Insert amenities if not already present
 INSERT INTO amenities (name, icon) VALUES
     ('TV', 'PiTelevisionSimpleThin'),
     ('Wi-Fi', 'FaWifi'),
@@ -773,7 +708,6 @@ INSERT INTO amenities (name, icon) VALUES
     ('Kitchenette', 'FaKitchenSet')
 ON CONFLICT (name) DO NOTHING;
 
--- 6. Link room to amenities
 INSERT INTO room_amenities (room_id, amenity_id)
 SELECT 10, id FROM amenities
 WHERE name IN (

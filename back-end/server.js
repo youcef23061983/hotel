@@ -22,7 +22,11 @@ app.use(
   })
 );
 
-app.use(morgan("dev"));
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev")); // Colorful logs
+} else {
+  app.use(morgan("tiny")); // Minimal logs
+}
 app.use("/rooms", roomsRoutes);
 app.use("/gallery", galleryRoutes);
 app.use("/album", albumRoutes);
