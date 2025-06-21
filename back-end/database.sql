@@ -995,29 +995,28 @@ CREATE TABLE testimonials (
 -- ///////////////////////INSERTING TESTIMONIALS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 INSERT INTO testimonials (name, date, rating, img, text) VALUES
 ('Sophie W., Travel Enthusiast', '2023-10-20', 4.5, '/images/gallery/testimonial1.jpg',
- 'Legend Hotel is an absolute gem! From the moment I stepped into the elegant lobby...'),
-
+ 'Legend Hotel is an absolute gem! From the moment I stepped into the elegant lobby, I knew my stay would be special. The attention to detail and the warm welcome from the staff made me feel like royalty. The coastal views from my room were breathtaking, and the culinary experience surpassed all expectations. Legend Hotel is more than a stay; it''s an immersive journey into luxury and comfort.'),
+ 
 ('David L., Business Traveler', '2023-11-02', 4.6, '/images/gallery/testimonial2.jpg',
- 'As a frequent business traveler, Legend Hotel has set a new standard for excellence...'),
+ 'As a frequent business traveler, Legend Hotel has set a new standard for excellence. The state-of-the-art meeting facilities, coupled with impeccable service, made my work trip exceptionally productive and enjoyable. The coastal locale provided a refreshing change of scenery, and the attention to detail from the staff ensured a seamless experience. I highly recommend Legend Hotel for both business and leisure stays.'),
 
 ('Emily and James P., Honeymooners', '2023-11-10', 4.7, '/images/gallery/testimonial3.jpg',
- 'Our honeymoon at Legend Hotel was a dream come true...'),
+ 'Our honeymoon at Legend Hotel was a dream come true. The romantic ambiance, coupled with the stunning coastal backdrop, created the perfect setting for our celebration of love. The spa treatments were heavenly, and the private beach access made our stay truly magical. Legend Hotel exceeded our expectations, and we''re already planning our anniversary trip back!'),
 
 ('Alex M., Adventure Seeker', '2023-11-20', 4.8, '/images/gallery/testimonial4.jpg',
- 'Legend Hotel is not just a luxurious stay; it''s an adventure lover''s paradise...'),
+ 'Legend Hotel is not just a luxurious stay; it''s an adventure lover''s paradise. From windsurfing against the ocean breeze to exploring the vibrant streets of Batu Ferringhi, every moment was filled with excitement. The concierge team''s recommendations for local activities added an authentic touch to my stay. I left Legend Hotel with a suitcase full of memories and a longing to return.'),
 
 ('Linda K., Family Vacationer', '2023-11-30', 4.5, '/images/gallery/testimonial5.jpg',
- 'Our family getaway at Legend Hotel was nothing short of extraordinary...'),
+ 'Our family getaway at Legend Hotel was nothing short of extraordinary. The spacious accommodations comfortably accommodated our family, and the kids couldn''t get enough of the engaging activities organized by the hotel. From beach picnics to poolside fun, every day brought new adventures. The staff''s friendliness and genuine care for families truly made our stay remarkable. Legend Hotel has become our go-to destination for creating cherished family memories.'),
 
 ('Robert H., Golf Enthusiast', '2023-11-30', 4.6, '/images/gallery/testimonial6.jpg',
- 'As an avid golfer, Legend Hotel''s proximity to world-class golf courses...'),
+ 'As an avid golfer, Legend Hotel''s proximity to world-class golf courses made it an ideal choice for my golf retreat. The concierge effortlessly arranged tee times, and returning to the hotel after a day on the green felt like coming home. The elegant surroundings, coupled with the serene coastal atmosphere, provided the perfect balance of relaxation and golfing excitement. Legend Hotel seamlessly caters to both my passion for golf and my desire for a luxurious escape.'),
 
 ('Nadia S., Culinary Connoisseur', '2023-12-05', 4.7, '/images/gallery/testimonial7.jpg',
- 'For a culinary journey like no other, Legend Hotel is a gastronomic haven...'),
+ 'For a culinary journey like no other, Legend Hotel is a gastronomic haven. Each meal was a masterpiece, a symphony of flavors meticulously crafted by the talented chefs. The diverse culinary offerings, from local delicacies to international fare, showcased the richness of the dining experience. The restaurant''s ambiance, coupled with the impeccable service, made every dining moment an unforgettable affair. Legend Hotel has truly elevated the art of dining.'),
 
 ('Samuel D., Wellness Seeker', '2023-12-11', 4.8, '/images/gallery/testimonial8.jpg',
- 'In search of rejuvenation, I found my haven at Legend Hotel''s spa and wellness center...');
-
+ 'In search of rejuvenation, I found my haven at Legend Hotel''s spa and wellness center. The holistic approach to well-being, coupled with expert therapists, offered a sanctuary for relaxation. From soothing massages to invigorating wellness classes, each element contributed to a revitalizing experience. The spa''s serene atmosphere, combined with the coastal setting, created the perfect backdrop for a wellness retreat. Legend Hotel exceeded my expectations, leaving me refreshed and renewed.');
 
 
 -- ////////CREATE USER TABLE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\:

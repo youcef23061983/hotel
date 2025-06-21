@@ -1,9 +1,9 @@
-import UseFetch from "./UseFetch";
 import Banner from "../pages/Banner";
 import { useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { ReactLenis } from "lenis/react";
 import { IoLocationSharp } from "react-icons/io5";
+import UseFetch from "../data managment/UseFetch";
 
 const Google = () => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;

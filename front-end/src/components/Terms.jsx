@@ -1,5 +1,5 @@
-import UseFetch from "./UseFetch";
 import { useEffect, useState } from "react";
+import UseFetch from "../data managment/UseFetch";
 const Terms = () => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
 
