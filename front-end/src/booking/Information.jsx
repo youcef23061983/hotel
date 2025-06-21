@@ -11,6 +11,50 @@ const Information = ({
   const { room: roomData, user } = useContext(AppContext);
 
   const img2 = roomData ? roomData.images[0] : null;
+  const informationSubmit = (e) => {
+    e.preventDefault();
+
+    e.preventDefault();
+    if (
+      !user.title ||
+      !user.firstName ||
+      !user.lastName ||
+      !user.countryCode ||
+      !user.phoneNumber ||
+      !user.email ||
+      !user.country ||
+      !user.city ||
+      !user.nationality ||
+      !user.termsCondition ||
+      !user.emailMe
+    ) {
+      alert("please enter your information");
+      return;
+    }
+    if (!user.arrival || !user.departure) {
+      alert("please go back and choose your booking days ");
+      return;
+    }
+    if (
+      user.title &&
+      user.firstName &&
+      user.lastName &&
+      user.countryCode &&
+      user.phoneNumber &&
+      user.email &&
+      user.country &&
+      user.city &&
+      user.nationality &&
+      user.termsCondition &&
+      user.emailMe &&
+      user.departure &&
+      user.arrival
+    ) {
+      open();
+
+      return;
+    }
+  };
 
   const informationVariants = {
     hidden: { x: "100vw", opacity: 0 },
@@ -103,10 +147,7 @@ const Information = ({
         </motion.div>
 
         <motion.form
-          onSubmit={(e) => {
-            e.preventDefault();
-            open();
-          }}
+          onSubmit={informationSubmit}
           className="allDetails"
           variants={detailschildVariants}
         >
