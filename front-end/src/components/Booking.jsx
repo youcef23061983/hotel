@@ -158,53 +158,53 @@ const Booking = () => {
 
   const confirm = (e) => {
     e.preventDefault();
-    // if (
-    //   !user.firstName ||
-    //   !user.lastName ||
-    //   !user.title ||
-    //   !user.phoneNumber ||
-    //   !user.countryCode ||
-    //   !user.country ||
-    //   !user.nationality ||
-    //   !user.creditCardNumber ||
-    //   !user.expirationMonth ||
-    //   !user.year ||
-    //   !user.securityCode ||
-    //   !user.nameHolder ||
-    //   !user.termsCondition ||
-    //   !user.emailMe ||
-    //   !user.email
-    // ) {
-    //   alert("please enter your information");
-    //   return;
-    // }
-    // if (!user.arrival || !user.departure) {
-    //   alert("please go back and choose your booking days ");
-    //   return;
-    // }
-    // if (
-    //   user.firstName &&
-    //   user.lastName &&
-    //   user.title &&
-    //   user.phoneNumber &&
-    //   user.countryCode &&
-    //   user.country &&
-    //   user.nationality &&
-    //   user.creditCardNumber &&
-    //   user.expirationMonth &&
-    //   user.year &&
-    //   user.securityCode &&
-    //   user.nameHolder &&
-    //   user.termsCondition &&
-    //   user.emailMe &&
-    //   user.email &&
-    //   user.departure &&
-    //   user.arrival
-    // ) {
-    unavailableData();
-    bookingMutate();
-    //   return;
-    // }
+    if (
+      !user.firstName ||
+      !user.lastName ||
+      !user.title ||
+      !user.phoneNumber ||
+      !user.countryCode ||
+      !user.country ||
+      !user.nationality ||
+      !user.creditCardNumber ||
+      !user.expirationMonth ||
+      !user.year ||
+      !user.securityCode ||
+      !user.nameHolder ||
+      !user.termsCondition ||
+      !user.emailMe ||
+      !user.email
+    ) {
+      alert("please enter your information");
+      return;
+    }
+    if (!user.arrival || !user.departure) {
+      alert("please go back and choose your booking days ");
+      return;
+    }
+    if (
+      user.firstName &&
+      user.lastName &&
+      user.title &&
+      user.phoneNumber &&
+      user.countryCode &&
+      user.country &&
+      user.nationality &&
+      user.creditCardNumber &&
+      user.expirationMonth &&
+      user.year &&
+      user.securityCode &&
+      user.nameHolder &&
+      user.termsCondition &&
+      user.emailMe &&
+      user.email &&
+      user.departure &&
+      user.arrival
+    ) {
+      unavailableData();
+      bookingMutate();
+      return;
+    }
   };
 
   const img2 = roomData ? roomData.images[0] : null;

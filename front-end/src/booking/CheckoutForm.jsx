@@ -17,6 +17,7 @@ const CheckoutForm = ({ onSuccess }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [message, setMessage] = useState(null);
   const [customerData, setCustomerData] = useState(null);
+  const url = `${import.meta.env.VITE_PROD_URL_URL}`;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,20 +49,17 @@ const CheckoutForm = ({ onSuccess }) => {
         setMessage("Payment status: " + paymentIntent?.status + " 🎉");
         if (paymentIntent?.status === "succeeded") {
           // Fetch complete customer data
-          const response = await fetch(
-            "http://localhost:3000/retrieve-customer-data",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                paymentIntentId: paymentIntent.id,
-                user,
-                room,
-                formUser,
-                firebaseUser,
-              }),
-            }
-          );
+          const response = await fetch(`${url}/retrieve-customer-data`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              paymentIntentId: paymentIntent.id,
+              user,
+              room,
+              formUser,
+              firebaseUser,
+            }),
+          });
 
           const fullCustomerData = await response.json();
           setCustomerData(fullCustomerData);
