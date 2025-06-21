@@ -14,6 +14,7 @@ const SignUp = ({ onSubmit }) => {
     password: "",
     confirmPassword: "",
   });
+  const url = `${import.meta.env.VITE_PROD_URL_URL}`;
 
   const navigate = useNavigate();
 
@@ -47,7 +48,7 @@ const SignUp = ({ onSubmit }) => {
     try {
       const token = sessionStorage.getItem("token");
       const body = { username, email, password };
-      const response = await fetch("http://localhost:3000/auth/signup", {
+      const response = await fetch(`${url}/auth/signup`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

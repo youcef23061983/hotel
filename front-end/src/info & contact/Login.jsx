@@ -37,6 +37,7 @@ const Login = ({ onSubmit, setAuth }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const [error, setError] = useState("");
+  const url = `${import.meta.env.VITE_PROD_URL_URL}`;
 
   const handleSubmit = async (e) => {
     const { password, email } = loginFormData;
@@ -57,7 +58,7 @@ const Login = ({ onSubmit, setAuth }) => {
       }
       const token = sessionStorage.getItem("token");
       const body = { email, password };
-      const response = await fetch("http://localhost:3000/auth/signin", {
+      const response = await fetch(`${url}/auth/signin`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -117,7 +118,7 @@ const Login = ({ onSubmit, setAuth }) => {
         username: user.displayName,
         provider: "google",
       };
-      const res = await fetch("http://localhost:3000/auth/firebaseSignup", {
+      const res = await fetch(`${url}/auth/firebaseSignup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -207,7 +208,7 @@ const Login = ({ onSubmit, setAuth }) => {
         provider: "facebook",
       };
 
-      const res = await fetch("http://localhost:3000/auth/firebaseSignup", {
+      const res = await fetch(`${url}/auth/firebaseSignup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
