@@ -7,6 +7,8 @@ import { EffectCoverflow, Pagination } from "swiper/modules";
 import { useRef, useState, useEffect } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import Rating from "../components/Rating";
+import { format } from "date-fns";
+
 import { Helmet } from "react-helmet-async";
 import UseFetchQueries from "../data managment/UseFetchQueries";
 
@@ -158,6 +160,7 @@ const Testimonial = () => {
             {testimonials &&
               testimonials.map((testimonial) => {
                 const { name, date, img, text, rating } = testimonial;
+                const formattedDate = format(new Date(date), "MM/dd/yyyy");
 
                 return (
                   <SwiperSlide style={{ height: "auto" }}>
@@ -175,13 +178,11 @@ const Testimonial = () => {
                           <p>{name}</p>
 
                           <div className="rating">
-                            <p>{date}</p>
+                            <p>{formattedDate}</p>
                             <div className="rating">
-                              <div>
-                                <Rating rating={rating} />
-                              </div>
-                              <p>{rating}</p>
+                              <Rating rating={rating} />
                             </div>
+                            <p>{rating}</p>
                           </div>
                         </div>
                       </div>

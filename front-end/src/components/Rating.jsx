@@ -4,7 +4,7 @@ import { IoStar } from "react-icons/io5";
 
 const Rating = ({ rating }) => {
   return (
-    <div>
+    <div className="rating">
       {rating >= 2 ? (
         <IoStar className="star" />
       ) : rating >= 1.5 ? (
