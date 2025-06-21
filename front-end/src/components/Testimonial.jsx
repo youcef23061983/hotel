@@ -229,6 +229,7 @@ const Testimonial = () => {
   } = UseFetchQueries(url1, key1, url2, key2);
 
   const ref = useRef(null);
+  console.log("testiomonials", testimonials);
 
   const useMediaQuery = (query) => {
     const [matches, setMatches] = useState(false);
@@ -380,7 +381,7 @@ const Testimonial = () => {
                           <p>{name}</p>
 
                           <div className="rating">
-                            <p>{formattedDate}</p>
+                            {/* <p>{formattedDate}</p> */}
                             <div className="rating">
                               <div>
                                 <Rating rating={rating} />
