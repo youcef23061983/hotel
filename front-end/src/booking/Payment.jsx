@@ -26,9 +26,10 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
   const [clientSecret, setClientSecret] = useState(null);
 
   const total = user?.total || 0;
+  const paymentUrl = `${import.meta.env.VITE_PROD_URL_URL}`;
 
   useEffect(() => {
-    fetch("http://localhost:3000/config")
+    fetch(`${paymentUrl}/config`)
       .then(async (r) => {
         const { publishableKey } = await r.json();
         setStripePromise(loadStripe(publishableKey));
@@ -37,7 +38,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:3000/create-payment-intent", {
+    fetch(`${paymentUrl}/create-payment-intent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

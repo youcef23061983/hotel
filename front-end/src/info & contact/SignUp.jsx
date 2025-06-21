@@ -65,7 +65,7 @@ const SignUp = ({ onSubmit }) => {
       }
 
       sessionStorage.setItem("token", parseRes.token);
-      navigate("/rooms");
+      navigate("/login");
       setFormData({
         username: "",
         email: "",
