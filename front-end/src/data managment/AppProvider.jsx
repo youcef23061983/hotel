@@ -1,7 +1,6 @@
 import { useReducer, useEffect, createContext, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../info & contact/Firebase";
-import UseFetch from "./UseFetch";
 
 export const AppContext = createContext();
 
@@ -14,12 +13,7 @@ const initialState = {
 };
 
 const AppProvider = ({ children }) => {
-  const url = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
   const authUrl = import.meta.env.VITE_PROD_URL_URL;
-
-  const key = "rooms";
-
-  const { data: roomsData, error, isPending } = UseFetch(url, key);
 
   const [isInitialized, setIsInitialized] = useState(false);
 

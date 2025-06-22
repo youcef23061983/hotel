@@ -54,6 +54,8 @@ const SignUp = ({ onSubmit }) => {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        credentials: "include", // ✅ correctly placed here
+
         body: JSON.stringify(body),
       });
 

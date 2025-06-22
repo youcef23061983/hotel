@@ -64,6 +64,8 @@ const Login = ({ onSubmit, setAuth }) => {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        credentials: "include", // ✅ correctly placed here
+
         body: JSON.stringify(body),
       });
 
@@ -124,6 +126,8 @@ const Login = ({ onSubmit, setAuth }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        credentials: "include", // ✅ correctly placed here
+
         body: JSON.stringify(payload),
       });
       if (!res.ok)
@@ -222,6 +226,8 @@ const Login = ({ onSubmit, setAuth }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        credentials: "include", // ✅ correctly placed here
+
         body: JSON.stringify(payload),
       });
       if (!res.ok)
