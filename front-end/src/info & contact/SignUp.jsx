@@ -14,7 +14,7 @@ const SignUp = ({ onSubmit }) => {
     password: "",
     confirmPassword: "",
   });
-  const url = `${import.meta.env.VITE_PROD_URL_URL}`;
+  const url = import.meta.env.VITE_PROD_URL_URL;
 
   const navigate = useNavigate();
 

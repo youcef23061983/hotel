@@ -26,7 +26,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
   const [clientSecret, setClientSecret] = useState(null);
 
   const total = user?.total || 0;
-  const paymentUrl = `${import.meta.env.VITE_PROD_URL_URL}`;
+  const paymentUrl = import.meta.env.VITE_PROD_URL_URL;
 
   useEffect(() => {
     fetch(`${paymentUrl}/config`)

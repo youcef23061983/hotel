@@ -15,6 +15,7 @@ const initialState = {
 
 const AppProvider = ({ children }) => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
+  const authUrl = import.meta.env.VITE_PROD_URL_URL;
 
   const key = "rooms";
 
@@ -112,6 +113,14 @@ const AppProvider = ({ children }) => {
   };
   const logout = async () => {
     try {
+      const response = await fetch(`${authUrl}/auth/logout`, {
+        method: "POST",
+        credentials: "include", // Required for cookies
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to clear server session");
+      }
       sessionStorage.removeItem("formUser");
       sessionStorage.removeItem("fireUser");
       sessionStorage.removeItem("token");
@@ -184,19 +193,13 @@ const AppProvider = ({ children }) => {
 
     initializeState();
   }, [isInitialized]);
-  //   // Save cart to localStorage whenever it changes
-  //   useEffect(() => {
-  //     if (!isInitialized) return;
-  //     localStorage.setItem("cart", JSON.stringify(state.cart));
-  //     dispatch({ type: "GET_TOTAL" });
-  //   }, [state.cart, isInitialized]);
-  // Add this to your AppProvider or auth context
+
   const checkAuthStatus = async () => {
     try {
       const token = sessionStorage.getItem("token");
       if (!token) return null;
 
-      const response = await fetch("http://localhost:3000/auth/verify", {
+      const response = await fetch(`${authUrl}/auth/verify`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

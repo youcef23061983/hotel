@@ -147,6 +147,12 @@ const firebaseSignup = async (req, res) => {
 
       const updatedUser = result.rows[0];
       const token = createJWT(updatedUser.id);
+      res.cookie("token", token, {
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== "development",
+        sameSite: "strict",
+      });
 
       return res.status(200).json({
         status: "success",
@@ -171,6 +177,12 @@ const firebaseSignup = async (req, res) => {
     const newUser = result.rows[0];
 
     const token = createJWT(newUser.id);
+    res.cookie("token", token, {
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
+    });
 
     res.status(200).json({
       status: "success",
@@ -207,10 +219,25 @@ const userAuthorization = (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+const logoutUser = (req, res) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
+    });
+
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    console.error("Logout error:", error.message);
+    res.status(500).json({ message: "Internal server error during logout" });
+  }
+};
 
 module.exports = {
   signupUser,
   signinUser,
   firebaseSignup,
   userAuthorization,
+  logoutUser,
 };

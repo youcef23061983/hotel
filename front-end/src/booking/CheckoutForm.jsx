@@ -17,7 +17,7 @@ const CheckoutForm = ({ onSuccess }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [message, setMessage] = useState(null);
   const [customerData, setCustomerData] = useState(null);
-  const url = `${import.meta.env.VITE_PROD_URL_URL}`;
+  const url = import.meta.env.VITE_PROD_URL_URL;
 
   const handleSubmit = async (event) => {
     event.preventDefault();

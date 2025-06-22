@@ -37,7 +37,7 @@ const Login = ({ onSubmit, setAuth }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const [error, setError] = useState("");
-  const url = `${import.meta.env.VITE_PROD_URL_URL}`;
+  const url = import.meta.env.VITE_PROD_URL_URL;
 
   const handleSubmit = async (e) => {
     const { password, email } = loginFormData;
@@ -160,12 +160,20 @@ const Login = ({ onSubmit, setAuth }) => {
     e.preventDefault();
     try {
       await signOut(auth);
-      navigate("/", { replace: true });
+      const response = await fetch(`${url}/auth/logout`, {
+        method: "POST",
+        credentials: "include", // Necessary for cookies to be sent
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to clear session on server");
+      }
 
       setFirebaseUser(null);
       setFormUser(null);
       setAuth(null);
       sessionStorage.removeItem("token");
+      navigate("/", { replace: true });
     } catch (err) {
       console.error("Error signing out:", err.message);
     }
