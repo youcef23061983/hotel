@@ -5,9 +5,10 @@ import Testimonial from "../components/Testimonial";
 import { expect } from "vitest";
 import { mockData, mockData3 } from "./SetupTest";
 import { HelmetProvider } from "react-helmet-async";
+import { format } from "date-fns";
 
 describe("group of testing testimonial componnet", () => {
-  vi.mock("../components/UseFetchQueries", () => ({
+  vi.mock("../data managment/UseFetchQueries", () => ({
     __esModule: true,
     default: vi.fn(() => ({
       data1: mockData,
@@ -31,7 +32,7 @@ describe("group of testing testimonial componnet", () => {
       expect(screen.queryByText("...is loading")).toBeNull();
     });
   });
-  it("should the right elements", async () => {
+  it("should be the right elements", async () => {
     const div = screen.getByTestId("div-testimonial");
     expect(div).toHaveStyle(
       `background: url(${mockData && mockData[7].images[5]}) center/cover `

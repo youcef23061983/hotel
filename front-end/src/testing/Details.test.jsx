@@ -6,9 +6,10 @@ import Details from "../components/Details";
 import { mockData2, mockData } from "./SetupTest";
 import userEvent from "@testing-library/user-event";
 import { HelmetProvider } from "react-helmet-async";
+import AppProvider from "../data managment/AppProvider";
 
 describe("group of testing details component ", () => {
-  vi.mock("../components/UseFetchQueries", () => ({
+  vi.mock("../data managment/UseFetchQueries", () => ({
     __esModule: true,
     default: vi.fn(() => ({
       data1: mockData,
@@ -30,10 +31,12 @@ describe("group of testing details component ", () => {
       <QueryClientProvider client={queryClient}>
         <HelmetProvider>
           <MemoryRouter initialEntries={["/rooms/1"]}>
-            <Routes>
-              <Route path="rooms/:id" element={<Details />} />
-              <Route path="/booking/:id" element={<BookingMock />} />
-            </Routes>
+            <AppProvider>
+              <Routes>
+                <Route path="rooms/:id" element={<Details />} />
+                <Route path="/booking/:id" element={<BookingMock />} />
+              </Routes>
+            </AppProvider>
           </MemoryRouter>
         </HelmetProvider>
       </QueryClientProvider>

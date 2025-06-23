@@ -3,8 +3,8 @@ import { useRef, useEffect, useState } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { MdAttachEmail } from "react-icons/md";
 import emailjs from "@emailjs/browser";
-import UseFetch from "./UseFetch";
 import { ReactLenis } from "lenis/react";
+import UseFetch from "../data managment/UseFetch";
 const ContactUs = ({ onSubmit }) => {
   const [formStatus, setFormStatus] = useState(null);
   const [user, setUser] = useState({ name: "", email: "", comment: "" });

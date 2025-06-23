@@ -7,7 +7,7 @@ import { mockData, mockData3 } from "./SetupTest";
 import { HelmetProvider } from "react-helmet-async";
 
 describe("group of testing HomePage component", () => {
-  vi.mock("../components/UseFetchQueries", () => ({
+  vi.mock("../data managment/UseFetchQueries", () => ({
     __esModule: true,
     default: vi.fn(() => ({
       data1: mockData,

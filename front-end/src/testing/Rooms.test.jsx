@@ -37,7 +37,7 @@ describe("group of testing Rooms component", () => {
     expect(div).toHaveStyle(
       `background: url(../images/header/roomsheader.jpg) center/cover`
     );
-    const type = screen.getByRole("combobox", { name: "room &suite type" });
+    const type = screen.getByRole("combobox", { name: "room & suite type" });
 
     const roomOption = screen.getByRole("option", { name: "room" });
     expect(roomOption).toBeInTheDocument();

@@ -254,7 +254,7 @@ const Rooms = () => {
             }}
           >
             <div className="searchElement">
-              <label htmlFor="type">room &suite type</label>
+              <label htmlFor="type">room & suite type</label>
               <select
                 name="type"
                 id="type"

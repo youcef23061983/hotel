@@ -73,6 +73,7 @@ const Calendar = ({
     open();
     addToCart(roomData);
   };
+  console.log("select test", date);
 
   return (
     <motion.div

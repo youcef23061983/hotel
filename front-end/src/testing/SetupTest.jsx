@@ -362,6 +362,7 @@ export const mockData3 = [
       "https://hotel.com/image6.jpg",
       "https://hotel.com/image7.jpg",
     ],
+    date: "2025-08-01",
   },
   {
     name: "yohju",
@@ -376,6 +377,7 @@ export const mockData3 = [
       "https://hotel.com/image6.jpg",
       "https://hotel.com/image7.jpg",
     ],
+    date: "2025-09-01",
   },
   {
     name: "yhjfou",
@@ -389,6 +391,7 @@ export const mockData3 = [
       "https://hotel.com/image6.jpg",
       "https://hotel.com/image7.jpg",
     ],
+    date: "2025-08-01",
   },
   {
     name: "yohgdu",
@@ -408,6 +411,7 @@ export const mockData3 = [
       "https://hotel.com/image13.jpg",
       "https://hotel.com/image14.jpg",
     ],
+    date: "2025-08-01",
   },
   {
     name: "yooyfu",
@@ -433,6 +437,7 @@ export const mockData3 = [
       "https://hotel.com/image6.jpg",
       "https://hotel.com/image7.jpg",
     ],
+    date: "2025-08-01",
   },
   {
     name: "sqdqsf",
@@ -446,6 +451,7 @@ export const mockData3 = [
       "https://hotel.com/image6.jpg",
       "https://hotel.com/image7.jpg",
     ],
+    date: "2025-08-01",
   },
   {
     name: "fgrg",
@@ -459,6 +465,7 @@ export const mockData3 = [
       "https://hotel.com/image6.jpg",
       "https://hotel.com/image7.jpg",
     ],
+    date: "2025-08-01",
   },
   {
     name: "ituk",
@@ -472,6 +479,7 @@ export const mockData3 = [
       "https://hotel.com/image6.jpg",
       "https://hotel.com/image7.jpg",
     ],
+    date: "2025-08-01",
   },
 ];
 export const mockData2 = {
@@ -537,7 +545,7 @@ export const mockData2 = {
     "A comfortable room with a fantastic city view. The 24-hour room service was a lifesaver!",
 };
 // Mock for UseFetch
-vi.mock("../components/UseFetch", () => ({
+vi.mock("../data managment/UseFetch", () => ({
   __esModule: true,
   default: vi.fn(() => ({
     data: mockData,
@@ -546,15 +554,20 @@ vi.mock("../components/UseFetch", () => ({
   })),
 }));
 
-vi.mock("../components/BookingUseFetch", () => ({
+vi.mock("../data managment/BookingUseFetch", () => ({
   __esModule: true,
   default: vi.fn(() => ({
     data: mockData2,
     isPending: false,
     error: null,
+    ranges: {
+      startDate: new Date("2025-08-01T00:00:00+01:00"),
+      endDate: new Date("2025-08-01T00:00:00+01:00"),
+      key: "selection",
+    },
   })),
 }));
-vi.mock("../components/DetailUseFetchQueries", () => ({
+vi.mock("../data managment/DetailUseFetchQueries", () => ({
   __esModule: true,
   default: vi.fn(() => ({
     data1: mockData,

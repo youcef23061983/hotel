@@ -1,10 +1,11 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter, Route, Routes, useLocation } from "react-router-dom";
 import { render, waitFor, screen } from "@testing-library/react";
-import { beforeEach, expect } from "vitest";
+import { beforeEach, expect, vi } from "vitest";
 import About from "../../src/components/About";
 import userEvent from "@testing-library/user-event";
 import { HelmetProvider } from "react-helmet-async";
+import AppProvider from "../data managment/AppProvider";
 
 describe("group of testing About component", () => {
   const LocationDisplay = () => {
@@ -17,10 +18,12 @@ describe("group of testing About component", () => {
       <QueryClientProvider client={queryClient}>
         <HelmetProvider>
           <MemoryRouter initialEntries={["/about"]}>
-            <Routes>
-              <Route path="/about" element={<About />} />
-              <Route path="/google" element={<LocationDisplay />} />
-            </Routes>
+            <AppProvider>
+              <Routes>
+                <Route path="/about" element={<About />} />
+                <Route path="/google" element={<LocationDisplay />} />
+              </Routes>
+            </AppProvider>
           </MemoryRouter>
         </HelmetProvider>
       </QueryClientProvider>
@@ -32,6 +35,7 @@ describe("group of testing About component", () => {
   });
 
   it("should render the proper elements", async () => {
+    screen.debug();
     const headingText =
       "Coastal Elegance: Legend Hotel's Enchanting Locale in Batu Ferringhi";
     const h2 = screen.getByRole("heading", { name: headingText });

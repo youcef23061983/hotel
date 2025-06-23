@@ -2,9 +2,9 @@ import Banner from "../pages/Banner";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { useScroll, motion, useTransform } from "framer-motion";
-import UseFetch from "./UseFetch";
 import { ReactLenis } from "lenis/react";
 import { Helmet } from "react-helmet-async";
+import UseFetch from "../data managment/UseFetch";
 
 const About = () => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;

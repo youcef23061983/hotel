@@ -219,9 +219,7 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         ...state,
-
         addToCart,
-
         setFirebaseUser,
         setFormUser,
         checkAuthStatus,

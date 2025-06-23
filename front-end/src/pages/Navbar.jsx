@@ -164,7 +164,7 @@ const Navbar = () => {
           >
             <li>
               <Link to="rooms" className="navlink">
-                Romms & Suites
+                Rooms & Suites
               </Link>
             </li>
             <li>

@@ -180,7 +180,7 @@ const Testimonial = () => {
                           <p>{name}</p>
 
                           <div className="rating">
-                            {/* <p>{formattedDate}</p> */}
+                            <p>{formattedDate}</p>
                             <div className="rating">
                               <div>
                                 <Rating rating={rating} />

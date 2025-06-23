@@ -1,7 +1,6 @@
+import UseFetch from "../data managment/UseFetch";
 import Banner from "../pages/Banner";
 import { useEffect } from "react";
-
-import UseFetch from "./UseFetch";
 
 const Cookies = () => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/gallery`;
