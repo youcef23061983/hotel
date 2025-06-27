@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://hotelmalaysia.vercel.app"],
+    methods: ["GET", "POST", "PATCH", "DELETE"],
     credentials: true, // Allow credentials (cookies)
     optionsSuccessStatus: 200, // Some legacy browsers choke on 204
   })

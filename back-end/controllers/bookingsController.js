@@ -32,6 +32,7 @@ const potBooking = async (req, res) => {
     termsCondition,
     emailMe,
   } = req.body;
+  console.log("tbluserid ", tbluser_id);
 
   try {
     const newBooking = await pool.query(
