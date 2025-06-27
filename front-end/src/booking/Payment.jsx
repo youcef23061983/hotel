@@ -19,7 +19,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 
 const Payment = ({ estimatedTotal, allDates, id }) => {
-  const { user, room, roomPayment, payment } = useContext(AppContext);
+  const { user, room, roomPayment, payment, roomUser } = useContext(AppContext);
 
   const [paymentSucceeded, setPaymentSucceeded] = useState(false);
   const [stripePromise, setStripePromise] = useState(null);
@@ -62,11 +62,14 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         ...payment,
         [name]: value,
       });
+      roomUser({ ...user, payment: value });
     },
     [payment, roomPayment]
   );
 
   const url = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
+  console.log("this is the payment method", payment);
+  console.log("this is the user", user);
 
   const patchData = async () => {
     const updatedUnavailables = room ? [...room.unavailables, ...allDates] : [];

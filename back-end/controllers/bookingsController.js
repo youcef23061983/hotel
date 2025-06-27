@@ -27,6 +27,7 @@ const potBooking = async (req, res) => {
     country,
     city,
     nationality,
+    payment,
     termsCondition,
     emailMe,
   } = req.body;
@@ -49,12 +50,12 @@ const potBooking = async (req, res) => {
         country,
         city,
         nationality,
-        
+        payment,
         termsCondition,
         emailMe
       ) VALUES (
         $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
-        $11, $12, $13, $14, $15, $16, $17
+        $11, $12, $13, $14, $15, $16, $17,$18
       ) RETURNING *`,
       [
         room_id,
@@ -72,6 +73,7 @@ const potBooking = async (req, res) => {
         country,
         city,
         nationality,
+        payment,
         termsCondition,
         emailMe,
       ]
