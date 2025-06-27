@@ -13,6 +13,7 @@ const getBookings = async (req, res) => {
 const potBooking = async (req, res) => {
   const {
     room_id,
+    tbluser_id,
     arrival,
     departure,
     dates,
@@ -36,6 +37,7 @@ const potBooking = async (req, res) => {
     const newBooking = await pool.query(
       `INSERT INTO bookings (
         room_id,
+        tbluser_id,
         arrival,
         departure,
         dates,
@@ -55,10 +57,11 @@ const potBooking = async (req, res) => {
         emailMe
       ) VALUES (
         $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
-        $11, $12, $13, $14, $15, $16, $17,$18
+        $11, $12, $13, $14, $15, $16, $17,$18, $19
       ) RETURNING *`,
       [
         room_id,
+        tbluser_id,
         arrival,
         departure,
         dates,

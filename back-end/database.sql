@@ -71,7 +71,7 @@ CREATE TABLE room_amenities (
 CREATE TABLE bookings (
     id SERIAL PRIMARY KEY,
     room_id INT NOT NULL REFERENCES rooms(id) ON DELETE CASCADE,
-    user_id INT NOT NULL REFERENCES tbluser(id) ON DELETE CASCADE,
+    tbluser_id INT NOT NULL REFERENCES tbluser(id) ON DELETE CASCADE,
     arrival DATE NOT NULL,
     departure DATE NOT NULL,
     dates DATE[] DEFAULT ARRAY[]::DATE[],

@@ -19,7 +19,8 @@ import {
 import { useMutation } from "@tanstack/react-query";
 
 const Payment = ({ estimatedTotal, allDates, id }) => {
-  const { user, room, roomPayment, payment, roomUser } = useContext(AppContext);
+  const { user, room, roomPayment, payment, roomUser, formUser, firebaseUser } =
+    useContext(AppContext);
 
   const [paymentSucceeded, setPaymentSucceeded] = useState(false);
   const [stripePromise, setStripePromise] = useState(null);
@@ -62,7 +63,11 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         ...payment,
         [name]: value,
       });
-      roomUser({ ...user, payment: value });
+      roomUser({
+        ...user,
+        payment: value,
+        tbluser_id: formUser?.user?.id || firebaseUser?.id,
+      });
     },
     [payment, roomPayment]
   );
@@ -70,6 +75,8 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
   const url = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
   console.log("this is the payment method", payment);
   console.log("this is the user", user);
+  console.log("form user", formUser?.user?.id);
+  console.log("firebase user", firebaseUser?.id);
 
   const patchData = async () => {
     const updatedUnavailables = room ? [...room.unavailables, ...allDates] : [];
