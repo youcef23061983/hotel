@@ -71,6 +71,7 @@ CREATE TABLE room_amenities (
 CREATE TABLE bookings (
     id SERIAL PRIMARY KEY,
     room_id INT NOT NULL REFERENCES rooms(id) ON DELETE CASCADE,
+    user_id INT NOT NULL REFERENCES tbluser(id) ON DELETE CASCADE,
     arrival DATE NOT NULL,
     departure DATE NOT NULL,
     dates DATE[] DEFAULT ARRAY[]::DATE[],
@@ -92,6 +93,24 @@ CREATE TABLE bookings (
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
+-- to delete all data and set it to 0: TRUNCATE TABLE tbluser RESTART IDENTITY;
+
+CREATE TABLE tbluser (
+    id SERIAL NOT NULL PRIMARY KEY,
+    email VARCHAR(120) UNIQUE NOT NULL,
+    firebase_uid VARCHAR(100) ,
+    username VARCHAR(50) NOT NULL,
+    contact VARCHAR(15),
+    accounts TEXT[],
+    password TEXT,
+    provider VARCHAR(10) NOT NULL DEFAULT 'local',
+    country TEXT,
+    currency VARCHAR(5) NOT NULL DEFAULT 'USD',
+    user_role VARCHAR(10) NOT NULL DEFAULT 'customer' 
+        CHECK (user_role IN ('customer', 'admin')),
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 
 
 -- ////////////////////////INSERTING ROOMS & SUITES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -1020,25 +1039,6 @@ INSERT INTO testimonials (name, date, rating, img, text) VALUES
  'In search of rejuvenation, I found my haven at Legend Hotel''s spa and wellness center. The holistic approach to well-being, coupled with expert therapists, offered a sanctuary for relaxation. From soothing massages to invigorating wellness classes, each element contributed to a revitalizing experience. The spa''s serene atmosphere, combined with the coastal setting, created the perfect backdrop for a wellness retreat. Legend Hotel exceeded my expectations, leaving me refreshed and renewed.');
 
 
--- ////////CREATE USER TABLE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\:
--- to delete all data and set it to 0: TRUNCATE TABLE tbluser RESTART IDENTITY;
-
-CREATE TABLE tbluser (
-    id SERIAL NOT NULL PRIMARY KEY,
-    email VARCHAR(120) UNIQUE NOT NULL,
-    firebase_uid VARCHAR(100) ,
-    username VARCHAR(50) NOT NULL,
-    contact VARCHAR(15),
-    accounts TEXT[],
-    password TEXT,
-    provider VARCHAR(10) NOT NULL DEFAULT 'local',
-    country TEXT,
-    currency VARCHAR(5) NOT NULL DEFAULT 'USD',
-    user_role VARCHAR(10) NOT NULL DEFAULT 'customer' 
-        CHECK (user_role IN ('customer', 'admin')),
-    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
 
 
 
