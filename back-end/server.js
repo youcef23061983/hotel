@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+app.set("trust proxy", true);
+
 const PORT = process.env.PORT || 3000;
 const cors = require("cors");
 const morgan = require("morgan");
@@ -10,6 +12,8 @@ const albumRoutes = require("./routes/album.js");
 const testimonialsRoutes = require("./routes/testimonials.js");
 const bookingsRoutes = require("./routes/bookings.js");
 const authRoutes = require("./routes/authUser.js");
+const aj = require("./libs/arctjet.js");
+const helmet = require("helmet");
 
 const stripe = require("stripe")(process.env.VITE_STRIPE_SECRET_KEY);
 
@@ -28,12 +32,57 @@ if (process.env.NODE_ENV === "development") {
 } else {
   app.use(morgan("tiny")); // Minimal logs
 }
+app.use(helmet());
+
 app.use("/rooms", roomsRoutes);
 app.use("/gallery", galleryRoutes);
 app.use("/album", albumRoutes);
 app.use("/testimonials", testimonialsRoutes);
 app.use("/bookings", bookingsRoutes);
 app.use("/auth", authRoutes);
+app.use(async (req, res, next) => {
+  // 🛑 Skip Arcjet on /health
+  if (req.path === "/health" || req.path === "/") return next();
+  if (req.path.startsWith("/assets")) return next();
+  console.log("Client IP:", req.ip);
+  console.log("User-Agent:", req.headers["user-agent"]);
+  console.log("Accept-Language:", req.headers["accept-language"]);
+  console.log("Request Path:", req.path);
+
+  try {
+    const ajPromise = await aj;
+
+    const decision = await ajPromise.protect(req, {
+      requested: 1, // specifies that each request consumes 1 token
+    });
+
+    if (decision.isDenied()) {
+      if (decision.reason.isRateLimit()) {
+        res.status(429).json({ error: "Too Many Requests" });
+      } else if (decision.reason.isBot()) {
+        res.status(403).json({ error: "Bot access denied" });
+      } else {
+        res.status(403).json({ error: "Forbidden" });
+      }
+      return;
+    }
+
+    // check for spoofed bots
+    if (
+      decision.results.some(
+        (result) => result.reason.isBot() && result.reason.isSpoofed()
+      )
+    ) {
+      res.status(403).json({ error: "Spoofed bot detected" });
+      return;
+    }
+
+    next();
+  } catch (error) {
+    console.log("Arcjet error", error);
+    next(error);
+  }
+});
 
 app.post("/create-payment-intent", async (req, res) => {
   const { total } = req.body;
