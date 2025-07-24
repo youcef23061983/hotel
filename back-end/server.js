@@ -532,20 +532,21 @@ app.post("/create-checkout-session", async (req, res) => {
   const { metadata } = req.body;
 
   try {
-    const room = metadata.room;
+    // 1. Get the raw image path (with spaces)
+    const rawImagePath = metadata?.room.image; // "images/rooms/standard single room/img1.jpg"
 
+    // 2. Remove leading slash if present
+    const cleanPath = rawImagePath.replace(/^\//, "");
+
+    // 3. Encode ONLY the spaces (keep slashes)
+    const encodedPath = encodeURI(cleanPath); // "images/rooms/standard%20single%20room/img1.jpg"
+
+    // 4. Build full URL
+    const imageUrl = `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/${encodedPath}`;
+
+    // 5. Verify in logs (check for %20)
+    console.log("Final Image URL:", imageUrl);
     const dates = metadata.dates || [];
-    // In your create-checkout-session endpoint:
-    const cleanImagePath = encodeURIComponent(
-      room.image.replace(/^\/|\/$/g, "")
-    );
-    const imageUrl = `${
-      process.env.VITE_PUBLIC_PRODUCTS_FRONTEND_URL
-    }/${encodeURI(cleanImagePath)}`;
-
-    // Build proper image URL
-
-    console.log("imageUrl", imageUrl);
 
     // Validate image URL
     if (imageUrl && !isValidUrl(imageUrl)) {
@@ -557,12 +558,10 @@ app.post("/create-checkout-session", async (req, res) => {
         price_data: {
           currency: "usd",
           product_data: {
-            name: room.name || "Hotel Room Booking",
-            images: [
-              `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}${room.image}`,
-            ],
+            name: rawImagePath.name || "Hotel Room Booking",
+            images: [imageUrl],
           },
-          unit_amount: Math.round(Number(room.price) * 100),
+          unit_amount: Math.round(Number(rawImagePath.price) * 100),
         },
         quantity: dates.length || 1,
       },
@@ -574,7 +573,7 @@ app.post("/create-checkout-session", async (req, res) => {
       mode: "payment",
       customer_email: metadata.email,
       metadata: {
-        room_id: room.id,
+        room_id: rawImagePath.id,
         stay_duration: dates.length.toString(),
       },
       success_url: `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order?session_id={CHECKOUT_SESSION_ID}`,
