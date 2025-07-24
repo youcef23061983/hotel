@@ -544,9 +544,9 @@ app.post("/create-checkout-session", async (req, res) => {
     }
 
     // Build proper image URL
-    const imageUrl = room.image?.startsWith("http")
-      ? room.image
-      : `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}${room.image || ""}`;
+    const imageUrl = `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/${
+      room.image || ""
+    }`;
 
     // Validate image URL
     if (imageUrl && !isValidUrl(imageUrl)) {
