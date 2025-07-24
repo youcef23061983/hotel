@@ -530,56 +530,67 @@ app.use("/auth", authRoutes);
 
 app.post("/create-checkout-session", async (req, res) => {
   const { metadata } = req.body;
-  const { room, dates } = metadata;
 
   try {
-    // 1. Properly handle room data (assuming room is already an object)
+    // 1. Parse and validate room data
+    const room =
+      typeof metadata.room === "string"
+        ? JSON.parse(metadata.room || "{}")
+        : metadata.room || {};
+
+    const dates = metadata.dates || [];
+
+    // 2. Validate essential fields
+    if (!room.price || isNaN(room.price)) {
+      throw new Error("Invalid room price");
+    }
+    if (!metadata.email) {
+      throw new Error("Customer email is required");
+    }
+
+    // 3. Create line item
     const line_items = [
       {
         price_data: {
           currency: "usd",
           product_data: {
-            name: room?.name || "Hotel Room Booking",
-            images: room?.images?.length
+            name: room.name || "Hotel Room Booking",
+            images: room.image
               ? [
                   `${process.env.VITE_PUBLIC_PRODUCTS_FRONTEND_URL}/${room.image}`,
                 ]
-              : [], // Fallback for missing images
+              : [],
           },
-          unit_amount: Math.round(Number(room?.price || 0) * 100), // in cents
+          unit_amount: Math.round(Number(room.price) * 100), // in cents
         },
-        quantity: dates?.length || 1,
+        quantity: dates.length || 1,
       },
     ];
 
-    // 2. Session parameters
-    const sessionParams = {
+    // 4. Create session
+    const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
-      customer_email: metadata?.email,
+      customer_email: metadata.email,
       phone_number_collection: { enabled: true },
       metadata: {
-        ...metadata,
-        room_id: room?.id, // Preserve room ID
-        amount: dates?.length || 1,
+        room_id: room.id,
+        stay_duration: dates.length.toString(),
       },
       success_url: `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/rooms`,
       shipping_address_collection: {
         allowed_countries: ["US", "CA", "FR", "DZ"],
       },
-      automatic_tax: { enabled: false },
-    };
+    });
 
-    // 3. Create Stripe session
-    const session = await stripe.checkout.sessions.create(sessionParams);
     res.json({ sessionId: session.id });
   } catch (err) {
-    console.error("Stripe Session Error:", err);
+    console.error("Stripe Error:", err);
     res.status(400).json({
-      error: "Failed to create checkout session",
-      details: err.message,
+      error: err.message || "Payment failed",
+      details: process.env.NODE_ENV === "development" ? err.stack : undefined,
     });
   }
 });
