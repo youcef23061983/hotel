@@ -254,215 +254,215 @@ if (process.env.NODE_ENV === "development") {
 } else {
   app.use(morgan("tiny")); // Minimal logs
 }
-app.post(
-  "/webhook",
-  // Use express.raw middleware to get raw body for signature verification
-  express.raw({ type: "application/json" }),
-  async (req, res) => {
-    const sig = req.headers["stripe-signature"];
-    console.log("Signature:", sig ? "Present" : "Missing"); // Verify headers
+// app.post(
+//   "/webhook",
+//   // Use express.raw middleware to get raw body for signature verification
+//   express.raw({ type: "application/json" }),
+//   async (req, res) => {
+//     const sig = req.headers["stripe-signature"];
+//     console.log("Signature:", sig ? "Present" : "Missing"); // Verify headers
 
-    if (!sig) {
-      console.error("❌ Missing Stripe signature");
-      return res.status(400).send("Missing Stripe signature");
-    }
+//     if (!sig) {
+//       console.error("❌ Missing Stripe signature");
+//       return res.status(400).send("Missing Stripe signature");
+//     }
 
-    let event;
-    try {
-      event = stripe.webhooks.constructEvent(
-        req.body, // Use raw body directly
-        sig,
-        process.env.STRIPE_WEBHOOK_SECRET
-      );
-      console.log("🟢 Event type:", event.type); // Confirm event parsing
-    } catch (err) {
-      console.error("❌ Webhook signature verification failed:", err.message);
-      return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
+//     let event;
+//     try {
+//       event = stripe.webhooks.constructEvent(
+//         req.body, // Use raw body directly
+//         sig,
+//         process.env.STRIPE_WEBHOOK_SECRET
+//       );
+//       console.log("🟢 Event type:", event.type); // Confirm event parsing
+//     } catch (err) {
+//       console.error("❌ Webhook signature verification failed:", err.message);
+//       return res.status(400).send(`Webhook Error: ${err.message}`);
+//     }
 
-    // Handle checkout.session.completed events
-    if (event.type === "checkout.session.completed") {
-      console.log("🛒 Checkout session completed - starting processing"); // Entry point
+//     // Handle checkout.session.completed events
+//     if (event.type === "checkout.session.completed") {
+//       console.log("🛒 Checkout session completed - starting processing"); // Entry point
 
-      try {
-        console.log("🔔 Handling checkout.session.completed event");
+//       try {
+//         console.log("🔔 Handling checkout.session.completed event");
 
-        // Retrieve the expanded session
-        const session = await stripe.checkout.sessions.retrieve(
-          event.data.object.id,
-          {
-            expand: ["line_items", "payment_intent.payment_method"],
-          }
-        );
-        console.log("📦 Raw session data:", JSON.stringify(session, null, 2));
+//         // Retrieve the expanded session
+//         const session = await stripe.checkout.sessions.retrieve(
+//           event.data.object.id,
+//           {
+//             expand: ["line_items", "payment_intent.payment_method"],
+//           }
+//         );
+//         console.log("📦 Raw session data:", JSON.stringify(session, null, 2));
 
-        // Extract customer details with proper fallbacks
-        const metadata = session.metadata || {};
+//         // Extract customer details with proper fallbacks
+//         const metadata = session.metadata || {};
 
-        const customerDetails = session.customer_details || {};
-        const email =
-          customerDetails.email || metadata.email || "no-email@example.com";
-        const room_id = metadata?.room_id || "Not provided";
+//         const customerDetails = session.customer_details || {};
+//         const email =
+//           customerDetails.email || metadata.email || "no-email@example.com";
+//         const room_id = metadata?.room_id || "Not provided";
 
-        const phone = customerDetails.phone || metadata.phonenumber || null;
-        const orderId = session.id;
-        const amount = metadata?.dates?.length;
-        const currency = session.currency.toUpperCase();
-        const country =
-          session.shipping_details?.address?.country ||
-          session.metadata?.country ||
-          "Not provided";
+//         const phone = customerDetails.phone || metadata.phonenumber || null;
+//         const orderId = session.id;
+//         const amount = metadata?.dates?.length;
+//         const currency = session.currency.toUpperCase();
+//         const country =
+//           session.shipping_details?.address?.country ||
+//           session.metadata?.country ||
+//           "Not provided";
 
-        const address =
-          session.shipping_details?.address?.line1 || "no-email@example.com";
-        const city =
-          session.shipping_details?.address?.city ||
-          metadata?.city ||
-          "Not provided";
-        const total = session.amount_total / 100 || metadata.total || "0";
+//         const address =
+//           session.shipping_details?.address?.line1 || "no-email@example.com";
+//         const city =
+//           session.shipping_details?.address?.city ||
+//           metadata?.city ||
+//           "Not provided";
+//         const total = session.amount_total / 100 || metadata.total || "0";
 
-        const tbluser_id = metadata.tbluser_id || "guest";
+//         const tbluser_id = metadata.tbluser_id || "guest";
 
-        const room = JSON.parse(metadata.room || "[]");
-        const payment = "stripe" || "no method";
-        const arrival = metadata?.arrival;
-        const departure = metadata?.departure;
-        const dates = metadata?.dates;
-        const price = metadata?.room?.price;
-        const title = metadata?.room?.title;
-        const fullName =
-          customerDetails.name || metadata.fullName || "Valued Customer";
-        const names = fullName.split(" ");
-        const firstname = names[0] || metadata?.firstName || "";
-        const lastname = names.slice(1).join(" ") || metadata?.lastName || "";
+//         const room = JSON.parse(metadata.room || "[]");
+//         const payment = "stripe" || "no method";
+//         const arrival = metadata?.arrival;
+//         const departure = metadata?.departure;
+//         const dates = metadata?.dates;
+//         const price = metadata?.room?.price;
+//         const title = metadata?.room?.title;
+//         const fullName =
+//           customerDetails.name || metadata.fullName || "Valued Customer";
+//         const names = fullName.split(" ");
+//         const firstname = names[0] || metadata?.firstName || "";
+//         const lastname = names.slice(1).join(" ") || metadata?.lastName || "";
 
-        const countrycode =
-          metadata.countryCode || customerDetails?.phone?.slice(0, 4) || "0000";
-        const phonenumber =
-          metadata.fullPhone || customerDetails?.phone || "0000000000";
-        const nationality =
-          metadata.nationality ||
-          customerDetails?.address?.country ||
-          "Not provided";
+//         const countrycode =
+//           metadata.countryCode || customerDetails?.phone?.slice(0, 4) || "0000";
+//         const phonenumber =
+//           metadata.fullPhone || customerDetails?.phone || "0000000000";
+//         const nationality =
+//           metadata.nationality ||
+//           customerDetails?.address?.country ||
+//           "Not provided";
 
-        const termscondition = metadata?.termsCondition || "not provided";
-        const emailme = metadata?.emailMe;
+//         const termscondition = metadata?.termsCondition || "not provided";
+//         const emailme = metadata?.emailMe;
 
-        // Log important details
+//         // Log important details
 
-        // Prepare order data for database
-        const orderData = {
-          room_id,
-          tbluser_id,
-          arrival,
-          departure,
-          dates,
-          price,
-          total,
-          title,
-          firstname,
-          lastname,
-          countrycode,
-          phonenumber,
-          email,
-          country,
-          city,
-          nationality,
-          termscondition,
-          payment,
-          emailme,
-          room,
-        };
+//         // Prepare order data for database
+//         const orderData = {
+//           room_id,
+//           tbluser_id,
+//           arrival,
+//           departure,
+//           dates,
+//           price,
+//           total,
+//           title,
+//           firstname,
+//           lastname,
+//           countrycode,
+//           phonenumber,
+//           email,
+//           country,
+//           city,
+//           nationality,
+//           termscondition,
+//           payment,
+//           emailme,
+//           room,
+//         };
 
-        // Save to database
-        await saveOrderToDatabase(orderData);
-        console.log("💾 Order saved to database");
-        console.log("💰 Payment Details:", {
-          orderId,
-          total: total.toFixed(2),
-          currency,
-          email: email,
-          phone: phone ? "provided" : "not provided",
-        });
-        console.log("📱 My Phone Number:", metadata?.phone);
-        console.log("🛡️ My Session:", session);
+//         // Save to database
+//         await saveOrderToDatabase(orderData);
+//         console.log("💾 Order saved to database");
+//         console.log("💰 Payment Details:", {
+//           orderId,
+//           total: total.toFixed(2),
+//           currency,
+//           email: email,
+//           phone: phone ? "provided" : "not provided",
+//         });
+//         console.log("📱 My Phone Number:", metadata?.phone);
+//         console.log("🛡️ My Session:", session);
 
-        // Send email notification
-        try {
-          await sendEmail({
-            to: email,
-            subject: `🧾 Order Confirmation #${orderId}`,
-            html: `
-              <p>Hello ${fullName},</p>
-              <p>Thank you for your order <strong>#${orderId}</strong>.</p>
-              <p>Total: <strong> ${total} ${currency}</strong></p>
-              // <p>View your order details <a href="${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order/${orderId}">here</a>.</p>
-              <p>If you have any questions, please contact our support team.</p>
-            `,
-          });
-          console.log("📧 Confirmation email sent to", fullName);
-        } catch (emailError) {
-          console.error("❌ Failed to send email:", emailError.message);
-        }
+//         // Send email notification
+//         try {
+//           await sendEmail({
+//             to: email,
+//             subject: `🧾 Order Confirmation #${orderId}`,
+//             html: `
+//               <p>Hello ${fullName},</p>
+//               <p>Thank you for your order <strong>#${orderId}</strong>.</p>
+//               <p>Total: <strong> ${total} ${currency}</strong></p>
+//               // <p>View your order details <a href="${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order/${orderId}">here</a>.</p>
+//               <p>If you have any questions, please contact our support team.</p>
+//             `,
+//           });
+//           console.log("📧 Confirmation email sent to", fullName);
+//         } catch (emailError) {
+//           console.error("❌ Failed to send email:", emailError.message);
+//         }
 
-        // Send SMS notifications if phone number exists and textbelt accept the country:
-        if (phone) {
-          try {
-            // await sendwhatsappSMS({
-            //   phone: phone,
-            //   name: fullName,
-            //   orderId,
-            //   total,
-            // });
+//         // Send SMS notifications if phone number exists and textbelt accept the country:
+//         if (phone) {
+//           try {
+//             // await sendwhatsappSMS({
+//             //   phone: phone,
+//             //   name: fullName,
+//             //   orderId,
+//             //   total,
+//             // });
 
-            // await sendSMS({
-            //   phone: phone,
-            //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
-            //     total / 100
-            //   ).toFixed(2)} was received. Thank you!`,
-            // });
+//             // await sendSMS({
+//             //   phone: phone,
+//             //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
+//             //     total / 100
+//             //   ).toFixed(2)} was received. Thank you!`,
+//             // });
 
-            // const pdfBuffer = await generateInvoicePDF(metadata, orderId);
-            // const pdfUrl = await uploadInvoice(session.id, pdfBuffer);
+//             // const pdfBuffer = await generateInvoicePDF(metadata, orderId);
+//             // const pdfUrl = await uploadInvoice(session.id, pdfBuffer);
 
-            // await sendtwilioSMS({
-            //   phone: phone,
-            //   // message: `Hi ${fullName}, your order #${orderId} of ${currency} ${total} $ was received. Thank you!`,
-            //   message: "hi i am youcef here, it works",
-            //   pdfUrl,
-            // });
-            // await sendtwilioSMS({
-            //   phone: phone,
-            //   message: `Hi ${fullName}, your order #${orderId} of ${total} ${currency} was received. Thank you!`,
-            // });
-            console.log("📱 twilio SMS notifications sent to", phone);
-            console.log("🆔 SID:", process.env.TWILIO_SID);
-            console.log("🔑 AUTH:", process.env.TWILIO_AUTH);
+//             // await sendtwilioSMS({
+//             //   phone: phone,
+//             //   // message: `Hi ${fullName}, your order #${orderId} of ${currency} ${total} $ was received. Thank you!`,
+//             //   message: "hi i am youcef here, it works",
+//             //   pdfUrl,
+//             // });
+//             // await sendtwilioSMS({
+//             //   phone: phone,
+//             //   message: `Hi ${fullName}, your order #${orderId} of ${total} ${currency} was received. Thank you!`,
+//             // });
+//             console.log("📱 twilio SMS notifications sent to", phone);
+//             console.log("🆔 SID:", process.env.TWILIO_SID);
+//             console.log("🔑 AUTH:", process.env.TWILIO_AUTH);
 
-            // await sendTwilioCall({
-            //   phone: phone,
-            //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
-            //     total / 100
-            //   ).toFixed(2)} $ was received. Thank you!`,
-            // });
-            // console.log("📱 SMS notifications sent to", phone);
-          } catch (smsError) {
-            console.error("❌ Failed to send SMS:", smsError.message);
-          }
-        }
-      } catch (processingError) {
-        console.error("❌ Order processing failed:", processingError);
-        // Here you should implement your error handling logic:
-        // - Log to error tracking service
-        // - Retry mechanism
-        // - Alert your team
-      }
-    }
+//             // await sendTwilioCall({
+//             //   phone: phone,
+//             //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
+//             //     total / 100
+//             //   ).toFixed(2)} $ was received. Thank you!`,
+//             // });
+//             // console.log("📱 SMS notifications sent to", phone);
+//           } catch (smsError) {
+//             console.error("❌ Failed to send SMS:", smsError.message);
+//           }
+//         }
+//       } catch (processingError) {
+//         console.error("❌ Order processing failed:", processingError);
+//         // Here you should implement your error handling logic:
+//         // - Log to error tracking service
+//         // - Retry mechanism
+//         // - Alert your team
+//       }
+//     }
 
-    // Return a response to Stripe to prevent retries
-    res.status(200).json({ received: true });
-  }
-);
+//     // Return a response to Stripe to prevent retries
+//     res.status(200).json({ received: true });
+//   }
+// );
 
 app.use(express.json());
 
@@ -533,20 +533,14 @@ app.post("/create-checkout-session", async (req, res) => {
 
   try {
     const room = metadata.room;
+
     const dates = metadata.dates || [];
 
-    // Validate essential fields
-    if (!room?.price || isNaN(room.price)) {
-      throw new Error("Invalid room price");
-    }
-    if (!metadata.email) {
-      throw new Error("Customer email is required");
-    }
-
     // Build proper image URL
-    const imageUrl = `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/${
+    const imageUrl = `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}${
       room.image || ""
     }`;
+    console.log("imageUrl", imageUrl);
 
     // Validate image URL
     if (imageUrl && !isValidUrl(imageUrl)) {
@@ -559,7 +553,9 @@ app.post("/create-checkout-session", async (req, res) => {
           currency: "usd",
           product_data: {
             name: room.name || "Hotel Room Booking",
-            images: imageUrl ? [imageUrl] : [], // Only include if valid
+            images: [
+              `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}${room.image}`,
+            ],
           },
           unit_amount: Math.round(Number(room.price) * 100),
         },
