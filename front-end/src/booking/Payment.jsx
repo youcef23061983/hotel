@@ -439,12 +439,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
     mutationFn: bookingFun,
   });
   const handleStripeCheckout = async () => {
-    const selectedRoom = room?.map((item) => ({
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      image: item?.images?.[0],
-    }));
+    const primaryRoom = Array.isArray(room) ? room[0] : room;
 
     setIsSubmitting(true);
     try {
@@ -474,8 +469,12 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         termscondition: user?.termsCondition || "Not provided",
         emailme: user?.emailMe || "Not provided",
         room_id: user?.room_id || "Not provided",
-        room: JSON.stringify(selectedRoom),
-
+        room: {
+          id: primaryRoom?.id,
+          name: primaryRoom?.name,
+          price: primaryRoom?.price,
+          image: primaryRoom?.images?.[0], // Just use first image
+        },
         payment: user?.payment || "Not provided",
 
         tbluser_id: user?.tbluser_id || "guest",
