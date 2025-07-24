@@ -438,8 +438,10 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
   const { data: addBooking, mutate: bookingMutate } = useMutation({
     mutationFn: bookingFun,
   });
+
   const handleStripeCheckout = async () => {
     const primaryRoom = Array.isArray(room) ? room[0] : room;
+    console.log("primary room", primaryRoom);
 
     setIsSubmitting(true);
     try {

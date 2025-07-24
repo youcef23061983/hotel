@@ -532,57 +532,52 @@ app.post("/create-checkout-session", async (req, res) => {
   const { metadata } = req.body;
 
   try {
-    // 1. Parse and validate room data
-    const room =
-      typeof metadata.room === "string"
-        ? JSON.parse(metadata.room || "{}")
-        : metadata.room || {};
-
+    const room = metadata.room;
     const dates = metadata.dates || [];
 
-    // 2. Validate essential fields
-    if (!room.price || isNaN(room.price)) {
+    // Validate essential fields
+    if (!room?.price || isNaN(room.price)) {
       throw new Error("Invalid room price");
     }
     if (!metadata.email) {
       throw new Error("Customer email is required");
     }
 
-    // 3. Create line item
+    // Build proper image URL
+    const imageUrl = room.image?.startsWith("http")
+      ? room.image
+      : `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}${room.image || ""}`;
+
+    // Validate image URL
+    if (imageUrl && !isValidUrl(imageUrl)) {
+      console.warn(`Invalid image URL: ${imageUrl}`);
+    }
+
     const line_items = [
       {
         price_data: {
           currency: "usd",
           product_data: {
             name: room.name || "Hotel Room Booking",
-            images: room.image
-              ? [
-                  `${process.env.VITE_PUBLIC_PRODUCTS_FRONTEND_URL}/${room.image}`,
-                ]
-              : [],
+            images: imageUrl ? [imageUrl] : [], // Only include if valid
           },
-          unit_amount: Math.round(Number(room.price) * 100), // in cents
+          unit_amount: Math.round(Number(room.price) * 100),
         },
         quantity: dates.length || 1,
       },
     ];
 
-    // 4. Create session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
       customer_email: metadata.email,
-      phone_number_collection: { enabled: true },
       metadata: {
         room_id: room.id,
         stay_duration: dates.length.toString(),
       },
       success_url: `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/rooms`,
-      shipping_address_collection: {
-        allowed_countries: ["US", "CA", "FR", "DZ"],
-      },
     });
 
     res.json({ sessionId: session.id });
@@ -594,6 +589,16 @@ app.post("/create-checkout-session", async (req, res) => {
     });
   }
 });
+
+// Helper function to validate URLs
+function isValidUrl(string) {
+  try {
+    new URL(string);
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
 app.get("/config", (req, res) => {
   res.json({
     publishableKey: process.env.VITE_STRIPE_PUBLIC_KEY, // Send as JSON object
