@@ -1,18 +1,39 @@
 import { motion } from "framer-motion";
 import { AppContext } from "../data managment/AppProvider";
 import { useContext } from "react";
+import { formatPhone, isValidPhone } from "../utils/phoneUtils";
 
 const Information = ({
   handleDateChange,
   estimatedTotal,
-  handleChange,
+  // handleChange,
   open,
 }) => {
-  const { room: roomData, user } = useContext(AppContext);
+  const { room: roomData, user, roomUser } = useContext(AppContext);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // For phone inputs, update both the field and the combined fullPhone
+    const updates = { ...user, [name]: value };
+
+    if (name === "phoneNumber" || name === "countryCode") {
+      updates.fullPhone = formatPhone(
+        name === "countryCode" ? value : user.countryCode,
+        name === "phoneNumber" ? value : user.phoneNumber
+      );
+    }
+    roomUser(updates);
+  };
+  console.log("this is the user", user);
 
   const img2 = roomData ? roomData.images[0] : null;
   const informationSubmit = (e) => {
     e.preventDefault();
+    const fullPhone = formatPhone(user.countryCode, user.phoneNumber);
+    if (!isValidPhone(fullPhone)) {
+      alert("Please enter a valid international phone number");
+      return;
+    }
 
     e.preventDefault();
     if (
@@ -35,6 +56,7 @@ const Information = ({
       alert("please go back and choose your booking days ");
       return;
     }
+
     if (
       user.title &&
       user.firstName &&
@@ -479,7 +501,23 @@ const Information = ({
                   name="phoneNumber"
                   value={user.phoneNumber}
                   onChange={handleChange}
+                  className={`input ${
+                    user.phoneNumber &&
+                    !isValidPhone(
+                      formatPhone(user.countryCode, user.phoneNumber)
+                    )
+                      ? "error"
+                      : ""
+                  }`}
                 />
+                {user.phone &&
+                  !isValidPhone(
+                    formatPhone(user.countryCode, user.phoneNumber)
+                  ) && (
+                    <span className="error-message">
+                      Please enter a valid phone number
+                    </span>
+                  )}
               </div>
             </div>
             <div className="guestTitle">

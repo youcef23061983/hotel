@@ -24,6 +24,7 @@ const Booking = () => {
     isPending,
   } = BookingUseFetch(url, "products", id);
   const { roomUser, user } = useContext(AppContext);
+  console.log("booking user", user);
 
   useEffect(() => {
     document.title = "Booking";
@@ -65,11 +66,11 @@ const Booking = () => {
     }
   }, [roomData]);
 
-  const handleChange = (e) => {
-    const { type, name, value, checked } = e.target;
+  // const handleChange = (e) => {
+  //   const { type, name, value, checked } = e.target;
 
-    roomUser({ ...user, [name]: type === "checkbox" ? checked : value });
-  };
+  //   roomUser({ ...user, [name]: type === "checkbox" ? checked : value });
+  // };
   const handleDateChange = (item) => {
     const arrival = format(item.selection.startDate, "MM/dd/yyyy");
     const departure = format(addDays(item.selection.endDate, 1), "MM/dd/yyy");
@@ -135,7 +136,7 @@ const Booking = () => {
         <Information
           handleDateChange={handleDateChange}
           estimatedTotal={estimatedTotal}
-          handleChange={handleChange}
+          // handleChange={handleChange}
           open={openPatmentcloseInfo}
         />
       )}

@@ -21,6 +21,7 @@ import About from "./info & contact/About";
 import ContactUs from "./info & contact/ContactUs";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "./data managment/AppProvider";
+import Order from "./info & contact/Order";
 
 function App() {
   const location = useLocation();
@@ -99,6 +100,7 @@ function App() {
         <Route path="events" element={<Events />} />
         <Route path="gallery" element={<Gallery />} />
         <Route path="contact" element={<ContactUs />} />
+        <Route path="order" element={<Order />} />
 
         <Route
           path="/login"
