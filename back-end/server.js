@@ -558,10 +558,10 @@ app.post("/create-checkout-session", async (req, res) => {
         price_data: {
           currency: "usd",
           product_data: {
-            name: rawImagePath.name || "Hotel Room Booking",
+            name: metadata?.room.name || "Hotel Room Booking",
             images: [imageUrl],
           },
-          unit_amount: Math.round(Number(rawImagePath.price) * 100),
+          unit_amount: Math.round(Number(metadata?.room.price) * 100),
         },
         quantity: dates.length || 1,
       },
