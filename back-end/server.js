@@ -535,11 +535,16 @@ app.post("/create-checkout-session", async (req, res) => {
     const room = metadata.room;
 
     const dates = metadata.dates || [];
+    // In your create-checkout-session endpoint:
+    const cleanImagePath = encodeURIComponent(
+      room.image.replace(/^\/|\/$/g, "")
+    );
+    const imageUrl = `${
+      process.env.VITE_PUBLIC_PRODUCTS_FRONTEND_URL
+    }/${encodeURI(cleanImagePath)}`;
 
     // Build proper image URL
-    const imageUrl = `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}${
-      room.image || ""
-    }`;
+
     console.log("imageUrl", imageUrl);
 
     // Validate image URL
