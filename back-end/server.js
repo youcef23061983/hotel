@@ -542,7 +542,7 @@ app.post("/create-checkout-session", async (req, res) => {
             name: room?.name || "Hotel Room Booking",
             images: room?.images?.length
               ? [
-                  `${process.env.VITE_PUBLIC_PRODUCTS_FRONTEND_URL}/${room.images[0]}`,
+                  `${process.env.VITE_PUBLIC_PRODUCTS_FRONTEND_URL}/${room.image}`,
                 ]
               : [], // Fallback for missing images
           },
