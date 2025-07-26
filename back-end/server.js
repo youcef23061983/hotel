@@ -520,6 +520,8 @@ app.use("/auth", authRoutes);
 app.post("/create-checkout-session", async (req, res) => {
   const { metadata } = req.body;
   console.log("room_id", metadata.room_id);
+  console.log("room data", metadata?.room);
+  console.log("room image data", metadata?.room?.image);
 
   try {
     const rawImagePath = metadata?.room?.image;
