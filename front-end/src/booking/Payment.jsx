@@ -504,8 +504,8 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         total: String(user?.total?.toFixed(2) || "0.00"),
         phonenumber: String(user?.fullPhone || ""),
         countrycode: String(user?.countryCode || ""),
-        termscondition: String(user?.termsCondition || false),
-        emailme: String(user?.emailMe || false),
+        termscondition: String(user?.termsCondition || "off"),
+        emailme: String(user?.emailMe || "off"),
         room_id: String(room?.id || ""),
         room: JSON.stringify({
           id: primaryRoom?.id,
