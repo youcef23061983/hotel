@@ -467,12 +467,12 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         termscondition: user?.termsCondition,
         emailme: user?.emailMe,
         room_id: room?.id,
-        room: {
+        room: JSON.stringify({
           id: primaryRoom?.id,
           name: primaryRoom?.name,
           price: primaryRoom?.price,
           image: primaryRoom?.images[0],
-        },
+        }),
         payment: user?.payment,
 
         tbluser_id: formUser?.user?.id || firebaseUser?.id,
