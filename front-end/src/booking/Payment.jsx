@@ -447,35 +447,76 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
 
     setIsSubmitting(true);
     try {
+      // const metadata = {
+      //   firstname: user?.firstName,
+      //   lastlame: user?.lastName,
+      //   fullName:
+      //     formUser?.user?.username || user?.firstName + " " + user?.lastName,
+      //   title: user?.title,
+      //   arrival: user?.arrival,
+      //   departure: user?.departure,
+      //   email: formUser?.user?.email || firebaseUser?.email || user?.email,
+      //   city: user?.city,
+      //   country: user?.country,
+      //   nationality: user?.nationality,
+      //   dates: user?.dates,
+      //   price: user?.price,
+      //   total: parseFloat(user?.total.toFixed(2)),
+      //   phonenumber: user?.fullPhone,
+      //   countrycode: user?.countryCode,
+      //   termscondition: user?.termsCondition,
+      //   emailme: user?.emailMe,
+      //   room_id: room?.id,
+      //   room: JSON.stringify({
+      //     id: primaryRoom?.id,
+      //     name: primaryRoom?.name,
+      //     price: primaryRoom?.price,
+      //     image: primaryRoom?.images[0],
+      //   }),
+      //   payment: user?.payment,
+
+      //   tbluser_id: formUser?.user?.id || firebaseUser?.id,
+      //   companyName: "LEGEND",
+      //   companyLogoPath: `${window.location.href}/icon.png`,
+      //   companyAddress: "123 ain naaja street",
+      //   companyPhoneNumber: "+123540016247",
+      //   companyCity: "Algiers",
+      //   companyPostalCode: "16000",
+      //   companyState: "Algeria",
+      // };
       const metadata = {
-        firstname: user?.firstName,
-        lastlame: user?.lastName,
-        fullName:
-          formUser?.user?.username || user?.firstName + " " + user?.lastName,
-        title: user?.title,
-        arrival: user?.arrival,
-        departure: user?.departure,
-        email: formUser?.user?.email || firebaseUser?.email || user?.email,
-        city: user?.city,
-        country: user?.country,
-        nationality: user?.nationality,
-        dates: user?.dates,
-        price: user?.price,
-        total: parseFloat(user?.total.toFixed(2)),
-        phonenumber: user?.fullPhone,
-        countrycode: user?.countryCode,
-        termscondition: user?.termsCondition,
-        emailme: user?.emailMe,
-        room_id: room?.id,
+        firstname: String(user?.firstName || ""),
+        lastname: String(user?.lastName || ""),
+        fullName: String(
+          formUser?.user?.username || `${user?.firstName} ${user?.lastName}`
+        ),
+        title: String(user?.title || ""),
+        arrival: String(user?.arrival || ""),
+        departure: String(user?.departure || ""),
+        email: String(
+          formUser?.user?.email || firebaseUser?.email || user?.email || ""
+        ),
+        city: String(user?.city || ""),
+        country: String(user?.country || ""),
+        nationality: String(user?.nationality || ""),
+        dates: JSON.stringify(user?.dates || []), // Important: stringify hashes/objects
+        price: String(user?.price || ""),
+        total: String(user?.total?.toFixed(2) || "0.00"),
+        phonenumber: String(user?.fullPhone || ""),
+        countrycode: String(user?.countryCode || ""),
+        termscondition: String(user?.termsCondition || false),
+        emailme: String(user?.emailMe || false),
+        room_id: String(room?.id || ""),
         room: JSON.stringify({
           id: primaryRoom?.id,
           name: primaryRoom?.name,
           price: primaryRoom?.price,
-          image: primaryRoom?.images[0],
+          image: primaryRoom?.images?.[0],
         }),
-        payment: user?.payment,
+        payment: String(user?.payment || ""),
+        tbluser_id: String(formUser?.user?.id || firebaseUser?.id || ""),
 
-        tbluser_id: formUser?.user?.id || firebaseUser?.id,
+        // Company info
         companyName: "LEGEND",
         companyLogoPath: `${window.location.href}/icon.png`,
         companyAddress: "123 ain naaja street",
@@ -484,6 +525,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         companyPostalCode: "16000",
         companyState: "Algeria",
       };
+
       const response = await fetch(
         `${import.meta.env.VITE_PROD_URL_URL}/create-checkout-session`,
         {
