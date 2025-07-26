@@ -522,47 +522,29 @@ app.post("/create-checkout-session", async (req, res) => {
   console.log("room_id", metadata.room_id);
 
   try {
-    const rawImagePath = metadata?.room?.image;
+    // 1. Safely get the image path with optional chaining and default value
+    const rawImagePath = metadata?.room?.image || "";
+    console.log("Raw image path:", rawImagePath);
 
     if (!rawImagePath) {
-      return res.status(400).json({ error: "Room image path is missing" });
+      throw new Error("No image path found in metadata");
     }
 
-    const cleanPath = rawImagePath.replace(/^\//, "");
-    const encodedPath = encodeURI(cleanPath);
-    const imageUrl = `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/${encodedPath}`;
+    // 2. Remove leading slash if present (safely)
+    const cleanPath =
+      typeof rawImagePath === "string" ? rawImagePath.replace(/^\//, "") : "";
 
-    console.log("Final Image URL:", imageUrl);
+    // 3. Encode the entire path (not just spaces) for URL safety
+    const encodedPath = encodeURIComponent(cleanPath);
 
-    //    // 1. Safely get the image path with optional chaining and default value
-    // const rawImagePath = metadata?.room?.image || '';
-    // console.log('Raw image path:', rawImagePath);
-
-    // if (!rawImagePath) {
-    //   throw new Error('No image path found in metadata');
-    // }
-
-    // // 2. Remove leading slash if present (safely)
-    // const cleanPath = typeof rawImagePath === 'string'
-    //   ? rawImagePath.replace(/^\//, '')
-    //   : '';
-
-    // // 3. Encode the entire path (not just spaces) for URL safety
-    // const encodedPath = encodeURIComponent(cleanPath);
-
-    // // 4. Build full URL - decode just the slashes for proper routing
-    // const imageUrl = `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/${
-    //   encodedPath.replace(/%2F/g, '/')
-    // }`;
+    // 4. Build full URL - decode just the slashes for proper routing
+    const imageUrl = `${
+      process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL
+    }/${encodedPath.replace(/%2F/g, "/")}`;
 
     console.log("Final image URL:", imageUrl);
 
     const dates = metadata.dates || [];
-
-    // Validate image URL
-    if (imageUrl && !isValidUrl(imageUrl)) {
-      console.warn(`Invalid image URL: ${imageUrl}`);
-    }
 
     const line_items = [
       {
