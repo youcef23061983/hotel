@@ -448,40 +448,34 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
     setIsSubmitting(true);
     try {
       const metadata = {
-        firstname: user?.firstName || "Not provided",
-        lastlame: user?.lastName || "Not provided",
+        firstname: user?.firstName,
+        lastlame: user?.lastName,
         fullName:
-          formUser?.user?.username ||
-          user?.firstName + " " + user?.lastName ||
-          "Not provided",
-        title: user?.title || "Not provided",
-        arrival: user?.arrival || "Not provided",
-        departure: user?.departure || "Not provided",
-        email:
-          formUser?.user?.email ||
-          firebaseUser?.email ||
-          user?.email ||
-          "Not provided",
-        city: user?.city || "Not provided",
-        country: user?.country || "Not provided",
-        nationality: user?.nationality || "Not provided",
-        dates: user?.dates || "Not provided",
-        price: parseFloat(user?.price.toFixed(2)) || null,
-        total: parseFloat(user?.total.toFixed(2)) || null,
-        phonenumber: user?.fullPhone || null,
-        countrycode: user?.countryCode || null,
-        termscondition: user?.termsCondition || false,
-        emailme: user?.emailMe || false,
-        room_id: user?.room_id || null,
+          formUser?.user?.username || user?.firstName + " " + user?.lastName,
+        title: user?.title,
+        arrival: user?.arrival,
+        departure: user?.departure,
+        email: formUser?.user?.email || firebaseUser?.email || user?.email,
+        city: user?.city,
+        country: user?.country,
+        nationality: user?.nationality,
+        dates: user?.dates,
+        price: user?.price,
+        total: parseFloat(user?.total.toFixed(2)),
+        phonenumber: user?.fullPhone,
+        countrycode: user?.countryCode,
+        termscondition: user?.termsCondition,
+        emailme: user?.emailMe,
+        room_id: user?.room_id,
         room: {
           id: primaryRoom?.id,
           name: primaryRoom?.name,
           price: primaryRoom?.price,
-          image: primaryRoom?.images?.[0], // Just use first image
+          image: primaryRoom?.images[0],
         },
-        payment: user?.payment || "Not provided",
+        payment: user?.payment,
 
-        tbluser_id: formUser?.user?.id || firebaseUser?.id || null,
+        tbluser_id: formUser?.user?.id || firebaseUser?.id,
         companyName: "LEGEND",
         companyLogoPath: `${window.location.href}/icon.png`,
         companyAddress: "123 ain naaja street",
