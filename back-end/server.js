@@ -302,7 +302,7 @@ app.post(
         const customerDetails = session.customer_details || {};
         const email =
           customerDetails.email || metadata.email || "no-email@example.com";
-        const room_id = metadata?.room_id || "Not provided";
+        const room_id = metadata?.room_id || null;
 
         const phone = customerDetails.phone || metadata.phonenumber || null;
         const orderId = session.id;
@@ -321,9 +321,7 @@ app.post(
           "Not provided";
         const total = session.amount_total / 100 || metadata.total || "0";
 
-        const tbluser_id = Number.isInteger(Number(metadata.tbluser_id))
-          ? Number(metadata.tbluser_id)
-          : null;
+        const tbluser_id = metadata.tbluser_id || null;
 
         const room = JSON.parse(metadata.room || "[]");
         const payment = "stripe" || "no method";

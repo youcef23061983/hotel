@@ -404,6 +404,9 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
 
   console.log("form user id ", formUser?.user?.id);
   console.log("formUser user", formUser);
+  const price = user?.price;
+  console.log("price type", typeof price);
+
   console.log("room data id type ", room?.id, typeof room?.id);
   const idd = formUser?.user?.id || firebaseUser?.id;
   console.log("tblid type", typeof idd, idd);
@@ -463,7 +466,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         country: user?.country || "Not provided",
         nationality: user?.nationality || "Not provided",
         dates: user?.dates || "Not provided",
-        price: user?.price || null,
+        price: parseFloat(user?.price.toFixed(2)) || null,
         total: parseFloat(user?.total.toFixed(2)) || null,
         phonenumber: user?.fullPhone || "Not provided",
         countrycode: user?.countryCode || "Not provided",
@@ -478,7 +481,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         },
         payment: user?.payment || "Not provided",
 
-        tbluser_id: formUser?.user?.id || firebaseUser?.id,
+        tbluser_id: formUser?.user?.id || firebaseUser?.id || null,
         companyName: "LEGEND",
         companyLogoPath: `${window.location.href}/icon.png`,
         companyAddress: "123 ain naaja street",
