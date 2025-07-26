@@ -328,9 +328,7 @@ import { useContext, useEffect, useState } from "react";
 import Checkout from "./Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
 import { motion } from "framer-motion";
-import CheckoutForm from "./CheckoutForm";
 import { useCallback } from "react";
 import { AppContext } from "../data managment/AppProvider";
 import { FcCheckmark } from "react-icons/fc";
@@ -350,7 +348,6 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
 
   const [paymentSucceeded, setPaymentSucceeded] = useState(false);
   const [stripePromise, setStripePromise] = useState(null);
-  const [clientSecret, setClientSecret] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // const total = parseFloat(user?.total.toFixed(2));
@@ -479,7 +476,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         },
         payment: user?.payment || "Not provided",
 
-        tbluser_id: user?.tbluser_id || "guest",
+        tbluser_id: formUser?.user?.id || firebaseUser?.id || "guest",
         companyName: "LEGEND",
         companyLogoPath: `${window.location.href}/icon.png`,
         companyAddress: "123 ain naaja street",
@@ -682,7 +679,9 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
               <button
                 onClick={handleStripeCheckout}
                 disabled={isSubmitting}
-                className="addCart"
+                className={`w-full py-2 px-4 rounded-md text-white font-medium ${
+                  isSubmitting ? "bg-blue-400" : "bg-blue-600 hover:bg-blue-700"
+                }`}
               >
                 {isSubmitting ? "Processing..." : "Proceed to Stripe Checkout"}
               </button>
