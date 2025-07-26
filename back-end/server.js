@@ -567,6 +567,8 @@ app.post("/create-checkout-session", async (req, res) => {
     console.log("Final image URL:", imageUrl);
 
     const dates = metadata.dates || [];
+    console.log("dates", dates);
+    console.log("dates length", dates?.length);
 
     // Validate image URL
     if (imageUrl && !isValidUrl(imageUrl)) {
