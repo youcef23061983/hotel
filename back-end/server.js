@@ -538,6 +538,10 @@ app.post("/create-checkout-session", async (req, res) => {
     const imageUrl = `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/${encodedPath}`;
 
     console.log("Final Image URL:", imageUrl);
+    const parsedPrice = parseFloat(parseRoom?.price);
+    if (isNaN(parsedPrice)) {
+      return res.status(400).json({ error: "Invalid room price in metadata" });
+    }
 
     //    // 1. Safely get the image path with optional chaining and default value
     // const rawImagePath = metadata?.room?.image || '';
@@ -574,10 +578,10 @@ app.post("/create-checkout-session", async (req, res) => {
         price_data: {
           currency: "usd",
           product_data: {
-            name: metadata?.room.name || "Hotel Room Booking",
+            name: parseRoom?.name || "Hotel Room Booking",
             images: [imageUrl],
           },
-          unit_amount: Math.round(Number(metadata?.room.price) * 100),
+          unit_amount: Math.round(parsedPrice * 100), // ✅ Safe now
         },
         quantity: dates.length || 1,
       },
