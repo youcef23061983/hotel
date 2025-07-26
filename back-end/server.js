@@ -522,19 +522,16 @@ app.post("/create-checkout-session", async (req, res) => {
   console.log("room_id", metadata.room_id);
 
   try {
-    // 1. Get the raw image path (with spaces)
-    const rawImagePath = metadata?.room.image; // "images/rooms/standard single room/img1.jpg"
+    const rawImagePath = metadata?.room?.image;
 
-    // 2. Remove leading slash if present
+    if (!rawImagePath) {
+      return res.status(400).json({ error: "Room image path is missing" });
+    }
+
     const cleanPath = rawImagePath.replace(/^\//, "");
-
-    // 3. Encode ONLY the spaces (keep slashes)
-    const encodedPath = encodeURI(cleanPath); // "images/rooms/standard%20single%20room/img1.jpg"
-
-    // 4. Build full URL
+    const encodedPath = encodeURI(cleanPath);
     const imageUrl = `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/${encodedPath}`;
 
-    // 5. Verify in logs (check for %20)
     console.log("Final Image URL:", imageUrl);
 
     //    // 1. Safely get the image path with optional chaining and default value
