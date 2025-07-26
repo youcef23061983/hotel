@@ -519,6 +519,7 @@ app.use("/auth", authRoutes);
 
 app.post("/create-checkout-session", async (req, res) => {
   const { metadata } = req.body;
+  console.log("room_id", metadata.room_id);
 
   try {
     // 1. Get the raw image path (with spaces)
@@ -562,7 +563,7 @@ app.post("/create-checkout-session", async (req, res) => {
       mode: "payment",
       customer_email: metadata.email,
       metadata: {
-        room_id: rawImagePath.id,
+        ...metadata,
         stay_duration: dates.length.toString(),
       },
       success_url: `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order?session_id={CHECKOUT_SESSION_ID}`,

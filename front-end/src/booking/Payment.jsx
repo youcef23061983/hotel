@@ -510,6 +510,8 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
       setIsSubmitting(false);
     }
   };
+  console.log("room_id", room?.id);
+
   const handleSuccess = useCallback(() => {
     setPaymentSucceeded(true);
     unavailableData();
