@@ -302,50 +302,39 @@ app.post(
         const customerDetails = session.customer_details || {};
         const email =
           customerDetails.email || metadata.email || "no-email@example.com";
-        const room_id = metadata?.room_id || null;
+        const room_id = metadata?.room_id;
 
-        const phone = customerDetails.phone || metadata.phonenumber || null;
+        const phone = customerDetails.phone || metadata.phonenumber;
         const orderId = session.id;
         const amount = metadata?.dates?.length;
         const currency = session.currency.toUpperCase();
         const country =
           session.shipping_details?.address?.country ||
-          session.metadata?.country ||
-          "Not provided";
+          session.metadata?.country;
+        const address = session.shipping_details?.address?.line1;
+        const city = session.shipping_details?.address?.city || metadata?.city;
+        const total = session.amount_total / 100 || metadata.total;
 
-        const address =
-          session.shipping_details?.address?.line1 || "no-email@example.com";
-        const city =
-          session.shipping_details?.address?.city ||
-          metadata?.city ||
-          "Not provided";
-        const total = session.amount_total / 100 || metadata.total || "0";
-
-        const tbluser_id = metadata.tbluser_id || null;
+        const tbluser_id = metadata.tbluser_id;
 
         const room = JSON.parse(metadata.room || "[]");
         const payment = "stripe" || "no method";
         const arrival = metadata?.arrival;
         const departure = metadata?.departure;
         const dates = metadata?.dates;
-        const price = metadata?.room?.price;
+        const price = metadata?.price;
         const title = metadata?.room?.title;
-        const fullName =
-          customerDetails.name || metadata.fullName || "Valued Customer";
+        const fullName = customerDetails.name || metadata.fullName;
         const names = fullName.split(" ");
-        const firstname = names[0] || metadata?.firstName || "";
-        const lastname = names.slice(1).join(" ") || metadata?.lastName || "";
+        const firstname = names[0] || metadata?.firstName;
+        const lastname = names.slice(1).join(" ") || metadata?.lastName;
 
         const countrycode =
-          metadata.countryCode || customerDetails?.phone?.slice(0, 4) || "0000";
-        const phonenumber =
-          metadata.fullPhone || customerDetails?.phone || "0000000000";
+          metadata.countryCode || customerDetails?.phone?.slice(0, 4);
+        const phonenumber = metadata.fullPhone || customerDetails?.phone;
         const nationality =
-          metadata.nationality ||
-          customerDetails?.address?.country ||
-          "Not provided";
-
-        const termscondition = metadata?.termsCondition || "not provided";
+          metadata.nationality || customerDetails?.address?.country;
+        const termscondition = metadata?.termsCondition;
         const emailme = metadata?.emailMe;
 
         // Log important details
