@@ -405,6 +405,8 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
   console.log("form user id ", formUser?.user?.id);
   console.log("formUser user", formUser);
   console.log("room data", room);
+  const idd = formUser?.user?.id || firebaseUser?.id;
+  console.log("tblid type", typeof idd, idd);
 
   const patchData = async () => {
     const updatedUnavailables = room ? [...room.unavailables, ...allDates] : [];
@@ -476,7 +478,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         },
         payment: user?.payment || "Not provided",
 
-        tbluser_id: formUser?.user?.id || firebaseUser?.id || "guest",
+        tbluser_id: formUser?.user?.id || firebaseUser?.id,
         companyName: "LEGEND",
         companyLogoPath: `${window.location.href}/icon.png`,
         companyAddress: "123 ain naaja street",
