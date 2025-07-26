@@ -466,7 +466,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         countrycode: user?.countryCode,
         termscondition: user?.termsCondition,
         emailme: user?.emailMe,
-        room_id: user?.room_id,
+        room_id: room?.id,
         room: {
           id: primaryRoom?.id,
           name: primaryRoom?.name,
