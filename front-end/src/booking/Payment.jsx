@@ -499,7 +499,9 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         city: String(user?.city || ""),
         country: String(user?.country || ""),
         nationality: String(user?.nationality || ""),
-        dates: JSON.stringify(user?.dates || []), // Important: stringify hashes/objects
+        dates: Array.isArray(user?.dates)
+          ? user.dates.join(", ")
+          : user?.dates || "",
         price: String(user?.price || ""),
         total: String(user?.total?.toFixed(2) || "0.00"),
         phonenumber: String(user?.fullPhone || ""),
