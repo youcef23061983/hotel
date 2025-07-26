@@ -536,6 +536,30 @@ app.post("/create-checkout-session", async (req, res) => {
 
     // 5. Verify in logs (check for %20)
     console.log("Final Image URL:", imageUrl);
+
+    //    // 1. Safely get the image path with optional chaining and default value
+    // const rawImagePath = metadata?.room?.image || '';
+    // console.log('Raw image path:', rawImagePath);
+
+    // if (!rawImagePath) {
+    //   throw new Error('No image path found in metadata');
+    // }
+
+    // // 2. Remove leading slash if present (safely)
+    // const cleanPath = typeof rawImagePath === 'string'
+    //   ? rawImagePath.replace(/^\//, '')
+    //   : '';
+
+    // // 3. Encode the entire path (not just spaces) for URL safety
+    // const encodedPath = encodeURIComponent(cleanPath);
+
+    // // 4. Build full URL - decode just the slashes for proper routing
+    // const imageUrl = `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/${
+    //   encodedPath.replace(/%2F/g, '/')
+    // }`;
+
+    console.log("Final image URL:", imageUrl);
+
     const dates = metadata.dates || [];
 
     // Validate image URL
