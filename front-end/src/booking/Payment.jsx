@@ -350,8 +350,8 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
   const [stripePromise, setStripePromise] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // const total = parseFloat(user?.total.toFixed(2));
-  console.log("total", typeof user?.total, parseFloat(user?.total.toFixed(2)));
+  const total = parseFloat(user?.total.toFixed(2));
+  console.log("total", typeof total, parseFloat(user?.total.toFixed(2)));
 
   const paymentUrl = import.meta.env.VITE_PROD_URL_URL;
 
@@ -404,7 +404,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
 
   console.log("form user id ", formUser?.user?.id);
   console.log("formUser user", formUser);
-  console.log("room data", room);
+  console.log("room data id type ", room?.id, typeof room?.id);
   const idd = formUser?.user?.id || firebaseUser?.id;
   console.log("tblid type", typeof idd, idd);
 
@@ -463,13 +463,13 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         country: user?.country || "Not provided",
         nationality: user?.nationality || "Not provided",
         dates: user?.dates || "Not provided",
-        price: user?.price || "Not provided",
-        total: parseFloat(user?.total.toFixed(2)) || "Not provided",
+        price: user?.price || null,
+        total: parseFloat(user?.total.toFixed(2)) || null,
         phonenumber: user?.fullPhone || "Not provided",
         countrycode: user?.countryCode || "Not provided",
         termscondition: user?.termsCondition || "Not provided",
         emailme: user?.emailMe || "Not provided",
-        room_id: user?.room_id || "Not provided",
+        room_id: user?.room_id || null,
         room: {
           id: primaryRoom?.id,
           name: primaryRoom?.name,

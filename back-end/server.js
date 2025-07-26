@@ -321,7 +321,9 @@ app.post(
           "Not provided";
         const total = session.amount_total / 100 || metadata.total || "0";
 
-        const tbluser_id = metadata.tbluser_id || "guest";
+        const tbluser_id = Number.isInteger(Number(metadata.tbluser_id))
+          ? Number(metadata.tbluser_id)
+          : null;
 
         const room = JSON.parse(metadata.room || "[]");
         const payment = "stripe" || "no method";
