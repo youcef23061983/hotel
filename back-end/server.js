@@ -520,14 +520,14 @@ app.use("/auth", authRoutes);
 app.post("/create-checkout-session", async (req, res) => {
   const { metadata } = req.body;
   console.log("room_id", metadata.room_id);
-  console.log("room data", metadata?.room);
-  console.log("room image data", metadata?.room?.image);
-  const parseRoom = JSON.parse(metadata.room || "[]"); // ✅ parse it
-  console.log("room parse data", parseRoom?.room);
-  console.log("room image parse data", parseRoom?.room?.image);
+  console.log("room data (string)", metadata?.room);
 
+  const parseRoom = JSON.parse(metadata?.room || "{}");
+
+  console.log("✅ Parsed room object", parseRoom);
+  console.log("✅ Parsed room image", parseRoom.image);
   try {
-    const rawImagePath = metadata?.room?.image;
+    const rawImagePath = parseRoom.image;
 
     if (!rawImagePath) {
       return res.status(400).json({ error: "Room image path is missing" });
