@@ -6,9 +6,7 @@ const patchUnavailables = async (unavailableOrder) => {
   const { unavailables, id } = unavailableOrder;
 
   if (!Array.isArray(unavailables)) {
-    return res
-      .status(400)
-      .json({ error: "Invalid or missing 'unavailables' array" });
+    throw new Error("Invalid or missing 'unavailables' array");
   }
 
   try {
@@ -29,7 +27,7 @@ const patchUnavailables = async (unavailableOrder) => {
     await client.query("COMMIT");
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ error: "Room not found" });
+      throw new Error("Room not found");
     }
     return {
       success: true,
