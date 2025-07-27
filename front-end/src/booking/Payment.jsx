@@ -454,46 +454,10 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
   const handleStripeCheckout = async () => {
     const primaryRoom = Array.isArray(room) ? room[0] : room;
     console.log("primary room", primaryRoom);
+    const updatedUnavailables = room ? [...room.unavailables, ...allDates] : [];
 
     setIsSubmitting(true);
     try {
-      // const metadata = {
-      //   firstname: user?.firstName,
-      //   lastlame: user?.lastName,
-      //   fullName:
-      //     formUser?.user?.username || user?.firstName + " " + user?.lastName,
-      //   title: user?.title,
-      //   arrival: user?.arrival,
-      //   departure: user?.departure,
-      //   email: formUser?.user?.email || firebaseUser?.email || user?.email,
-      //   city: user?.city,
-      //   country: user?.country,
-      //   nationality: user?.nationality,
-      //   dates: user?.dates,
-      //   price: user?.price,
-      //   total: parseFloat(user?.total.toFixed(2)),
-      //   phonenumber: user?.fullPhone,
-      //   countrycode: user?.countryCode,
-      //   termscondition: user?.termsCondition,
-      //   emailme: user?.emailMe,
-      //   room_id: room?.id,
-      //   room: JSON.stringify({
-      //     id: primaryRoom?.id,
-      //     name: primaryRoom?.name,
-      //     price: primaryRoom?.price,
-      //     image: primaryRoom?.images[0],
-      //   }),
-      //   payment: user?.payment,
-
-      //   tbluser_id: formUser?.user?.id || firebaseUser?.id,
-      //   companyName: "LEGEND",
-      //   companyLogoPath: `${window.location.href}/icon.png`,
-      //   companyAddress: "123 ain naaja street",
-      //   companyPhoneNumber: "+123540016247",
-      //   companyCity: "Algiers",
-      //   companyPostalCode: "16000",
-      //   companyState: "Algeria",
-      // };
       const metadata = {
         firstname: String(user?.firstName || ""),
         lastname: String(user?.lastName || ""),

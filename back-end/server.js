@@ -238,6 +238,7 @@ const saveOrderToDatabase = require("./utils/saveOrderToDb.js");
 const { sendtwilioSMS } = require("./utils/sendtwilioSms&call.js");
 const generateInvoicePDF = require("./utils/generateInvoicePDF .js");
 const { uploadInvoice } = require("./utils/uploadInvoiceToStorage .js");
+const patchUnavailables = require("./utils/unavailablesOrder.js");
 app.use(helmet());
 
 app.use(
@@ -391,9 +392,11 @@ app.post(
           room,
         };
         console.log("webhook data", orderData);
+        const unavailableOrder = { unavailables: pgDatesArray, id: room_id };
 
         // Save to database
         await saveOrderToDatabase(orderData);
+        await patchUnavailables(unavailableOrder);
         console.log("💾 Order saved to database");
         console.log("💰 Payment Details:", {
           orderId,
@@ -424,50 +427,50 @@ app.post(
         }
 
         // Send SMS notifications if phone number exists and textbelt accept the country:
-        if (phone) {
-          try {
-            // await sendwhatsappSMS({
-            //   phone: phone,
-            //   name: fullName,
-            //   orderId,
-            //   total,
-            // });
+        // if (phone) {
+        //   try {
+        //     // await sendwhatsappSMS({
+        //     //   phone: phone,
+        //     //   name: fullName,
+        //     //   orderId,
+        //     //   total,
+        //     // });
 
-            // await sendSMS({
-            //   phone: phone,
-            //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
-            //     total / 100
-            //   ).toFixed(2)} was received. Thank you!`,
-            // });
+        //     // await sendSMS({
+        //     //   phone: phone,
+        //     //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
+        //     //     total / 100
+        //     //   ).toFixed(2)} was received. Thank you!`,
+        //     // });
 
-            // const pdfBuffer = await generateInvoicePDF(metadata, orderId);
-            // const pdfUrl = await uploadInvoice(session.id, pdfBuffer);
+        //     // const pdfBuffer = await generateInvoicePDF(metadata, orderId);
+        //     // const pdfUrl = await uploadInvoice(session.id, pdfBuffer);
 
-            // await sendtwilioSMS({
-            //   phone: phone,
-            //   // message: `Hi ${fullName}, your order #${orderId} of ${currency} ${total} $ was received. Thank you!`,
-            //   message: "hi i am youcef here, it works",
-            //   pdfUrl,
-            // });
-            await sendtwilioSMS({
-              phone: phone,
-              message: `Hi ${fullName}, your order #${orderId} of ${total} ${currency} was received. Thank you!`,
-            });
-            console.log("📱 twilio SMS notifications sent to", phone);
-            console.log("🆔 SID:", process.env.TWILIO_SID);
-            console.log("🔑 AUTH:", process.env.TWILIO_AUTH);
+        //     // await sendtwilioSMS({
+        //     //   phone: phone,
+        //     //   // message: `Hi ${fullName}, your order #${orderId} of ${currency} ${total} $ was received. Thank you!`,
+        //     //   message: "hi i am youcef here, it works",
+        //     //   pdfUrl,
+        //     // });
+        //     await sendtwilioSMS({
+        //       phone: phone,
+        //       message: `Hi ${fullName}, your order #${orderId} of ${total} ${currency} was received. Thank you!`,
+        //     });
+        //     console.log("📱 twilio SMS notifications sent to", phone);
+        //     console.log("🆔 SID:", process.env.TWILIO_SID);
+        //     console.log("🔑 AUTH:", process.env.TWILIO_AUTH);
 
-            // await sendTwilioCall({
-            //   phone: phone,
-            //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
-            //     total / 100
-            //   ).toFixed(2)} $ was received. Thank you!`,
-            // });
-            // console.log("📱 SMS notifications sent to", phone);
-          } catch (smsError) {
-            console.error("❌ Failed to send SMS:", smsError.message);
-          }
-        }
+        //     // await sendTwilioCall({
+        //     //   phone: phone,
+        //     //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
+        //     //     total / 100
+        //     //   ).toFixed(2)} $ was received. Thank you!`,
+        //     // });
+        //     // console.log("📱 SMS notifications sent to", phone);
+        //   } catch (smsError) {
+        //     console.error("❌ Failed to send SMS:", smsError.message);
+        //   }
+        // }
       } catch (processingError) {
         console.error("❌ Order processing failed:", processingError);
         // Here you should implement your error handling logic:
