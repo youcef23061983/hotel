@@ -21,7 +21,7 @@ const patchUnavailables = async (unavailableOrder) => {
            updated_at = CURRENT_TIMESTAMP
        WHERE id = $2
        RETURNING *`,
-      [unavailables, id]
+      [cleanDates, id]
     );
 
     // ✅ Commit if all successful
