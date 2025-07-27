@@ -5,10 +5,6 @@ const patchUnavailables = async (unavailableOrder) => {
 
   const { unavailables, id } = unavailableOrder;
 
-  if (!Array.isArray(unavailables)) {
-    throw new Error("Invalid or missing 'unavailables' array");
-  }
-
   try {
     client = await pool.connect(); // ✅ no `const`
 
