@@ -325,19 +325,19 @@ app.post(
         //   ? metadata.dates.split(",").map((date) => new Date(date.trim()))
         //   : [];
         const price = metadata?.price;
-        const title = metadata?.room?.title;
+        const title = metadata?.title;
         const fullName = customerDetails.name || metadata.fullName;
         const names = fullName.split(" ");
-        const firstname = names[0] || metadata?.firstName;
-        const lastname = names.slice(1).join(" ") || metadata?.lastName;
+        const firstname = names[0] || metadata?.firstname;
+        const lastname = names.slice(1).join(" ") || metadata?.lastname;
 
         const countrycode =
-          metadata.countryCode || customerDetails?.phone?.slice(0, 4);
-        const phonenumber = metadata.fullPhone || customerDetails?.phone;
+          metadata.countrycode || customerDetails?.phone?.slice(0, 4);
+        const phonenumber = metadata.phonenumber || customerDetails?.phone;
         const nationality =
           metadata.nationality || customerDetails?.address?.country;
-        const termscondition = metadata?.termsCondition;
-        const emailme = metadata?.emailMe;
+        const termscondition = metadata?.termscondition;
+        const emailme = metadata?.emailme;
         // 1. Convert dates back to proper array format for PostgreSQL
         let datesArray = [];
         if (metadata?.dates) {
