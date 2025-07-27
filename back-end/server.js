@@ -402,7 +402,7 @@ app.post(
           email: email,
           phone: phone ? "provided" : "not provided",
         });
-        console.log("📱 My Phone Number:", metadata?.phone);
+        console.log("📱 My Phone Number:", phone);
         console.log("🛡️ My Session:", session);
 
         // Send email notification
