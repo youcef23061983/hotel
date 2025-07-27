@@ -455,6 +455,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
     const primaryRoom = Array.isArray(room) ? room[0] : room;
     console.log("primary room", primaryRoom);
     const updatedUnavailables = room ? [...room.unavailables, ...allDates] : [];
+    console.log("unavailables", updatedUnavailables);
 
     setIsSubmitting(true);
     try {
@@ -494,6 +495,11 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         days: String(user?.dates?.length || ""),
         payment: String(user?.payment || ""),
         tbluser_id: String(formUser?.user?.id || firebaseUser?.id || ""),
+        updatedUnavailables: Array.isArray(updatedUnavailables)
+          ? updatedUnavailables.join(", ")
+          : typeof updatedUnavailables === "string"
+          ? updatedUnavailables
+          : "",
 
         // Company info
         companyName: "LEGEND",

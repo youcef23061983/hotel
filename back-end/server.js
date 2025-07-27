@@ -366,6 +366,33 @@ app.post(
 
         console.log("dates comeback", pgDatesArray);
 
+        // 1. Convert unavailables dates back to proper array format for PostgreSQL\\\\\\\\\\\\\\\\\\\\\\
+        let unavailablesArray = [];
+        if (metadata?.updatedUnavailables) {
+          if (typeof metadata?.updatedUnavailables === "string") {
+            // Handle both comma-separated and JSON string formats
+            if (metadata?.updatedUnavailables?.startsWith("[")) {
+              // JSON array string format
+              unavailablesArray = JSON.parse(metadata?.updatedUnavailables);
+            } else {
+              // Comma-separated string format
+              unavailablesArray = metadata?.updatedUnavailables
+                ?.split(",")
+                .map((date) => date.trim());
+            }
+          } else if (Array.isArray(metadata?.updatedUnavailables)) {
+            unavailablesArray = metadata?.updatedUnavailables;
+          }
+        }
+
+        // 2. Convert to PostgreSQL DATE array format
+        const pgunavailablesArray =
+          unavailablesArray.length > 0
+            ? `{${unavailablesArray.map((date) => `"${date}"`).join(",")}}`
+            : "{}";
+
+        console.log("unavailablesdates comeback", pgunavailablesArray);
+
         // Log important details
 
         // Prepare order data for database
@@ -392,7 +419,10 @@ app.post(
           room,
         };
         console.log("webhook data", orderData);
-        const unavailableOrder = { unavailables: pgDatesArray, id: room_id };
+        const unavailableOrder = {
+          unavailables: pgunavailablesArray,
+          id: room_id,
+        };
 
         // Save to database
         await saveOrderToDatabase(orderData);
