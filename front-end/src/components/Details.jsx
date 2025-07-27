@@ -78,6 +78,13 @@ const Details = () => {
         return null;
     }
   }
+  // const otherRooms =
+  //   roomsData && roomData
+  //     ? roomsData.filter(
+  //         (room) =>
+  //           room && room.type === roomData.type && room.id !== roomData.id
+  //       )
+  //     : [];
 
   const otherRooms = roomsData
     ? roomsData.filter(
@@ -85,6 +92,11 @@ const Details = () => {
         (room) => room && room.type === roomData.type && room.id !== roomData.id
       )
     : [];
+  // const otherRooms =
+  //   roomsData?.filter(
+  //     (room) => room && room.type === roomData?.type && room.id !== roomData?.id
+  //   ) || [];
+
   const useMediaQuery = (query) => {
     const [matches, setMatches] = useState(false);
 

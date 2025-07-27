@@ -321,7 +321,9 @@ app.post(
         const payment = "stripe" || "no method";
         const arrival = metadata?.arrival;
         const departure = metadata?.departure;
-        const dates = metadata?.dates;
+        // const dates = metadata?.dates
+        //   ? metadata.dates.split(",").map((date) => new Date(date.trim()))
+        //   : [];
         const price = metadata?.price;
         const title = metadata?.room?.title;
         const fullName = customerDetails.name || metadata.fullName;
@@ -336,6 +338,32 @@ app.post(
           metadata.nationality || customerDetails?.address?.country;
         const termscondition = metadata?.termsCondition;
         const emailme = metadata?.emailMe;
+        // 1. Convert dates back to proper array format for PostgreSQL
+        let datesArray = [];
+        if (metadata?.dates) {
+          if (typeof metadata?.dates === "string") {
+            // Handle both comma-separated and JSON string formats
+            if (metadata?.dates?.startsWith("[")) {
+              // JSON array string format
+              datesArray = JSON.parse(metadata?.dates);
+            } else {
+              // Comma-separated string format
+              datesArray = metadata?.dates
+                ?.split(",")
+                .map((date) => date.trim());
+            }
+          } else if (Array.isArray(metadata?.dates)) {
+            datesArray = metadata?.dates;
+          }
+        }
+
+        // 2. Convert to PostgreSQL DATE array format
+        const pgDatesArray =
+          datesArray.length > 0
+            ? `{${datesArray.map((date) => `"${date}"`).join(",")}}`
+            : "{}";
+
+        console.log("dates comeback", pgDatesArray);
 
         // Log important details
 
@@ -345,7 +373,7 @@ app.post(
           tbluser_id,
           arrival,
           departure,
-          dates,
+          dates: pgDatesArray, // Properly formatted for DATE[] column
           price,
           total,
           title,
@@ -526,6 +554,29 @@ app.post("/create-checkout-session", async (req, res) => {
 
   console.log("✅ Parsed room object", parseRoom);
   console.log("✅ Parsed room image", parseRoom.image);
+  let datesArray = [];
+  if (metadata?.dates) {
+    if (typeof metadata?.dates === "string") {
+      // Handle both comma-separated and JSON string formats
+      if (metadata?.dates?.startsWith("[")) {
+        // JSON array string format
+        datesArray = JSON.parse(metadata?.dates);
+      } else {
+        // Comma-separated string format
+        datesArray = metadata?.dates?.split(",").map((date) => date.trim());
+      }
+    } else if (Array.isArray(metadata?.dates)) {
+      datesArray = metadata?.dates;
+    }
+  }
+
+  // 2. Convert to PostgreSQL DATE array format
+  const pgDatesArray =
+    datesArray.length > 0
+      ? `{${datesArray.map((date) => `"${date}"`).join(",")}}`
+      : "{}";
+
+  console.log("dates comeback", pgDatesArray);
   try {
     const rawImagePath = parseRoom.image;
 
@@ -566,9 +617,10 @@ app.post("/create-checkout-session", async (req, res) => {
 
     console.log("Final image URL:", imageUrl);
 
-    const dates = metadata.dates || [];
-    console.log("dates", dates);
-    console.log("dates length", dates?.length);
+    const days = metadata?.days || [];
+    console.log("dates", metadata?.dates);
+    console.log("dates length", metadata?.dates?.length);
+    console.log("days: ", days);
 
     // Validate image URL
     if (imageUrl && !isValidUrl(imageUrl)) {
@@ -585,7 +637,7 @@ app.post("/create-checkout-session", async (req, res) => {
           },
           unit_amount: Math.round(parsedPrice * 100), // ✅ Safe now
         },
-        quantity: dates.length || 1,
+        quantity: days || 1,
       },
     ];
 
@@ -596,7 +648,7 @@ app.post("/create-checkout-session", async (req, res) => {
       customer_email: metadata.email,
       metadata: {
         ...metadata,
-        stay_duration: dates.length.toString(),
+        stay_duration: days,
       },
       success_url: `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/rooms`,

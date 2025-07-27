@@ -440,6 +440,16 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
   const { data: addBooking, mutate: bookingMutate } = useMutation({
     mutationFn: bookingFun,
   });
+  console.log("dates array", user?.dates);
+
+  console.log(
+    "dates without an array",
+    Array.isArray(user?.dates)
+      ? user.dates.join(",")
+      : typeof user?.dates === "string"
+      ? user.dates
+      : ""
+  );
 
   const handleStripeCheckout = async () => {
     const primaryRoom = Array.isArray(room) ? room[0] : room;
@@ -501,7 +511,9 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         nationality: String(user?.nationality || ""),
         dates: Array.isArray(user?.dates)
           ? user.dates.join(", ")
-          : user?.dates || "",
+          : typeof user?.dates === "string"
+          ? user.dates
+          : "",
         price: String(user?.price || ""),
         total: String(user?.total?.toFixed(2) || "0.00"),
         phonenumber: String(user?.fullPhone || ""),
@@ -515,6 +527,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
           price: primaryRoom?.price,
           image: primaryRoom?.images?.[0],
         }),
+        days: String(user?.dates?.length || ""),
         payment: String(user?.payment || ""),
         tbluser_id: String(formUser?.user?.id || firebaseUser?.id || ""),
 
