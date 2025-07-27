@@ -390,6 +390,7 @@ app.post(
           emailme,
           room,
         };
+        console.log("webhook data", orderData);
 
         // Save to database
         await saveOrderToDatabase(orderData);
@@ -551,6 +552,7 @@ app.post("/create-checkout-session", async (req, res) => {
   console.log("room data (string)", metadata?.room);
 
   const parseRoom = JSON.parse(metadata?.room || "{}");
+  console.log("metada checkout data", metadata);
 
   console.log("✅ Parsed room object", parseRoom);
   console.log("✅ Parsed room image", parseRoom.image);
