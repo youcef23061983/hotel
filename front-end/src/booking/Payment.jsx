@@ -450,6 +450,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
       ? user.dates
       : ""
   );
+  console.log("allDates", allDates);
 
   const handleStripeCheckout = async () => {
     const primaryRoom = Array.isArray(room) ? room[0] : room;
