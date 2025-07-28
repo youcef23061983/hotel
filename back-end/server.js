@@ -358,21 +358,24 @@ app.post(
           }
         }
 
-        const cleanDatesArray = datesArray.map((date) => {
-          const d = new Date(date);
-          const utc = new Date(
-            Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())
-          );
-          return utc.toISOString().split("T")[0]; // Ensures format 'YYYY-MM-DD'
-        });
-
         // 2. Convert to PostgreSQL DATE array format
+        // const pgDatesArray =
+        //   datesArray.length > 0
+        //     ? `{${datesArray
+        //         .map(
+        //           (date) => `"${new Date(date).toISOString().split("T")[0]}"`
+        //         )
+        //         .join(",")}}`
+        //     : "{}";
+        // or::::
         const pgDatesArray =
           datesArray.length > 0
             ? `{${datesArray
-                .map(
-                  (date) => `"${new Date(date).toISOString().split("T")[0]}"`
-                )
+                .map((d) => {
+                  const [month, day, year] = d.split("/").map(Number);
+                  const utcDate = new Date(Date.UTC(year, month - 1, day)); // UTC-safe
+                  return `"${utcDate.toISOString().split("T")[0]}"`; // YYYY-MM-DD
+                })
                 .join(",")}}`
             : "{}";
 
@@ -420,7 +423,7 @@ app.post(
           tbluser_id,
           arrival,
           departure,
-          dates: cleanDatesArray,
+          dates: pgDatesArray,
           price,
           total,
           title,
