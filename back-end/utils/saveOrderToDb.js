@@ -37,7 +37,8 @@ const saveOrderToDatabase = async (orderData) => {
 
     // 1. Insert into orders
     const orderRes = await client.query(
-      `INSERT INTO bookings (room_id,
+      `INSERT INTO bookings (
+    room_id,
     tbluser_id,
     arrival,
     departure,
@@ -55,9 +56,13 @@ const saveOrderToDatabase = async (orderData) => {
     nationality,
     termscondition,
     payment,
-    emailme   ) VALUES ($1, $2, $3, $4,$5::DATE[],
-, $6, $7, $8, $9, $10,$11,$12,$13,$14,$15,$16,$17,$18,$19)
-      RETURNING id`,
+    emailme
+  ) VALUES (
+    $1, $2, $3, $4, $5::DATE[],
+    $6, $7, $8, $9, $10, $11,
+    $12, $13, $14, $15, $16,
+    $17, $18, $19
+  ) RETURNING id`,
       [
         room_id,
         tbluser_id,
