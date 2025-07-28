@@ -384,6 +384,7 @@ app.post(
             unavailablesArray = metadata?.updatedUnavailables;
           }
         }
+        console.log("unavailablesArray", unavailablesArray);
 
         // 2. Convert to PostgreSQL DATE array format
         const pgunavailablesArray =

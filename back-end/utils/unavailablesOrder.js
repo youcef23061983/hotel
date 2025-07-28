@@ -5,7 +5,7 @@ const patchUnavailables = async (unavailableOrder) => {
 
   const { unavailables, id } = unavailableOrder;
   // Convert each date to 'YYYY-MM-DD' string to avoid timezone issues
-  const cleanDates = unavailables.map((date) => {
+  const cleanDates = unavailables?.map((date) => {
     const d = new Date(date);
     return d.toISOString().split("T")[0]; // Keeps only '2025-07-28'
   });
@@ -21,7 +21,7 @@ const patchUnavailables = async (unavailableOrder) => {
            updated_at = CURRENT_TIMESTAMP
        WHERE id = $2
        RETURNING *`,
-      [cleanDates, id]
+      [unavailables, id]
     );
 
     // ✅ Commit if all successful
