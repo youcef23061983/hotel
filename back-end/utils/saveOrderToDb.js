@@ -25,12 +25,9 @@ const saveOrderToDatabase = async (orderData) => {
     emailme,
     room,
   } = orderData;
-  const pgDatesArray =
-    dates.length > 0
-      ? `{${datesArray
-          .map((date) => `"${new Date(date).toISOString().split("T")[0]}"`)
-          .join(",")}}`
-      : "{}";
+  const pgDatesArray = dates.map(
+    (d) => new Date(d).toISOString().split("T")[0]
+  );
 
   try {
     client = await pool.connect(); // ✅ no `const`

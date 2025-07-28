@@ -387,6 +387,7 @@ app.post(
           }
         }
         console.log("📅 Dates comeback:", metadata?.dates);
+        console.log("📅 Dates array:", datesArray);
 
         console.log("📅PG Dates comeback:", pgDatesArray);
         console.log("❌ Unavailables array:", unavailablesArray);
