@@ -364,8 +364,6 @@ app.post(
             ? `{${datesArray.map((date) => `"${date}"`).join(",")}}`
             : "{}";
 
-        console.log("dates comeback", pgDatesArray);
-
         // 1. Convert unavailables dates back to proper array format for PostgreSQL\\\\\\\\\\\\\\\\\\\\\\
         let unavailablesArray = [];
         if (metadata?.updatedUnavailables) {
@@ -384,7 +382,8 @@ app.post(
             unavailablesArray = metadata?.updatedUnavailables;
           }
         }
-        console.log("unavailablesArray", unavailablesArray);
+        console.log("📅 Dates comeback:", pgDatesArray);
+        console.log("❌ Unavailables array:", unavailablesArray);
 
         // 2. Convert to PostgreSQL DATE array format
         const pgunavailablesArray =
@@ -392,7 +391,7 @@ app.post(
             ? `{${unavailablesArray.map((date) => `"${date}"`).join(",")}}`
             : "{}";
 
-        console.log("unavailablesdates comeback", pgunavailablesArray);
+        console.log("❌❌unavailablesdates comeback", pgunavailablesArray);
 
         // Log important details
 
@@ -419,7 +418,7 @@ app.post(
           emailme,
           room,
         };
-        console.log("webhook data", orderData);
+        console.log("📦 Webhook Data:", orderData);
         const unavailableOrder = {
           unavailables: pgunavailablesArray,
           id: room_id,
