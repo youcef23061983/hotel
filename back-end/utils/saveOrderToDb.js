@@ -25,23 +25,23 @@ const saveOrderToDatabase = async (orderData) => {
     emailme,
     room,
   } = orderData;
-  // const pgDatesArray = dates.map((d) => {
-  //   const date = new Date(d);
-  //   const utcDate = new Date(
-  //     Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
-  //   );
-  //   return utcDate.toISOString().split("T")[0]; // 'YYYY-MM-DD'
-  // });
-
-  const formatDate = (d) => {
+  const pgDatesArray = dates.map((d) => {
     const date = new Date(d);
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}-${String(date.getDate()).padStart(2, "0")}`;
-  };
+    const utcDate = new Date(
+      Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+    );
+    return utcDate.toISOString().split("T")[0]; // 'YYYY-MM-DD'
+  });
 
-  const pgDatesArray = dates.map(formatDate);
+  // const formatDate = (d) => {
+  //   const date = new Date(d);
+  //   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+  //     2,
+  //     "0"
+  //   )}-${String(date.getDate()).padStart(2, "0")}`;
+  // };
+
+  // const pgDatesArray = dates.map(formatDate);
 
   try {
     client = await pool.connect(); // ✅ no `const`
