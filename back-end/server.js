@@ -411,7 +411,7 @@ app.post(
           tbluser_id,
           arrival,
           departure,
-          dates: pgDatesArray, // Properly formatted for DATE[] column
+          dates: datesArray,
           price,
           total,
           title,

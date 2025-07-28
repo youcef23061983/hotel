@@ -25,6 +25,12 @@ const saveOrderToDatabase = async (orderData) => {
     emailme,
     room,
   } = orderData;
+  const pgDatesArray =
+    dates.length > 0
+      ? `{${datesArray
+          .map((date) => `"${new Date(date).toISOString().split("T")[0]}"`)
+          .join(",")}}`
+      : "{}";
 
   try {
     client = await pool.connect(); // ✅ no `const`
@@ -52,14 +58,15 @@ const saveOrderToDatabase = async (orderData) => {
     nationality,
     termscondition,
     payment,
-    emailme   ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10,$11,$12,$13,$14,$15,$16,$17,$18,$19)
+    emailme   ) VALUES ($1, $2, $3, $4,$5::DATE[],
+, $6, $7, $8, $9, $10,$11,$12,$13,$14,$15,$16,$17,$18,$19)
       RETURNING id`,
       [
         room_id,
         tbluser_id,
         arrival,
         departure,
-        dates,
+        pgDatesArray,
         price,
         total,
         title,
