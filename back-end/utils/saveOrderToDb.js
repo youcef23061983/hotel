@@ -134,13 +134,18 @@ const saveOrderToDatabase = async (orderData) => {
   } = orderData;
 
   // Modified date handling - UTC-safe conversion
+  // const pgDatesArray = dates.map((d) => {
+  //   const date = new Date(d);
+  //   return [
+  //     date.getUTCFullYear(),
+  //     String(date.getUTCMonth() + 1).padStart(2, "0"),
+  //     String(date.getUTCDate()).padStart(2, "0"),
+  //   ].join("-");
+  // });
   const pgDatesArray = dates.map((d) => {
-    const date = new Date(d);
-    return [
-      date.getUTCFullYear(),
-      String(date.getUTCMonth() + 1).padStart(2, "0"),
-      String(date.getUTCDate()).padStart(2, "0"),
-    ].join("-");
+    // Parse MM/DD/YYYY into a UTC date string (YYYY-MM-DD)
+    const [month, day, year] = d.split("/");
+    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
   });
 
   try {
@@ -152,37 +157,37 @@ const saveOrderToDatabase = async (orderData) => {
 
     const orderRes = await client.query(
       `INSERT INTO bookings (
-        room_id,
-        tbluser_id,
-        arrival,
-        departure,
-        dates,
-        price,
-        total,
-        title,
-        firstname,
-        lastname,
-        countrycode,
-        phonenumber,
-        email,
-        country,
-        city,
-        nationality,
-        termscondition,
-        payment,
-        emailme
-      ) VALUES (
-        $1, $2, $3, $4, $5::DATE[],
-        $6, $7, $8, $9, $10, $11,
-        $12, $13, $14, $15, $16,
-        $17, $18, $19
-      ) RETURNING id`,
+    room_id,
+    tbluser_id,
+    arrival,
+    departure,
+    dates,
+    price,
+    total,
+    title,
+    firstname,
+    lastname,
+    countrycode,
+    phonenumber,
+    email,
+    country,
+    city,
+    nationality,
+    termscondition,
+    payment,
+    emailme
+  ) VALUES (
+    $1, $2, $3::DATE, $4::DATE, $5::DATE[],
+    $6, $7, $8, $9, $10, $11,
+    $12, $13, $14, $15, $16,
+    $17, $18, $19
+  ) RETURNING id`,
       [
         room_id,
         tbluser_id,
-        arrival,
-        departure,
-        pgDatesArray,
+        arrival, // Format: "MM/DD/YYYY" (from frontend)
+        departure, // Format: "MM/DD/YYYY" (from frontend)
+        pgDatesArray, // Format: ["YYYY-MM-DD", ...] (UTC-converted)
         price,
         total,
         title,

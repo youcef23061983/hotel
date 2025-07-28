@@ -71,27 +71,61 @@ const Booking = () => {
 
   //   roomUser({ ...user, [name]: type === "checkbox" ? checked : value });
   // };
+  // const handleDateChange = (item) => {
+  //   const arrival = format(item.selection.startDate, "MM/dd/yyyy");
+  //   const departure = format(addDays(item.selection.endDate, 1), "MM/dd/yyy");
+  //   const allDates = dateRange(
+  //     item.selection.startDate,
+  //     item.selection.endDate
+  //   ).map((ms) => format(new Date(ms), "MM/dd/yyyy"));
+
+  //   const numberOfNights =
+  //     differenceInDays(item.selection.endDate, item.selection.startDate) + 1;
+  //   const price = roomData ? roomData.price : 0;
+
+  //   const total = roomData ? roomData.price * numberOfNights : 0;
+
+  //   roomUser({
+  //     ...user,
+  //     arrival: arrival,
+  //     departure: departure,
+  //     dates: allDates,
+  //     price,
+  //     total,
+  //     room_id: id,
+  //   });
+
+  //   setDate([item.selection]);
+  // };
   const handleDateChange = (item) => {
-    const arrival = format(item.selection.startDate, "MM/dd/yyyy");
-    const departure = format(addDays(item.selection.endDate, 1), "MM/dd/yyy");
-    const allDates = dateRange(
-      item.selection.startDate,
-      item.selection.endDate
-    ).map((ms) => format(new Date(ms), "MM/dd/yyyy"));
+    const startDate = new Date(item.selection.startDate);
+    const endDate = new Date(item.selection.endDate);
 
-    const numberOfNights =
-      differenceInDays(item.selection.endDate, item.selection.startDate) + 1;
-    const price = roomData ? roomData.price : 0;
+    // Format as UTC dates (MM/DD/YYYY)
+    const formatUTCDate = (date) => {
+      return `${
+        date.getUTCMonth() + 1
+      }/${date.getUTCDate()}/${date.getUTCFullYear()}`;
+    };
 
-    const total = roomData ? roomData.price * numberOfNights : 0;
+    const arrival = formatUTCDate(startDate);
+    const departure = formatUTCDate(endDate);
+
+    // Generate all selected dates in UTC
+    const allDates = [];
+    let current = new Date(startDate);
+    while (current <= endDate) {
+      allDates.push(formatUTCDate(current));
+      current.setDate(current.getDate() + 1);
+    }
 
     roomUser({
       ...user,
-      arrival: arrival,
-      departure: departure,
-      dates: allDates,
-      price,
-      total,
+      arrival,
+      departure,
+      dates: allDates, // e.g., ["07/28/2025", "07/29/2025"]
+      price: roomData?.price || 0,
+      total: roomData ? roomData.price * allDates.length : 0,
       room_id: id,
     });
 
