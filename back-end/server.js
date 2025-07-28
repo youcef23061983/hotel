@@ -369,8 +369,8 @@ app.post(
         //     : "{}";
         // or::::
         const pgDatesArray =
-          datesArray.length > 0
-            ? `{${datesArray
+          metadata?.dates.length > 0
+            ? `{${metadata?.dates
                 .map((d) => {
                   const [month, day, year] = d.split("/").map(Number);
                   const utcDate = new Date(Date.UTC(year, month - 1, day)); // UTC-safe
