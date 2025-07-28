@@ -340,23 +340,23 @@ app.post(
         const termscondition = metadata?.termscondition;
         const emailme = metadata?.emailme;
         // 1. Convert dates back to proper array format for PostgreSQL
-        let datesArray = [];
-        if (metadata?.dates) {
-          if (typeof metadata?.dates === "string") {
-            // Handle both comma-separated and JSON string formats
-            if (metadata?.dates?.startsWith("[")) {
-              // JSON array string format
-              datesArray = JSON.parse(metadata?.dates);
-            } else {
-              // Comma-separated string format
-              datesArray = metadata?.dates
-                ?.split(",")
-                .map((date) => date.trim());
-            }
-          } else if (Array.isArray(metadata?.dates)) {
-            datesArray = metadata?.dates;
-          }
-        }
+        // let datesArray = [];
+        // if (metadata?.dates) {
+        //   if (typeof metadata?.dates === "string") {
+        //     // Handle both comma-separated and JSON string formats
+        //     if (metadata?.dates?.startsWith("[")) {
+        //       // JSON array string format
+        //       datesArray = JSON.parse(metadata?.dates);
+        //     } else {
+        //       // Comma-separated string format
+        //       datesArray = metadata?.dates
+        //         ?.split(",")
+        //         .map((date) => date.trim());
+        //     }
+        //   } else if (Array.isArray(metadata?.dates)) {
+        //     datesArray = metadata?.dates;
+        //   }
+        // }
 
         // 2. Convert to PostgreSQL DATE array format
         // const pgDatesArray =
@@ -378,16 +378,17 @@ app.post(
         //         })
         //         .join(",")}}`
         //     : "{}";
-        const pgDatesArray =
-          datesArray.length > 0
-            ? `{${datesArray
-                .map((date) => {
-                  // Already in YYYY-MM-DD format from frontend
-                  return `"${date}"`;
-                })
-                .join(",")}}`
-            : "{}";
+        // In your webhook handler:
+        const formatDateToUTC = (dateStr) => {
+          const date = new Date(dateStr);
+          return [
+            date.getUTCFullYear(),
+            String(date.getUTCMonth() + 1).padStart(2, "0"),
+            String(date.getUTCDate()).padStart(2, "0"),
+          ].join("-");
+        };
 
+        const datesArray = metadata?.dates?.split(",").map(formatDateToUTC);
         // 1. Convert unavailables dates back to proper array format for PostgreSQL\\\\\\\\\\\\\\\\\\\\\\
         let unavailablesArray = [];
         if (metadata?.updatedUnavailables) {
@@ -432,7 +433,7 @@ app.post(
           tbluser_id,
           arrival,
           departure,
-          dates: pgDatesArray,
+          dates: datesArray,
           price,
           total,
           title,

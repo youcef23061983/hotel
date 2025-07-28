@@ -30,6 +30,12 @@ const saveOrderToDatabase = async (orderData) => {
     client = await pool.connect(); // ✅ no `const`
     console.log("📅 saveOrder dates:", dates);
     // console.log("🐘 saveOrder PG dates:", pgDatesArray);
+    const pgDatesArray =
+      dates.length > 0
+        ? `{${dates.map((date) => `"${date}"`).join(",")}}`
+        : "{}";
+
+    console.log("📅 saveOrder PG dates:", pgDatesArray);
 
     // ✅ Start a transaction
     await client.query("BEGIN");
@@ -67,7 +73,7 @@ const saveOrderToDatabase = async (orderData) => {
         tbluser_id,
         arrival,
         departure,
-        dates,
+        pgDatesArray,
         price,
         total,
         title,
