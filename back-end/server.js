@@ -379,7 +379,8 @@ app.post(
         //         .join(",")}}`
         //     : "{}";
         // In your webhook handler:
-        const formatDateToUTC = (dateStr) => {
+        const formatDateForPostgres = (dateStr) => {
+          // Handle both "MM/DD/YYYY" and ISO formats
           const date = new Date(dateStr);
           return [
             date.getUTCFullYear(),
@@ -388,7 +389,9 @@ app.post(
           ].join("-");
         };
 
-        const datesArray = metadata?.dates?.split(",").map(formatDateToUTC);
+        const datesArray = metadata.dates
+          .split(",")
+          .map((date) => formatDateForPostgres(date.trim()));
         // 1. Convert unavailables dates back to proper array format for PostgreSQL\\\\\\\\\\\\\\\\\\\\\\
         let unavailablesArray = [];
         if (metadata?.updatedUnavailables) {
