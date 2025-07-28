@@ -25,12 +25,15 @@ const saveOrderToDatabase = async (orderData) => {
     emailme,
     room,
   } = orderData;
+
   const pgDatesArray = dates.map(
     (d) => new Date(d).toISOString().split("T")[0]
   );
 
   try {
     client = await pool.connect(); // ✅ no `const`
+    console.log("📅 saveOrder dates:", dates);
+    console.log("🐘 saveOrder PG dates:", pgDatesArray);
 
     // ✅ Start a transaction
     await client.query("BEGIN");
