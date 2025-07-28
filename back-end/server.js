@@ -368,13 +368,22 @@ app.post(
         //         .join(",")}}`
         //     : "{}";
         // or::::
+        // const pgDatesArray =
+        //   datesArray.length > 0
+        //     ? `{${datesArray
+        //         .map((d) => {
+        //           const [month, day, year] = d.split("/").map(Number);
+        //           const utcDate = new Date(Date.UTC(year, month - 1, day)); // UTC-safe
+        //           return `"${utcDate.toISOString().split("T")[0]}"`; // YYYY-MM-DD
+        //         })
+        //         .join(",")}}`
+        //     : "{}";
         const pgDatesArray =
-          metadata?.dates.length > 0
-            ? `{${metadata?.dates
-                .map((d) => {
-                  const [month, day, year] = d.split("/").map(Number);
-                  const utcDate = new Date(Date.UTC(year, month - 1, day)); // UTC-safe
-                  return `"${utcDate.toISOString().split("T")[0]}"`; // YYYY-MM-DD
+          datesArray.length > 0
+            ? `{${datesArray
+                .map((date) => {
+                  // Already in YYYY-MM-DD format from frontend
+                  return `"${date}"`;
                 })
                 .join(",")}}`
             : "{}";
