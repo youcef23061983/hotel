@@ -358,6 +358,14 @@ app.post(
           }
         }
 
+        const cleanDatesArray = datesArray.map((date) => {
+          const d = new Date(date);
+          const utc = new Date(
+            Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())
+          );
+          return utc.toISOString().split("T")[0]; // Ensures format 'YYYY-MM-DD'
+        });
+
         // 2. Convert to PostgreSQL DATE array format
         const pgDatesArray =
           datesArray.length > 0
@@ -412,7 +420,7 @@ app.post(
           tbluser_id,
           arrival,
           departure,
-          dates: datesArray,
+          dates: cleanDatesArray,
           price,
           total,
           title,

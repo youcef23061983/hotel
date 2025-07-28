@@ -25,13 +25,13 @@ const saveOrderToDatabase = async (orderData) => {
     emailme,
     room,
   } = orderData;
-  const pgDatesArray = dates.map((d) => {
-    const date = new Date(d);
-    const utcDate = new Date(
-      Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
-    );
-    return utcDate.toISOString().split("T")[0]; // 'YYYY-MM-DD'
-  });
+  // const pgDatesArray = dates.map((d) => {
+  //   const date = new Date(d);
+  //   const utcDate = new Date(
+  //     Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+  //   );
+  //   return utcDate.toISOString().split("T")[0]; // 'YYYY-MM-DD'
+  // });
 
   // const formatDate = (d) => {
   //   const date = new Date(d);
@@ -46,7 +46,7 @@ const saveOrderToDatabase = async (orderData) => {
   try {
     client = await pool.connect(); // ✅ no `const`
     console.log("📅 saveOrder dates:", dates);
-    console.log("🐘 saveOrder PG dates:", pgDatesArray);
+    // console.log("🐘 saveOrder PG dates:", pgDatesArray);
 
     // ✅ Start a transaction
     await client.query("BEGIN");
@@ -84,7 +84,7 @@ const saveOrderToDatabase = async (orderData) => {
         tbluser_id,
         arrival,
         departure,
-        pgDatesArray,
+        dates,
         price,
         total,
         title,
