@@ -27,7 +27,7 @@ const saveOrderToDatabase = async (orderData) => {
   } = orderData;
 
   const pgDatesArray = dates.map(
-    (d) => new Date(d).toISOString().split("T")[0]
+    (d) => new Date(d).toLocaleDateString("en-CA") // "YYYY-MM-DD"
   );
 
   try {
