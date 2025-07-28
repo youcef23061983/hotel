@@ -361,7 +361,11 @@ app.post(
         // 2. Convert to PostgreSQL DATE array format
         const pgDatesArray =
           datesArray.length > 0
-            ? `{${datesArray.map((date) => `"${date}"`).join(",")}}`
+            ? `{${datesArray
+                .map(
+                  (date) => `"${new Date(date).toISOString().split("T")[0]}"`
+                )
+                .join(",")}}`
             : "{}";
 
         // 1. Convert unavailables dates back to proper array format for PostgreSQL\\\\\\\\\\\\\\\\\\\\\\
@@ -382,16 +386,22 @@ app.post(
             unavailablesArray = metadata?.updatedUnavailables;
           }
         }
-        console.log("📅 Dates comeback:", pgDatesArray);
+        console.log("📅 Dates comeback:", metadata?.dates);
+
+        console.log("📅PG Dates comeback:", pgDatesArray);
         console.log("❌ Unavailables array:", unavailablesArray);
 
         // 2. Convert to PostgreSQL DATE array format
         const pgunavailablesArray =
           unavailablesArray.length > 0
-            ? `{${unavailablesArray.map((date) => `"${date}"`).join(",")}}`
+            ? `{${unavailablesArray
+                .map(
+                  (date) => `"${new Date(date).toISOString().split("T")[0]}"`
+                )
+                .join(",")}}`
             : "{}";
 
-        console.log("❌❌unavailablesdates comeback", pgunavailablesArray);
+        console.log("❌❌unavailablesPGdates comeback", pgunavailablesArray);
 
         // Log important details
 
@@ -401,7 +411,7 @@ app.post(
           tbluser_id,
           arrival,
           departure,
-          dates: unavailablesArray, // Properly formatted for DATE[] column
+          dates: pgDatesArray, // Properly formatted for DATE[] column
           price,
           total,
           title,
@@ -420,7 +430,7 @@ app.post(
         };
         console.log("📦 Webhook Data:", orderData);
         const unavailableOrder = {
-          unavailables: unavailablesArray,
+          unavailables: pgunavailablesArray,
           id: room_id,
         };
 
