@@ -401,7 +401,7 @@ app.post(
           tbluser_id,
           arrival,
           departure,
-          dates: pgDatesArray, // Properly formatted for DATE[] column
+          dates: unavailablesArray, // Properly formatted for DATE[] column
           price,
           total,
           title,
@@ -420,7 +420,7 @@ app.post(
         };
         console.log("📦 Webhook Data:", orderData);
         const unavailableOrder = {
-          unavailables: pgunavailablesArray,
+          unavailables: unavailablesArray,
           id: room_id,
         };
 
