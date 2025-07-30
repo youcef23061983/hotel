@@ -475,19 +475,12 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         city: String(user?.city || ""),
         country: String(user?.country || ""),
         nationality: String(user?.nationality || ""),
-        // dates: Array.isArray(user?.dates)
-        //   ? user.dates.join(", ")
-        //   : typeof user?.dates === "string"
-        //   ? user.dates
-        //   : "",
         dates: Array.isArray(user?.dates)
+          ? user.dates.join(", ")
+          : typeof user?.dates === "string"
           ? user.dates
-              .map((date) => {
-                const [month, day, year] = date.split("/");
-                return `${year}-${month}-${day}`; // ISO format (UTC)
-              })
-              .join(",")
           : "",
+
         price: String(user?.price || ""),
         total: String(user?.total?.toFixed(2) || "0.00"),
         phonenumber: String(user?.fullPhone || ""),
