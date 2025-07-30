@@ -618,29 +618,29 @@ app.post("/create-checkout-session", async (req, res) => {
 
   console.log("✅ Parsed room object", parseRoom);
   console.log("✅ Parsed room image", parseRoom.image);
-  let datesArray = [];
-  if (metadata?.dates) {
-    if (typeof metadata?.dates === "string") {
-      // Handle both comma-separated and JSON string formats
-      if (metadata?.dates?.startsWith("[")) {
-        // JSON array string format
-        datesArray = JSON.parse(metadata?.dates);
-      } else {
-        // Comma-separated string format
-        datesArray = metadata?.dates?.split(",").map((date) => date.trim());
-      }
-    } else if (Array.isArray(metadata?.dates)) {
-      datesArray = metadata?.dates;
-    }
-  }
+  // let datesArray = [];
+  // if (metadata?.dates) {
+  //   if (typeof metadata?.dates === "string") {
+  //     // Handle both comma-separated and JSON string formats
+  //     if (metadata?.dates?.startsWith("[")) {
+  //       // JSON array string format
+  //       datesArray = JSON.parse(metadata?.dates);
+  //     } else {
+  //       // Comma-separated string format
+  //       datesArray = metadata?.dates?.split(",").map((date) => date.trim());
+  //     }
+  //   } else if (Array.isArray(metadata?.dates)) {
+  //     datesArray = metadata?.dates;
+  //   }
+  // }
 
-  // 2. Convert to PostgreSQL DATE array format
-  const pgDatesArray =
-    datesArray.length > 0
-      ? `{${datesArray.map((date) => `"${date}"`).join(",")}}`
-      : "{}";
+  // // 2. Convert to PostgreSQL DATE array format
+  // const pgDatesArray =
+  //   datesArray.length > 0
+  //     ? `{${datesArray.map((date) => `"${date}"`).join(",")}}`
+  //     : "{}";
 
-  console.log("dates comeback", pgDatesArray);
+  // console.log("dates comeback", pgDatesArray);
   try {
     const rawImagePath = parseRoom.image;
 
