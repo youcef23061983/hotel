@@ -451,10 +451,46 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
       : ""
   );
   console.log("allDates", allDates);
+  // const formatDateForBackend = (dateStr) => {
+  //   const [month, day, year] = dateStr.split("/");
+  //   return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+  // };
+
   const formatDateForBackend = (dateStr) => {
-    const [month, day, year] = dateStr.split("/");
+    if (!dateStr || typeof dateStr !== "string") {
+      console.error("Invalid date string:", dateStr);
+      return ""; // or throw an error? but we don't want to break the whole process
+    }
+    const parts = dateStr.split("/");
+    if (parts.length !== 3) {
+      // Maybe it's already in YYYY-MM-DD format?
+      // Check if it matches YYYY-MM-DD
+      if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+        return dateStr;
+      }
+      console.error("Invalid date format:", dateStr);
+      return "";
+    }
+    const [month, day, year] = parts;
     return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
   };
+  // Alternatively, we can do:
+
+  // const formatDateForBackend = (dateStr) => {
+  //   if (!dateStr) return '';
+  //   // If already in YYYY-MM-DD, return as is.
+  //   if (typeof dateStr === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+  //     return dateStr;
+  //   }
+  //   // Otherwise, try to parse as MM/DD/YYYY
+  //   const parts = dateStr.split('/');
+  //   if (parts.length !== 3) {
+  //     console.error('Invalid date format (expected MM/DD/YYYY):', dateStr);
+  //     return '';
+  //   }
+  //   const [month, day, year] = parts;
+  //   return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+  // };
   console.log(
     "formatedDate",
     Array.isArray(user?.dates)
