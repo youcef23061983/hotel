@@ -451,6 +451,10 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
       : ""
   );
   console.log("allDates", allDates);
+  const [month, day, year] = date.split("/").map(Number);
+  const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day
+    .toString()
+    .padStart(2, "0")}`;
 
   const handleStripeCheckout = async () => {
     const primaryRoom = Array.isArray(room) ? room[0] : room;
@@ -475,11 +479,12 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         city: String(user?.city || ""),
         country: String(user?.country || ""),
         nationality: String(user?.nationality || ""),
-        dates: Array.isArray(user?.dates)
-          ? user.dates.join(", ")
-          : typeof user?.dates === "string"
-          ? user.dates
-          : "",
+        // dates: Array.isArray(user?.dates)
+        //   ? user.dates.join(", ")
+        //   : typeof user?.dates === "string"
+        //   ? user.dates
+        //   : "",
+        dates: formattedDate,
 
         price: String(user?.price || ""),
         total: String(user?.total?.toFixed(2) || "0.00"),
