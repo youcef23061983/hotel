@@ -449,7 +449,7 @@ app.post(
         };
         console.log("📦 Webhook Data:", orderData);
         const unavailableOrder = {
-          unavailables: pgunavailablesArray,
+          unavailables: unavailablesArray,
           id: room_id,
         };
 

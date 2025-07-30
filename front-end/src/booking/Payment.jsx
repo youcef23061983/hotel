@@ -463,6 +463,16 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
       ? formatDateForBackend(user.dates)
       : ""
   );
+  const updatedUnavailables = room ? [...room.unavailables, ...allDates] : [];
+
+  console.log(
+    "unavailables new",
+    Array.isArray(updatedUnavailables)
+      ? updatedUnavailables.map((date) => formatDateForBackend(date)).join(", ")
+      : typeof updatedUnavailables === "string"
+      ? formatDateForBackend(updatedUnavailables)
+      : ""
+  );
 
   const handleStripeCheckout = async () => {
     const primaryRoom = Array.isArray(room) ? room[0] : room;
@@ -511,9 +521,11 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         payment: String(user?.payment || ""),
         tbluser_id: String(formUser?.user?.id || firebaseUser?.id || ""),
         updatedUnavailables: Array.isArray(updatedUnavailables)
-          ? updatedUnavailables.join(", ")
-          : typeof updatedUnavailables === "string"
           ? updatedUnavailables
+              .map((date) => formatDateForBackend(date))
+              .join(", ")
+          : typeof updatedUnavailables === "string"
+          ? formatDateForBackend(updatedUnavailables)
           : "",
 
         // Company info

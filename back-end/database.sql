@@ -21,6 +21,8 @@ CREATE TABLE rooms (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+  ALTER TABLE rooms
+    ALTER COLUMN unavailables TYPE TEXT[];
 
 -- Room measurements (unchanged)
 CREATE TABLE room_square_footage (
@@ -92,6 +94,8 @@ CREATE TABLE bookings (
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
+  ALTER TABLE bookings
+    ALTER COLUMN dates TYPE TEXT[];
 
 -- to delete all data and set it to 0: TRUNCATE TABLE tbluser RESTART IDENTITY;
 

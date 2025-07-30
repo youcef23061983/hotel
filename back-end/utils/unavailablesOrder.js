@@ -12,12 +12,13 @@ const patchUnavailables = async (unavailableOrder) => {
 
   try {
     client = await pool.connect(); // ✅ no `const`
+    console.log("📅 fn unavailables dates:", unavailables);
 
     // ✅ Start a transaction
     await client.query("BEGIN");
     const result = await client.query(
       `UPDATE rooms
-       SET unavailables = $1::DATE[],
+       SET unavailables = $1,
            updated_at = CURRENT_TIMESTAMP
        WHERE id = $2
        RETURNING *`,
