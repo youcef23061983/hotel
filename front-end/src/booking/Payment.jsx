@@ -500,6 +500,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
       : ""
   );
   const updatedUnavailables = room ? [...room.unavailables, ...allDates] : [];
+  console.log("updatedValaibles array", updatedUnavailables);
 
   console.log(
     "unavailables new",
