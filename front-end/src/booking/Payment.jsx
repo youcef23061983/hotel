@@ -451,11 +451,18 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
       : ""
   );
   console.log("allDates", allDates);
-  const [month, day, year] = user?.dates.split("/").map(Number);
-  const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day
-    .toString()
-    .padStart(2, "0")}`;
-  console.log("formatedDate", formattedDate);
+  const formatDateForBackend = (dateStr) => {
+    const [month, day, year] = dateStr.split("/");
+    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+  };
+  console.log(
+    "formatedDate",
+    Array.isArray(user?.dates)
+      ? user.dates.map((date) => formatDateForBackend(date)).join(", ")
+      : typeof user?.dates === "string"
+      ? formatDateForBackend(user.dates)
+      : ""
+  );
 
   const handleStripeCheckout = async () => {
     const primaryRoom = Array.isArray(room) ? room[0] : room;
@@ -480,12 +487,12 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         city: String(user?.city || ""),
         country: String(user?.country || ""),
         nationality: String(user?.nationality || ""),
-        // dates: Array.isArray(user?.dates)
-        //   ? user.dates.join(", ")
-        //   : typeof user?.dates === "string"
-        //   ? user.dates
-        //   : "",
-        dates: formattedDate,
+        dates: Array.isArray(user?.dates)
+          ? user.dates.map((date) => formatDateForBackend(date)).join(", ")
+          : typeof user?.dates === "string"
+          ? formatDateForBackend(user.dates)
+          : "",
+        // dates: formattedDate,
 
         price: String(user?.price || ""),
         total: String(user?.total?.toFixed(2) || "0.00"),
