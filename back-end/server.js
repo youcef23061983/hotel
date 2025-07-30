@@ -359,13 +359,17 @@ app.post(
         }
 
         // 2. Convert to PostgreSQL DATE array format
+        // const pgDatesArray =
+        //   datesArray.length > 0
+        //     ? `{${datesArray
+        //         .map(
+        //           (date) => `"${new Date(date).toISOString().split("T")[0]}"`
+        //         )
+        //         .join(",")}}`
+        //     : "{}";
         const pgDatesArray =
           datesArray.length > 0
-            ? `{${datesArray
-                .map(
-                  (date) => `"${new Date(date).toISOString().split("T")[0]}"`
-                )
-                .join(",")}}`
+            ? `{${datesArray.map((date) => `"${date}"`).join(",")}}`
             : "{}";
         // or::::
         // const pgDatesArray =
@@ -378,6 +382,7 @@ app.post(
         //         })
         //         .join(",")}}`
         //     : "{}";
+
         // In your webhook handler:
 
         // 1. Convert unavailables dates back to proper array format for PostgreSQL\\\\\\\\\\\\\\\\\\\\\\
@@ -425,7 +430,7 @@ app.post(
           arrival,
           departure,
           // dates: pgDatesArray,
-          dates: metadata?.dates,
+          dates: datesArray,
           price,
           total,
           title,
