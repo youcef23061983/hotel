@@ -451,7 +451,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
       : ""
   );
   console.log("allDates", allDates);
-  const [month, day, year] = date.split("/").map(Number);
+  const [month, day, year] = user?.dates.split("/").map(Number);
   const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day
     .toString()
     .padStart(2, "0")}`;
