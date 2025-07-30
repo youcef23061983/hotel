@@ -455,6 +455,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
   const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day
     .toString()
     .padStart(2, "0")}`;
+  console.log("formatedDate", formattedDate);
 
   const handleStripeCheckout = async () => {
     const primaryRoom = Array.isArray(room) ? room[0] : room;
