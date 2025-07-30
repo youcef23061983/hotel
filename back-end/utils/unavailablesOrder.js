@@ -4,11 +4,6 @@ const patchUnavailables = async (unavailableOrder) => {
   let client; // ✅ Declare client at the top
 
   const { unavailables, id } = unavailableOrder;
-  // Convert each date to 'YYYY-MM-DD' string to avoid timezone issues
-  // const cleanDates = unavailables?.map((date) => {
-  //   const d = new Date(date);
-  //   return d.toISOString().split("T")[0]; // Keeps only '2025-07-28'
-  // });
 
   try {
     client = await pool.connect(); // ✅ no `const`

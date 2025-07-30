@@ -307,12 +307,10 @@ app.post(
 
         const phone = customerDetails.phone || metadata.phonenumber;
         const orderId = session.id;
-        const amount = metadata?.dates?.length;
         const currency = session.currency.toUpperCase();
         const country =
           session.shipping_details?.address?.country ||
           session.metadata?.country;
-        const address = session.shipping_details?.address?.line1;
         const city = session.shipping_details?.address?.city || metadata?.city;
         const total = session.amount_total / 100 || metadata.total;
 
@@ -322,9 +320,7 @@ app.post(
         const payment = "stripe" || "no method";
         const arrival = metadata?.arrival;
         const departure = metadata?.departure;
-        // const dates = metadata?.dates
-        //   ? metadata.dates.split(",").map((date) => new Date(date.trim()))
-        //   : [];
+
         const price = metadata?.price;
         const title = metadata?.title;
         const fullName = customerDetails.name || metadata.fullName;
@@ -358,33 +354,6 @@ app.post(
           }
         }
 
-        // 2. Convert to PostgreSQL DATE array format
-        // const pgDatesArray =
-        //   datesArray.length > 0
-        //     ? `{${datesArray
-        //         .map(
-        //           (date) => `"${new Date(date).toISOString().split("T")[0]}"`
-        //         )
-        //         .join(",")}}`
-        //     : "{}";
-        const pgDatesArray =
-          datesArray.length > 0
-            ? `{${datesArray.map((date) => `"${date}"`).join(",")}}`
-            : "{}";
-        // or::::
-        // const pgDatesArray =
-        //   datesArray.length > 0
-        //     ? `{${datesArray
-        //         .map((d) => {
-        //           const [month, day, year] = d.split("/").map(Number);
-        //           const utcDate = new Date(Date.UTC(year, month - 1, day)); // UTC-safe
-        //           return `"${utcDate.toISOString().split("T")[0]}"`; // YYYY-MM-DD
-        //         })
-        //         .join(",")}}`
-        //     : "{}";
-
-        // In your webhook handler:
-
         // 1. Convert unavailables dates back to proper array format for PostgreSQL\\\\\\\\\\\\\\\\\\\\\\
         let unavailablesArray = [];
         if (metadata?.updatedUnavailables) {
@@ -406,30 +375,13 @@ app.post(
         console.log("📅 Dates comeback:", metadata?.dates);
         console.log("📅 Dates array:", datesArray);
 
-        console.log("📅PG Dates comeback:", pgDatesArray);
         console.log("❌ Unavailables array:", unavailablesArray);
 
-        // 2. Convert to PostgreSQL DATE array format
-        const pgunavailablesArray =
-          unavailablesArray.length > 0
-            ? `{${unavailablesArray
-                .map(
-                  (date) => `"${new Date(date).toISOString().split("T")[0]}"`
-                )
-                .join(",")}}`
-            : "{}";
-
-        console.log("❌❌unavailablesPGdates comeback", pgunavailablesArray);
-
-        // Log important details
-
-        // Prepare order data for database
         const orderData = {
           room_id,
           tbluser_id,
           arrival,
           departure,
-          // dates: pgDatesArray,
           dates: datesArray,
           price,
           total,
@@ -486,60 +438,55 @@ app.post(
         }
 
         // Send SMS notifications if phone number exists and textbelt accept the country:
-        // if (phone) {
-        //   try {
-        //     // await sendwhatsappSMS({
-        //     //   phone: phone,
-        //     //   name: fullName,
-        //     //   orderId,
-        //     //   total,
-        //     // });
+        if (phone) {
+          try {
+            // await sendwhatsappSMS({
+            //   phone: phone,
+            //   name: fullName,
+            //   orderId,
+            //   total,
+            // });
 
-        //     // await sendSMS({
-        //     //   phone: phone,
-        //     //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
-        //     //     total / 100
-        //     //   ).toFixed(2)} was received. Thank you!`,
-        //     // });
+            // await sendSMS({
+            //   phone: phone,
+            //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
+            //     total / 100
+            //   ).toFixed(2)} was received. Thank you!`,
+            // });
 
-        //     // const pdfBuffer = await generateInvoicePDF(metadata, orderId);
-        //     // const pdfUrl = await uploadInvoice(session.id, pdfBuffer);
+            // const pdfBuffer = await generateInvoicePDF(metadata, orderId);
+            // const pdfUrl = await uploadInvoice(session.id, pdfBuffer);
 
-        //     // await sendtwilioSMS({
-        //     //   phone: phone,
-        //     //   // message: `Hi ${fullName}, your order #${orderId} of ${currency} ${total} $ was received. Thank you!`,
-        //     //   message: "hi i am youcef here, it works",
-        //     //   pdfUrl,
-        //     // });
-        //     await sendtwilioSMS({
-        //       phone: phone,
-        //       message: `Hi ${fullName}, your order #${orderId} of ${total} ${currency} was received. Thank you!`,
-        //     });
-        //     console.log("📱 twilio SMS notifications sent to", phone);
-        //     console.log("🆔 SID:", process.env.TWILIO_SID);
-        //     console.log("🔑 AUTH:", process.env.TWILIO_AUTH);
+            // await sendtwilioSMS({
+            //   phone: phone,
+            //   // message: `Hi ${fullName}, your order #${orderId} of ${currency} ${total} $ was received. Thank you!`,
+            //   message: "hi i am youcef here, it works",
+            //   pdfUrl,
+            // });
+            await sendtwilioSMS({
+              phone: phone,
+              message: `Hi ${fullName}, your order #${orderId} of ${total} ${currency} was received. Thank you!`,
+            });
+            console.log("📱 twilio SMS notifications sent to", phone);
+            console.log("🆔 SID:", process.env.TWILIO_SID);
+            console.log("🔑 AUTH:", process.env.TWILIO_AUTH);
 
-        //     // await sendTwilioCall({
-        //     //   phone: phone,
-        //     //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
-        //     //     total / 100
-        //     //   ).toFixed(2)} $ was received. Thank you!`,
-        //     // });
-        //     // console.log("📱 SMS notifications sent to", phone);
-        //   } catch (smsError) {
-        //     console.error("❌ Failed to send SMS:", smsError.message);
-        //   }
-        // }
+            // await sendTwilioCall({
+            //   phone: phone,
+            //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
+            //     total / 100
+            //   ).toFixed(2)} $ was received. Thank you!`,
+            // });
+            // console.log("📱 SMS notifications sent to", phone);
+          } catch (smsError) {
+            console.error("❌ Failed to send SMS:", smsError.message);
+          }
+        }
       } catch (processingError) {
         console.error("❌ Order processing failed:", processingError);
-        // Here you should implement your error handling logic:
-        // - Log to error tracking service
-        // - Retry mechanism
-        // - Alert your team
       }
     }
 
-    // Return a response to Stripe to prevent retries
     res.status(200).json({ received: true });
   }
 );
@@ -553,61 +500,6 @@ app.use("/testimonials", testimonialsRoutes);
 app.use("/bookings", bookingsRoutes);
 app.use("/auth", authRoutes);
 
-// app.post("/create-checkout-session", async (req, res) => {
-//   const { metadata, successUrl, cancelUrl } = req.body;
-//   const { room, dates } = metadata;
-
-//   try {
-//     const cartItems = JSON.parse(room || "[]"); // ✅ parse it
-//     console.log("room", [cartItems]);
-
-//     const line_items = [cartItems]?.map((item) => {
-//       return {
-//         price_data: {
-//           currency: "usd",
-//           product_data: {
-//             name: room.name || "Unnamed Product",
-//             images: [
-//               `${process.env.VITE_PUBLIC_PRODUCTS_FRONTEND_URL}/${room.images[0]}`,
-//             ],
-//           },
-//           unit_amount: Math.round(Number(item.price || 0) * 100), // ✅ safe
-//         },
-//         quantity: dates?.length || 1,
-//       };
-//     });
-
-//     const sessionParams = {
-//       payment_method_types: ["card"],
-//       line_items,
-//       mode: "payment",
-//       customer_email: metadata.email,
-//       phone_number_collection: { enabled: true },
-//       metadata: {
-//         ...metadata,
-//         amount: dates?.length || "0",
-//       },
-//       success_url: `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order?session_id={CHECKOUT_SESSION_ID}`,
-//       cancel_url: `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/rooms`,
-//       shipping_address_collection: {
-//         allowed_countries: ["US", "CA", "FR", "DZ"],
-//       },
-//       automatic_tax: {
-//         enabled: false, // Set to true if you want Stripe to handle taxes
-//       },
-//     };
-
-//     const session = await stripe.checkout.sessions.create(sessionParams);
-//     res.json({ sessionId: session.id });
-//   } catch (err) {
-//     console.error("Stripe Session Error:", err);
-//     res.status(400).json({
-//       error: "Failed to create checkout session",
-//       details: err.message,
-//     });
-//   }
-// });
-
 app.post("/create-checkout-session", async (req, res) => {
   const { metadata } = req.body;
   console.log("room_id", metadata.room_id);
@@ -618,29 +510,7 @@ app.post("/create-checkout-session", async (req, res) => {
 
   console.log("✅ Parsed room object", parseRoom);
   console.log("✅ Parsed room image", parseRoom.image);
-  // let datesArray = [];
-  // if (metadata?.dates) {
-  //   if (typeof metadata?.dates === "string") {
-  //     // Handle both comma-separated and JSON string formats
-  //     if (metadata?.dates?.startsWith("[")) {
-  //       // JSON array string format
-  //       datesArray = JSON.parse(metadata?.dates);
-  //     } else {
-  //       // Comma-separated string format
-  //       datesArray = metadata?.dates?.split(",").map((date) => date.trim());
-  //     }
-  //   } else if (Array.isArray(metadata?.dates)) {
-  //     datesArray = metadata?.dates;
-  //   }
-  // }
 
-  // // 2. Convert to PostgreSQL DATE array format
-  // const pgDatesArray =
-  //   datesArray.length > 0
-  //     ? `{${datesArray.map((date) => `"${date}"`).join(",")}}`
-  //     : "{}";
-
-  // console.log("dates comeback", pgDatesArray);
   try {
     const rawImagePath = parseRoom.image;
 
@@ -745,50 +615,52 @@ app.get("/config", (req, res) => {
 app.get("/", (req, res) => {
   res.send("API is running ✅");
 });
-// app.use(async (req, res, next) => {
-//   // 🛑 Skip Arcjet on /health
-//   if (req.path === "/health" || req.path === "/" || req.path === "/webhook")
-//     return next();
-//   if (req.path.startsWith("/assets")) return next();
-//   console.log("Client IP:", req.ip);
-//   console.log("User-Agent:", req.headers["user-agent"]);
-//   console.log("Accept-Language:", req.headers["accept-language"]);
-//   console.log("Request Path:", req.path);
+if (process.env.NODE_ENV === "production") {
+  app.use(async (req, res, next) => {
+    // 🛑 Skip Arcjet on /health
+    if (req.path === "/health" || req.path === "/" || req.path === "/webhook")
+      return next();
+    if (req.path.startsWith("/assets")) return next();
+    console.log("Client IP:", req.ip);
+    console.log("User-Agent:", req.headers["user-agent"]);
+    console.log("Accept-Language:", req.headers["accept-language"]);
+    console.log("Request Path:", req.path);
 
-//   try {
-//     const ajPromise = await aj;
+    try {
+      const ajPromise = await aj;
 
-//     const decision = await ajPromise.protect(req, {
-//       requested: 1, // specifies that each request consumes 1 token
-//     });
+      const decision = await ajPromise.protect(req, {
+        requested: 1, // specifies that each request consumes 1 token
+      });
 
-//     if (decision.isDenied()) {
-//       if (decision.reason.isRateLimit()) {
-//         res.status(429).json({ error: "Too Many Requests" });
-//       } else if (decision.reason.isBot()) {
-//         res.status(403).json({ error: "Bot access denied" });
-//       } else {
-//         res.status(403).json({ error: "Forbidden" });
-//       }
-//       return;
-//     }
+      if (decision.isDenied()) {
+        if (decision.reason.isRateLimit()) {
+          res.status(429).json({ error: "Too Many Requests" });
+        } else if (decision.reason.isBot()) {
+          res.status(403).json({ error: "Bot access denied" });
+        } else {
+          res.status(403).json({ error: "Forbidden" });
+        }
+        return;
+      }
 
-//     // check for spoofed bots
-//     if (
-//       decision.results.some(
-//         (result) => result.reason.isBot() && result.reason.isSpoofed()
-//       )
-//     ) {
-//       res.status(403).json({ error: "Spoofed bot detected" });
-//       return;
-//     }
+      // check for spoofed bots
+      if (
+        decision.results.some(
+          (result) => result.reason.isBot() && result.reason.isSpoofed()
+        )
+      ) {
+        res.status(403).json({ error: "Spoofed bot detected" });
+        return;
+      }
 
-//     next();
-//   } catch (error) {
-//     console.log("Arcjet error", error);
-//     next(error);
-//   }
-// });
+      next();
+    } catch (error) {
+      console.log("Arcjet error", error);
+      next(error);
+    }
+  });
+}
 
 app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
