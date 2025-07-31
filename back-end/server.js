@@ -227,6 +227,7 @@ const albumRoutes = require("./routes/album.js");
 const testimonialsRoutes = require("./routes/testimonials.js");
 const bookingsRoutes = require("./routes/bookings.js");
 const authRoutes = require("./routes/authUser.js");
+const orderRoutes = require("./routes/order.js");
 const aj = require("./libs/arctjet.js");
 const helmet = require("helmet");
 
@@ -487,10 +488,10 @@ app.post(
             //   message: "hi i am youcef here, it works",
             //   pdfUrl,
             // });
-            await sendtwilioSMS({
-              phone: phone,
-              message: `Hi ${fullName}, your order #${orderId} of ${total} ${currency} was received. Thank you!`,
-            });
+            // await sendtwilioSMS({
+            //   phone: phone,
+            //   message: `Hi ${fullName}, your order #${orderId} of ${total} ${currency} was received. Thank you!`,
+            // });
             console.log("📱 twilio SMS notifications sent to", phone);
             console.log("🆔 SID:", process.env.TWILIO_SID);
             console.log("🔑 AUTH:", process.env.TWILIO_AUTH);
@@ -523,6 +524,7 @@ app.use("/album", albumRoutes);
 app.use("/testimonials", testimonialsRoutes);
 app.use("/bookings", bookingsRoutes);
 app.use("/auth", authRoutes);
+app.use("/order", orderRoutes);
 
 app.post("/create-checkout-session", async (req, res) => {
   const { metadata } = req.body;
@@ -618,32 +620,6 @@ app.post("/create-checkout-session", async (req, res) => {
     res.status(400).json({
       error: err.message || "Payment failed",
       details: process.env.NODE_ENV === "development" ? err.stack : undefined,
-    });
-  }
-});
-app.get("/order", async (req, res) => {
-  const pool = require("./libs/db.js");
-
-  try {
-    const { sessionId } = req.query;
-
-    // 1. Get all booking data in one query
-    const result = await pool.query(
-      `SELECT * FROM bookings WHERE transaction_id = $1`,
-      [sessionId]
-    );
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: "Booking not found" });
-    }
-
-    // 2. Return the complete booking record as-is
-    res.json(result.rows[0]);
-  } catch (error) {
-    console.error("Error fetching booking:", error);
-    res.status(500).json({
-      error: "Internal server error",
-      details: error.message,
     });
   }
 });
