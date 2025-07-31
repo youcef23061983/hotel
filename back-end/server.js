@@ -622,6 +622,8 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 app.get("/order", async (req, res) => {
+  const pool = require("./libs/db.js");
+
   try {
     const { sessionId } = req.query;
 
