@@ -210,12 +210,14 @@ const Order = () => {
 
   const { data: order, error, isPending } = UseFetch(url, key);
   const id = order?.room_id;
+  console.log("order booking data", order);
   const detailurl = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
   const {
     data: roomData,
     error: detailRoomerror,
     isPending: detailRoompending,
-  } = BookingUseFetch(detailurl, "room", id);
+  } = BookingUseFetch(id ? detailurl : null, "room", id);
+  console.log("order roomdata", roomData);
 
   if (isPending || detailRoompending)
     return (
