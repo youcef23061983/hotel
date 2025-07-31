@@ -30,73 +30,6 @@ const Details = () => {
   const { addToCart, room } = useContext(AppContext);
 
   const location = useLocation();
-
-  const {
-    data1: roomsData,
-    data2: roomData,
-    isPending1,
-    isPending2,
-    error1,
-    error2,
-  } = DetailUseFetchQueries(url1, key1, id);
-
-  const img1 = roomData ? roomData.images[0] : null;
-
-  const roomImages = roomData ? roomData.images : null;
-  const roomIcons = roomData ? roomData.amenities : 0;
-  const x = roomData ? roomImages.length : 0;
-  const square = roomData ? roomData.room_square_footage : [];
-  const guest = roomData ? roomData.capacity : [];
-  const bath = roomData ? roomData.bath_number : [];
-
-  function renderIcon(iconName) {
-    switch (iconName) {
-      case "PiTelevisionSimpleThin":
-        return <PiTelevisionSimpleThin className="icon" />;
-      case "FaWifi":
-        return <FaWifi className="icon" />;
-      case "Air Conditioning":
-        return <TbAirConditioning className="icon" />;
-      case "TbSofa":
-        return <TbSofa className="icon" />;
-      case "Tb24Hours":
-        return <Tb24Hours />;
-      case "MdOutlineFreeBreakfast":
-        return <MdOutlineFreeBreakfast className="icon" />;
-      case "FaKitchenSet":
-        return <FaKitchenSet className="icon" />;
-      case "MdBalcony":
-        return <MdBalcony className="icon" />;
-      case "GrCube":
-        return <GrCube className="icon" />;
-      case "MdOutlinePeopleAlt":
-        return <MdOutlinePeopleAlt className="icon" />;
-      case "TbBath":
-        return <TbBath className="icon" />;
-
-      default:
-        return null;
-    }
-  }
-  // const otherRooms =
-  //   roomsData && roomData
-  //     ? roomsData.filter(
-  //         (room) =>
-  //           room && room.type === roomData.type && room.id !== roomData.id
-  //       )
-  //     : [];
-
-  const otherRooms = roomsData
-    ? roomsData.filter(
-        // (room) => room.type === roomData.type && room.id !== roomData.id
-        (room) => room && room.type === roomData.type && room.id !== roomData.id
-      )
-    : [];
-  // const otherRooms =
-  //   roomsData?.filter(
-  //     (room) => room && room.type === roomData?.type && room.id !== roomData?.id
-  //   ) || [];
-
   const useMediaQuery = (query) => {
     const [matches, setMatches] = useState(false);
 
@@ -141,6 +74,71 @@ const Details = () => {
   );
   const scrollIcon = useTransform(scrollYProgress, [0, 1], ["70vw", "0vw"]);
   const scrollP = useTransform(scrollYProgress, [0, 1], ["-70vw", "0vw"]);
+
+  const {
+    data1: roomsData,
+    data2: roomData,
+    isPending1,
+    isPending2,
+    error1,
+    error2,
+  } = DetailUseFetchQueries(url1, key1, id);
+  if (isPending1 || isPending2) return <h2>...is loading</h2>;
+  if (error1) return <h2>{error1.message}</h2>;
+  if (error2) return <h2>{error2.message}</h2>;
+  if (!roomData) return <h2>Room data not found</h2>;
+
+  const img1 = roomData ? roomData.images[0] : null;
+
+  const roomImages = roomData ? roomData.images : null;
+  const roomIcons = roomData ? roomData.amenities : 0;
+  const x = roomData ? roomImages.length : 0;
+  const square = roomData ? roomData.room_square_footage : [];
+  const guest = roomData ? roomData.capacity : [];
+  const bath = roomData ? roomData.bath_number : [];
+
+  function renderIcon(iconName) {
+    switch (iconName) {
+      case "PiTelevisionSimpleThin":
+        return <PiTelevisionSimpleThin className="icon" />;
+      case "FaWifi":
+        return <FaWifi className="icon" />;
+      case "Air Conditioning":
+        return <TbAirConditioning className="icon" />;
+      case "TbSofa":
+        return <TbSofa className="icon" />;
+      case "Tb24Hours":
+        return <Tb24Hours />;
+      case "MdOutlineFreeBreakfast":
+        return <MdOutlineFreeBreakfast className="icon" />;
+      case "FaKitchenSet":
+        return <FaKitchenSet className="icon" />;
+      case "MdBalcony":
+        return <MdBalcony className="icon" />;
+      case "GrCube":
+        return <GrCube className="icon" />;
+      case "MdOutlinePeopleAlt":
+        return <MdOutlinePeopleAlt className="icon" />;
+      case "TbBath":
+        return <TbBath className="icon" />;
+
+      default:
+        return null;
+    }
+  }
+  const otherRooms =
+    roomsData && roomData
+      ? roomsData.filter(
+          (room) =>
+            room && room.type === roomData.type && room.id !== roomData.id
+        )
+      : [];
+  // const otherRooms = roomsData
+  //   ? roomsData.filter(
+  //       (room) => room && room.type === roomData.type && room.id !== roomData.id
+  //     )
+  //   : [];
+
   const goBack = (search) => {
     if (search && search.includes("room")) {
       return "go back to rooms";
@@ -150,9 +148,7 @@ const Details = () => {
       return "go back to all rooms & suites";
     }
   };
-  if (isPending1 || isPending2) return <h2>...is loading</h2>;
-  if (error1) return <h2>{error1.message}</h2>;
-  if (error2) return <h2>{error2.message}</h2>;
+
   return (
     <div>
       <Helmet>

@@ -23,7 +23,10 @@ const saveOrderToDatabase = async (orderData) => {
     termscondition,
     payment,
     emailme,
-    room,
+    transactionId, // New field
+    last4, // New field
+    postalCode, // New field
+    currency,
   } = orderData;
 
   try {
@@ -54,12 +57,18 @@ const saveOrderToDatabase = async (orderData) => {
     nationality,
     termscondition,
     payment,
-    emailme
+    emailme,
+     transaction_id, 
+      last4,         
+      postal_code,    
+      currency       
   ) VALUES (
     $1, $2, $3, $4, $5,
     $6, $7, $8, $9, $10, $11,
     $12, $13, $14, $15, $16,
-    $17, $18, $19
+    $17, $18, $19,
+          $20, $21, $22, $23
+
   ) RETURNING id`,
       [
         room_id,
@@ -81,6 +90,10 @@ const saveOrderToDatabase = async (orderData) => {
         termscondition,
         payment,
         emailme,
+        transactionId,
+        last4,
+        postalCode,
+        currency,
       ]
     );
 

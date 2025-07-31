@@ -364,24 +364,6 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
       .catch((error) => console.error("Error fetching config:", error));
   }, []);
 
-  // useEffect(() => {
-  //   fetch(`${paymentUrl}/create-payment-intent`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ total }),
-  //   })
-  //     .then(async (r) => {
-  //       if (!r.ok) {
-  //         throw new Error("Failed to fetch client secret");
-  //       }
-  //       const { clientSecret } = await r.json();
-  //       setClientSecret(clientSecret);
-  //     })
-  //     .catch((error) => console.error("Error fetching client secret:", error));
-  // }, []);
-
   const handleChange = useCallback(
     (e) => {
       const { name, value } = e.target;

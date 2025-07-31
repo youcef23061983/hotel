@@ -76,7 +76,7 @@ CREATE TABLE bookings (
     tbluser_id INT NOT NULL REFERENCES tbluser(id) ON DELETE CASCADE,
     arrival DATE NOT NULL,
     departure DATE NOT NULL,
-    dates DATE[] DEFAULT ARRAY[]::DATE[],
+    dates TEXT[] DEFAULT ARRAY[]::TEXT[],
     price DECIMAL(10, 2) NOT NULL,
     total DECIMAL(10, 2) NOT NULL,
     title VARCHAR(10),
@@ -91,11 +91,13 @@ CREATE TABLE bookings (
     termsCondition BOOLEAN NOT NULL DEFAULT FALSE,
     payment VARCHAR(20),
     emailMe BOOLEAN NOT NULL DEFAULT FALSE,
+    transaction_id VARCHAR(100),
+    last4 CHAR(4),
+    postal_code VARCHAR(20),
+    currency CHAR(3),
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
-  ALTER TABLE bookings
-    ALTER COLUMN dates TYPE TEXT[];
 
 -- to delete all data and set it to 0: TRUNCATE TABLE tbluser RESTART IDENTITY;
 

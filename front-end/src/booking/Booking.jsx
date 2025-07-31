@@ -18,11 +18,7 @@ const Booking = () => {
   const [calendar, setCalendar] = useState(true);
   const [payment, setPayment] = useState(false);
   const url = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
-  const {
-    data: roomData,
-    error,
-    isPending,
-  } = BookingUseFetch(url, "products", id);
+  const { data: roomData, error, isPending } = BookingUseFetch(url, "room", id);
   const { roomUser, user } = useContext(AppContext);
   console.log("booking user", user);
 

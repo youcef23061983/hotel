@@ -307,7 +307,6 @@ app.post(
 
         const phone = customerDetails.phone || metadata.phonenumber;
         const orderId = session.id;
-        const currency = session.currency.toUpperCase();
         const country =
           session.shipping_details?.address?.country ||
           session.metadata?.country;
@@ -335,6 +334,21 @@ app.post(
           metadata.nationality || customerDetails?.address?.country;
         const termscondition = metadata?.termscondition;
         const emailme = metadata?.emailme;
+        const paymentIntent = session.payment_intent;
+        const paymentMethod = paymentIntent?.payment_method;
+
+        // Get last 4 digits of card (if card payment)
+        const last4 = paymentMethod?.card?.last4 || "N/A";
+
+        // Get postal code (billing address)
+        const postalCode =
+          session.customer_details?.address?.postal_code || "N/A";
+
+        // Transaction ID (Stripe Payment Intent ID)
+        const transactionId = paymentIntent?.id || session.id;
+
+        // Currency (e.g., "USD")
+        const currency = session.currency.toUpperCase();
         // 1. Convert dates back to proper array format for PostgreSQL
         let datesArray = [];
         if (metadata?.dates) {
@@ -398,7 +412,17 @@ app.post(
           payment,
           emailme,
           room,
+          transactionId, // Stripe Payment Intent ID
+          last4, // Last 4 digits of card (if applicable)
+          postalCode, // Billing postal code
+          currency,
         };
+        console.log("💳 Payment Details:", {
+          transactionId,
+          last4,
+          postalCode,
+          currency,
+        });
         console.log("📦 Webhook Data:", orderData);
         const unavailableOrder = {
           unavailables: unavailablesArray,
@@ -594,6 +618,30 @@ app.post("/create-checkout-session", async (req, res) => {
     res.status(400).json({
       error: err.message || "Payment failed",
       details: process.env.NODE_ENV === "development" ? err.stack : undefined,
+    });
+  }
+});
+app.get("/order", async (req, res) => {
+  try {
+    const { sessionId } = req.query;
+
+    // 1. Get all booking data in one query
+    const result = await pool.query(
+      `SELECT * FROM bookings WHERE transaction_id = $1`,
+      [sessionId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+
+    // 2. Return the complete booking record as-is
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error fetching booking:", error);
+    res.status(500).json({
+      error: "Internal server error",
+      details: error.message,
     });
   }
 });
