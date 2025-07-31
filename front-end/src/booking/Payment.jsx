@@ -523,7 +523,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
           : "",
         // dates: formattedDate,
 
-        price: String(user?.price?.toFixed(2) || ""),
+        price: String(user?.price || "0.00"),
         total: String(user?.total?.toFixed(2) || "0.00"),
         phonenumber: String(user?.fullPhone || ""),
         countrycode: String(user?.countryCode || ""),

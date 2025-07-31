@@ -312,7 +312,9 @@ app.post(
           session.shipping_details?.address?.country ||
           session.metadata?.country;
         const city = session.shipping_details?.address?.city || metadata?.city;
-        const total = session.amount_total / 100 || metadata.total;
+        const total =
+          Number(session.amount_total / 100).toFixed(2) ||
+          Number(metadata.total).toFixed(2);
 
         const tbluser_id = metadata.tbluser_id;
 
@@ -321,7 +323,7 @@ app.post(
         const arrival = metadata?.arrival;
         const departure = metadata?.departure;
 
-        const price = metadata?.price;
+        const price = Number(metadata.price).toFixed(2) || "0.00";
         const title = metadata?.title;
         const fullName = customerDetails.name || metadata.fullName;
         const names = fullName.split(" ");
