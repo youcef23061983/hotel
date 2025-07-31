@@ -291,14 +291,14 @@ const Order = () => {
           variants={itemVariants}
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-primaryDark to-primary py-8 px-6 text-center text-white">
+          <div className="bg-gradient-to-r from-primaryDark to-primary py-8 px-6 text-center">
             <h1 className="text-2xl md:text-3xl font-bold">
               TROPICAL PARADISE RESORT
             </h1>
             <p className="mt-2 opacity-90">Your booking is confirmed</p>
             <div className="mt-4 bg-white bg-opacity-20 inline-block px-4 py-2 rounded-full">
               <span className="text-sm font-medium">
-                CONFIRMATION #{order.transaction_id?.slice(-8)}
+                CONFIRMATION #{order.transaction_id?.slice(-8)}...
               </span>
             </div>
           </div>
@@ -333,39 +333,51 @@ const Order = () => {
               <h2 className="text-xl font-semibold text-primaryDark mb-4 flex items-center">
                 <FaHotel className="mr-2" /> Booking Details
               </h2>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between py-3 border-b border-gray-100">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between py-2 border-b border-gray-100">
                   <div className="flex items-center">
-                    <FaCalendarAlt className="text-gray-400 mr-3" />
+                    <FaCalendarAlt className="text-gray-400 mr-2 text-sm" />
                     <div>
-                      <p className="text-gray-500">Dates</p>
-                      <p className="font-medium">
+                      <p className="text-gray-500 text-xs uppercase tracking-wider">
+                        Dates
+                      </p>
+                      <p className="font-medium text-sm">
                         {arrivalDate} - {departureDate}
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-gray-500">Nights</p>
-                    <p className="font-medium">{nights}</p>
+                    <p className="text-gray-500 text-xs uppercase tracking-wider">
+                      Nights
+                    </p>
+                    <p className="font-medium text-sm">{nights}</p>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between py-3 border-b border-gray-100">
+                <div className="flex items-center justify-between py-2 border-b border-gray-100">
                   <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-md bg-primary bg-opacity-10 flex items-center justify-center mr-3">
-                      <FaHotel className="text-primary" />
+                    <div className="w-8 h-8 rounded-md bg-primary bg-opacity-10 flex items-center justify-center mr-2">
+                      <FaHotel className="text-primary text-sm" />
                     </div>
                     <div>
-                      <p className="text-gray-500">Room Type</p>
-                      <p className="font-medium">
-                        {roomName} ({roomType})
+                      <p className="text-gray-500 text-xs uppercase tracking-wider">
+                        Room Type
+                      </p>
+                      <p className="font-medium text-sm">
+                        {roomName}{" "}
+                        <span className="text-gray-400">({roomType})</span>
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-gray-500">Nightly Rate</p>
-                    <p className="font-medium">
-                      {roomPrice} {order.currency}
+                    <p className="text-gray-500 text-xs uppercase tracking-wider">
+                      Nightly Rate
+                    </p>
+                    <p className="font-medium text-sm">
+                      {typeof roomPrice === "number"
+                        ? roomPrice.toFixed(2)
+                        : roomPrice}{" "}
+                      {order.currency}
                     </p>
                   </div>
                 </div>
