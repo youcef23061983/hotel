@@ -413,7 +413,7 @@ app.post(
           payment,
           emailme,
           room,
-          transactionId, // Stripe Payment Intent ID
+          orderId, // Stripe Payment Intent ID
           last4, // Last 4 digits of card (if applicable)
           postalCode, // Billing postal code
           currency,

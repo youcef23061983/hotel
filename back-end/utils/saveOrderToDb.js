@@ -23,7 +23,7 @@ const saveOrderToDatabase = async (orderData) => {
     termscondition,
     payment,
     emailme,
-    transactionId, // New field
+    orderId, // New field
     last4, // New field
     postalCode, // New field
     currency,
@@ -90,7 +90,7 @@ const saveOrderToDatabase = async (orderData) => {
         termscondition,
         payment,
         emailme,
-        transactionId,
+        orderId,
         last4,
         postalCode,
         currency,
