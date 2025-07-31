@@ -177,7 +177,7 @@ import BookingUseFetch from "../data managment/BookingUseFetch";
 
 const Order = () => {
   const sessionId = new URLSearchParams(window.location.search).get(
-    "sessionId"
+    "session_id"
   );
 
   // Animation variants
@@ -205,7 +205,8 @@ const Order = () => {
 
   const url = `${
     import.meta.env.VITE_PROD_URL_URL
-  }/order?sessionId=${sessionId}`;
+  }/order?session_id=${sessionId}`;
+
   const key = "order";
 
   const { data: order, error, isPending } = UseFetch(url, key);
