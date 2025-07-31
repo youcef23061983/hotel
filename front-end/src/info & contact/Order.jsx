@@ -270,14 +270,12 @@ const Order = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header with Banner */}
       <div
-        className="relative h-64 md:h-80 bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundImage: `url(${roomImage})` }}
+        className="headerimages"
+        style={{
+          background: `url(${img}) center/cover `,
+        }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        <Banner
-          title="BOOKING CONFIRMATION"
-          className="relative z-10 text-white"
-        />
+        <Banner title="YOUR RECEIPT" />
       </div>
 
       {/* Main Content */}
@@ -300,7 +298,7 @@ const Order = () => {
             <p className="mt-2 opacity-90">Your booking is confirmed</p>
             <div className="mt-4 bg-white bg-opacity-20 inline-block px-4 py-2 rounded-full">
               <span className="text-sm font-medium">
-                CONFIRMATION #{order.transactionId?.slice(-8)}
+                CONFIRMATION #{order.transaction_id?.slice(-8)}
               </span>
             </div>
           </div>
@@ -325,9 +323,7 @@ const Order = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Phone:</span>
-                  <span className="font-medium">
-                    {order.countrycode} {order.phonenumber}
-                  </span>
+                  <span className="font-medium">{order.phonenumber}</span>
                 </div>
               </div>
             </motion.div>
@@ -342,14 +338,14 @@ const Order = () => {
                   <div className="flex items-center">
                     <FaCalendarAlt className="text-gray-400 mr-3" />
                     <div>
-                      <p className="text-gray-600">Dates</p>
+                      <p className="text-gray-500">Dates</p>
                       <p className="font-medium">
                         {arrivalDate} - {departureDate}
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-gray-600">Nights</p>
+                    <p className="text-gray-500">Nights</p>
                     <p className="font-medium">{nights}</p>
                   </div>
                 </div>
@@ -360,16 +356,16 @@ const Order = () => {
                       <FaHotel className="text-primary" />
                     </div>
                     <div>
-                      <p className="text-gray-600">Room Type</p>
+                      <p className="text-gray-500">Room Type</p>
                       <p className="font-medium">
                         {roomName} ({roomType})
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-gray-600">Nightly Rate</p>
+                    <p className="text-gray-500">Nightly Rate</p>
                     <p className="font-medium">
-                      {order.currency} {roomPrice}
+                      {roomPrice} {order.currency}
                     </p>
                   </div>
                 </div>
@@ -417,7 +413,7 @@ const Order = () => {
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Transaction ID:</span>
                   <span className="font-medium text-sm">
-                    {order.transactionId}
+                    {order.transaction_id}
                   </span>
                 </div>
               </div>
@@ -433,7 +429,7 @@ const Order = () => {
                   Total Amount
                 </span>
                 <span className="text-2xl font-bold text-primary">
-                  {order.currency} {order.total?.toFixed(2)}
+                  {order.total} {order.currency}
                 </span>
               </div>
             </motion.div>
@@ -451,7 +447,7 @@ const Order = () => {
                 </span>
               </p>
               <p className="mt-4 text-xs text-gray-400">
-                Booking reference: {order.transactionId}
+                Booking reference: {order.transaction_id}
               </p>
             </motion.div>
           </div>

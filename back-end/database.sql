@@ -92,6 +92,7 @@ CREATE TABLE bookings (
     payment VARCHAR(20),
     emailMe BOOLEAN NOT NULL DEFAULT FALSE,
     transaction_id VARCHAR(100),
+    session_id VARCHAR(100),
     last4 CHAR(4),
     postal_code VARCHAR(20),
     currency CHAR(3),

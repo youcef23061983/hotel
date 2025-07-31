@@ -415,7 +415,8 @@ app.post(
           payment,
           emailme,
           room,
-          orderId, // Stripe Payment Intent ID
+          session_id: orderId, // Stripe Payment Intent ID
+          transaction_id: transactionId,
           last4, // Last 4 digits of card (if applicable)
           postalCode, // Billing postal code
           currency,

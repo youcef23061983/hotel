@@ -15,7 +15,7 @@ const getOrder = async (req, res) => {
 
     // First try with the session_id as transaction_id
     let result = await pool.query(
-      `SELECT * FROM bookings WHERE transaction_id = $1`,
+      `SELECT * FROM bookings WHERE session_id = $1`,
       [session_id]
     );
 
@@ -25,8 +25,8 @@ const getOrder = async (req, res) => {
       const session = await stripe.checkout.sessions.retrieve(session_id);
 
       result = await pool.query(
-        `SELECT * FROM bookings WHERE transaction_id = $1`,
-        [session.payment_intent] // Use payment intent ID instead
+        `SELECT * FROM bookings WHERE session_id = $1`,
+        [session.id] // Use payment intent ID instead
       );
     }
 

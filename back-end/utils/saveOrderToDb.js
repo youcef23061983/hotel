@@ -23,7 +23,8 @@ const saveOrderToDatabase = async (orderData) => {
     termscondition,
     payment,
     emailme,
-    orderId, // New field
+    session_id,
+    transaction_id, // New field
     last4, // New field
     postalCode, // New field
     currency,
@@ -58,6 +59,7 @@ const saveOrderToDatabase = async (orderData) => {
     termscondition,
     payment,
     emailme,
+    session_id,
      transaction_id, 
       last4,         
       postal_code,    
@@ -67,7 +69,7 @@ const saveOrderToDatabase = async (orderData) => {
     $6, $7, $8, $9, $10, $11,
     $12, $13, $14, $15, $16,
     $17, $18, $19,
-          $20, $21, $22, $23
+          $20, $21, $22, $23, $24
 
   ) RETURNING id`,
       [
@@ -90,7 +92,8 @@ const saveOrderToDatabase = async (orderData) => {
         termscondition,
         payment,
         emailme,
-        orderId,
+        session_id,
+        transaction_id,
         last4,
         postalCode,
         currency,
