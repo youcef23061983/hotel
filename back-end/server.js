@@ -312,9 +312,7 @@ app.post(
           session.shipping_details?.address?.country ||
           session.metadata?.country;
         const city = session.shipping_details?.address?.city || metadata?.city;
-        const total =
-          Number(session.amount_total / 100).toFixed(2) ||
-          Number(metadata.total).toFixed(2);
+        const total = session.amount_total / 100 || metadata.total;
 
         const tbluser_id = metadata.tbluser_id;
 
