@@ -35,7 +35,6 @@ const Information = ({
       return;
     }
 
-    e.preventDefault();
     if (
       !user.title ||
       !user.firstName ||
