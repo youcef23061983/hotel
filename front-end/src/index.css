@@ -915,6 +915,7 @@ a {
   .touches {
     width: 50%;
   }
+
   .infoContainer {
     display: flex;
     flex-direction: row-reverse;
