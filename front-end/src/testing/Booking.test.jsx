@@ -48,8 +48,8 @@ describe("group of testing Booking component", () => {
     expect(headerH2).toBeInTheDocument();
     const today = new Date();
     const todayDay = today.getDate().toString();
-    const todayButton = screen.getByText(todayDay);
-    await userEvent.setup().click(todayButton);
+    const todayButton = screen.getAllByText(todayDay);
+    await userEvent.setup().click(todayButton[0]);
 
     const submitBtn = screen.getByRole("button", { name: "submit" });
     expect(submitBtn).toBeInTheDocument();
