@@ -307,7 +307,6 @@ app.post(
         const room_id = metadata?.room_id;
 
         const phone = customerDetails.phone || metadata.phonenumber;
-        const orderId = session.id;
         const country =
           session.shipping_details?.address?.country ||
           session.metadata?.country;
@@ -346,7 +345,8 @@ app.post(
           session.customer_details?.address?.postal_code || "N/A";
 
         // Transaction ID (Stripe Payment Intent ID)
-        const transactionId = paymentIntent?.id || session.id;
+        const transactionId = session.payment_intent.id;
+        const orderId = session.id;
 
         // Currency (e.g., "USD")
         const currency = session.currency.toUpperCase();
@@ -436,7 +436,7 @@ app.post(
         await patchUnavailables(unavailableOrder);
         console.log("💾 Order saved to database");
         console.log("💰 Payment Details:", {
-          orderId,
+          transactionId,
           total: total.toFixed(2),
           currency,
           email: email,
@@ -449,12 +449,12 @@ app.post(
         try {
           await sendEmail({
             to: email,
-            subject: `🧾 Order Confirmation #${orderId}`,
+            subject: `🧾 Order Confirmation #${transactionId}`,
             html: `
               <p>Hello ${fullName},</p>
-              <p>Thank you for your order <strong>#${orderId}</strong>.</p>
+              <p>Thank you for your order <strong>#${transactionId}</strong>.</p>
               <p>Total: <strong> ${total} ${currency}</strong></p>
-              // <p>View your order details <a href="${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order/${orderId}">here</a>.</p>
+              // <p>View your order details <a href="${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order/${transactionId}">here</a>.</p>
               <p>If you have any questions, please contact our support team.</p>
             `,
           });
@@ -469,29 +469,29 @@ app.post(
             // await sendwhatsappSMS({
             //   phone: phone,
             //   name: fullName,
-            //   orderId,
+            //   transactionId,
             //   total,
             // });
 
             // await sendSMS({
             //   phone: phone,
-            //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
+            //   message: `Hi ${fullName}, your order #${transactionId} of ${currency} ${(
             //     total / 100
             //   ).toFixed(2)} was received. Thank you!`,
             // });
 
-            // const pdfBuffer = await generateInvoicePDF(metadata, orderId);
+            // const pdfBuffer = await generateInvoicePDF(metadata, transactionId);
             // const pdfUrl = await uploadInvoice(session.id, pdfBuffer);
 
             // await sendtwilioSMS({
             //   phone: phone,
-            //   // message: `Hi ${fullName}, your order #${orderId} of ${currency} ${total} $ was received. Thank you!`,
+            //   // message: `Hi ${fullName}, your order #${transactionId} of ${currency} ${total} $ was received. Thank you!`,
             //   message: "hi i am youcef here, it works",
             //   pdfUrl,
             // });
             await sendtwilioSMS({
               phone: phone,
-              message: `Hi ${fullName}, your order #${orderId} of ${total} ${currency} was received. Thank you!`,
+              message: `Hi ${fullName}, your order #${transactionId} of ${total} ${currency} was received. Thank you!`,
             });
             console.log("📱 twilio SMS notifications sent to", phone);
             console.log("🆔 SID:", process.env.TWILIO_SID);
@@ -499,7 +499,7 @@ app.post(
 
             // await sendTwilioCall({
             //   phone: phone,
-            //   message: `Hi ${fullName}, your order #${orderId} of ${currency} ${(
+            //   message: `Hi ${fullName}, your order #${transactionId} of ${currency} ${(
             //     total / 100
             //   ).toFixed(2)} $ was received. Thank you!`,
             // });
