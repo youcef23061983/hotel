@@ -462,16 +462,198 @@ app.post(
           // });
           console.log("BREVO_API_KEY:", process.env.BREVO_API_KEY);
           console.log("GMAIL_USER:", process.env.GMAIL_USER);
+          const emailHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f4f7f9; }
+    .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+    .header { background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; padding: 40px 30px; text-align: center; }
+    .header h1 { margin: 0; font-size: 28px; letter-spacing: -0.5px; }
+    .header p { margin: 12px 0 0 0; opacity: 0.9; font-size: 16px; }
+    .content { padding: 35px 30px; }
+    .greeting { margin-bottom: 25px; }
+    .greeting h2 { color: #1e3c72; margin: 0 0 8px 0; font-size: 24px; }
+    .greeting p { color: #5a6e7c; margin: 0; }
+    .booking-summary { background: linear-gradient(135deg, #f8fafc, #f1f5f9); padding: 25px; border-radius: 12px; margin: 25px 0; border: 1px solid #e2e8f0; }
+    .booking-summary h3 { color: #1e3c72; margin: 0 0 20px 0; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    .info-item { background: white; padding: 12px; border-radius: 8px; border-left: 3px solid #2a5298; }
+    .info-label { font-size: 12px; text-transform: uppercase; color: #64748b; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .info-value { font-size: 16px; font-weight: 600; color: #1e293b; }
+    .room-details { background: white; border-radius: 12px; overflow: hidden; margin: 20px 0; border: 1px solid #e2e8f0; }
+    .room-header { background: #f8fafc; padding: 15px 20px; border-bottom: 1px solid #e2e8f0; }
+    .room-header h4 { margin: 0; color: #1e3c72; font-size: 18px; }
+    .room-content { padding: 20px; }
+    .room-image { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+    .room-amenities { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+    .amenity-badge { background: #eef2ff; color: #2a5298; padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+    .dates-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    .dates-table th { text-align: left; padding: 12px 8px; background: #f1f5f9; color: #374151; font-weight: 600; border-radius: 8px; }
+    .dates-table td { padding: 10px 8px; border-bottom: 1px solid #e2e8f0; }
+    .price-breakdown { background: #fef9e3; padding: 20px; border-radius: 12px; margin: 20px 0; border-left: 4px solid #f59e0b; }
+    .price-row { display: flex; justify-content: space-between; padding: 8px 0; }
+    .total-row { border-top: 2px solid #e2e8f0; margin-top: 8px; padding-top: 12px; font-weight: bold; font-size: 18px; color: #2a5298; }
+    .guest-info { background: #f0fdf4; padding: 20px; border-radius: 12px; margin: 20px 0; border-left: 4px solid #10b981; }
+    .guest-info h4 { color: #047857; margin: 0 0 15px 0; display: flex; align-items: center; gap: 8px; }
+    .guest-details { margin: 10px 0; }
+    .guest-details p { margin: 6px 0; }
+    .important-info { background: #fff7ed; padding: 20px; border-radius: 12px; margin: 20px 0; border-left: 4px solid #f97316; }
+    .important-info h4 { color: #c2410c; margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px; }
+    .important-info ul { margin: 0; padding-left: 20px; color: #7c2d12; }
+    .important-info li { margin-bottom: 8px; }
+    .footer { text-align: center; padding: 30px; background: #1e293b; color: #cbd5e1; }
+    .footer a { color: #60a5fa; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+    .button { display: inline-block; background: #2a5298; color: white; padding: 12px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 15px 0; transition: background-color 0.2s; }
+    .button:hover { background: #1e3c72; }
+    @media (max-width: 600px) {
+      .content { padding: 25px 20px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .header h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🏨 Booking Confirmed!</h1>
+      <p>Your luxury stay is now reserved</p>
+    </div>
+    <div class="content">
+      <div class="greeting">
+        <h2>Dear ${fullName},</h2>
+        <p>Thank you for choosing Hotel Malaysia! We're delighted to confirm your upcoming stay.</p>
+      </div>
+
+      <div class="booking-summary">
+        <h3>📋 Booking Details</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">Booking Reference</div>
+            <div class="info-value">#${transactionId}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Booking Date</div>
+            <div class="info-value">${new Date().toLocaleDateString()}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Check-in</div>
+            <div class="info-value">📅 ${new Date(arrival).toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Check-out</div>
+            <div class="info-value">📅 ${new Date(departure).toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Nights Stay</div>
+            <div class="info-value">✨ ${datesArray.length} Nights</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Payment Status</div>
+            <div class="info-value">✅ Paid via ${payment}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-details">
+        <div class="room-header">
+          <h4>🛏️ Selected Room</h4>
+        </div>
+        <div class="room-content">
+          ${room[0]?.image ? `<img src="${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/${room[0].image.replace(/^\//, "")}" alt="${room[0]?.name}" class="room-image" style="max-width: 100%; height: auto;" onerror="this.style.display='none'">` : ""}
+          <h3 style="margin: 0 0 10px 0; color: #1e3c72;">${room[0]?.name || title}</h3>
+          <p style="color: #5a6e7c; margin: 0 0 15px 0;">${room[0]?.description || "Luxurious accommodation with premium amenities"}</p>
+          <div class="room-amenities">
+            ${
+              room[0]?.amenities
+                ? room[0].amenities
+                    .split(",")
+                    .map(
+                      (amenity) =>
+                        `<span class="amenity-badge">✓ ${amenity.trim()}</span>`,
+                    )
+                    .join("")
+                : '<span class="amenity-badge">✓ Free Wi-Fi</span><span class="amenity-badge">✓ Air Conditioning</span><span class="amenity-badge">✓ Room Service</span>'
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="price-breakdown">
+        <h4 style="margin: 0 0 15px 0; color: #b45309;">💰 Price Breakdown</h4>
+        <div class="price-row">
+          <span>Room Rate per Night</span>
+          <span>${currency} ${(price / datesArray.length).toFixed(2)}</span>
+        </div>
+        <div class="price-row">
+          <span>Number of Nights (${datesArray.length})</span>
+          <span>${currency} ${price}</span>
+        </div>
+        <div class="price-row">
+          <span>Taxes & Service Charges</span>
+          <span>Included</span>
+        </div>
+        <div class="total-row">
+          <span>Total Amount Paid</span>
+          <span>${currency} ${total.toFixed(2)}</span>
+        </div>
+      </div>
+
+      <div class="guest-info">
+        <h4>👤 Guest Information</h4>
+        <div class="guest-details">
+          <p><strong>Name:</strong> ${fullName}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          ${phonenumber ? `<p><strong>Phone:</strong> ${countrycode || ""} ${phonenumber}</p>` : ""}
+          ${nationality ? `<p><strong>Nationality:</strong> ${nationality}</p>` : ""}
+        </div>
+      </div>
+
+      <div class="important-info">
+        <h4>📍 Important Information</h4>
+        <ul>
+          <li><strong>Check-in Time:</strong> 2:00 PM onwards</li>
+          <li><strong>Check-out Time:</strong> 12:00 PM noon</li>
+          <li><strong>ID Requirement:</strong> Valid government ID/passport required at check-in</li>
+          <li><strong>Cancellation Policy:</strong> Free cancellation up to 48 hours before check-in</li>
+          <li><strong>Deposit:</strong> A security deposit may be required upon arrival</li>
+        </ul>
+      </div>
+
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order/${transactionId}" class="button">
+          View Booking Details
+        </a>
+        <p style="font-size: 12px; color: #64748b; margin-top: 12px;">
+          Need to modify your booking? Visit your booking page
+        </p>
+      </div>
+
+      <div style="background: #eef2ff; padding: 20px; border-radius: 12px; text-align: center;">
+        <h4 style="color: #1e3c72; margin: 0 0 10px 0;">📞 Need Assistance?</h4>
+        <p style="margin: 0; color: #5a6e7c;">
+          Contact our 24/7 concierge service:<br>
+          <strong>Phone:</strong> +60 123 456 789 | <strong>Email:</strong> reservations@hotelmalaysia.com
+        </p>
+      </div>
+    </div>
+    <div class="footer">
+      <p style="margin: 0 0 10px 0;">© ${new Date().getFullYear()} Hotel Malaysia. All rights reserved.</p>
+      <p style="margin: 0 0 5px 0; font-size: 12px;">123 Jalan Bukit Bintang, Kuala Lumpur, 55100, Malaysia</p>
+      <p style="margin: 0; font-size: 12px;">
+        <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a> | <a href="#">Unsubscribe</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
+`;
           await sendEmailBrevo({
             to: email, // Customer's email
             subject: `🧾 Order Confirmation #${transactionId}`,
-            html: `
-                <p>Hello ${fullName},</p>
-                <p>Thank you for your order <strong>#${transactionId}</strong>.</p>
-                <p>Total: <strong> ${total} ${currency}</strong></p>
-                <p>View your order details <a href="${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order/${transactionId}">here</a>.</p>
-                <p>If you have any questions, please contact our support team.</p>
-              `,
+            html: emailHtml,
           });
           console.log("📧 Confirmation email sent to", fullName);
         } catch (emailError) {
