@@ -562,22 +562,10 @@ app.post(
           <h4>🛏️ Selected Room</h4>
         </div>
         <div class="room-content">
-          ${room[0]?.image ? `<img src="${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/${room[0].image.replace(/^\//, "")}" alt="${room[0]?.name}" class="room-image" style="max-width: 100%; height: auto;" onerror="this.style.display='none'">` : ""}
-          <h3 style="margin: 0 0 10px 0; color: #1e3c72;">${room[0]?.name || title}</h3>
-          <p style="color: #5a6e7c; margin: 0 0 15px 0;">${room[0]?.description || "Luxurious accommodation with premium amenities"}</p>
-          <div class="room-amenities">
-            ${
-              room[0]?.amenities
-                ? room[0].amenities
-                    .split(",")
-                    .map(
-                      (amenity) =>
-                        `<span class="amenity-badge">✓ ${amenity.trim()}</span>`,
-                    )
-                    .join("")
-                : '<span class="amenity-badge">✓ Free Wi-Fi</span><span class="amenity-badge">✓ Air Conditioning</span><span class="amenity-badge">✓ Room Service</span>'
-            }
-          </div>
+          <h3 style="margin: 0 0 10px 0; color: #1e3c72;">${room?.name}</h3>
+
+          ${room?.image ? `<img src="${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/${room.image}" alt="${room?.name}" class="room-image" style="max-width: 100%; height: auto;" onerror="this.style.display='none'">` : ""}
+         
         </div>
       </div>
 

@@ -377,7 +377,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         tbluser_id: formUser?.user?.id || firebaseUser?.id,
       });
     },
-    [payment, roomPayment]
+    [payment, roomPayment],
   );
 
   const url = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
@@ -429,8 +429,8 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
     Array.isArray(user?.dates)
       ? user.dates.join(",")
       : typeof user?.dates === "string"
-      ? user.dates
-      : ""
+        ? user.dates
+        : "",
   );
   console.log("allDates", allDates);
   // const formatDateForBackend = (dateStr) => {
@@ -478,8 +478,8 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
     Array.isArray(user?.dates)
       ? user.dates.map((date) => formatDateForBackend(date)).join(", ")
       : typeof user?.dates === "string"
-      ? formatDateForBackend(user.dates)
-      : ""
+        ? formatDateForBackend(user.dates)
+        : "",
   );
   const updatedUnavailables = room ? [...room.unavailables, ...allDates] : [];
   console.log("updatedValaibles array", updatedUnavailables);
@@ -489,8 +489,8 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
     Array.isArray(updatedUnavailables)
       ? updatedUnavailables.map((date) => formatDateForBackend(date)).join(", ")
       : typeof updatedUnavailables === "string"
-      ? formatDateForBackend(updatedUnavailables)
-      : ""
+        ? formatDateForBackend(updatedUnavailables)
+        : "",
   );
 
   const handleStripeCheckout = async () => {
@@ -505,13 +505,13 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         firstname: String(user?.firstName || ""),
         lastname: String(user?.lastName || ""),
         fullName: String(
-          formUser?.user?.username || `${user?.firstName} ${user?.lastName}`
+          formUser?.user?.username || `${user?.firstName} ${user?.lastName}`,
         ),
         title: String(user?.title || ""),
         arrival: String(user?.arrival || ""),
         departure: String(user?.departure || ""),
         email: String(
-          formUser?.user?.email || firebaseUser?.email || user?.email || ""
+          formUser?.user?.email || firebaseUser?.email || user?.email || "",
         ),
         city: String(user?.city || ""),
         country: String(user?.country || ""),
@@ -519,8 +519,8 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
         dates: Array.isArray(user?.dates)
           ? user.dates.map((date) => formatDateForBackend(date)).join(", ")
           : typeof user?.dates === "string"
-          ? formatDateForBackend(user.dates)
-          : "",
+            ? formatDateForBackend(user.dates)
+            : "",
         // dates: formattedDate,
 
         price: String(user?.price || "0.00"),
@@ -544,8 +544,8 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
               .map((date) => formatDateForBackend(date))
               .join(", ")
           : typeof updatedUnavailables === "string"
-          ? formatDateForBackend(updatedUnavailables)
-          : "",
+            ? formatDateForBackend(updatedUnavailables)
+            : "",
 
         // Company info
         companyName: "LEGEND",
@@ -565,7 +565,7 @@ const Payment = ({ estimatedTotal, allDates, id }) => {
           body: JSON.stringify({
             metadata,
           }),
-        }
+        },
       );
 
       const { sessionId } = await response.json();
