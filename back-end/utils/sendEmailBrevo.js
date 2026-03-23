@@ -73,9 +73,7 @@
 //   }
 // };
 
-// module.exports = sendEmailBrevo;
-
-async function sendEmailBrevo({ to, subject, html }) {
+const sendEmailBrevo = async ({ to, subject, html }) => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10000); // 10s timeout
 
@@ -106,4 +104,5 @@ async function sendEmailBrevo({ to, subject, html }) {
     console.error("❌ Brevo error FULL:", err);
     throw err;
   }
-}
+};
+module.exports = sendEmailBrevo;
