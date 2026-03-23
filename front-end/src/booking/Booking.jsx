@@ -45,7 +45,7 @@ const Booking = () => {
   };
 
   const allDates = dateRange(date[0].startDate, date[0].endDate).map((ms) =>
-    format(new Date(ms), "MM/dd/yyyy")
+    format(new Date(ms), "MM/dd/yyyy"),
   );
 
   const arrival = format(date[0].startDate, "MM/dd/yyy");
@@ -62,17 +62,12 @@ const Booking = () => {
     }
   }, [roomData]);
 
-  // const handleChange = (e) => {
-  //   const { type, name, value, checked } = e.target;
-
-  //   roomUser({ ...user, [name]: type === "checkbox" ? checked : value });
-  // };
   const handleDateChange = (item) => {
     const arrival = format(item.selection.startDate, "MM/dd/yyyy");
     const departure = format(addDays(item.selection.endDate, 1), "MM/dd/yyy");
     const allDates = dateRange(
       item.selection.startDate,
-      item.selection.endDate
+      item.selection.endDate,
     ).map((ms) => format(new Date(ms), "MM/dd/yyyy"));
 
     const numberOfNights =
@@ -133,7 +128,6 @@ const Booking = () => {
         <Information
           handleDateChange={handleDateChange}
           estimatedTotal={estimatedTotal}
-          // handleChange={handleChange}
           open={openPatmentcloseInfo}
         />
       )}

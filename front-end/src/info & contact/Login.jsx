@@ -85,7 +85,8 @@ const Login = ({ onSubmit, setAuth }) => {
 
         setAuth({
           isAuthenticated: true,
-          user_role: parseRes.user?.user_role || "customer",
+          userRole: parseRes.user?.user_role || "customer",
+          checked: true,
         });
         setFormUser(parseRes);
       } else {
@@ -132,7 +133,7 @@ const Login = ({ onSubmit, setAuth }) => {
       });
       if (!res.ok)
         throw new Error(
-          "Failed to login with Google, the email exists with facebook account"
+          "Failed to login with Google, the email exists with facebook account",
         );
       const data = await res.json();
       if (data.token) {
@@ -147,7 +148,8 @@ const Login = ({ onSubmit, setAuth }) => {
 
         setAuth({
           isAuthenticated: true,
-          user_role: data.user?.user_role || "customer",
+          userRole: data.user?.user_role || "customer",
+          checked: true,
         });
       } else {
         setAuth(null);
@@ -205,7 +207,7 @@ const Login = ({ onSubmit, setAuth }) => {
           FacebookAuthProvider.credentialFromResult(userCredential);
         const accessToken = credential.accessToken;
         const response = await fetch(
-          `https://graph.facebook.com/v12.0/me?fields=email&access_token=${accessToken}`
+          `https://graph.facebook.com/v12.0/me?fields=email&access_token=${accessToken}`,
         );
         const data = await response.json();
         userEmail = data.email;
@@ -232,7 +234,7 @@ const Login = ({ onSubmit, setAuth }) => {
       });
       if (!res.ok)
         throw new Error(
-          "Failed to login with Facebook, the email exists with google account"
+          "Failed to login with Facebook, the email exists with google account",
         );
       const data = await res.json();
       if (data.token) {
@@ -247,7 +249,8 @@ const Login = ({ onSubmit, setAuth }) => {
 
         setAuth({
           isAuthenticated: true,
-          user_role: data.user?.user_role || "customer",
+          userRole: data.user?.user_role || "customer",
+          checked: true,
         });
       } else {
         setAuth(null);

@@ -34,13 +34,6 @@ function App() {
   const { setFirebaseUser, setFormUser, checkAuthStatus, firebaseUser } =
     useContext(AppContext);
 
-  const setAuth = (userData) => {
-    setAuthState({
-      isAuthenticated: true,
-      userRole: userData?.user_role || "customer",
-      checked: true,
-    });
-  };
   useEffect(() => {
     const verifyAuth = async () => {
       try {
@@ -106,7 +99,7 @@ function App() {
           path="/login"
           element={
             !authState.isAuthenticated ? (
-              <Login setAuth={setAuth} />
+              <Login setAuth={setAuthState} />
             ) : (
               <Navigate
                 to={location.state?.from?.pathname || "/rooms"}

@@ -3,17 +3,11 @@ import { AppContext } from "../data managment/AppProvider";
 import { useContext } from "react";
 import { formatPhone, isValidPhone } from "../utils/phoneUtils";
 
-const Information = ({
-  handleDateChange,
-  estimatedTotal,
-  // handleChange,
-  open,
-}) => {
+const Information = ({ handleDateChange, estimatedTotal, open }) => {
   const { room: roomData, user, roomUser } = useContext(AppContext);
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // For phone inputs, update both the field and the combined fullPhone
     const updates = { ...user, [name]: value };
 
     if (name === "phoneNumber" || name === "countryCode") {
@@ -496,7 +490,6 @@ const Information = ({
               <div className="guestTitle">
                 <label htmlFor="phoneNumber">Local Number *</label>
                 <input
-                  // type="number"
                   type="tel"
                   name="phoneNumber"
                   value={user.phoneNumber}
@@ -510,15 +503,8 @@ const Information = ({
                       : ""
                   }`}
                 />
-                {/* {user.phone &&
-                  !isValidPhone(
-                    formatPhone(user.countryCode, user.phoneNumber),
-                  ) && (
-                    <span className="error-message">
-                      Please enter a valid phone number
-                    </span>
-                  )} */}
-                {user.phoneNumber && // Fixed: was checking user.phone
+
+                {user.phoneNumber &&
                   !isValidPhone(
                     formatPhone(user.countryCode, user.phoneNumber),
                   ) && (

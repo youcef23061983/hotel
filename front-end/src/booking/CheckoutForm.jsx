@@ -36,8 +36,6 @@ const CheckoutForm = ({ onSuccess }) => {
       const { error, paymentIntent } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          // Return URL becomes you need it in postgresql:
-          // return_url: `${origin}/order?order_id=${newOrder.rows[0].id}`,
           return_url: `${window.location.origin}/order`,
         },
         redirect: "if_required",
@@ -88,8 +86,8 @@ const CheckoutForm = ({ onSuccess }) => {
   const itemsArray = Array.isArray(customerData?.items)
     ? customerData.items
     : customerData?.items
-    ? [customerData.items]
-    : [];
+      ? [customerData.items]
+      : [];
 
   return (
     <div className="space-y-6">

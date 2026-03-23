@@ -1,15 +1,161 @@
-import UseFetch from "../data managment/UseFetch";
+import { useState, useEffect } from "react";
 import Banner from "../pages/Banner";
 import img from "/images/header/order.jpg";
 import { motion } from "framer-motion";
 import { FaCalendarAlt, FaUser, FaCreditCard, FaHotel } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
+import useFetchWithRetry from "../data managment/useFetchWithRetry";
 import BookingUseFetch from "../data managment/BookingUseFetch";
-
 const Order = () => {
-  const sessionId = new URLSearchParams(window.location.search).get(
-    "session_id"
-  );
+  const [sessionId, setSessionId] = useState(null);
+  const [retryCount, setRetryCount] = useState(0);
+
+  // ✅ Good: Get session_id from URL
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("session_id");
+    if (id) setSessionId(id);
+  }, []);
+
+  // ✅ Good: Conditional URL
+  const url = sessionId
+    ? `${import.meta.env.VITE_PROD_URL_URL}/order?session_id=${sessionId}`
+    : null;
+
+  // ✅ Good: Fetch order with retry
+  const {
+    data: order,
+    error,
+    isPending,
+    refetch,
+  } = useFetchWithRetry(url, "order", {
+    retry: 8,
+    retryDelay: 1500,
+    enabled: !!url,
+  });
+
+  // ✅ Fixed: id declared BEFORE using it
+  const id = order?.room_id;
+  const detailurl = id ? `${import.meta.env.VITE_PROD_URL_URL}/rooms` : null;
+
+  // ✅ Good: Conditional room fetch with initialData from cache
+  const {
+    data: roomData,
+    error: detailRoomerror,
+    isPending: detailRoompending,
+  } = BookingUseFetch(id ? detailurl : null, "room", id);
+
+  // ✅ Simple refresh handler
+  const handleRefresh = () => {
+    setRetryCount((prev) => prev + 1);
+    refetch();
+  };
+
+  // Combined loading state
+  if (isPending || detailRoompending) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+        <p className="mt-4 text-gray-600">
+          {isPending
+            ? "Retrieving your booking details..."
+            : "Loading room information..."}
+        </p>
+        <p className="text-sm text-gray-400 mt-2">
+          This may take a few moments
+        </p>
+      </div>
+    );
+  }
+
+  // Combined error handling
+  if (error || detailRoomerror) {
+    const isNotFound =
+      error?.message?.includes("404") || error?.message?.includes("not ready");
+
+    return (
+      <div className="text-center py-20 px-4">
+        <div className="max-w-md mx-auto">
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-6">
+            <h2 className="text-xl font-bold text-yellow-800 mb-2">
+              {isNotFound ? "Booking Processing" : "Error Loading Order"}
+            </h2>
+            <p className="text-yellow-700">
+              {isNotFound
+                ? "Your booking is still being processed. This usually takes a few seconds."
+                : error?.message ||
+                  detailRoomerror?.message ||
+                  "We're having trouble retrieving your booking details."}
+            </p>
+            {isNotFound && (
+              <div className="mt-4">
+                <div className="w-full bg-yellow-200 rounded-full h-2 mb-4">
+                  <div
+                    className="bg-yellow-600 h-2 rounded-full transition-all duration-500"
+                    style={{
+                      width: `${Math.min((retryCount / 8) * 100, 100)}%`,
+                    }}
+                  ></div>
+                </div>
+                <p className="text-sm text-yellow-600">
+                  Attempt {retryCount + 1}/8
+                </p>
+              </div>
+            )}
+          </div>
+
+          <button
+            onClick={handleRefresh}
+            className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primaryDark transition-colors"
+          >
+            Try Again
+          </button>
+
+          <p className="mt-4 text-sm text-gray-500">
+            Booking reference: {sessionId?.slice(-8)}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Check if data exists
+  if (!order || !roomData) {
+    return (
+      <div className="text-center py-20">
+        <h2 className="text-2xl font-bold">No Booking Found</h2>
+        <p className="mt-2 text-gray-600">
+          We couldn't find your booking details. Please check your confirmation
+          email.
+        </p>
+        <button
+          onClick={handleRefresh}
+          className="mt-4 bg-primary text-white px-6 py-2 rounded-lg"
+        >
+          Refresh
+        </button>
+      </div>
+    );
+  }
+
+  // Calculate nights stayed
+  const nights = order.dates ? order.dates.length : 1;
+  const arrivalDate = new Date(order.arrival).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+  const departureDate = new Date(order.departure).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  // Room details
+  const roomImage = roomData.images?.[0] || img;
+  const roomName = roomData.name || "Deluxe Room";
+  const roomType = roomData.type || "Standard";
+  const roomPrice = roomData.price || order.price;
 
   // Animation variants
   const containerVariants = {
@@ -33,70 +179,6 @@ const Order = () => {
       },
     },
   };
-
-  const url = `${
-    import.meta.env.VITE_PROD_URL_URL
-  }/order?session_id=${sessionId}`;
-
-  const key = "order";
-
-  const { data: order, error, isPending } = UseFetch(url, key);
-  const id = order?.room_id;
-  console.log("order booking data", order);
-  const detailurl = `${import.meta.env.VITE_PROD_URL_URL}/rooms`;
-  const {
-    data: roomData,
-    error: detailRoomerror,
-    isPending: detailRoompending,
-  } = BookingUseFetch(id ? detailurl : null, "room", id);
-  console.log("order roomdata", roomData);
-
-  if (isPending || detailRoompending)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-      </div>
-    );
-
-  if (error || detailRoomerror)
-    return (
-      <div className="text-center py-20">
-        <h2 className="text-2xl font-bold text-red-600">Error Loading Order</h2>
-        <p className="mt-2 text-gray-600">
-          {error?.message || detailRoomerror?.message}
-        </p>
-      </div>
-    );
-
-  if (!order || !roomData)
-    return (
-      <div className="text-center py-20">
-        <h2 className="text-2xl font-bold">No Booking Found</h2>
-        <p className="mt-2 text-gray-600">
-          We couldn't find your booking details
-        </p>
-      </div>
-    );
-
-  // Calculate nights stayed
-  const nights = order.dates ? order.dates.length : 1;
-  const arrivalDate = new Date(order.arrival).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-  const departureDate = new Date(order.departure).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-
-  // Room details
-  const roomImage = roomData.images?.[0] || img;
-  const roomName = roomData.name || "Deluxe Room";
-  const roomType = roomData.type || "Standard";
-  const roomPrice = roomData.price || order.price;
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header with Banner */}
