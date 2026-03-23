@@ -240,6 +240,8 @@ const { sendtwilioSMS } = require("./utils/sendtwilioSms&call.js");
 const generateInvoicePDF = require("./utils/generateInvoicePDF .js");
 const { uploadInvoice } = require("./utils/uploadInvoiceToStorage .js");
 const patchUnavailables = require("./utils/unavailablesOrder.js");
+const sendEmailBrevo = require("./utils/sendEmailBrevo");
+
 app.use(helmet());
 
 app.use(
@@ -248,7 +250,7 @@ app.use(
     methods: ["GET", "POST", "PATCH", "DELETE"],
     credentials: true, // Allow credentials (cookies)
     optionsSuccessStatus: 200, // Some legacy browsers choke on 204
-  })
+  }),
 );
 
 if (process.env.NODE_ENV === "development") {
@@ -274,7 +276,7 @@ app.post(
       event = stripe.webhooks.constructEvent(
         req.body, // Use raw body directly
         sig,
-        process.env.STRIPE_WEBHOOK_SECRET
+        process.env.STRIPE_WEBHOOK_SECRET,
       );
       console.log("🟢 Event type:", event.type); // Confirm event parsing
     } catch (err) {
@@ -294,7 +296,7 @@ app.post(
           event.data.object.id,
           {
             expand: ["line_items", "payment_intent.payment_method"],
-          }
+          },
         );
         console.log("📦 Raw session data:", JSON.stringify(session, null, 2));
 
@@ -447,16 +449,29 @@ app.post(
 
         // Send email notification
         try {
-          await sendEmail({
-            to: email,
+          // await sendEmail({
+          //   to: email,
+          //   subject: `🧾 Order Confirmation #${transactionId}`,
+          //   html: `
+          //     <p>Hello ${fullName},</p>
+          //     <p>Thank you for your order <strong>#${transactionId}</strong>.</p>
+          //     <p>Total: <strong> ${total} ${currency}</strong></p>
+          //     // <p>View your order details <a href="${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order/${transactionId}">here</a>.</p>
+          //     <p>If you have any questions, please contact our support team.</p>
+          //   `,
+          // });
+          console.log("BREVO_API_KEY:", process.env.BREVO_API_KEY);
+          console.log("GMAIL_USER:", process.env.GMAIL_USER);
+          await sendEmailBrevo({
+            to: email, // Customer's email
             subject: `🧾 Order Confirmation #${transactionId}`,
             html: `
-              <p>Hello ${fullName},</p>
-              <p>Thank you for your order <strong>#${transactionId}</strong>.</p>
-              <p>Total: <strong> ${total} ${currency}</strong></p>
-              // <p>View your order details <a href="${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order/${transactionId}">here</a>.</p>
-              <p>If you have any questions, please contact our support team.</p>
-            `,
+                <p>Hello ${fullName},</p>
+                <p>Thank you for your order <strong>#${transactionId}</strong>.</p>
+                <p>Total: <strong> ${total} ${currency}</strong></p>
+                <p>View your order details <a href="${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/order/${transactionId}">here</a>.</p>
+                <p>If you have any questions, please contact our support team.</p>
+              `,
           });
           console.log("📧 Confirmation email sent to", fullName);
         } catch (emailError) {
@@ -514,7 +529,7 @@ app.post(
     }
 
     res.status(200).json({ received: true });
-  }
+  },
 );
 
 app.use(express.json());
@@ -674,7 +689,7 @@ if (process.env.NODE_ENV === "production") {
       // check for spoofed bots
       if (
         decision.results.some(
-          (result) => result.reason.isBot() && result.reason.isSpoofed()
+          (result) => result.reason.isBot() && result.reason.isSpoofed(),
         )
       ) {
         res.status(403).json({ error: "Spoofed bot detected" });

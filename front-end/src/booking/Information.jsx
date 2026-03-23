@@ -19,7 +19,7 @@ const Information = ({
     if (name === "phoneNumber" || name === "countryCode") {
       updates.fullPhone = formatPhone(
         name === "countryCode" ? value : user.countryCode,
-        name === "phoneNumber" ? value : user.phoneNumber
+        name === "phoneNumber" ? value : user.phoneNumber,
       );
     }
     roomUser(updates);
@@ -496,22 +496,31 @@ const Information = ({
               <div className="guestTitle">
                 <label htmlFor="phoneNumber">Local Number *</label>
                 <input
-                  type="number"
+                  // type="number"
+                  type="tel"
                   name="phoneNumber"
                   value={user.phoneNumber}
                   onChange={handleChange}
                   className={`input ${
                     user.phoneNumber &&
                     !isValidPhone(
-                      formatPhone(user.countryCode, user.phoneNumber)
+                      formatPhone(user.countryCode, user.phoneNumber),
                     )
                       ? "error"
                       : ""
                   }`}
                 />
-                {user.phone &&
+                {/* {user.phone &&
                   !isValidPhone(
-                    formatPhone(user.countryCode, user.phoneNumber)
+                    formatPhone(user.countryCode, user.phoneNumber),
+                  ) && (
+                    <span className="error-message">
+                      Please enter a valid phone number
+                    </span>
+                  )} */}
+                {user.phoneNumber && // Fixed: was checking user.phone
+                  !isValidPhone(
+                    formatPhone(user.countryCode, user.phoneNumber),
                   ) && (
                     <span className="error-message">
                       Please enter a valid phone number
