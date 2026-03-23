@@ -524,28 +524,6 @@ app.post("/create-checkout-session", async (req, res) => {
     if (isNaN(parsedPrice)) {
       return res.status(400).json({ error: "Invalid room price in metadata" });
     }
-
-    //    // 1. Safely get the image path with optional chaining and default value
-    // const rawImagePath = metadata?.room?.image || '';
-    // console.log('Raw image path:', rawImagePath);
-
-    // if (!rawImagePath) {
-    //   throw new Error('No image path found in metadata');
-    // }
-
-    // // 2. Remove leading slash if present (safely)
-    // const cleanPath = typeof rawImagePath === 'string'
-    //   ? rawImagePath.replace(/^\//, '')
-    //   : '';
-
-    // // 3. Encode the entire path (not just spaces) for URL safety
-    // const encodedPath = encodeURIComponent(cleanPath);
-
-    // // 4. Build full URL - decode just the slashes for proper routing
-    // const imageUrl = `${process.env.VITE_PUBLIC_ROOMS_FRONTEND_URL}/${
-    //   encodedPath.replace(/%2F/g, '/')
-    // }`;
-
     console.log("Final image URL:", imageUrl);
 
     const days = metadata?.days || [];
@@ -574,7 +552,7 @@ app.post("/create-checkout-session", async (req, res) => {
             name: parseRoom?.name || "Hotel Room Booking",
             images: [imageUrl],
           },
-          unit_amount: Math.round(parsedPrice * 100), // ✅ Safe now
+          unit_amount: Math.round(parsedPrice * 100),
         },
         quantity: days || 1,
       },
