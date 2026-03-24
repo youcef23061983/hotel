@@ -23,7 +23,7 @@ const signupUser = async (req, res) => {
     );
     const token = createJWT(user.rows[0].id);
     res.cookie("token", token, {
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days in milliseconds
+      maxAge: 60 * 60 * 1000, // 1 hour in milliseconds
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development", // Set to true if using HTTPS
       sameSite: "strict", // CSRF protection
@@ -106,96 +106,6 @@ const signinUser = async (req, res) => {
     });
   }
 };
-// const firebaseSignup = async (req, res) => {
-//   const { email, firebase_uid, username, provider } = req.body;
-
-//   try {
-//     // Verify Firebase token
-//     const decodedToken = await firebaseAdmin
-//       .auth()
-//       .verifyIdToken(req.headers.authorization?.split("Bearer ")[1]);
-
-//     if (decodedToken.uid !== firebase_uid) {
-//       return res.status(403).json({ message: "Invalid Firebase token" });
-//     }
-
-//     // First check if user exists and provider matches
-//     const existingUser = await pool.query(
-//       "SELECT id, provider FROM tbluser WHERE email = $1",
-//       [email]
-//     );
-
-//     if (existingUser.rows.length > 0) {
-//       const user = existingUser.rows[0];
-
-//       // If existing provider doesn't match the current provider
-//       if (user.provider !== provider) {
-//         return res.status(409).json({
-//           message: `Email already exists with ${user.provider} provider`,
-//         });
-//       }
-
-//       // If provider matches, proceed with updating firebase_uid if needed
-//       const result = await pool.query(
-//         `UPDATE tbluser SET
-//           firebase_uid = $1,
-//           username = COALESCE($2, username)
-//          WHERE email = $3
-//          RETURNING id, email, username, provider, firebase_uid, user_role`,
-//         [firebase_uid, username, email]
-//       );
-
-//       const updatedUser = result.rows[0];
-//       const token = createJWT(updatedUser.id);
-//       res.cookie("token", token, {
-//         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-//         httpOnly: true,
-//         secure: process.env.NODE_ENV !== "development",
-//         sameSite: "strict",
-//       });
-
-//       return res.status(200).json({
-//         status: "success",
-//         token,
-//         user: updatedUser,
-//       });
-//     }
-
-//     // If user doesn't exist, create new user
-//     const result = await pool.query(
-//       `INSERT INTO tbluser (
-//         email,
-//         username,
-//         provider,
-//         firebase_uid,
-//         password
-//       ) VALUES ($1, $2, $3, $4, '')
-//       RETURNING id, email, username, provider, firebase_uid, user_role`,
-//       [email, username || email.split("@")[0], provider, firebase_uid]
-//     );
-
-//     const newUser = result.rows[0];
-
-//     const token = createJWT(newUser.id);
-//     res.cookie("token", token, {
-//       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-//       httpOnly: true,
-//       secure: process.env.NODE_ENV !== "development",
-//       sameSite: "strict",
-//     });
-
-//     res.status(200).json({
-//       status: "success",
-//       token,
-//       user: newUser,
-//     });
-//   } catch (error) {
-//     console.error("Firebase signup error:", error.message);
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
-
-// more secure way to handle user authorization and token management:
 const firebaseSignup = async (req, res) => {
   try {
     // ✅ Decoded & verified by middleware
